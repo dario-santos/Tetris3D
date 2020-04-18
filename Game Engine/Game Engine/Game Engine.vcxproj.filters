@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{65363d93-46a7-4ba1-a83f-cb9eef118d42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine">
+      <UniqueIdentifier>{b120ca4e-a9cd-43e4-ba9e-a40a3e722f59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Components">
+      <UniqueIdentifier>{43fcea3c-416b-4f47-96d4-465300c5cd34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Input">
+      <UniqueIdentifier>{9c0620eb-b72b-4add-b7dd-b47ae4a26ab0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Primitives">
+      <UniqueIdentifier>{fac3ca60-2a8a-4928-9a7a-599669bf6294}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Prefabs">
+      <UniqueIdentifier>{4b53a0ee-275d-498c-8716-23633d11104f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{a220560c-c9fc-4546-af45-eced8abe1a36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Model">
+      <UniqueIdentifier>{3f0135f5-20dc-42db-9c0b-41a4455be21d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Audio">
+      <UniqueIdentifier>{9004b8e2-d5cb-47ea-b239-536a4de29068}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Primitives\Circle.cpp">
+      <Filter>GameEngine\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Primitives\Square.cpp">
+      <Filter>GameEngine\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Scene.cpp">
+      <Filter>GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Input\Input.cpp">
+      <Filter>GameEngine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Components\GameObject.cpp">
+      <Filter>GameEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Components\Renderer.cpp">
+      <Filter>GameEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Components\Transform.cpp">
+      <Filter>GameEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Camera.cpp">
+      <Filter>GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Primitives\Sin.cpp">
+      <Filter>GameEngine\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Primitives\Cos.cpp">
+      <Filter>GameEngine\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Window.cpp">
+      <Filter>GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Model\ModelLoader.cpp">
+      <Filter>GameEngine\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\BallManager.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\BrickManager.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\PlayerMovement.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Audio\AudioDevice.cpp">
+      <Filter>GameEngine\Audio</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="shader.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Primitives\Circle.hpp">
+      <Filter>GameEngine\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Primitives\Primitive.hpp">
+      <Filter>GameEngine\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Primitives\Square.hpp">
+      <Filter>GameEngine\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Scene.hpp">
+      <Filter>GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Input\Input.hpp">
+      <Filter>GameEngine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Components\GameObject.hpp">
+      <Filter>GameEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Components\Renderer.hpp">
+      <Filter>GameEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Components\Script.hpp">
+      <Filter>GameEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Components\Transform.hpp">
+      <Filter>GameEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="main.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Camera.hpp">
+      <Filter>GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Primitives\Sin.hpp">
+      <Filter>GameEngine\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Primitives\Cos.hpp">
+      <Filter>GameEngine\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Window.hpp">
+      <Filter>GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Model\ModelLoader.hpp">
+      <Filter>GameEngine\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Prefabs\Ball.hpp">
+      <Filter>Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="Prefabs\Brick.hpp">
+      <Filter>Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="Prefabs\CosFun.hpp">
+      <Filter>Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="Prefabs\DeathZone.hpp">
+      <Filter>Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="Prefabs\Player.hpp">
+      <Filter>Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="Prefabs\SinFun.hpp">
+      <Filter>Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\BallManager.hpp">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\BrickManager.hpp">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\PlayerMovement.hpp">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Audio\AudioDevice.hpp">
+      <Filter>GameEngine\Audio</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FragmentShader.fs">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="VertexShader.vs">
+      <Filter>Shader</Filter>
+    </None>
+  </ItemGroup>
+</Project>
