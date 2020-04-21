@@ -40,6 +40,9 @@
     <Filter Include="GameEngine\Audio">
       <UniqueIdentifier>{9004b8e2-d5cb-47ea-b239-536a4de29068}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\Parser">
+      <UniqueIdentifier>{32849747-5439-4426-a2b9-e734b6ebceab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -95,6 +98,9 @@
     </ClCompile>
     <ClCompile Include="GameEngine\Audio\AudioDevice.cpp">
       <Filter>GameEngine\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Parser\Parser.cpp">
+      <Filter>GameEngine\Parser</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +181,9 @@
     </ClInclude>
     <ClInclude Include="GameEngine\Audio\AudioDevice.hpp">
       <Filter>GameEngine\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Parser\Parser.hpp">
+      <Filter>GameEngine\Parser</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
