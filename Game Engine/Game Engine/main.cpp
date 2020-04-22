@@ -28,6 +28,10 @@ using namespace glm;
 
 #include <iostream>
 
+// Shaders
+GLuint transparencyShader;
+GLuint opaceShader;
+
 int main(void)
 {
   // Initialization of the GLFW
@@ -66,11 +70,11 @@ int main(void)
   // Background Color
   glClearColor(45.f/255, 52.f/255, 54.f/255, 0.0f);
 
-  // Clear the screen
-  glClear(GL_COLOR_BUFFER_BIT);
-
-  // Enable depth test
+  // Enable depth test and blend
   glEnable(GL_DEPTH_TEST);
+  glEnable(GL_BLEND);
+
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   // Accept fragment if it closer to the camera than the former one
   glDepthFunc(GL_LESS);
@@ -80,18 +84,11 @@ int main(void)
   glGenVertexArrays(1, &VertexArrayID);
   glBindVertexArray(VertexArrayID);
 
-  // Load Vertex and Fragment shader
-  GLuint programID = LoadShaders("./TransparencyShader.vs", "./TransparencyShader.fs");
-
   // Loads the scene and sets it as the active one
   Scene * scene = new Scene();
-  
   scene->AddCamera(new Camera(vec2(-40.0f, 40.0f), vec2(-30.0f, 30.0f)));
   Scene::LoadScene(scene);
-  loadGameObjects(scene, programID);
-
-  glEnable(GL_BLEND);
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  loadGameObjects(scene);
 
   // render scene for each frame
   do
@@ -117,23 +114,27 @@ int main(void)
 
   /// Frees the vertex array
   glDeleteVertexArrays(1, &VertexArrayID);
-  // Frees the shader
-  glDeleteProgram(programID);
+
+  // Frees the shaders
+  glDeleteProgram(transparencyShader);
+  glDeleteProgram(opaceShader);
 
   // Close OpenGL window and terminate GLFW
   glfwTerminate();
   return 0;
 }
 
-void loadGameObjects(Scene* scene, GLuint programID)
+void loadGameObjects(Scene* scene)
 {
-  GLuint opaceShader = LoadShaders("./VertexShader.vs", "./FragmentShader.fs");
+  // Load Vertex and Fragments shaders
+  transparencyShader = LoadShaders("./Shaders/TransparencyShader.vs", "./Shaders/TransparencyShader.fs");
+  opaceShader = LoadShaders("./Shaders/OpaqueShader.vs", "./Shaders/OpaqueShader.fs");
 
   // Bricks
   for (int i = 25; i >= 10; i -= 3)
    for (int j = -35; j <= 35; j += 5)
     scene->AddGameObject(Brick::AddBrick(
-      new Transform(vec3(j, i, 0.0f), vec3(0.0f, 0.0f, 0.0f), vec3(5.0f, 2.0f, 1.0f)), vec3(abs(j) * i * 0.5f, abs(j) * i + 200, 0), programID));
+      new Transform(vec3(j, i, 0.0f), vec3(0.0f, 0.0f, 0.0f), vec3(5.0f, 2.0f, 1.0f)), vec3(abs(j) * i * 0.5f, abs(j) * i + 200, 0), transparencyShader));
 
   // Ball
   scene->AddGameObject(Ball::AddBall(

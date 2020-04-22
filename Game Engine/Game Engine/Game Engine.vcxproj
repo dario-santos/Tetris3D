@@ -92,7 +92,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)OpenGL\irrKlang\include;$(MSBuildProjectDirectory)\glm;$(SolutionDir)OpenGL\glew\include;$(SolutionDir)OpenGL\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)OpenGL\irrKlang\include;$(SolutionDir)OpenGL\glm;$(SolutionDir)OpenGL\glew\include;$(SolutionDir)OpenGL\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -125,7 +125,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)OpenGL\irrKlang\include;$(MSBuildProjectDirectory)\glm;$(SolutionDir)OpenGL\glew\include;$(SolutionDir)OpenGL\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)OpenGL\irrKlang\include;$(SolutionDir)OpenGL\glm;$(SolutionDir)OpenGL\glew\include;$(SolutionDir)OpenGL\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -205,10 +205,10 @@
     <ClInclude Include="shader.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="FragmentShader.fs" />
-    <None Include="TransparencyShader.fs" />
-    <None Include="TransparencyShader.vs" />
-    <None Include="VertexShader.vs" />
+    <None Include="Shaders\OpaqueShader.fs" />
+    <None Include="Shaders\OpaqueShader.vs" />
+    <None Include="Shaders\TransparencyShader.fs" />
+    <None Include="Shaders\TransparencyShader.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -14,9 +14,8 @@
  *   Loads game objects into scene with a certain shader.
  *   
  *   scene: The scene that the objects will get loaded into;
- *   programID: The shader id.
  */
-void loadGameObjects(Scene *scene, GLuint programID);
+void loadGameObjects(Scene *scene);
 
 /*
  * Function: lifeCycle

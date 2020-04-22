@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Shader">
-      <UniqueIdentifier>{65363d93-46a7-4ba1-a83f-cb9eef118d42}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameEngine">
       <UniqueIdentifier>{b120ca4e-a9cd-43e4-ba9e-a40a3e722f59}</UniqueIdentifier>
     </Filter>
@@ -42,6 +39,9 @@
     </Filter>
     <Filter Include="GameEngine\Parser">
       <UniqueIdentifier>{32849747-5439-4426-a2b9-e734b6ebceab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{65363d93-46a7-4ba1-a83f-cb9eef118d42}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -187,17 +187,17 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="FragmentShader.fs">
-      <Filter>Shader</Filter>
+    <None Include="Shaders\OpaqueShader.fs">
+      <Filter>Shaders</Filter>
     </None>
-    <None Include="VertexShader.vs">
-      <Filter>Shader</Filter>
+    <None Include="Shaders\OpaqueShader.vs">
+      <Filter>Shaders</Filter>
     </None>
-    <None Include="TransparencyShader.fs">
-      <Filter>Shader</Filter>
+    <None Include="Shaders\TransparencyShader.fs">
+      <Filter>Shaders</Filter>
     </None>
-    <None Include="TransparencyShader.vs">
-      <Filter>Shader</Filter>
+    <None Include="Shaders\TransparencyShader.vs">
+      <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
 </Project>
