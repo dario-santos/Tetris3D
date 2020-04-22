@@ -33,3 +33,17 @@ void Input::KeyCallback(GLFWwindow* window, int key, int scancode, int action, i
   if(action == GLFW_RELEASE)
     Input::UpdateKeyStatus(key, action);
 }
+
+#include <iostream>
+
+void Input::JoystickCallback(int jid, int event)
+{
+  if (event == GLFW_CONNECTED)
+  {
+    cout << "JOYSTICK " << jid << " CONNECTED" << endl;
+  }
+  else if (event == GLFW_DISCONNECTED)
+  {
+    cout << "JOYSTICK " << jid << "  DISCONNECTED" << endl;
+  }
+}

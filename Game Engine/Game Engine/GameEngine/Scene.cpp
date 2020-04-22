@@ -1,5 +1,4 @@
 #include "Scene.hpp"
-#include "Window.hpp"
 
 Scene *Scene::currentScene = nullptr;
 
@@ -44,15 +43,5 @@ void Scene::RemoveCamera(Camera* camera)
 void Scene::DrawScene()
 {
   for (GameObject *g: this->gameObjects)
-  {
-    for (Camera *c: this->cameras)
-    {
-      std::vector<float> p = c->GetViewPort();
-      vec2 d = Window::GetDimensions();
-
-      glViewport(p[0], p[1], p[2] * d[0], p[3] * d[1]);
-      
-      g->Draw();
-    }
-  }
+    g->Draw();
 }

@@ -18,7 +18,7 @@ class Scene
     static Scene *currentScene;
     // The game objects that constitute this scene
     list<GameObject *> gameObjects;
-    // Cameras, view ports
+    // Cameras in the scene
     list<Camera *> cameras;
 
   public:

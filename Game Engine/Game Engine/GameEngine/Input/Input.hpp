@@ -58,8 +58,19 @@ class Input
     *  scancode: the code of the pressed key;
     *  action: The status of the pressed key.
     *  mods: modifiers, ex.: if the capslock is active, etc..
-    * 
-    *  returns: false if it's not being pressed, true otherwise.
     */
     static void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+
+    /*
+    * Function: JoystickCallback
+    * --------------------------------
+    *  This function is used as the joystick event callbock for the glfw.
+    *
+    *  window: the window that we are using;
+    *  key: the pressed key;
+    *  scancode: the code of the pressed key;
+    *  action: The status of the pressed key.
+    *  mods: modifiers, ex.: if the capslock is active, etc..
+    */
+    static void JoystickCallback(int jid, int event);
 };

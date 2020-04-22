@@ -1,4 +1,4 @@
-#include <GL/glew.h>
+﻿#include <GL/glew.h>
 
 #include <GLFW/glfw3.h>
 
@@ -40,10 +40,9 @@ int main(void)
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // sets the Opengl profile as core, added in 3.2
 
   // Creates the window
-  int width = 800;
-  int height = 600;
-  Window::SetDimensions(vec2(width, height));
-  GLFWwindow *window = glfwCreateWindow(width, height, "Breakout With Sound", NULL, NULL);
+  vec2 dimensions = vec2(800, 600);
+  Window::SetDimensions(dimensions);
+  GLFWwindow *window = glfwCreateWindow(dimensions.x, dimensions.y, "Breakout With Sound", NULL, NULL);
 
   // Create window context
   glfwMakeContextCurrent(window);
@@ -53,7 +52,7 @@ int main(void)
   // Initialization of GLEW
   glewInit();
 
-  AudioDevice *theme = new AudioDevice(10);
+  AudioDevice *theme = new AudioDevice(0);
   theme->Play2D("audio/tetris.mp3", GL_TRUE);
 
   // Ensure we can capture the escape key being pressed below
@@ -61,10 +60,22 @@ int main(void)
 
   // Callbacks
   glfwSetKeyCallback(window, Input::KeyCallback);
+  glfwSetJoystickCallback(Input::JoystickCallback);
   glfwSetWindowSizeCallback(window, Window::WindowReshapeCallback);
 
   // Background Color
   glClearColor(45.f/255, 52.f/255, 54.f/255, 0.0f);
+
+  // Clear the screen
+  glClear(GL_COLOR_BUFFER_BIT);
+
+  // Enable depth test
+  glEnable(GL_DEPTH_TEST);
+
+  // Accept fragment if it closer to the camera than the former one
+  glDepthFunc(GL_LESS);
+
+
 
   // Transfer VAO
   GLuint VertexArrayID;
@@ -85,7 +96,7 @@ int main(void)
   do
   {
     // Iterate Objects
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     lifeCycle(scene);
 
@@ -117,9 +128,12 @@ void loadGameObjects(Scene* scene, GLuint programID)
 {
   // Bricks
   for (int i = 25; i >= 10; i -= 3)
-    for (int j = -35; j <= 35; j += 5)
-      scene->AddGameObject(Brick::AddBrick(
-        new Transform(vec3(j, i, 0.0f), vec3(0.0f, 0.0f, 0.0f), vec3(5.0f, 2.0f, 0.0f)), vec3(abs(j) * i * 0.5f, abs(j) * i + 200, 0), programID));
+   for (int j = -35; j <= 35; j += 5)
+    scene->AddGameObject(Brick::AddBrick(
+      new Transform(vec3(j, i, 0.0f), vec3(0.0f, 0.0f, 0.0f), vec3(5.0f, 2.0f, 1.0f)), vec3(abs(j) * i * 0.5f, abs(j) * i + 200, 0), programID));
+
+  //scene->AddGameObject(Brick::AddBrick(
+  //      new Transform(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f), vec3(5.0f, 2.0f, 1.0f)), vec3(150, 200, 0), programID));
 
   // Ball
   scene->AddGameObject(Ball::AddBall(
@@ -127,7 +141,7 @@ void loadGameObjects(Scene* scene, GLuint programID)
 
   // Player
   scene->AddGameObject(Player::AddPlayer(
-    new Transform(vec3(0.0f, -25.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f), vec3(10.0f, 2.0f, 0.0f)), programID));
+    new Transform(vec3(0.0f, -25.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f), vec3(10.0f, 2.0f, 1.0f)), programID));
 
   // DeathZone
   scene->AddGameObject(DeathZone::AddDeathZone(

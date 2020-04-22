@@ -1,4 +1,4 @@
-#include "Renderer.hpp"
+﻿#include "Renderer.hpp"
 
 Renderer::Renderer(Primitive *primitive, GLuint shaderId)
 {

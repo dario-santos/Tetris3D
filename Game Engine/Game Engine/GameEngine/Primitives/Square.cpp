@@ -1,4 +1,4 @@
-#include "Square.hpp"
+﻿#include "Square.hpp"
 
 Square::Square(Transform t, vec3 color)
 {
