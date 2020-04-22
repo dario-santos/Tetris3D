@@ -75,15 +75,13 @@ int main(void)
   // Accept fragment if it closer to the camera than the former one
   glDepthFunc(GL_LESS);
 
-
-
   // Transfer VAO
   GLuint VertexArrayID;
   glGenVertexArrays(1, &VertexArrayID);
   glBindVertexArray(VertexArrayID);
 
   // Load Vertex and Fragment shader
-  GLuint programID = LoadShaders("./VertexShader.vs", "./FragmentShader.fs");
+  GLuint programID = LoadShaders("./TransparencyShader.vs", "./TransparencyShader.fs");
 
   // Loads the scene and sets it as the active one
   Scene * scene = new Scene();
@@ -91,6 +89,9 @@ int main(void)
   scene->AddCamera(new Camera(vec2(-40.0f, 40.0f), vec2(-30.0f, 30.0f)));
   Scene::LoadScene(scene);
   loadGameObjects(scene, programID);
+
+  glEnable(GL_BLEND);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   // render scene for each frame
   do
@@ -126,22 +127,21 @@ int main(void)
 
 void loadGameObjects(Scene* scene, GLuint programID)
 {
+  GLuint opaceShader = LoadShaders("./VertexShader.vs", "./FragmentShader.fs");
+
   // Bricks
   for (int i = 25; i >= 10; i -= 3)
    for (int j = -35; j <= 35; j += 5)
     scene->AddGameObject(Brick::AddBrick(
       new Transform(vec3(j, i, 0.0f), vec3(0.0f, 0.0f, 0.0f), vec3(5.0f, 2.0f, 1.0f)), vec3(abs(j) * i * 0.5f, abs(j) * i + 200, 0), programID));
 
-  //scene->AddGameObject(Brick::AddBrick(
-  //      new Transform(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f), vec3(5.0f, 2.0f, 1.0f)), vec3(150, 200, 0), programID));
-
   // Ball
   scene->AddGameObject(Ball::AddBall(
-    new Transform(vec3(0.0f, -15.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 2.0f, 0.0f)), programID));
+    new Transform(vec3(0.0f, -15.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 2.0f, 0.0f)), opaceShader));
 
   // Player
   scene->AddGameObject(Player::AddPlayer(
-    new Transform(vec3(0.0f, -25.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f), vec3(10.0f, 2.0f, 1.0f)), programID));
+    new Transform(vec3(0.0f, -25.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f), vec3(10.0f, 2.0f, 1.0f)), opaceShader));
 
   // DeathZone
   scene->AddGameObject(DeathZone::AddDeathZone(

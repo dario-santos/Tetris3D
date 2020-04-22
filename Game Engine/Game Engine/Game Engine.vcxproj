@@ -206,6 +206,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="FragmentShader.fs" />
+    <None Include="TransparencyShader.fs" />
+    <None Include="TransparencyShader.vs" />
     <None Include="VertexShader.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

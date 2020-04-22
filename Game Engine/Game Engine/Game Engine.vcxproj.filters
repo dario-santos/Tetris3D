@@ -193,5 +193,11 @@
     <None Include="VertexShader.vs">
       <Filter>Shader</Filter>
     </None>
+    <None Include="TransparencyShader.fs">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="TransparencyShader.vs">
+      <Filter>Shader</Filter>
+    </None>
   </ItemGroup>
 </Project>
