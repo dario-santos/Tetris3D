@@ -14,9 +14,9 @@ void PlayerMovement::Update()
   vec3 half = transform->scale * vec3(0.5f, 0.5f, 0.5f);
   
   // Sees if the right or left keys are being pressed
-  if(Input::IsPressed(GLFW_KEY_RIGHT))
+  if(Input::IsPressed(KeyCode::RIGHT) || Input::IsPressed(ButtonCode::DPAD_RIGHT, 1)  )
     transform->position.x += horizontalSpeed;
-  else if(Input::IsPressed(GLFW_KEY_LEFT))
+  else if(Input::IsPressed(KeyCode::LEFT) || Input::IsPressed(ButtonCode::DPAD_LEFT, 1))
     transform->position.x -= horizontalSpeed;
 
   // Looks the player inside the screen

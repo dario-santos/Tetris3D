@@ -1,4 +1,5 @@
 #include "Input.hpp"
+#include <iostream>
 
 // GLFW_PRESSED = true 
 // GLFW_REPEAT  = true
@@ -15,14 +16,29 @@ map<int, bool> Input::keys = {
   {GLFW_KEY_SPACE, false},
 };
 
+vector<bool> Input::gamepadsStatus = { false, false, false, false };
+
 void Input::UpdateKeyStatus(int key, int action)
 {
   Input::keys[key] = !(action == GLFW_RELEASE);
 }
 
-bool Input::IsPressed(int key)
+bool Input::IsPressed(int key, int device)
 {
-  return Input::keys[key];
+  if (device == 0)
+  {
+    return Input::keys[key];
+  } 
+  else if(glfwJoystickPresent(device))
+  {
+    int count;
+    unsigned const char *buttons = glfwGetJoystickButtons(device-1, &count);
+
+    if(buttons != NULL)
+      return buttons[key] == GLFW_PRESS;
+  }
+
+  return false;
 }
 
 void Input::KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -33,8 +49,6 @@ void Input::KeyCallback(GLFWwindow* window, int key, int scancode, int action, i
   if(action == GLFW_RELEASE)
     Input::UpdateKeyStatus(key, action);
 }
-
-#include <iostream>
 
 void Input::JoystickCallback(int jid, int event)
 {
