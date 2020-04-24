@@ -30,9 +30,9 @@ class Square : public Primitive
 {
   private:
     // The vertex buffer, contains the (x,y,z) points of the circle
-    std::vector<GLfloat> verticeBuffer = std::vector<GLfloat>(18, 0.0f);
+    std::vector<GLfloat> verticeBuffer = std::vector<GLfloat>(18 * 6);
     // The color buffer, contains the color of each point of the circle
-    std::vector<GLfloat> verticeColor = std::vector<GLfloat>(18);
+    std::vector<GLfloat> verticeColor = std::vector<GLfloat>(18 * 6);
     // The id of the vertex buffer array
     GLuint verticeBufferId;
     // The id of the color buffer array

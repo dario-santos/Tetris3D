@@ -10,37 +10,177 @@ Square::Square(Transform t, vec3 color)
   vec3 tmp = t.scale * vec3(0.5f, 0.5f, 0.5f);
 
   // Calculates the 6 (two triangles) points of the square
-  verticeBuffer[0] = t.position.x - tmp.x;
-  verticeBuffer[1] = t.position.y - tmp.y;
-  verticeBuffer[2] = t.position.z - tmp.z;
+  // Imaginando um cubo de lado 1 cujo vértices estaos nos octantes positivos
+  // coordenada da face no plano xy, z=0 em (0,0,0)
 
-  verticeBuffer[3] = t.position.x - tmp.x;
-  verticeBuffer[4] = t.position.y + tmp.y;
-  verticeBuffer[5] = t.position.z - tmp.z;
+  // Primeira face do cubo
+  verticeBuffer.push_back(t.position.x - tmp.x);
+  verticeBuffer.push_back(t.position.y - tmp.y);    // (0,0,0)
+  verticeBuffer.push_back(t.position.z - tmp.z);
 
-  verticeBuffer[6] = t.position.x + tmp.x;
-  verticeBuffer[7] = t.position.y - tmp.y;
-  verticeBuffer[8] = t.position.z - tmp.z;
+  verticeBuffer.push_back(t.position.x - tmp.x);
+  verticeBuffer.push_back(t.position.y + tmp.y);    // (0,y,0)
+  verticeBuffer.push_back(t.position.z - tmp.z);
 
-  verticeBuffer[9] = t.position.x - tmp.x;
-  verticeBuffer[10] = t.position.y + tmp.y;
-  verticeBuffer[11] = t.position.z - tmp.z;
+  verticeBuffer.push_back(t.position.x + tmp.x);
+  verticeBuffer.push_back(t.position.y - tmp.y);    // (x,0,0)
+  verticeBuffer.push_back(t.position.z - tmp.z);
 
-  verticeBuffer[12] = t.position.x + tmp.x;
-  verticeBuffer[13] = t.position.y - tmp.y;
-  verticeBuffer[14] = t.position.z - tmp.z;
+  verticeBuffer.push_back(t.position.x - tmp.x);
+  verticeBuffer.push_back(t.position.y + tmp.y);    // (0,y,0)
+  verticeBuffer.push_back(t.position.z - tmp.z);
 
-  verticeBuffer[15] = t.position.x + tmp.x;
-  verticeBuffer[16] = t.position.y + tmp.y;
-  verticeBuffer[17] = t.position.z - tmp.z;
+  verticeBuffer.push_back(t.position.x + tmp.x);
+  verticeBuffer.push_back(t.position.y - tmp.y);    // (x,0,0)
+  verticeBuffer.push_back(t.position.z - tmp.z);
+
+  verticeBuffer.push_back(t.position.x + tmp.x);
+  verticeBuffer.push_back(t.position.y + tmp.y);    // (x,y,0)
+  verticeBuffer.push_back(t.position.z - tmp.z);
+
+
+
+  // Segunda face do cubo, plano xy, z=z
+  verticeBuffer.push_back(t.position.x - tmp.x);
+  verticeBuffer.push_back(t.position.y - tmp.y);    // (0,0,z)
+  verticeBuffer.push_back(t.position.z + tmp.z);
+
+  verticeBuffer.push_back(t.position.x - tmp.x);
+  verticeBuffer.push_back(t.position.y + tmp.y);    // (0,y,z)
+  verticeBuffer.push_back(t.position.z + tmp.z);
+
+  verticeBuffer.push_back(t.position.x + tmp.x);
+  verticeBuffer.push_back(t.position.y - tmp.y);    // (x,0,z)
+  verticeBuffer.push_back(t.position.z + tmp.z);
+
+  verticeBuffer.push_back(t.position.x - tmp.x);
+  verticeBuffer.push_back(t.position.y + tmp.y);    // (0,y,z)
+  verticeBuffer.push_back(t.position.z + tmp.z);
+
+  verticeBuffer.push_back(t.position.x + tmp.x);
+  verticeBuffer.push_back(t.position.y - tmp.y);    // (x,0,z)
+  verticeBuffer.push_back(t.position.z + tmp.z);
+
+  verticeBuffer.push_back(t.position.x + tmp.x);
+  verticeBuffer.push_back(t.position.y + tmp.y);    // (x,y,z)
+  verticeBuffer.push_back(t.position.z + tmp.z);
+
+
+
+  // Terceira face do cubo, plano xz, y=0
+  verticeBuffer.push_back(t.position.x - tmp.x);
+  verticeBuffer.push_back(t.position.x - tmp.y);    // (0,0,0)
+  verticeBuffer.push_back(t.position.x - tmp.z);
+
+  verticeBuffer.push_back(t.position.x + tmp.x);
+  verticeBuffer.push_back(t.position.x - tmp.y);    // (x,0,0)
+  verticeBuffer.push_back(t.position.x - tmp.z);
+
+  verticeBuffer.push_back(t.position.x - tmp.x);
+  verticeBuffer.push_back(t.position.x - tmp.y);    // (0,0,z)
+  verticeBuffer.push_back(t.position.x + tmp.z);
+
+  verticeBuffer.push_back(t.position.x - tmp.x);
+  verticeBuffer.push_back(t.position.x - tmp.y);    // (0,0,z)
+  verticeBuffer.push_back(t.position.x + tmp.z);
+
+  verticeBuffer.push_back(t.position.x + tmp.x);
+  verticeBuffer.push_back(t.position.x - tmp.y);    // (x,0,z)
+  verticeBuffer.push_back(t.position.x + tmp.z);
+
+  verticeBuffer.push_back(t.position.x + tmp.x);
+  verticeBuffer.push_back(t.position.x - tmp.y);    // (x,0,0)
+  verticeBuffer.push_back(t.position.x - tmp.z);
+
+
+
+  // Quarta face do cubo, plano xz, y=y
+  verticeBuffer.push_back(t.position.x - tmp.x);
+  verticeBuffer.push_back(t.position.x + tmp.y);    // (0,y,0)
+  verticeBuffer.push_back(t.position.x - tmp.z);
+
+  verticeBuffer.push_back(t.position.x + tmp.x);
+  verticeBuffer.push_back(t.position.x + tmp.y);    // (x,y,0)
+  verticeBuffer.push_back(t.position.x - tmp.z);
+
+  verticeBuffer.push_back(t.position.x - tmp.x);
+  verticeBuffer.push_back(t.position.x + tmp.y);    // (0,y,z)
+  verticeBuffer.push_back(t.position.x + tmp.z);
+
+  verticeBuffer.push_back(t.position.x - tmp.x);
+  verticeBuffer.push_back(t.position.x + tmp.y);    // (0,y,z)
+  verticeBuffer.push_back(t.position.x + tmp.z);
+
+  verticeBuffer.push_back(t.position.x + tmp.x);
+  verticeBuffer.push_back(t.position.x + tmp.y);    // (x,y,z)
+  verticeBuffer.push_back(t.position.x + tmp.z);
+
+  verticeBuffer.push_back(t.position.x + tmp.x);
+  verticeBuffer.push_back(t.position.x + tmp.y);    // (x,y,0)
+  verticeBuffer.push_back(t.position.x - tmp.z);
+
+
+
+  // Quinta face do cubo, plano yz, x=0
+  verticeBuffer.push_back(t.position.x - tmp.x);
+  verticeBuffer.push_back(t.position.x - tmp.y);    // (0,0,0)
+  verticeBuffer.push_back(t.position.x - tmp.z);
+
+  verticeBuffer.push_back(t.position.x - tmp.x);
+  verticeBuffer.push_back(t.position.x + tmp.y);    // (0,y,0)
+  verticeBuffer.push_back(t.position.x - tmp.z);
+
+  verticeBuffer.push_back(t.position.x - tmp.x);
+  verticeBuffer.push_back(t.position.x + tmp.y);    // (0,y,z)
+  verticeBuffer.push_back(t.position.x + tmp.z);
+
+  verticeBuffer.push_back(t.position.x - tmp.x);
+  verticeBuffer.push_back(t.position.x + tmp.y);    // (0,y,z)
+  verticeBuffer.push_back(t.position.x + tmp.z);
+
+  verticeBuffer.push_back(t.position.x - tmp.x);
+  verticeBuffer.push_back(t.position.x - tmp.y);    // (0,0,z)
+  verticeBuffer.push_back(t.position.x + tmp.z);
+
+  verticeBuffer.push_back(t.position.x - tmp.x);
+  verticeBuffer.push_back(t.position.x - tmp.y);    // (0,0,0)
+  verticeBuffer.push_back(t.position.x - tmp.z);
+
+
+
+  // Sexta face do cubo, plano yz, x=x
+  verticeBuffer.push_back(t.position.x + tmp.x);
+  verticeBuffer.push_back(t.position.x - tmp.y);    // (x,0,0)
+  verticeBuffer.push_back(t.position.x - tmp.z);
+
+  verticeBuffer.push_back(t.position.x + tmp.x);
+  verticeBuffer.push_back(t.position.x + tmp.y);    // (x,y,0)
+  verticeBuffer.push_back(t.position.x - tmp.z);
+
+  verticeBuffer.push_back(t.position.x + tmp.x);
+  verticeBuffer.push_back(t.position.x + tmp.y);    // (x,y,z)
+  verticeBuffer.push_back(t.position.x + tmp.z);
+
+  verticeBuffer.push_back(t.position.x + tmp.x);
+  verticeBuffer.push_back(t.position.x + tmp.y);    // (x,y,z)
+  verticeBuffer.push_back(t.position.x + tmp.z);
+
+  verticeBuffer.push_back(t.position.x + tmp.x);
+  verticeBuffer.push_back(t.position.x - tmp.y);    // (x,0,z)
+  verticeBuffer.push_back(t.position.x + tmp.z);
+
+  verticeBuffer.push_back(t.position.x + tmp.x);
+  verticeBuffer.push_back(t.position.x - tmp.y);    // (x,0,0)
+  verticeBuffer.push_back(t.position.x - tmp.z);
+
 
 
   vec3 c = color / vec3(255.f, 255.f, 255.f);
   for(GLuint i = 0; i < verticeColor.size(); i+=3)
   {
-    verticeColor[i] = c.x;
-    verticeColor[i + 1] = c.y;
-    verticeColor[i + 2] = c.z;
+    verticeColor.push_back(c.x);
+    verticeColor.push_back(c.y);
+    verticeColor.push_back(c.z);
   }
 
   // Move vertex data to video memory; specifically to VBO called vertexbuffer
@@ -104,8 +244,8 @@ void Square::Draw(GLuint shaderId, Transform transform)
   // Input 0 of the shader 3 float coordinates
   glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void *)0);
 
-  // Draws 2 triangles, 6 * 3, 6 points with 3 coordinates each 
-  glDrawArrays(GL_TRIANGLES, 0, 18);
+  // A cube has 6 sides, each with 6 vertexes that have 3 coordinates each -> 3 * 6 * 6
+  glDrawArrays(GL_TRIANGLES, 0, 18 * 6);
 
   // Closes input 0 of the vertex
   glDisableVertexAttribArray(0);
@@ -122,9 +262,9 @@ void Square::UpdateColor(vec3 color)
 
   for(GLuint i = 0 ; i < verticeColor.size() ; i += 3)
   {
-    verticeColor[i] = c.x;
-    verticeColor[i+1] = c.y;
-    verticeColor[i+2] = c.z;
+    verticeColor.push_back(c.x);
+    verticeColor.push_back(c.y);
+    verticeColor.push_back(c.z);
   }
 
   // Move color data to video memory; specifically to CBO called colorbuffer
