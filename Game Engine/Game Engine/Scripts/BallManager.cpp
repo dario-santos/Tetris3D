@@ -10,7 +10,7 @@ BallManager::BallManager(Transform *transform, GameObject *gameObject)
 
 void BallManager::Update()
 {
-  vec3 r = transform->scale * vec3(0.5f, 0.5f, 0.5);
+  vec3 r = transform->scale * vec3(0.5f, 0.5f, 0.0f);
 
   // If the ball is not inside of the screen then change its direction
   if(transform->position.x + r.x > 40 || transform->position.x - r.x < -40)
@@ -19,7 +19,7 @@ void BallManager::Update()
     step.y = -step.y;
 
   // Updates the position of the transform
-  transform->position += step;
+  transform->Translate(step);
 }
 
 void BallManager::OnCollision(vec3 force, std::string tag)
@@ -47,7 +47,7 @@ void BallManager::OnCollision(vec3 force, std::string tag)
     else if(numberOfLives > 0)
     {
       step = vec3(0.3f, 0.6, 0.0f);
-      transform->position = vec3(0.0f, -15, 0.0f);
+      transform->TranslateTo(vec3(0.0f, -15, 0.0f));
       --numberOfLives;
     }
   }

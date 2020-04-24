@@ -8,6 +8,7 @@ using namespace glm;
 // GameEngine
 #include "./GameEngine/Components/GameObject.hpp"
 #include "./GameEngine/Components/Transform.hpp"
+#include "./GameEngine/Primitives/Square.hpp"
 #include "./GameEngine/Scene.hpp"
 #include "./GameEngine/Window.hpp"
 
@@ -84,6 +85,8 @@ int main(void)
   glGenVertexArrays(1, &VertexArrayID);
   glBindVertexArray(VertexArrayID);
 
+  Square::Init(); Circle::Init();
+
   // Loads the scene and sets it as the active one
   Scene * scene = new Scene();
   scene->AddCamera(new Camera(vec2(-40.0f, 40.0f), vec2(-30.0f, 30.0f)));
@@ -93,6 +96,9 @@ int main(void)
   // render scene for each frame
   do
   {
+    for (int i = 0; i < 5000000; i++)
+      ;
+
     // Iterate Objects
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -134,7 +140,7 @@ void loadGameObjects(Scene* scene)
   for (int i = 25; i >= 10; i -= 3)
    for (int j = -35; j <= 35; j += 5)
     scene->AddGameObject(Brick::AddBrick(
-      new Transform(vec3(j, i, -1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(5.0f, 2.0f, 1.0f)), vec3(abs(j) * i * 0.5f, abs(j) * i + 200, 0), transparencyShader));
+      new Transform(vec3(j, i, 0.0f), vec3(0.0f, 0.0f, 0.0f), vec3(5.0f, 2.0f, 1.0f)), vec3(abs(j) * i * 0.5f, abs(j) * i + 200, 0), transparencyShader));
 
   // Ball
   scene->AddGameObject(Ball::AddBall(
@@ -142,7 +148,7 @@ void loadGameObjects(Scene* scene)
 
   // Player
   scene->AddGameObject(Player::AddPlayer(
-    new Transform(vec3(0.0f, -10.0f, -25.0f), vec3(0.0f, 0.0f, 0.0f), vec3(4.0f, 4.0f, 4.0f)), opaceShader));
+    new Transform(vec3(0.0f, -20.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f), vec3(10.0f, 2.0f, 0.0f)), opaceShader));
 
   // DeathZone
   scene->AddGameObject(DeathZone::AddDeathZone(

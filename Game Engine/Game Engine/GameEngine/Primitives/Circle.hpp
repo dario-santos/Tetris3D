@@ -30,11 +30,11 @@ class Circle : public Primitive
 {
   private:
     // The vertex buffer, contains the (x,y,z) points of the circle
-    std::vector<GLfloat> verticeBuffer = std::vector<GLfloat>(180, 0.0f);
+    static std::vector<GLfloat> verticeBuffer;
+    // The id of the vertex buffer array
+    static GLuint verticeBufferId;
     // The color buffer, contains the color of each point of the circle
     std::vector<GLfloat> verticeColor = std::vector<GLfloat>(180);
-    // The id of the vertex buffer array
-    GLuint verticeBufferId;
     // The id of the color buffer array
     GLuint verticeColorId;
 
@@ -55,6 +55,8 @@ class Circle : public Primitive
     *  Circle destructor, frees the vertex and color buffer.
     */
     ~Circle();
+
+    static void Init();
 
     /*
     * Function: Draw

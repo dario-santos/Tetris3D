@@ -32,18 +32,16 @@ class Square : public Primitive
 {
 
 private:
-
 	// The vertex buffer, contains the (x,y,z) points of the circle
-	std::vector<GLfloat> verticeBuffer = std::vector<GLfloat>(18, 0.0f);
+	static std::vector<GLfloat> verticeBuffer;
+	// The id of the vertex buffer array
+	static GLuint verticeBufferId;
 	// The color buffer, contains the color of each point of the circle
 	std::vector<GLfloat> verticeColor = std::vector<GLfloat>(18);
-	// The id of the vertex buffer array
-	GLuint verticeBufferId;
 	// The id of the color buffer array
 	GLuint verticeColorId;
 
 public:
-
 	/*
 	* Function: Square
 	* --------------------------------
@@ -59,6 +57,9 @@ public:
 	*  Square destructor, frees the vertex and color buffer.
 	*/
 	~Square();
+
+	static void Init();
+
 	/*
 	* Function: Draw
 	* --------------------------------

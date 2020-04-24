@@ -4,19 +4,7 @@ Circle::Circle(Transform t, vec3 color)
 {
   // Calculates the MVP matrix, it's orthogonal, and we subtract the staring position of the transform
   // to get its world position
-  this->Primitive::mvp =
-    ortho(-40.0f + t.position.x, 40.0f + t.position.x, -30.0f + t.position.y, 30.0f + t.position.y);
-
-  vec3 tmp = t.scale * vec3(0.5f, 0.5f, 0.5f);
-
-  // Calculates the points of the circle
-  float x = .0f;
-  for(GLuint i = 0 ; i < verticeBuffer.size() ; i +=3)
-	{
-    x = i * 2 * 3.1415 / (verticeBuffer.size() - 2);
-		verticeBuffer[i] = t.position.x - (tmp.x * cos(x));
-		verticeBuffer[i+1] = t.position.y - (tmp.y * sin(x));
-	}
+  this->Primitive::mvp = ortho(-40.0f, 40.0f, -30.0f, 30.0f);
 
   vec3 c = color / vec3(255.f, 255.f, 255.f);
   for(GLuint i = 0; i < verticeColor.size(); i += 3)
@@ -25,13 +13,6 @@ Circle::Circle(Transform t, vec3 color)
     verticeColor[i + 1] = c.y;
     verticeColor[i + 2] = c.z;
   }
-
-  // Move vertex data to video memory; specifically to VBO called vertexbuffer
-  glGenBuffers(1, &verticeBufferId);
-  // Sets the verticeBufferId with the ID of the generated buffer
-  glBindBuffer(GL_ARRAY_BUFFER, verticeBufferId);
-  // Create a new data store for the buffer object, using the buffer object currently bound to target.
-  glBufferData(GL_ARRAY_BUFFER, verticeBuffer.size() * sizeof(GLfloat), &verticeBuffer.front(), GL_STATIC_DRAW);
 
   // Move color data to video memory; specifically to CBO called colorbuffer
   glGenBuffers(1, &verticeColorId);
@@ -49,29 +30,41 @@ Circle::~Circle()
   glDeleteBuffers(1, &verticeColorId);
 }
 
+std::vector<GLfloat>Circle::verticeBuffer = std::vector<GLfloat>(180);
+GLuint Circle::verticeBufferId = 0;
+
+
+void Circle::Init()
+{
+  // Calculates the points of the circle
+  float x = .0f;
+  for (GLuint i = 0; i < verticeBuffer.size(); i += 3)
+  {
+    x = i * 2 * 3.1415 / (verticeBuffer.size() - 2);
+    verticeBuffer[i] = cos(x);
+    verticeBuffer[i + 1] = sin(x);
+  }
+
+  // Move vertex data to video memory; specifically to VBO called vertexbuffer
+  glGenBuffers(1, &verticeBufferId);
+  // Sets the verticeBufferId with the ID of the generated buffer
+  glBindBuffer(GL_ARRAY_BUFFER, verticeBufferId);
+  // Create a new data store for the buffer object, using the buffer object currently bound to target.
+  glBufferData(GL_ARRAY_BUFFER, verticeBuffer.size() * sizeof(GLfloat), &verticeBuffer.front(), GL_STATIC_DRAW);
+}
+
+
 void Circle::Draw(GLuint shaderId, Transform transform)
 {
   // Uses shaderId as our shader
   glUseProgram(shaderId);
 
+  mat4 mvp = ortho(-40.0f, 40.0f, -30.0f, 30.0f) * transform.model;
+
   // Gets the mvp position
   unsigned int matrix = glGetUniformLocation(shaderId, "mvp");
   // Passes the matrix to the shader
   glUniformMatrix4fv(matrix, 1, GL_FALSE, &mvp[0][0]);
-  
-  // Creates a translate matrix
-  mat4 trans = translate(mat4(1.0f), transform.position);
-  // Gets the trans position
-  unsigned int t = glGetUniformLocation(shaderId, "trans");
-  // Passes the matrix to the shader
-  glUniformMatrix4fv(t, 1, GL_FALSE, &trans[0][0]);
-
-  // Creates a rotation matrix
-  mat4 rot = rotate(mat4(1), transform.rotation.x, vec3(0, 0, 1));
-  // Gets the rot position
-  unsigned int r = glGetUniformLocation(shaderId, "rot");
-  // Passes the matrix to the shader
-  glUniformMatrix4fv(r, 1, GL_FALSE, &rot[0][0]);
 
   // 1rst attribute buffer : vertices
   glEnableVertexAttribArray(0);

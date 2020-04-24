@@ -14,7 +14,7 @@
 #include "../GameEngine/Components/GameObject.hpp"
 #include "../GameEngine/Components/Renderer.hpp"
 
-#include "../GameEngine/Primitives/Cube.hpp"
+#include "../GameEngine/Primitives/Square.hpp"
 
 #include "../Scripts/PlayerMovement.hpp"
 
@@ -41,7 +41,7 @@ class Player
     static GameObject *AddPlayer(Transform *t, GLuint shaderId)
     {
       // Sets the primitive of the gameObject, a circle
-      Primitive *p = new Cube(*t, vec3(245, 0, 80));
+      Primitive *p = new Square(*t, vec3(245, 0, 80));
       GameObject *go = new GameObject(t, new Renderer(p, shaderId), "Player");
       
       // Adds the PlayerMovement script

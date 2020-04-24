@@ -1,37 +1,32 @@
 ﻿#include "Square.hpp"
+#include <iostream>
 
 Square::Square(Transform t, vec3 color)
 {
     // Calculates the MVP matrix, it's orthogonal, and we subtract the staring position of the transform
     // to get its world position
-    this->Primitive::mvp =
-        ortho(-40.0f + t.position.x, 40.0f + t.position.x, -30.0f + t.position.y, 30.0f + t.position.y);
 
+    this->Primitive::mvp = ortho(-40.0f + t.position.x, 40.0f + t.position.x, -30.0f + t.position.y, 30.0f + t.position.y);
+
+    // Add scale
+    // Add translation
+    /*this->model = translate(model, t.position);
+    this->model = scale(model, t.scale * vec3(0.5f, 0.5f,0.5f));
     vec3 tmp = t.scale * vec3(0.5f, 0.5f, 0.5f);
-    // Calculates the 6 (two triangles) points of the square
-    verticeBuffer[0] = t.position.x - tmp.x;
-    verticeBuffer[1] = t.position.y - tmp.y;
-    verticeBuffer[2] = t.position.z - tmp.z;
 
-    verticeBuffer[3] = t.position.x - tmp.x;
-    verticeBuffer[4] = t.position.y + tmp.y;
-    verticeBuffer[5] = t.position.z - tmp.z;
+    std::cout << "MODEL Square: scale    (" << tmp.x << ", " << tmp.y << ", " << tmp.z << ")" <<std::endl;
+    std::cout << "              transform(" << t.position.x << ", " << t.position.y << ", " << t.position.z << ")" << std::endl;
 
-    verticeBuffer[6] = t.position.x + tmp.x;
-    verticeBuffer[7] = t.position.y - tmp.y;
-    verticeBuffer[8] = t.position.z - tmp.z;
+    for (int i = 0; i < model.length(); i++)
+    {
+      for (int j = 0; j < model[i].length(); j++)
+        std::cout <<  model[i][j] << " ";
+      std::cout << std::endl;
+    }
 
-    verticeBuffer[9] = t.position.x - tmp.x;
-    verticeBuffer[10] = t.position.y + tmp.y;
-    verticeBuffer[11] = t.position.z - tmp.z;
 
-    verticeBuffer[12] = t.position.x + tmp.x;
-    verticeBuffer[13] = t.position.y - tmp.y;
-    verticeBuffer[14] = t.position.z - tmp.z;
-
-    verticeBuffer[15] = t.position.x + tmp.x;
-    verticeBuffer[16] = t.position.y + tmp.y;
-    verticeBuffer[17] = t.position.z - tmp.z;
+    this->Primitive::mvp *= this->model;
+    */
 
     vec3 c = color / vec3(255.f, 255.f, 255.f);
     for (GLuint i = 0; i < verticeColor.size(); i += 3)
@@ -41,28 +36,58 @@ Square::Square(Transform t, vec3 color)
         verticeColor[i + 2] = c.z;
     }
 
-    // Move vertex data to video memory; specifically to VBO called vertexbuffer
-    glGenBuffers(1, &verticeBufferId);
-    // Sets the verticeBufferId with the ID of the generated buffer
-    glBindBuffer(GL_ARRAY_BUFFER, verticeBufferId);
-    // Create a new data store for the buffer object, using the buffer object currently bound to target.
-    glBufferData(GL_ARRAY_BUFFER, verticeBuffer.size() * sizeof(GLfloat), &verticeBuffer.front(), GL_STATIC_DRAW);
-
     // Move color data to video memory; specifically to CBO called colorbuffer
     glGenBuffers(1, &verticeColorId);
     // Sets the verticeColorId with the ID of the generated buffer
     glBindBuffer(GL_ARRAY_BUFFER, verticeColorId);
     // Create a new data store for the buffer object, using the buffer object currently bound to target.
     glBufferData(GL_ARRAY_BUFFER, verticeColor.size() * sizeof(GLfloat), &verticeColor.front(), GL_STATIC_DRAW);
-
 }
 
 Square::~Square()
 {
     //Deletes the vertex buffer
-    glDeleteBuffers(1, &verticeBufferId);
+    //glDeleteBuffers(1, &verticeBufferId);
     //Deletes the color buffer
     glDeleteBuffers(1, &verticeColorId);
+}
+
+std::vector<GLfloat>Square::verticeBuffer = std::vector<GLfloat>(18);
+GLuint Square::verticeBufferId = 0;
+
+void Square::Init()
+{
+  verticeBuffer[0] = -1.0f;
+  verticeBuffer[1] = -1.0f;
+  verticeBuffer[2] = -1.0f;
+
+  verticeBuffer[3] = -1.0f;
+  verticeBuffer[4] = +1.0f;
+  verticeBuffer[5] = -1.0f;
+
+  verticeBuffer[6] = +1.0f;
+  verticeBuffer[7] = -1.0f;
+  verticeBuffer[8] = -1.0f;
+
+  verticeBuffer[9] = -1.0f;
+  verticeBuffer[10] = +1.0f;
+  verticeBuffer[11] = -1.0f;
+
+  verticeBuffer[12] = +1.0f;
+  verticeBuffer[13] = -1.0f;
+  verticeBuffer[14] = -1.0f;
+
+  verticeBuffer[15] = +1.0f;
+  verticeBuffer[16] = +1.0f;
+  verticeBuffer[17] = -1.0f;
+
+  // Move vertex data to video memory; specifically to VBO called vertexbuffer
+  glGenBuffers(1, &verticeBufferId);
+  // Sets the verticeBufferId with the ID of the generated buffer
+  glBindBuffer(GL_ARRAY_BUFFER, verticeBufferId);
+  // Create a new data store for the buffer object, using the buffer object currently bound to target.
+  glBufferData(GL_ARRAY_BUFFER, verticeBuffer.size() * sizeof(GLfloat), &verticeBuffer.front(), GL_STATIC_DRAW);
+
 }
 
 void Square::Draw(GLuint shaderId, Transform transform)
@@ -70,24 +95,12 @@ void Square::Draw(GLuint shaderId, Transform transform)
     // Uses shaderId as our shader
     glUseProgram(shaderId);
 
+    mat4 mvp = ortho(-40.0f, 40.0f, -30.0f, 30.0f) * transform.model;
+
     // Gets the mvp position
     unsigned int matrix = glGetUniformLocation(shaderId, "mvp");
     // Passes the matrix to the shader
     glUniformMatrix4fv(matrix, 1, GL_FALSE, &mvp[0][0]);
-
-    // Creates a translate matrix
-    mat4 trans = translate(mat4(1.0f), transform.position);
-    // Gets the trans position
-    unsigned int m = glGetUniformLocation(shaderId, "trans");
-    // Passes the matrix to the shader
-    glUniformMatrix4fv(m, 1, GL_FALSE, &trans[0][0]);
-
-    // Creates a rotation matrix
-    mat4 rot = rotate(mat4(1), transform.rotation.x, glm::vec3(0, 0, 1));
-    // Gets the rot position
-    unsigned int r = glGetUniformLocation(shaderId, "rot");
-    // Passes the matrix to the shader
-    glUniformMatrix4fv(r, 1, GL_FALSE, &rot[0][0]);
 
     // 1rst attribute buffer : vertices
     glEnableVertexAttribArray(0);

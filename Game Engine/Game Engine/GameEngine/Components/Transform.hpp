@@ -11,7 +11,8 @@
 #pragma once
 
 #include <glm/glm.hpp>
-using namespace glm;
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 /*
  * Class: Renderer
@@ -21,11 +22,14 @@ class Transform
 {   
   public:
     // Position (x, y, z), represents a position in the game world.
-    vec3 position;
+    glm::vec3 position;
     // Rotation (x, y, z), in degrees, represents the rotation of a game object
-    vec3 rotation;
+    glm::vec3 rotation;
     // Scale (x, y, z), the size of a game object.
-    vec3 scale;
+    glm::vec3 scale;
+    // The object model
+    glm::mat4 model = glm::mat4(1.0f);
+
 
     /*
     * Function: Transform
@@ -36,5 +40,8 @@ class Transform
     *  rotation: The rotation of the game object;
     *  scale: The size of the game object.
     */
-    Transform(vec3 position, vec3 rotation, vec3 scale);
+    Transform(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
+    
+    void Translate(glm::vec3 translation);
+    void TranslateTo(glm::vec3 position);
 };
