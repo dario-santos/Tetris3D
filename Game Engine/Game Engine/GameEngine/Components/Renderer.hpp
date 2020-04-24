@@ -8,8 +8,11 @@
  */
 #pragma once
 
+#include <glm/glm.hpp>
+using namespace glm;
+
 #include "./Transform.hpp"
-#include "../Primitives/Primitive.hpp"
+#include "../Primitives/IPrimitive.hpp"
 
 /*
  * Class: Renderer
@@ -21,7 +24,7 @@ class Renderer
     // The shader id
     GLuint shaderId;
     // The primitive of the renderer: ex.: triangle, square, circle, etc.
-    Primitive *primitive;
+    IPrimitive *primitive;
 
   public:
     /*
@@ -32,7 +35,7 @@ class Renderer
     *  primitive: The renderer primitive;
     *  shaderId: The shader id.
     */
-    Renderer(Primitive *primitive, GLuint shaderId);
+    Renderer(IPrimitive *primitive, GLuint shaderId);
     
     /*
     * Function: ~Renderer
@@ -50,7 +53,7 @@ class Renderer
     *  transform: The transform that will be used in the draw,
     *   decides the position, scale and rotation of the object.
     */
-    void Draw(Transform transform);
+    void Draw(mat4 model, mat4 projection);
 
     /*
     * Function: UpdateShader

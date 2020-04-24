@@ -1,7 +1,7 @@
 /**
- * @file Primitive.hpp
+ * @file IPrimitive.hpp
  *
- * @brief Primitive Interface, defines the interface of the primitives
+ * @brief IPrimitive Interface, defines the interface of the primitives
 
  *
  * @author Dário Santos
@@ -12,20 +12,13 @@
 #include <GL/glew.h>
 
 #include <glm/glm.hpp>
-using namespace glm;
-
-#include "../Components/Transform.hpp"
 
 /*
- * Class: GameObject
+ * Interface: IPrimitive
  * --------------------------------
  */
-class Primitive
-{
-  protected:
-    // The MVP matrix of the primitive
-    mat4 mvp;
-    
+class IPrimitive
+{   
   public:
     /*
     * Function: Draw
@@ -35,7 +28,7 @@ class Primitive
     *  shaderId: The shader that will be used to draw;
     *  transform: The transform that will be used to perform translations, rotations and scales.
     */
-    virtual void Draw(GLuint shaderId, Transform transform) = 0;
+    virtual void Draw(GLuint shaderId, glm::mat4 model, glm::mat4 projection) = 0;
 
     /*
     * Function: UpdateColor
@@ -44,5 +37,5 @@ class Primitive
     *  
     *  color: The new rgb color;
     */ 
-    virtual void UpdateColor(vec3 color) = 0;
+    virtual void UpdateColor(glm::vec3 color) = 0;
 };

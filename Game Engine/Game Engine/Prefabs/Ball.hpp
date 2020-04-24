@@ -41,7 +41,7 @@ class Ball
     static GameObject *AddBall(Transform *t, GLuint shaderId)
     {
       // Sets the primitive of the gameObject, a circle
-      Primitive *p = new Circle(*t, vec3(236, 240, 241));
+      IPrimitive *p = new Circle(vec3(236, 240, 241));
       GameObject *go = new GameObject(t, new Renderer(p, shaderId), "Ball");
 
       // Adds the BallManager script

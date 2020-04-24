@@ -156,7 +156,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GameEngine\Audio\AudioDevice.cpp" />
-    <ClCompile Include="GameEngine\Camera.cpp" />
+    <ClCompile Include="GameEngine\Camera\Orthographic.cpp" />
     <ClCompile Include="GameEngine\Components\GameObject.cpp" />
     <ClCompile Include="GameEngine\Components\Renderer.cpp" />
     <ClCompile Include="GameEngine\Components\Transform.cpp" />
@@ -176,7 +176,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngine\Audio\AudioDevice.hpp" />
-    <ClInclude Include="GameEngine\Camera.hpp" />
+    <ClInclude Include="GameEngine\Camera\ICamera.hpp" />
+    <ClInclude Include="GameEngine\Camera\Orthographic.hpp" />
     <ClInclude Include="GameEngine\Components\GameObject.hpp" />
     <ClInclude Include="GameEngine\Components\Renderer.hpp" />
     <ClInclude Include="GameEngine\Components\Script.hpp" />
@@ -186,7 +187,7 @@
     <ClInclude Include="GameEngine\Parser\Parser.hpp" />
     <ClInclude Include="GameEngine\Primitives\Circle.hpp" />
     <ClInclude Include="GameEngine\Primitives\Cube.hpp" />
-    <ClInclude Include="GameEngine\Primitives\Primitive.hpp" />
+    <ClInclude Include="GameEngine\Primitives\IPrimitive.hpp" />
     <ClInclude Include="GameEngine\Primitives\Square.hpp" />
     <ClInclude Include="GameEngine\Scene.hpp" />
     <ClInclude Include="GameEngine\Window.hpp" />

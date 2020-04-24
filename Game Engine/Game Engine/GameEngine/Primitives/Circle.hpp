@@ -18,7 +18,7 @@ using namespace glm;
 
 #include <vector>
 
-#include "Primitive.hpp"
+#include "IPrimitive.hpp"
 #include "../Components/Transform.hpp"
 
 /*
@@ -26,7 +26,7 @@ using namespace glm;
  * --------------------------------
  *  Interface: Primitive
  */
-class Circle : public Primitive
+class Circle : public IPrimitive
 {
   private:
     // The vertex buffer, contains the (x,y,z) points of the circle
@@ -47,7 +47,7 @@ class Circle : public Primitive
     *  transform: The transform that will be used to calculate the vertex buffer;
     *  color: The rgb color of the primitive. 
     */
-    Circle(Transform t, vec3 color);
+    Circle(vec3 color);
 
     /*
     * Function: ~Circle
@@ -66,7 +66,7 @@ class Circle : public Primitive
     *  shaderId: The shader that will be used to draw;
     *  transform: The transform that will be used to perform translations, rotations and scales.
     */
-    void Draw(GLuint shaderId, Transform);
+    void Draw(GLuint shaderId, mat4 model, mat4 projection);
   
     /*
     * Function: UpdateColor

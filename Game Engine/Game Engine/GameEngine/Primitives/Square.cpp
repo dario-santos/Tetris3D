@@ -1,33 +1,8 @@
 ﻿#include "Square.hpp"
 #include <iostream>
 
-Square::Square(Transform t, vec3 color)
+Square::Square(vec3 color)
 {
-    // Calculates the MVP matrix, it's orthogonal, and we subtract the staring position of the transform
-    // to get its world position
-
-    this->Primitive::mvp = ortho(-40.0f + t.position.x, 40.0f + t.position.x, -30.0f + t.position.y, 30.0f + t.position.y);
-
-    // Add scale
-    // Add translation
-    /*this->model = translate(model, t.position);
-    this->model = scale(model, t.scale * vec3(0.5f, 0.5f,0.5f));
-    vec3 tmp = t.scale * vec3(0.5f, 0.5f, 0.5f);
-
-    std::cout << "MODEL Square: scale    (" << tmp.x << ", " << tmp.y << ", " << tmp.z << ")" <<std::endl;
-    std::cout << "              transform(" << t.position.x << ", " << t.position.y << ", " << t.position.z << ")" << std::endl;
-
-    for (int i = 0; i < model.length(); i++)
-    {
-      for (int j = 0; j < model[i].length(); j++)
-        std::cout <<  model[i][j] << " ";
-      std::cout << std::endl;
-    }
-
-
-    this->Primitive::mvp *= this->model;
-    */
-
     vec3 c = color / vec3(255.f, 255.f, 255.f);
     for (GLuint i = 0; i < verticeColor.size(); i += 3)
     {
@@ -53,6 +28,7 @@ Square::~Square()
 }
 
 std::vector<GLfloat>Square::verticeBuffer = std::vector<GLfloat>(18);
+
 GLuint Square::verticeBufferId = 0;
 
 void Square::Init()
@@ -90,17 +66,16 @@ void Square::Init()
 
 }
 
-void Square::Draw(GLuint shaderId, Transform transform)
+void Square::Draw(GLuint shaderId, mat4 model, mat4 projection)
 {
     // Uses shaderId as our shader
     glUseProgram(shaderId);
 
-    mat4 mvp = ortho(-40.0f, 40.0f, -30.0f, 30.0f) * transform.model;
+    mat4 mvp = projection * model;
 
-    // Gets the mvp position
-    unsigned int matrix = glGetUniformLocation(shaderId, "mvp");
+    unsigned int MVP = glGetUniformLocation(shaderId, "mvp");
     // Passes the matrix to the shader
-    glUniformMatrix4fv(matrix, 1, GL_FALSE, &mvp[0][0]);
+    glUniformMatrix4fv(MVP, 1, GL_FALSE, &mvp[0][0]);
 
     // 1rst attribute buffer : vertices
     glEnableVertexAttribArray(0);

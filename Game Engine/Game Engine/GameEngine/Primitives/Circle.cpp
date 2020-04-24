@@ -1,11 +1,7 @@
 #include "Circle.hpp"
 
-Circle::Circle(Transform t, vec3 color)
+Circle::Circle(vec3 color)
 {
-  // Calculates the MVP matrix, it's orthogonal, and we subtract the staring position of the transform
-  // to get its world position
-  this->Primitive::mvp = ortho(-40.0f, 40.0f, -30.0f, 30.0f);
-
   vec3 c = color / vec3(255.f, 255.f, 255.f);
   for(GLuint i = 0; i < verticeColor.size(); i += 3)
   {
@@ -24,15 +20,13 @@ Circle::Circle(Transform t, vec3 color)
 
 Circle::~Circle()
 {
-  //Deletes the vertex buffer
-  glDeleteBuffers(1, &verticeBufferId);
   //Deletes the color buffer
   glDeleteBuffers(1, &verticeColorId);
 }
 
 std::vector<GLfloat>Circle::verticeBuffer = std::vector<GLfloat>(180);
-GLuint Circle::verticeBufferId = 0;
 
+GLuint Circle::verticeBufferId = 0;
 
 void Circle::Init()
 {
@@ -40,7 +34,7 @@ void Circle::Init()
   float x = .0f;
   for (GLuint i = 0; i < verticeBuffer.size(); i += 3)
   {
-    x = i * 2 * 3.1415 / (verticeBuffer.size() - 2);
+    x = ((float)i) * 2.0f * 3.1415f / (verticeBuffer.size() - 2);
     verticeBuffer[i] = cos(x);
     verticeBuffer[i + 1] = sin(x);
   }
@@ -53,18 +47,16 @@ void Circle::Init()
   glBufferData(GL_ARRAY_BUFFER, verticeBuffer.size() * sizeof(GLfloat), &verticeBuffer.front(), GL_STATIC_DRAW);
 }
 
-
-void Circle::Draw(GLuint shaderId, Transform transform)
+void Circle::Draw(GLuint shaderId, mat4 model, mat4 projection)
 {
   // Uses shaderId as our shader
   glUseProgram(shaderId);
 
-  mat4 mvp = ortho(-40.0f, 40.0f, -30.0f, 30.0f) * transform.model;
+  mat4 mvp = projection * model;
 
-  // Gets the mvp position
-  unsigned int matrix = glGetUniformLocation(shaderId, "mvp");
+  unsigned int MVP = glGetUniformLocation(shaderId, "mvp");
   // Passes the matrix to the shader
-  glUniformMatrix4fv(matrix, 1, GL_FALSE, &mvp[0][0]);
+  glUniformMatrix4fv(MVP, 1, GL_FALSE, &mvp[0][0]);
 
   // 1rst attribute buffer : vertices
   glEnableVertexAttribArray(0);
@@ -93,6 +85,7 @@ void Circle::UpdateColor(vec3 color)
 {
   // Deletes the old color buffer
   glDeleteBuffers(1, &verticeColorId);
+
   vec3 c = color / vec3(255.f, 255.f, 255.f);
   
   // loads the new color buffer

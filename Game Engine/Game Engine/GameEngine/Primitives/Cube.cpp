@@ -2,11 +2,6 @@
 
 Cube::Cube(Transform t, vec3 color)
 {
-    // Calculates the MVP matrix, it's orthogonal, and we subtract the staring position of the transform
-    // to get its world position
-    this->Primitive::mvp =
-        ortho(-40.0f + t.position.x, 40.0f + t.position.x, -30.0f + t.position.y, 30.0f + t.position.y);
-
     // p = 0 0 0
     // s = 2 2 2
     vec3 tmp = t.scale * vec3(0.5f, 0.5f, 0.5f);
@@ -88,77 +83,77 @@ Cube::Cube(Transform t, vec3 color)
 
     // Quarta face do cubo, plano xz, y=y
     verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);    // (0,y,0)
+    verticeBuffer.push_back(t.position.y + tmp.y);
     verticeBuffer.push_back(t.position.z - tmp.z);
 
     verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);    // (x,y,0)
+    verticeBuffer.push_back(t.position.y + tmp.y);
     verticeBuffer.push_back(t.position.z - tmp.z);
 
     verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);    // (0,y,z)
+    verticeBuffer.push_back(t.position.y + tmp.y);
     verticeBuffer.push_back(t.position.z + tmp.z);
 
     verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);    // (0,y,z)
+    verticeBuffer.push_back(t.position.y + tmp.y);
     verticeBuffer.push_back(t.position.z + tmp.z);
 
     verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);    // (x,y,z)
+    verticeBuffer.push_back(t.position.y + tmp.y);
     verticeBuffer.push_back(t.position.z + tmp.z);
 
     verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);    // (x,y,0)
+    verticeBuffer.push_back(t.position.y + tmp.y);
     verticeBuffer.push_back(t.position.z - tmp.z);
 
     // Quinta face do cubo, plano yz, x=0
     verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y - tmp.y);    // (0,0,0)
+    verticeBuffer.push_back(t.position.y - tmp.y);
     verticeBuffer.push_back(t.position.z - tmp.z);
 
     verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);    // (0,y,0)
+    verticeBuffer.push_back(t.position.y + tmp.y);
     verticeBuffer.push_back(t.position.z - tmp.z);
 
     verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);    // (0,y,z)
+    verticeBuffer.push_back(t.position.y + tmp.y);
     verticeBuffer.push_back(t.position.z + tmp.z);
 
     verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);    // (0,y,z)
+    verticeBuffer.push_back(t.position.y + tmp.y);
     verticeBuffer.push_back(t.position.z + tmp.z);
 
     verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y - tmp.y);    // (0,0,z)
+    verticeBuffer.push_back(t.position.y - tmp.y);
     verticeBuffer.push_back(t.position.z + tmp.z);
 
     verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y - tmp.y);    // (0,0,0)
+    verticeBuffer.push_back(t.position.y - tmp.y);
     verticeBuffer.push_back(t.position.z - tmp.z);
 
     // Sexta face do cubo, plano yz, x=x
     verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y - tmp.y);    // (x,0,0)
+    verticeBuffer.push_back(t.position.y - tmp.y);
     verticeBuffer.push_back(t.position.z - tmp.z);
 
     verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);    // (x,y,0)
+    verticeBuffer.push_back(t.position.y + tmp.y);
     verticeBuffer.push_back(t.position.z - tmp.z);
 
     verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);    // (x,y,z)
+    verticeBuffer.push_back(t.position.y + tmp.y);
     verticeBuffer.push_back(t.position.z + tmp.z);
 
     verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);    // (x,y,z)
+    verticeBuffer.push_back(t.position.y + tmp.y);
     verticeBuffer.push_back(t.position.z + tmp.z);
 
     verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y - tmp.y);    // (x,0,z)
+    verticeBuffer.push_back(t.position.y - tmp.y);
     verticeBuffer.push_back(t.position.z + tmp.z);
 
     verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y - tmp.y);    // (x,0,0)
+    verticeBuffer.push_back(t.position.y - tmp.y);
     verticeBuffer.push_back(t.position.z - tmp.z);
 
 
@@ -188,46 +183,22 @@ Cube::Cube(Transform t, vec3 color)
 Cube::~Cube()
 {
     //Deletes the vertex buffer
-    glDeleteBuffers(1, &verticeBufferId);
+    //glDeleteBuffers(1, &verticeBufferId);
     //Deletes the color buffer
     glDeleteBuffers(1, &verticeColorId);
 }
 
-void Cube::Draw(GLuint shaderId, Transform transform)
+void Cube::Draw(GLuint shaderId, mat4 model, mat4 projection)
 {
     // Uses shaderId as our shader
     glUseProgram(shaderId);
 
-    mat4 Projection = mat4(1.0f);
-    Projection = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
-    // Camera matrix
-    mat4 View = mat4(1.0f);
-    View = glm::lookAt(
-      glm::vec3(0, 0, 20), // Camera is at (4,3,-3), in World Space
-      glm::vec3(0, 0, 0), // and looks at the origin
-      glm::vec3(0, 1, 0)  // Head is up (set to 0,-1,0 to look upside-down)
-     );
-
-    this->mvp = Projection * View * mat4(1.0f);
+    mat4 mvp = projection * model;
 
     // Gets the mvp position
     unsigned int matrix = glGetUniformLocation(shaderId, "mvp");
     // Passes the matrix to the shader
     glUniformMatrix4fv(matrix, 1, GL_FALSE, &mvp[0][0]);
-
-    // Creates a translate matrix
-    mat4 trans = translate(mat4(1.0f), transform.position);
-    // Gets the trans position
-    unsigned int m = glGetUniformLocation(shaderId, "trans");
-    // Passes the matrix to the shader
-    glUniformMatrix4fv(m, 1, GL_FALSE, &trans[0][0]);
-
-    // Creates a rotation matrix
-    mat4 rot = rotate(mat4(1), transform.rotation.x, glm::vec3(0, 0, 1));
-    // Gets the rot position
-    unsigned int r = glGetUniformLocation(shaderId, "rot");
-    // Passes the matrix to the shader
-    glUniformMatrix4fv(r, 1, GL_FALSE, &rot[0][0]);
 
     // 1rst attribute buffer : vertices
     glEnableVertexAttribArray(0);

@@ -29,19 +29,20 @@ list<GameObject *> Scene::GetGameObjects()
     return this->gameObjects;
 }
 
-void Scene::AddCamera(Camera* camera) 
+void Scene::AddCamera(ICamera* camera) 
 {
   this->cameras.push_back(camera);
 }
 
-void Scene::RemoveCamera(Camera* camera)
+void Scene::RemoveCamera(ICamera* camera)
 {
-  camera->~Camera();
+//  camera->~ICamera();
   this->cameras.remove(camera);
 }
 
 void Scene::DrawScene()
 {
-  for (GameObject *g: this->gameObjects)
-    g->Draw();
+  for (ICamera* c : cameras)
+    for (GameObject *g: this->gameObjects)
+      g->Draw(c->GetProjection());
 }

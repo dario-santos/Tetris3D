@@ -1,6 +1,6 @@
 ﻿#include "Renderer.hpp"
 
-Renderer::Renderer(Primitive *primitive, GLuint shaderId)
+Renderer::Renderer(IPrimitive *primitive, GLuint shaderId)
 {
   this->primitive = primitive;
   this->shaderId = shaderId;
@@ -8,12 +8,12 @@ Renderer::Renderer(Primitive *primitive, GLuint shaderId)
 
 Renderer::~Renderer()
 {
-  this->primitive->~Primitive();
+  this->primitive->~IPrimitive();
 }
 
-void Renderer::Draw(Transform transform)
+void Renderer::Draw(mat4 model, mat4 projection)
 {
-  this->primitive->Draw(this->shaderId, transform);
+  this->primitive->Draw(this->shaderId, model, projection);
 }
 
 void Renderer::UpdateShader(GLuint shaderId)

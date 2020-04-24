@@ -9,6 +9,9 @@ using namespace glm;
 #include "./GameEngine/Components/GameObject.hpp"
 #include "./GameEngine/Components/Transform.hpp"
 #include "./GameEngine/Primitives/Square.hpp"
+#include "./GameEngine/Primitives/Circle.hpp"
+#include "./GameEngine/Camera/Orthographic.hpp"
+
 #include "./GameEngine/Scene.hpp"
 #include "./GameEngine/Window.hpp"
 
@@ -85,20 +88,18 @@ int main(void)
   glGenVertexArrays(1, &VertexArrayID);
   glBindVertexArray(VertexArrayID);
 
-  Square::Init(); Circle::Init();
+  Square::Init(); 
+  Circle::Init();
 
   // Loads the scene and sets it as the active one
-  Scene * scene = new Scene();
-  scene->AddCamera(new Camera(vec2(-40.0f, 40.0f), vec2(-30.0f, 30.0f)));
+  Scene* scene = new Scene();
+  scene->AddCamera(new Orthographic(vec2(-40.0f, -30.0f), vec2(40.0f, 30.0f)));
   Scene::LoadScene(scene);
   loadGameObjects(scene);
 
   // render scene for each frame
   do
   {
-    for (int i = 0; i < 5000000; i++)
-      ;
-
     // Iterate Objects
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 

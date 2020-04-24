@@ -41,7 +41,7 @@ class Player
     static GameObject *AddPlayer(Transform *t, GLuint shaderId)
     {
       // Sets the primitive of the gameObject, a circle
-      Primitive *p = new Square(*t, vec3(245, 0, 80));
+      IPrimitive *p = new Square(vec3(245, 0, 80));
       GameObject *go = new GameObject(t, new Renderer(p, shaderId), "Player");
       
       // Adds the PlayerMovement script

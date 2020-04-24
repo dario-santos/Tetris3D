@@ -5,7 +5,7 @@
 using namespace std;
 
 #include "./Components/GameObject.hpp"
-#include "./Camera.hpp"
+#include "./Camera/ICamera.hpp"
 
 /*
  * Class: Scene
@@ -19,7 +19,7 @@ class Scene
     // The game objects that constitute this scene
     list<GameObject *> gameObjects;
     // Cameras in the scene
-    list<Camera *> cameras;
+    list<ICamera *> cameras;
 
   public:
     /*
@@ -74,7 +74,7 @@ class Scene
     *
     *  camera: the camera that will be added.
     */
-   void AddCamera(Camera* camera);
+   void AddCamera(ICamera* camera);
 
     /*
     * Function: RemoveGameObject
@@ -83,7 +83,7 @@ class Scene
     *
     *  camera: the camera that will be removed.
     */
-    void RemoveCamera(Camera* camera);
+    void RemoveCamera(ICamera* camera);
 
     /*
     * Function: DrawScene
