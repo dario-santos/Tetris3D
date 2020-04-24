@@ -35,8 +35,8 @@ void Circle::Init()
   for (GLuint i = 0; i < verticeBuffer.size(); i += 3)
   {
     x = ((float)i) * 2.0f * 3.1415f / (verticeBuffer.size() - 2);
-    verticeBuffer[i] = cos(x);
-    verticeBuffer[i + 1] = sin(x);
+    verticeBuffer[i] = cos(x) * 0.5f;
+    verticeBuffer[i + 1] = sin(x) * 0.5f;
   }
 
   // Move vertex data to video memory; specifically to VBO called vertexbuffer

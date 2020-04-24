@@ -28,7 +28,6 @@ class CameraMovement : public Script
     int step = 90;
     int current = 0;
     float delta = 1;
-    bool isPressed = false;
     bool isMoving = false;
 
   public:

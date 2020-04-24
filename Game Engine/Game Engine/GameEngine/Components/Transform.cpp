@@ -14,7 +14,7 @@ Transform::Transform(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
   //Translate
   this->model = glm::translate(model, position);
   // Scale
-  this->model = glm::scale(model, scale * glm::vec3(0.5f, 0.5f, 0.5f));
+  this->model = glm::scale(model, scale);
 }
 
 void Transform::Translate(glm::vec3 translation)
@@ -37,7 +37,7 @@ void Transform::TranslateTo(glm::vec3 position)
 
 void Transform::Scale(glm::vec3 scale)
 {
-  this->model = glm::scale(this->model, scale * glm::vec3(0.5f, 0.5f, 0.5f));
+  this->model = glm::scale(this->model, scale);
 
   this->scale.x = this->model[0].x;
   this->scale.y = this->model[1].y;

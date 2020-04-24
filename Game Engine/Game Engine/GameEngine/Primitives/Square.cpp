@@ -33,12 +33,12 @@ GLuint Square::verticeBufferId = 0;
 void Square::Init()
 {
   verticeBuffer = {
-    -1.0f, -1.0f, -1.0f,
-    -1.0f, +1.0f, -1.0f,
-    +1.0f, -1.0f, -1.0f,
-    -1.0f, +1.0f, -1.0f,
-    +1.0f, -1.0f, -1.0f,
-    +1.0f, +1.0f, -1.0f,
+    -.5f, -.5f, -0.5f,
+    -.5f, +.5f, -0.5f,
+    +.5f, -.5f, -0.5f,
+    -.5f, +.5f, -0.5f,
+    +.5f, -.5f, -0.5f,
+    +.5f, +.5f, -0.5f,
   };
 
   // Move vertex data to video memory; specifically to VBO called vertexbuffer
