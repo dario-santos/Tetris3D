@@ -17,13 +17,13 @@ list<Script *> GameObject::GetScripts()
   return this->scripts;
 }
 
-void GameObject::Draw(mat4 projection)
+void GameObject::Draw(mat4 view, mat4 projection)
 {
   // If there is a renderer draw the object
   // this allows to have game objects that are not drawn.
   // An exempla is a death zone that works solely as a trigger collider.
   if(renderer != nullptr)
-    this->renderer->Draw(this->transform->model, projection);
+    this->renderer->Draw(projection * view * this->transform->model);
 }
 
 bool GameObject::IsEnabled()

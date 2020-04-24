@@ -44,5 +44,5 @@ void Scene::DrawScene()
 {
   for (ICamera* c : cameras)
     for (GameObject *g: this->gameObjects)
-      g->Draw(c->GetProjection());
+      g->Draw(c->GetView(), c->GetProjection());
 }

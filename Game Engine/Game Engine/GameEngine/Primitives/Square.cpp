@@ -66,12 +66,10 @@ void Square::Init()
 
 }
 
-void Square::Draw(GLuint shaderId, mat4 model, mat4 projection)
+void Square::Draw(GLuint shaderId, mat4 mvp)
 {
     // Uses shaderId as our shader
     glUseProgram(shaderId);
-
-    mat4 mvp = projection * model;
 
     unsigned int MVP = glGetUniformLocation(shaderId, "mvp");
     // Passes the matrix to the shader

@@ -33,6 +33,8 @@ public:
   
   Orthographic(vec2 origin, vec2 dimensions);
   
+  mat4 GetView();
+
   mat4 GetProjection();
 
   vec3 GetOrigin();

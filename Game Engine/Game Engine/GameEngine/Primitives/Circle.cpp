@@ -47,12 +47,10 @@ void Circle::Init()
   glBufferData(GL_ARRAY_BUFFER, verticeBuffer.size() * sizeof(GLfloat), &verticeBuffer.front(), GL_STATIC_DRAW);
 }
 
-void Circle::Draw(GLuint shaderId, mat4 model, mat4 projection)
+void Circle::Draw(GLuint shaderId, mat4 mvp)
 {
   // Uses shaderId as our shader
   glUseProgram(shaderId);
-
-  mat4 mvp = projection * model;
 
   unsigned int MVP = glGetUniformLocation(shaderId, "mvp");
   // Passes the matrix to the shader

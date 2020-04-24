@@ -28,7 +28,7 @@ class IPrimitive
     *  shaderId: The shader that will be used to draw;
     *  transform: The transform that will be used to perform translations, rotations and scales.
     */
-    virtual void Draw(GLuint shaderId, glm::mat4 model, glm::mat4 projection) = 0;
+    virtual void Draw(GLuint shaderId, glm::mat4 mvp) = 0;
 
     /*
     * Function: UpdateColor

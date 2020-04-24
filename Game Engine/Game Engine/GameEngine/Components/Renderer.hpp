@@ -53,7 +53,7 @@ class Renderer
     *  transform: The transform that will be used in the draw,
     *   decides the position, scale and rotation of the object.
     */
-    void Draw(mat4 model, mat4 projection);
+    void Draw(mat4 mvp);
 
     /*
     * Function: UpdateShader

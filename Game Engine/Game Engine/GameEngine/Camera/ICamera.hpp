@@ -14,19 +14,13 @@
 using namespace glm;
 
 /*
- * Interface: Camera
+ * Interface: ICamera
  * --------------------------------
  */
 class ICamera
 {
 public:
-  virtual mat4 GetProjection() = 0;
-
-  virtual vec3 GetOrigin() = 0;
+  virtual mat4 GetView() = 0;
   
-  virtual void SetOrigin(GLfloat x, GLfloat y, GLfloat z) = 0;
-
-  virtual vec3 GetDimensions() = 0;
-
-  virtual void SetDimensions(GLfloat x, GLfloat y, GLfloat z) = 0;
+  virtual mat4 GetProjection() = 0;
 };

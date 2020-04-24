@@ -157,6 +157,7 @@
   <ItemGroup>
     <ClCompile Include="GameEngine\Audio\AudioDevice.cpp" />
     <ClCompile Include="GameEngine\Camera\Orthographic.cpp" />
+    <ClCompile Include="GameEngine\Camera\Perspective.cpp" />
     <ClCompile Include="GameEngine\Components\GameObject.cpp" />
     <ClCompile Include="GameEngine\Components\Renderer.cpp" />
     <ClCompile Include="GameEngine\Components\Transform.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="GameEngine\Audio\AudioDevice.hpp" />
     <ClInclude Include="GameEngine\Camera\ICamera.hpp" />
     <ClInclude Include="GameEngine\Camera\Orthographic.hpp" />
+    <ClInclude Include="GameEngine\Camera\Perspective.hpp" />
     <ClInclude Include="GameEngine\Components\GameObject.hpp" />
     <ClInclude Include="GameEngine\Components\Renderer.hpp" />
     <ClInclude Include="GameEngine\Components\Script.hpp" />

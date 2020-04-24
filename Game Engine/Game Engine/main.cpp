@@ -11,6 +11,7 @@ using namespace glm;
 #include "./GameEngine/Primitives/Square.hpp"
 #include "./GameEngine/Primitives/Circle.hpp"
 #include "./GameEngine/Camera/Orthographic.hpp"
+#include "./GameEngine/Camera/Perspective.hpp"
 
 #include "./GameEngine/Scene.hpp"
 #include "./GameEngine/Window.hpp"
@@ -93,7 +94,7 @@ int main(void)
 
   // Loads the scene and sets it as the active one
   Scene* scene = new Scene();
-  scene->AddCamera(new Orthographic(vec2(-40.0f, -30.0f), vec2(40.0f, 30.0f)));
+  scene->AddCamera(new Perspective(45.0f, 4/3.0f, 0.1f, 100.0f, vec3(0, 0, 70), vec3(0, 0, 0), vec3(0, 1, 0)));
   Scene::LoadScene(scene);
   loadGameObjects(scene);
 
@@ -141,19 +142,19 @@ void loadGameObjects(Scene* scene)
   for (int i = 25; i >= 10; i -= 3)
    for (int j = -35; j <= 35; j += 5)
     scene->AddGameObject(Brick::AddBrick(
-      new Transform(vec3(j, i, 0.0f), vec3(0.0f, 0.0f, 0.0f), vec3(5.0f, 2.0f, 1.0f)), vec3(abs(j) * i * 0.5f, abs(j) * i + 200, 0), transparencyShader));
+      new Transform(vec3(j, i, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(5.0f, 2.0f, 1.0f)), vec3(abs(j) * i * 0.5f, abs(j) * i + 200, 0), transparencyShader));
 
   // Ball
   scene->AddGameObject(Ball::AddBall(
-    new Transform(vec3(0.0f, -15.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 2.0f, 0.0f)), opaceShader));
+    new Transform(vec3(0.0f, -15.0f, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 2.0f, 0.0f)), opaceShader));
 
   // Player
   scene->AddGameObject(Player::AddPlayer(
-    new Transform(vec3(0.0f, -20.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f), vec3(10.0f, 2.0f, 0.0f)), opaceShader));
+    new Transform(vec3(0.0f, -20.0f, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(10.0f, 2.0f, 0.0f)), opaceShader));
 
   // DeathZone
   scene->AddGameObject(DeathZone::AddDeathZone(
-    new Transform(vec3(0.0f, -30.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f), vec3(80.0f, 2.0f, 0.0f))));
+    new Transform(vec3(0.0f, -30.0f, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(80.0f, 2.0f, 0.0f))));
 }
 
 void lifeCycle(Scene *scene)

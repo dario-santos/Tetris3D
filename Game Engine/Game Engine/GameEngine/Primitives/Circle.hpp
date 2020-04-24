@@ -66,7 +66,7 @@ class Circle : public IPrimitive
     *  shaderId: The shader that will be used to draw;
     *  transform: The transform that will be used to perform translations, rotations and scales.
     */
-    void Draw(GLuint shaderId, mat4 model, mat4 projection);
+    void Draw(GLuint shaderId, mat4 mvp);
   
     /*
     * Function: UpdateColor

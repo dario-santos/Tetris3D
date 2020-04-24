@@ -75,7 +75,7 @@ class GameObject
     *  The function draw is called every frame and 
     *    its responsible for drawing the game object.
     */
-    void Draw(mat4 Projection);
+    void Draw(mat4 view, mat4 projection);
     
     /*
     * Function: IsEnabled

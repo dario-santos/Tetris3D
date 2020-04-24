@@ -18,6 +18,11 @@ Orthographic::Orthographic(vec2 origin, vec2 dimensions)
   this->projection = ortho(origin[0], dimensions[0], origin[1], dimensions[1]);
 }
 
+mat4 Orthographic::GetView()
+{
+  return mat4(1.0f);
+}
+
 mat4 Orthographic::GetProjection()
 {
   return this->projection;

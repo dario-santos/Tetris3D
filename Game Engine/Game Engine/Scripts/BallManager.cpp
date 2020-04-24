@@ -24,7 +24,6 @@ void BallManager::Update()
 
 void BallManager::OnCollision(vec3 force, std::string tag)
 {
-
   if(tag == "Player")
   {
     step = force/5.f;
