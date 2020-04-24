@@ -28,15 +28,14 @@ bool Input::IsPressed(int key, int device)
   if (device == 0)
   {
     return Input::keys[key];
-  } 
-  else if(glfwJoystickPresent(device))
-  {
-    int count;
-    unsigned const char *buttons = glfwGetJoystickButtons(device-1, &count);
-
-    if(buttons != NULL)
-      return buttons[key] == GLFW_PRESS;
   }
+
+  int count;
+  unsigned const char *buttons = glfwGetJoystickButtons(device-1, &count);
+
+  if(buttons != NULL)
+    return buttons[key] == GLFW_PRESS;
+  
 
   return false;
 }
