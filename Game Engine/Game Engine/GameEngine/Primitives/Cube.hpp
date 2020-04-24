@@ -1,7 +1,7 @@
 /**
- * @file Square.hpp
+ * @file Cube.hpp
  *
- * @brief Square class, defines how a circle is drawn,
+ * @brief Cube class, defines how a cube is drawn,
  *   contains the vertex and color buffers.
  *
  * @author Dário Santos
