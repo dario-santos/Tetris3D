@@ -27,7 +27,7 @@ class CameraMovement : public Script
     vec3 position;
     int step = 90;
     int current = 0;
-    int delta = 2;
+    float delta = 1;
     bool isPressed = false;
     bool isMoving = false;
 

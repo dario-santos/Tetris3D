@@ -141,23 +141,31 @@ void loadGameObjects(Scene* scene)
   transparencyShader = LoadShaders("./Shaders/TransparencyShader.vs", "./Shaders/TransparencyShader.fs");
   opaceShader = LoadShaders("./Shaders/OpaqueShader.vs", "./Shaders/OpaqueShader.fs");
 
+  bool tmp = false;
   // Bricks
   for (int i = 25; i >= 10; i -= 3)
-   for (int j = -35; j <= 35; j += 5)
-    scene->AddGameObject(Brick::AddBrick(
-      new Transform(vec3(j, i, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(5.0f, 2.0f, 1.0f)), vec3(abs(j) * i * 0.5f, abs(j) * i + 200, 0), transparencyShader));
+    for (int j = -35; j <= 35; j += 5)
+    {
+      if (tmp)
+        scene->AddGameObject(Brick::AddBrick(
+          new Transform(vec3(j, i, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(5.0f, 2.0f, 10.0f)), vec3(abs(j) * i * 0.5f, abs(j) * i + 200, 10), transparencyShader));
+      else
+        scene->AddGameObject(Brick::AddBrick(
+          new Transform(vec3(j, i, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(5.0f, 2.0f, 10.0f)), vec3(abs(j) * i * 0.5f, abs(j) * i + 200, 10), opaceShader));
+      tmp = !tmp;
+    }
 
   // Ball
   scene->AddGameObject(Ball::AddBall(
-    new Transform(vec3(0.0f, -15.0f, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 2.0f, 0.0f)), opaceShader));
+    new Transform(vec3(0.0f, -15.0f, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 2.0f, 1.0f)), opaceShader));
 
   // Player
   scene->AddGameObject(Player::AddPlayer(
-    new Transform(vec3(0.0f, -20.0f, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(10.0f, 2.0f, 0.0f)), opaceShader));
+    new Transform(vec3(0.0f, -20.0f, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(10.0f, 2.0f, 1.0f)), opaceShader));
 
   // DeathZone
   scene->AddGameObject(DeathZone::AddDeathZone(
-    new Transform(vec3(0.0f, -30.0f, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(80.0f, 2.0f, 0.0f))));
+    new Transform(vec3(0.0f, -30.0f, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(80.0f, 2.0f,1.0f))));
 }
 
 void lifeCycle(Scene *scene)

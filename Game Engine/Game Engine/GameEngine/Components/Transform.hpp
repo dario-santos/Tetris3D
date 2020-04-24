@@ -44,4 +44,6 @@ class Transform
     
     void Translate(glm::vec3 translation);
     void TranslateTo(glm::vec3 position);
+
+    void Scale(glm::vec3 scale);
 };

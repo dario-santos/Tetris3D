@@ -9,7 +9,6 @@ void CameraMovement::Update()
 {
   // A camera move-se em circunferência
   // A camera para 90 em 90 graus
-
   if(Input::IsPressed(KeyCode::RIGHT) && !isMoving)
   {
     isMoving = true;
