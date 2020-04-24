@@ -86,6 +86,15 @@ class Scene
     void RemoveCamera(ICamera* camera);
 
     /*
+    * Function: GetCameras
+    * --------------------------------
+    *  Returns the list of cameras in the scene
+    *
+    *  return: the list of cameras in the scene.
+    */
+    list<ICamera*> GetCameras();
+
+    /*
     * Function: DrawScene
     * --------------------------------
     *  Draws the scene

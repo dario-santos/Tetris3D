@@ -29,17 +29,17 @@ using namespace glm;
 class Cube : public IPrimitive
 {
 private:
-    // The vertex buffer, contains the (x,y,z) points of the circle
-    std::vector<GLfloat> verticeBuffer = std::vector<GLfloat>(0);
-    // The color buffer, contains the color of each point of the circle
-    std::vector<GLfloat> verticeColor = std::vector<GLfloat>(0);
-    // The id of the vertex buffer array
-    GLuint verticeBufferId;
-    // The id of the color buffer array
-    GLuint verticeColorId;
+  // The vertex buffer, contains the (x,y,z) points of the circle
+  static std::vector<GLfloat> verticeBuffer;
+  // The id of the vertex buffer array
+  static GLuint verticeBufferId;
+  // The color buffer, contains the color of each point of the circle
+  std::vector<GLfloat> verticeColor = std::vector<GLfloat>(0);
+  // The id of the color buffer array
+  GLuint verticeColorId;
 
 public:
-    /*
+   /*
     * Function: Square
     * --------------------------------
     *  Square constructor
@@ -47,7 +47,7 @@ public:
     *  transform: The transform that will be used to calculate the vertex buffer;
     *  color: The rgb color of the primitive.
     */
-    Cube(Transform t, vec3 color);
+    Cube(vec3 color);
 
     /*
     * Function: ~Square
@@ -55,6 +55,8 @@ public:
     *  Square destructor, frees the vertex and color buffer.
     */
     ~Cube();
+
+    static void Init();
 
     /*
     * Function: Draw
@@ -64,7 +66,7 @@ public:
     *  shaderId: The shader that will be used to draw;
     *  transform: The transform that will be used to perform translations, rotations and scales.
     */
-    void Draw(GLuint shaderId, mat4 model, mat4 projection);
+    void Draw(GLuint shaderId, mat4 mvp);
 
     /*
      * Function: UpdateColor

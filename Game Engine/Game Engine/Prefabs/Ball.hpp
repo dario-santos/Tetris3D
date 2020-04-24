@@ -17,6 +17,7 @@
 #include "../GameEngine/Primitives/Circle.hpp"
 
 #include "../Scripts/BallManager.hpp"
+#include "../Scripts/CameraMovement.hpp"
 
 /*
  * Class: Ball
@@ -45,6 +46,7 @@ class Ball
       GameObject *go = new GameObject(t, new Renderer(p, shaderId), "Ball");
 
       // Adds the BallManager script
+      go->AddScript(new CameraMovement());
       go->AddScript(new BallManager(t, go));
       return go;
     }

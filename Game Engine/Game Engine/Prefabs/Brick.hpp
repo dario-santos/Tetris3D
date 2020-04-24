@@ -34,7 +34,7 @@ class Brick
     static GameObject *AddBrick(Transform *t, vec3 color, GLuint programID)
     {
       //Sets the primitive of the gameObject, a square
-      IPrimitive *p = new Square(color);
+      IPrimitive *p = new Cube(color);
       GameObject *go = new GameObject(t, new Renderer(p, programID), "Brick");
 
       // Adds the BallManager script

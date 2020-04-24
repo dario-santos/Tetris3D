@@ -1,162 +1,7 @@
 #include "Cube.hpp"
 
-Cube::Cube(Transform t, vec3 color)
+Cube::Cube(vec3 color)
 {
-    // p = 0 0 0
-    // s = 2 2 2
-    vec3 tmp = t.scale * vec3(0.5f, 0.5f, 0.5f);
-
-    // Primeira face do cubo - face do fundo
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y - tmp.y);
-    verticeBuffer.push_back(t.position.z - tmp.z);
-
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);
-    verticeBuffer.push_back(t.position.z - tmp.z);
-
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);
-    verticeBuffer.push_back(t.position.z - tmp.z);
-
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y - tmp.y);
-    verticeBuffer.push_back(t.position.z - tmp.z);
-
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y - tmp.y);
-    verticeBuffer.push_back(t.position.z - tmp.z);
-
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);
-    verticeBuffer.push_back(t.position.z - tmp.z);
-
-    // Segunda face do cubo, Face de cá
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y - tmp.y);
-    verticeBuffer.push_back(t.position.z + tmp.z);
-
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);
-    verticeBuffer.push_back(t.position.z + tmp.z);
-
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y - tmp.y);
-    verticeBuffer.push_back(t.position.z + tmp.z);
-
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);
-    verticeBuffer.push_back(t.position.z + tmp.z);
-
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y - tmp.y);
-    verticeBuffer.push_back(t.position.z + tmp.z);
-
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);
-    verticeBuffer.push_back(t.position.z + tmp.z);
-
-    // Terceira face do cubo, plano xz, y=0
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y - tmp.y);    // (0,0,0)
-    verticeBuffer.push_back(t.position.z - tmp.z);
-
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y - tmp.y);    // (x,0,0)
-    verticeBuffer.push_back(t.position.z - tmp.z);
-
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y - tmp.y);    // (0,0,z)
-    verticeBuffer.push_back(t.position.z + tmp.z);
-
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y - tmp.y);    // (0,0,z)
-    verticeBuffer.push_back(t.position.z + tmp.z);
-
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y - tmp.y);    // (x,0,z)
-    verticeBuffer.push_back(t.position.z + tmp.z);
-
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y - tmp.y);    // (x,0,0)
-    verticeBuffer.push_back(t.position.z - tmp.z);
-
-    // Quarta face do cubo, plano xz, y=y
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);
-    verticeBuffer.push_back(t.position.z - tmp.z);
-
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);
-    verticeBuffer.push_back(t.position.z - tmp.z);
-
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);
-    verticeBuffer.push_back(t.position.z + tmp.z);
-
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);
-    verticeBuffer.push_back(t.position.z + tmp.z);
-
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);
-    verticeBuffer.push_back(t.position.z + tmp.z);
-
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);
-    verticeBuffer.push_back(t.position.z - tmp.z);
-
-    // Quinta face do cubo, plano yz, x=0
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y - tmp.y);
-    verticeBuffer.push_back(t.position.z - tmp.z);
-
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);
-    verticeBuffer.push_back(t.position.z - tmp.z);
-
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);
-    verticeBuffer.push_back(t.position.z + tmp.z);
-
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);
-    verticeBuffer.push_back(t.position.z + tmp.z);
-
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y - tmp.y);
-    verticeBuffer.push_back(t.position.z + tmp.z);
-
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y - tmp.y);
-    verticeBuffer.push_back(t.position.z - tmp.z);
-
-    // Sexta face do cubo, plano yz, x=x
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y - tmp.y);
-    verticeBuffer.push_back(t.position.z - tmp.z);
-
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);
-    verticeBuffer.push_back(t.position.z - tmp.z);
-
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);
-    verticeBuffer.push_back(t.position.z + tmp.z);
-
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);
-    verticeBuffer.push_back(t.position.z + tmp.z);
-
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y - tmp.y);
-    verticeBuffer.push_back(t.position.z + tmp.z);
-
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y - tmp.y);
-    verticeBuffer.push_back(t.position.z - tmp.z);
-
-
     vec3 c = color / vec3(255.f, 255.f, 255.f);
     for (GLuint i = 0; i < 18 * 6 ; i += 3)
     {
@@ -164,13 +9,6 @@ Cube::Cube(Transform t, vec3 color)
         verticeColor.push_back(c.y);
         verticeColor.push_back(c.z);
     }
-
-    // Move vertex data to video memory; specifically to VBO called vertexbuffer
-    glGenBuffers(1, &verticeBufferId);
-    // Sets the verticeBufferId with the ID of the generated buffer
-    glBindBuffer(GL_ARRAY_BUFFER, verticeBufferId);
-    // Create a new data store for the buffer object, using the buffer object currently bound to target.
-    glBufferData(GL_ARRAY_BUFFER, verticeBuffer.size() * sizeof(GLfloat), &verticeBuffer.front(), GL_STATIC_DRAW);
 
     // Move color data to video memory; specifically to CBO called colorbuffer
     glGenBuffers(1, &verticeColorId);
@@ -182,18 +20,67 @@ Cube::Cube(Transform t, vec3 color)
 
 Cube::~Cube()
 {
-    //Deletes the vertex buffer
-    //glDeleteBuffers(1, &verticeBufferId);
     //Deletes the color buffer
     glDeleteBuffers(1, &verticeColorId);
 }
 
-void Cube::Draw(GLuint shaderId, mat4 model, mat4 projection)
+std::vector<GLfloat> Cube::verticeBuffer = std::vector<GLfloat>(0);
+
+GLuint Cube::verticeBufferId = 0;
+
+void Cube::Init()
+{
+  verticeBuffer = {
+    -1.0f, -1.0f, -1.0f,
+    -1.0f, -1.0f, +1.0f,
+    -1.0f, +1.0f, +1.0f,
+    +1.0f, +1.0f, -1.0f,
+    -1.0f, -1.0f, -1.0f,
+    -1.0f, +1.0f, -1.0f,
+    +1.0f, -1.0f, +1.0f,
+    -1.0f, -1.0f, -1.0f,
+    +1.0f, -1.0f, -1.0f,
+    +1.0f, +1.0f, -1.0f,
+    +1.0f, -1.0f, -1.0f,
+    -1.0f, -1.0f, -1.0f,
+    -1.0f, -1.0f, -1.0f,
+    -1.0f, +1.0f, +1.0f,
+    -1.0f, +1.0f, -1.0f,
+    +1.0f, -1.0f, +1.0f,
+    -1.0f, -1.0f, +1.0f,
+    -1.0f, -1.0f, -1.0f,
+    -1.0f, +1.0f, +1.0f,
+    -1.0f, -1.0f, +1.0f,
+    +1.0f, -1.0f, +1.0f,
+    +1.0f, +1.0f, +1.0f,
+    +1.0f, -1.0f, -1.0f,
+    +1.0f, +1.0f, -1.0f,
+    +1.0f, -1.0f, -1.0f,
+    +1.0f, +1.0f, +1.0f,
+    +1.0f, -1.0f, +1.0f,
+    +1.0f, +1.0f, +1.0f,
+    +1.0f, +1.0f, -1.0f,
+    -1.0f, +1.0f, -1.0f,
+    +1.0f, +1.0f, +1.0f,
+    -1.0f, +1.0f, -1.0f,
+    -1.0f, +1.0f, +1.0f,
+    +1.0f, +1.0f, +1.0f,
+    -1.0f, +1.0f, +1.0f,
+    +1.0f, -1.0f, +1.0f
+  };
+
+  // Move vertex data to video memory; specifically to VBO called vertexbuffer
+  glGenBuffers(1, &verticeBufferId);
+  // Sets the verticeBufferId with the ID of the generated buffer
+  glBindBuffer(GL_ARRAY_BUFFER, verticeBufferId);
+  // Create a new data store for the buffer object, using the buffer object currently bound to target.
+  glBufferData(GL_ARRAY_BUFFER, verticeBuffer.size() * sizeof(GLfloat), &verticeBuffer.front(), GL_STATIC_DRAW);
+}
+
+void Cube::Draw(GLuint shaderId, mat4 mvp)
 {
     // Uses shaderId as our shader
     glUseProgram(shaderId);
-
-    mat4 mvp = projection * model;
 
     // Gets the mvp position
     unsigned int matrix = glGetUniformLocation(shaderId, "mvp");

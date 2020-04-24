@@ -36,8 +36,13 @@ void Scene::AddCamera(ICamera* camera)
 
 void Scene::RemoveCamera(ICamera* camera)
 {
-//  camera->~ICamera();
+  //  camera->~ICamera();
   this->cameras.remove(camera);
+}
+
+list<ICamera*> Scene::GetCameras()
+{
+  return this->cameras;
 }
 
 void Scene::DrawScene()

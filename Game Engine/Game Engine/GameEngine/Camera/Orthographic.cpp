@@ -20,12 +20,22 @@ Orthographic::Orthographic(vec2 origin, vec2 dimensions)
 
 mat4 Orthographic::GetView()
 {
-  return mat4(1.0f);
+  return this->view;
+}
+
+void Orthographic::SetView(mat4 view)
+{
+  this->view = view;
 }
 
 mat4 Orthographic::GetProjection()
 {
-  return this->projection;
+  return projection;
+}
+
+void Orthographic::SetProjection(mat4 projection)
+{
+  this->projection = projection;
 }
 
 vec3 Orthographic::GetOrigin()

@@ -22,5 +22,9 @@ class ICamera
 public:
   virtual mat4 GetView() = 0;
   
+  virtual void SetView(mat4 view) = 0;
+  
   virtual mat4 GetProjection() = 0;
+
+  virtual void SetProjection(mat4 projection) = 0;
 };

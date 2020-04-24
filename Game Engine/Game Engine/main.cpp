@@ -10,6 +10,7 @@ using namespace glm;
 #include "./GameEngine/Components/Transform.hpp"
 #include "./GameEngine/Primitives/Square.hpp"
 #include "./GameEngine/Primitives/Circle.hpp"
+#include "./GameEngine/Primitives/Cube.hpp"
 #include "./GameEngine/Camera/Orthographic.hpp"
 #include "./GameEngine/Camera/Perspective.hpp"
 
@@ -88,13 +89,15 @@ int main(void)
   GLuint VertexArrayID;
   glGenVertexArrays(1, &VertexArrayID);
   glBindVertexArray(VertexArrayID);
-
-  Square::Init(); 
+  
+  Square::Init();
   Circle::Init();
+  Cube::Init();
 
   // Loads the scene and sets it as the active one
   Scene* scene = new Scene();
-  scene->AddCamera(new Perspective(45.0f, 4/3.0f, 0.1f, 100.0f, vec3(0, 0, 70), vec3(0, 0, 0), vec3(0, 1, 0)));
+  scene->AddCamera(new Perspective(45.0f, 4/3.0f, 0.1f, 500.0f, vec3(0, 0, 70), vec3(0, 0, 0), vec3(0, 1, 0)));
+  //scene->AddCamera(new Orthographic(vec2(-40.0f, -30.0f), vec2(40, 30)));
   Scene::LoadScene(scene);
   loadGameObjects(scene);
 

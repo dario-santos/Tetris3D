@@ -172,6 +172,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Scripts\BallManager.cpp" />
     <ClCompile Include="Scripts\BrickManager.cpp" />
+    <ClCompile Include="Scripts\CameraMovement.cpp" />
     <ClCompile Include="Scripts\PlayerMovement.cpp" />
     <ClCompile Include="shader.cpp" />
   </ItemGroup>
@@ -200,6 +201,7 @@
     <ClInclude Include="Prefabs\Player.hpp" />
     <ClInclude Include="Scripts\BallManager.hpp" />
     <ClInclude Include="Scripts\BrickManager.hpp" />
+    <ClInclude Include="Scripts\CameraMovement.hpp" />
     <ClInclude Include="Scripts\PlayerMovement.hpp" />
     <ClInclude Include="shader.hpp" />
   </ItemGroup>

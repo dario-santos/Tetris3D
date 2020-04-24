@@ -26,6 +26,7 @@ class Orthographic : public ICamera
 private:
   vec3 origin;
   vec3 dimensions;
+  mat4 view = mat4(1.0f);
   mat4 projection;
 
 public:
@@ -35,7 +36,11 @@ public:
   
   mat4 GetView();
 
+  void SetView(mat4 view);
+
   mat4 GetProjection();
+
+  void SetProjection(mat4 projection);
 
   vec3 GetOrigin();
 

@@ -1,5 +1,4 @@
 ﻿#include "Square.hpp"
-#include <iostream>
 
 Square::Square(vec3 color)
 {
@@ -27,35 +26,20 @@ Square::~Square()
     glDeleteBuffers(1, &verticeColorId);
 }
 
-std::vector<GLfloat>Square::verticeBuffer = std::vector<GLfloat>(18);
+std::vector<GLfloat>Square::verticeBuffer = std::vector<GLfloat>(0);
 
 GLuint Square::verticeBufferId = 0;
 
 void Square::Init()
 {
-  verticeBuffer[0] = -1.0f;
-  verticeBuffer[1] = -1.0f;
-  verticeBuffer[2] = -1.0f;
-
-  verticeBuffer[3] = -1.0f;
-  verticeBuffer[4] = +1.0f;
-  verticeBuffer[5] = -1.0f;
-
-  verticeBuffer[6] = +1.0f;
-  verticeBuffer[7] = -1.0f;
-  verticeBuffer[8] = -1.0f;
-
-  verticeBuffer[9] = -1.0f;
-  verticeBuffer[10] = +1.0f;
-  verticeBuffer[11] = -1.0f;
-
-  verticeBuffer[12] = +1.0f;
-  verticeBuffer[13] = -1.0f;
-  verticeBuffer[14] = -1.0f;
-
-  verticeBuffer[15] = +1.0f;
-  verticeBuffer[16] = +1.0f;
-  verticeBuffer[17] = -1.0f;
+  verticeBuffer = {
+    -1.0f, -1.0f, -1.0f,
+    -1.0f, +1.0f, -1.0f,
+    +1.0f, -1.0f, -1.0f,
+    -1.0f, +1.0f, -1.0f,
+    +1.0f, -1.0f, -1.0f,
+    +1.0f, +1.0f, -1.0f,
+  };
 
   // Move vertex data to video memory; specifically to VBO called vertexbuffer
   glGenBuffers(1, &verticeBufferId);
@@ -63,7 +47,6 @@ void Square::Init()
   glBindBuffer(GL_ARRAY_BUFFER, verticeBufferId);
   // Create a new data store for the buffer object, using the buffer object currently bound to target.
   glBufferData(GL_ARRAY_BUFFER, verticeBuffer.size() * sizeof(GLfloat), &verticeBuffer.front(), GL_STATIC_DRAW);
-
 }
 
 void Square::Draw(GLuint shaderId, mat4 mvp)

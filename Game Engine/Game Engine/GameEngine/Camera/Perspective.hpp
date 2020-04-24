@@ -30,7 +30,11 @@ private:
 public:
   Perspective(GLfloat fov, GLfloat aspect, GLfloat near, GLfloat far, vec3 eye, vec3 origin, vec3 up);
   
+  mat4 GetView();
+
+  void SetView(mat4 view);
+
   mat4 GetProjection();
 
-  mat4 GetView();
+  void SetProjection(mat4 projection);
 };

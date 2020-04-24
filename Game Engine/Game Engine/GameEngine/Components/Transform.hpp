@@ -15,7 +15,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 /*
- * Class: Renderer
+ * Class: Transform
  * --------------------------------
  */
 class Transform
