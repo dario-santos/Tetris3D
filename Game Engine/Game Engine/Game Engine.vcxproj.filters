@@ -75,12 +75,6 @@
     <ClCompile Include="GameEngine\Camera.cpp">
       <Filter>GameEngine</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngine\Primitives\Sin.cpp">
-      <Filter>GameEngine\Primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="GameEngine\Primitives\Cos.cpp">
-      <Filter>GameEngine\Primitives</Filter>
-    </ClCompile>
     <ClCompile Include="GameEngine\Window.cpp">
       <Filter>GameEngine</Filter>
     </ClCompile>
@@ -101,6 +95,9 @@
     </ClCompile>
     <ClCompile Include="GameEngine\Parser\Parser.cpp">
       <Filter>GameEngine\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Primitives\Cube.cpp">
+      <Filter>GameEngine\Primitives</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -140,12 +137,6 @@
     <ClInclude Include="GameEngine\Camera.hpp">
       <Filter>GameEngine</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngine\Primitives\Sin.hpp">
-      <Filter>GameEngine\Primitives</Filter>
-    </ClInclude>
-    <ClInclude Include="GameEngine\Primitives\Cos.hpp">
-      <Filter>GameEngine\Primitives</Filter>
-    </ClInclude>
     <ClInclude Include="GameEngine\Window.hpp">
       <Filter>GameEngine</Filter>
     </ClInclude>
@@ -158,16 +149,10 @@
     <ClInclude Include="Prefabs\Brick.hpp">
       <Filter>Prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="Prefabs\CosFun.hpp">
-      <Filter>Prefabs</Filter>
-    </ClInclude>
     <ClInclude Include="Prefabs\DeathZone.hpp">
       <Filter>Prefabs</Filter>
     </ClInclude>
     <ClInclude Include="Prefabs\Player.hpp">
-      <Filter>Prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="Prefabs\SinFun.hpp">
       <Filter>Prefabs</Filter>
     </ClInclude>
     <ClInclude Include="Scripts\BallManager.hpp">
@@ -184,6 +169,9 @@
     </ClInclude>
     <ClInclude Include="GameEngine\Parser\Parser.hpp">
       <Filter>GameEngine\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Primitives\Cube.hpp">
+      <Filter>GameEngine\Primitives</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

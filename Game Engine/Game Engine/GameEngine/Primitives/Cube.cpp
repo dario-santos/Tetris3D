@@ -7,13 +7,111 @@ Cube::Cube(Transform t, vec3 color)
     this->Primitive::mvp =
         ortho(-40.0f + t.position.x, 40.0f + t.position.x, -30.0f + t.position.y, 30.0f + t.position.y);
 
+    // p = 0 0 0
+    // s = 2 2 2
     vec3 tmp = t.scale * vec3(0.5f, 0.5f, 0.5f);
 
-    // Calculates the 6 (two triangles) points of the square
-    // Imaginando um cubo de lado 1 cujo vértices estaos nos octantes positivos
-    // coordenada da face no plano xy, z=0 em (0,0,0)
+    // Primeira face do cubo - face do fundo
+    verticeBuffer.push_back(t.position.x - tmp.x);
+    verticeBuffer.push_back(t.position.y - tmp.y);
+    verticeBuffer.push_back(t.position.z - tmp.z);
 
-    // Primeira face do cubo
+    verticeBuffer.push_back(t.position.x - tmp.x);
+    verticeBuffer.push_back(t.position.y + tmp.y);
+    verticeBuffer.push_back(t.position.z - tmp.z);
+
+    verticeBuffer.push_back(t.position.x + tmp.x);
+    verticeBuffer.push_back(t.position.y + tmp.y);
+    verticeBuffer.push_back(t.position.z - tmp.z);
+
+    verticeBuffer.push_back(t.position.x - tmp.x);
+    verticeBuffer.push_back(t.position.y - tmp.y);
+    verticeBuffer.push_back(t.position.z - tmp.z);
+
+    verticeBuffer.push_back(t.position.x + tmp.x);
+    verticeBuffer.push_back(t.position.y - tmp.y);
+    verticeBuffer.push_back(t.position.z - tmp.z);
+
+    verticeBuffer.push_back(t.position.x + tmp.x);
+    verticeBuffer.push_back(t.position.y + tmp.y);
+    verticeBuffer.push_back(t.position.z - tmp.z);
+
+    // Segunda face do cubo, Face de cá
+    verticeBuffer.push_back(t.position.x - tmp.x);
+    verticeBuffer.push_back(t.position.y - tmp.y);
+    verticeBuffer.push_back(t.position.z + tmp.z);
+
+    verticeBuffer.push_back(t.position.x - tmp.x);
+    verticeBuffer.push_back(t.position.y + tmp.y);
+    verticeBuffer.push_back(t.position.z + tmp.z);
+
+    verticeBuffer.push_back(t.position.x + tmp.x);
+    verticeBuffer.push_back(t.position.y - tmp.y);
+    verticeBuffer.push_back(t.position.z + tmp.z);
+
+    verticeBuffer.push_back(t.position.x - tmp.x);
+    verticeBuffer.push_back(t.position.y + tmp.y);
+    verticeBuffer.push_back(t.position.z + tmp.z);
+
+    verticeBuffer.push_back(t.position.x + tmp.x);
+    verticeBuffer.push_back(t.position.y - tmp.y);
+    verticeBuffer.push_back(t.position.z + tmp.z);
+
+    verticeBuffer.push_back(t.position.x + tmp.x);
+    verticeBuffer.push_back(t.position.y + tmp.y);
+    verticeBuffer.push_back(t.position.z + tmp.z);
+
+    // Terceira face do cubo, plano xz, y=0
+    verticeBuffer.push_back(t.position.x - tmp.x);
+    verticeBuffer.push_back(t.position.y - tmp.y);    // (0,0,0)
+    verticeBuffer.push_back(t.position.z - tmp.z);
+
+    verticeBuffer.push_back(t.position.x + tmp.x);
+    verticeBuffer.push_back(t.position.y - tmp.y);    // (x,0,0)
+    verticeBuffer.push_back(t.position.z - tmp.z);
+
+    verticeBuffer.push_back(t.position.x - tmp.x);
+    verticeBuffer.push_back(t.position.y - tmp.y);    // (0,0,z)
+    verticeBuffer.push_back(t.position.z + tmp.z);
+
+    verticeBuffer.push_back(t.position.x - tmp.x);
+    verticeBuffer.push_back(t.position.y - tmp.y);    // (0,0,z)
+    verticeBuffer.push_back(t.position.z + tmp.z);
+
+    verticeBuffer.push_back(t.position.x + tmp.x);
+    verticeBuffer.push_back(t.position.y - tmp.y);    // (x,0,z)
+    verticeBuffer.push_back(t.position.z + tmp.z);
+
+    verticeBuffer.push_back(t.position.x + tmp.x);
+    verticeBuffer.push_back(t.position.y - tmp.y);    // (x,0,0)
+    verticeBuffer.push_back(t.position.z - tmp.z);
+
+    // Quarta face do cubo, plano xz, y=y
+    verticeBuffer.push_back(t.position.x - tmp.x);
+    verticeBuffer.push_back(t.position.y + tmp.y);    // (0,y,0)
+    verticeBuffer.push_back(t.position.z - tmp.z);
+
+    verticeBuffer.push_back(t.position.x + tmp.x);
+    verticeBuffer.push_back(t.position.y + tmp.y);    // (x,y,0)
+    verticeBuffer.push_back(t.position.z - tmp.z);
+
+    verticeBuffer.push_back(t.position.x - tmp.x);
+    verticeBuffer.push_back(t.position.y + tmp.y);    // (0,y,z)
+    verticeBuffer.push_back(t.position.z + tmp.z);
+
+    verticeBuffer.push_back(t.position.x - tmp.x);
+    verticeBuffer.push_back(t.position.y + tmp.y);    // (0,y,z)
+    verticeBuffer.push_back(t.position.z + tmp.z);
+
+    verticeBuffer.push_back(t.position.x + tmp.x);
+    verticeBuffer.push_back(t.position.y + tmp.y);    // (x,y,z)
+    verticeBuffer.push_back(t.position.z + tmp.z);
+
+    verticeBuffer.push_back(t.position.x + tmp.x);
+    verticeBuffer.push_back(t.position.y + tmp.y);    // (x,y,0)
+    verticeBuffer.push_back(t.position.z - tmp.z);
+
+    // Quinta face do cubo, plano yz, x=0
     verticeBuffer.push_back(t.position.x - tmp.x);
     verticeBuffer.push_back(t.position.y - tmp.y);    // (0,0,0)
     verticeBuffer.push_back(t.position.z - tmp.z);
@@ -22,14 +120,23 @@ Cube::Cube(Transform t, vec3 color)
     verticeBuffer.push_back(t.position.y + tmp.y);    // (0,y,0)
     verticeBuffer.push_back(t.position.z - tmp.z);
 
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y - tmp.y);    // (x,0,0)
-    verticeBuffer.push_back(t.position.z - tmp.z);
+    verticeBuffer.push_back(t.position.x - tmp.x);
+    verticeBuffer.push_back(t.position.y + tmp.y);    // (0,y,z)
+    verticeBuffer.push_back(t.position.z + tmp.z);
 
     verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);    // (0,y,0)
+    verticeBuffer.push_back(t.position.y + tmp.y);    // (0,y,z)
+    verticeBuffer.push_back(t.position.z + tmp.z);
+
+    verticeBuffer.push_back(t.position.x - tmp.x);
+    verticeBuffer.push_back(t.position.y - tmp.y);    // (0,0,z)
+    verticeBuffer.push_back(t.position.z + tmp.z);
+
+    verticeBuffer.push_back(t.position.x - tmp.x);
+    verticeBuffer.push_back(t.position.y - tmp.y);    // (0,0,0)
     verticeBuffer.push_back(t.position.z - tmp.z);
 
+    // Sexta face do cubo, plano yz, x=x
     verticeBuffer.push_back(t.position.x + tmp.x);
     verticeBuffer.push_back(t.position.y - tmp.y);    // (x,0,0)
     verticeBuffer.push_back(t.position.z - tmp.z);
@@ -38,141 +145,21 @@ Cube::Cube(Transform t, vec3 color)
     verticeBuffer.push_back(t.position.y + tmp.y);    // (x,y,0)
     verticeBuffer.push_back(t.position.z - tmp.z);
 
-
-
-    // Segunda face do cubo, plano xy, z=z
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y - tmp.y);    // (0,0,z)
-    verticeBuffer.push_back(t.position.z + tmp.z);
-
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);    // (0,y,z)
-    verticeBuffer.push_back(t.position.z + tmp.z);
-
     verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y - tmp.y);    // (x,0,z)
-    verticeBuffer.push_back(t.position.z + tmp.z);
-
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.y + tmp.y);    // (0,y,z)
-    verticeBuffer.push_back(t.position.z + tmp.z);
-
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.y - tmp.y);    // (x,0,z)
+    verticeBuffer.push_back(t.position.y + tmp.y);    // (x,y,z)
     verticeBuffer.push_back(t.position.z + tmp.z);
 
     verticeBuffer.push_back(t.position.x + tmp.x);
     verticeBuffer.push_back(t.position.y + tmp.y);    // (x,y,z)
     verticeBuffer.push_back(t.position.z + tmp.z);
 
-
-
-    // Terceira face do cubo, plano xz, y=0
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.x - tmp.y);    // (0,0,0)
-    verticeBuffer.push_back(t.position.x - tmp.z);
+    verticeBuffer.push_back(t.position.x + tmp.x);
+    verticeBuffer.push_back(t.position.y - tmp.y);    // (x,0,z)
+    verticeBuffer.push_back(t.position.z + tmp.z);
 
     verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.x - tmp.y);    // (x,0,0)
-    verticeBuffer.push_back(t.position.x - tmp.z);
-
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.x - tmp.y);    // (0,0,z)
-    verticeBuffer.push_back(t.position.x + tmp.z);
-
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.x - tmp.y);    // (0,0,z)
-    verticeBuffer.push_back(t.position.x + tmp.z);
-
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.x - tmp.y);    // (x,0,z)
-    verticeBuffer.push_back(t.position.x + tmp.z);
-
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.x - tmp.y);    // (x,0,0)
-    verticeBuffer.push_back(t.position.x - tmp.z);
-
-
-
-    // Quarta face do cubo, plano xz, y=y
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.x + tmp.y);    // (0,y,0)
-    verticeBuffer.push_back(t.position.x - tmp.z);
-
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.x + tmp.y);    // (x,y,0)
-    verticeBuffer.push_back(t.position.x - tmp.z);
-
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.x + tmp.y);    // (0,y,z)
-    verticeBuffer.push_back(t.position.x + tmp.z);
-
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.x + tmp.y);    // (0,y,z)
-    verticeBuffer.push_back(t.position.x + tmp.z);
-
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.x + tmp.y);    // (x,y,z)
-    verticeBuffer.push_back(t.position.x + tmp.z);
-
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.x + tmp.y);    // (x,y,0)
-    verticeBuffer.push_back(t.position.x - tmp.z);
-
-
-
-    // Quinta face do cubo, plano yz, x=0
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.x - tmp.y);    // (0,0,0)
-    verticeBuffer.push_back(t.position.x - tmp.z);
-
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.x + tmp.y);    // (0,y,0)
-    verticeBuffer.push_back(t.position.x - tmp.z);
-
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.x + tmp.y);    // (0,y,z)
-    verticeBuffer.push_back(t.position.x + tmp.z);
-
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.x + tmp.y);    // (0,y,z)
-    verticeBuffer.push_back(t.position.x + tmp.z);
-
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.x - tmp.y);    // (0,0,z)
-    verticeBuffer.push_back(t.position.x + tmp.z);
-
-    verticeBuffer.push_back(t.position.x - tmp.x);
-    verticeBuffer.push_back(t.position.x - tmp.y);    // (0,0,0)
-    verticeBuffer.push_back(t.position.x - tmp.z);
-
-
-
-    // Sexta face do cubo, plano yz, x=x
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.x - tmp.y);    // (x,0,0)
-    verticeBuffer.push_back(t.position.x - tmp.z);
-
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.x + tmp.y);    // (x,y,0)
-    verticeBuffer.push_back(t.position.x - tmp.z);
-
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.x + tmp.y);    // (x,y,z)
-    verticeBuffer.push_back(t.position.x + tmp.z);
-
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.x + tmp.y);    // (x,y,z)
-    verticeBuffer.push_back(t.position.x + tmp.z);
-
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.x - tmp.y);    // (x,0,z)
-    verticeBuffer.push_back(t.position.x + tmp.z);
-
-    verticeBuffer.push_back(t.position.x + tmp.x);
-    verticeBuffer.push_back(t.position.x - tmp.y);    // (x,0,0)
-    verticeBuffer.push_back(t.position.x - tmp.z);
-
+    verticeBuffer.push_back(t.position.y - tmp.y);    // (x,0,0)
+    verticeBuffer.push_back(t.position.z - tmp.z);
 
 
     vec3 c = color / vec3(255.f, 255.f, 255.f);
@@ -210,6 +197,18 @@ void Cube::Draw(GLuint shaderId, Transform transform)
 {
     // Uses shaderId as our shader
     glUseProgram(shaderId);
+
+    mat4 Projection = mat4(1.0f);
+    Projection = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
+    // Camera matrix
+    mat4 View = mat4(1.0f);
+    View = glm::lookAt(
+      glm::vec3(0, 0, 20), // Camera is at (4,3,-3), in World Space
+      glm::vec3(0, 0, 0), // and looks at the origin
+      glm::vec3(0, 1, 0)  // Head is up (set to 0,-1,0 to look upside-down)
+     );
+
+    this->mvp = Projection * View * mat4(1.0f);
 
     // Gets the mvp position
     unsigned int matrix = glGetUniformLocation(shaderId, "mvp");

@@ -134,7 +134,7 @@ void loadGameObjects(Scene* scene)
   for (int i = 25; i >= 10; i -= 3)
    for (int j = -35; j <= 35; j += 5)
     scene->AddGameObject(Brick::AddBrick(
-      new Transform(vec3(j, i, 0.0f), vec3(0.0f, 0.0f, 0.0f), vec3(5.0f, 2.0f, 1.0f)), vec3(abs(j) * i * 0.5f, abs(j) * i + 200, 0), transparencyShader));
+      new Transform(vec3(j, i, -1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(5.0f, 2.0f, 1.0f)), vec3(abs(j) * i * 0.5f, abs(j) * i + 200, 0), transparencyShader));
 
   // Ball
   scene->AddGameObject(Ball::AddBall(
@@ -142,7 +142,7 @@ void loadGameObjects(Scene* scene)
 
   // Player
   scene->AddGameObject(Player::AddPlayer(
-    new Transform(vec3(0.0f, -25.0f, 0.0f), vec3(0.0f, 0.0f, 0.0f), vec3(10.0f, 2.0f, 1.0f)), opaceShader));
+    new Transform(vec3(0.0f, -10.0f, -25.0f), vec3(0.0f, 0.0f, 0.0f), vec3(4.0f, 4.0f, 4.0f)), opaceShader));
 
   // DeathZone
   scene->AddGameObject(DeathZone::AddDeathZone(
