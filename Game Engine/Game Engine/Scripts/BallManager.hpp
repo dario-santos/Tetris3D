@@ -11,6 +11,8 @@ using namespace glm;
 
 #include "../GameEngine/Audio/AudioDevice.hpp"
 
+#include "../GameEngine/Time/Time.hpp"
+
 /*
  * Class: BallManager
  * --------------------------------
@@ -26,7 +28,7 @@ class BallManager : public Script
     // Audio device
     AudioDevice *beep = new AudioDevice();
     // Velocity of movement
-    vec3 step = vec3(0.3f, 0.6f, 0.0f);
+    vec3 step = vec3(10.0f, 6.0f, 0.0f);
     // Number of lives
     int numberOfLives = 2;
     // Score of the game

@@ -19,19 +19,19 @@ void BallManager::Update()
     step.y = -step.y;
 
   // Updates the position of the transform
-  transform->Translate(step);
+  transform->Translate(step * Time::GetDeltaTime());
 }
 
 void BallManager::OnCollision(vec3 force, std::string tag)
 {
   if(tag == "Player")
   {
-    step = vec3(force.x, force.y, 0.0f) / 5.0f;
+    step = vec3(force.x, force.y, 0.0f) * 5.0f;
     beep->Play2D("audio/beep.mp3");
   }
   else if(tag == "Brick")
   {
-    step = vec3(force.x, force.y, 0.0f) / 5.0f;
+    step = vec3(force.x, force.y, 0.0f) * 5.0f;
     score += 10;
 
     beep->Play2D("audio/beep.mp3");  

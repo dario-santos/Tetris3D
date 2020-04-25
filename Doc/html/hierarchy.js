@@ -17,6 +17,7 @@ var hierarchy =
     [ "Renderer", "class_renderer.html", null ],
     [ "Scene", "class_scene.html", null ],
     [ "Script", "class_script.html", null ],
+    [ "Time", "class_time.html", null ],
     [ "Transform", "class_transform.html", null ],
     [ "Window", "class_window.html", null ]
 ];

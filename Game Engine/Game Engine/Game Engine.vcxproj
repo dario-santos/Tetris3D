@@ -175,6 +175,7 @@
     <ClCompile Include="Scripts\CameraMovement.cpp" />
     <ClCompile Include="Scripts\PlayerMovement.cpp" />
     <ClCompile Include="shader.cpp" />
+    <ClCompile Include="GameEngine\Time\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngine\Audio\AudioDevice.hpp" />
@@ -204,6 +205,7 @@
     <ClInclude Include="Scripts\CameraMovement.hpp" />
     <ClInclude Include="Scripts\PlayerMovement.hpp" />
     <ClInclude Include="shader.hpp" />
+    <ClInclude Include="GameEngine\Time\Time.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\OpaqueShader.fs" />

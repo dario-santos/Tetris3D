@@ -18,6 +18,7 @@ using namespace glm;
 #include "./GameEngine/Window.hpp"
 
 #include "./GameEngine/Input/Input.hpp"
+#include "./GameEngine/Time/Time.hpp"
 
 #include "./GameEngine/Model/ModelLoader.hpp"
 
@@ -104,6 +105,8 @@ int main(void)
   // render scene for each frame
   do
   {
+    Time::UpdateValues();
+    
     // Iterate Objects
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -114,8 +117,6 @@ int main(void)
 
     // looking for events
     glfwPollEvents();
-
-   // Check if the ESC key was pressed or the window was closed
   }while(glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS && glfwWindowShouldClose(window) == 0);
 
   // Cleanup VAO, VBOs, and shaders from GPU

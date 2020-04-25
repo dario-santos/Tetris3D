@@ -16,6 +16,9 @@ using namespace glm;
 #include "../GameEngine/Components/Transform.hpp"
 #include "../GameEngine/Components/Script.hpp"
 
+#include "../GameEngine/Input/Input.hpp"
+#include "../GameEngine/Time/Time.hpp"
+
 #include "../GameEngine/Scene.hpp"
 /*
  * Class: BrickManager
@@ -28,7 +31,7 @@ class PlayerMovement : public Script
     // Transform of the gameObject
     Transform *transform;
     // The horizontal movement speed
-    float horizontalSpeed = 0.2f;
+    float horizontalSpeed = 10.0f;
   
   public:
     /*

@@ -15,6 +15,7 @@ var annotated_dup =
     [ "Scene", "class_scene.html", "class_scene" ],
     [ "Script", "class_script.html", "class_script" ],
     [ "Square", "class_square.html", "class_square" ],
+    [ "Time", "class_time.html", null ],
     [ "Transform", "class_transform.html", "class_transform" ],
     [ "Window", "class_window.html", null ]
 ];
