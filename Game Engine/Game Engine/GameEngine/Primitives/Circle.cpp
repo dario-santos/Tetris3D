@@ -1,5 +1,9 @@
 #include "Circle.hpp"
 
+std::vector<GLfloat>Circle::verticeBuffer = std::vector<GLfloat>(180);
+
+GLuint Circle::verticeBufferId = 0;
+
 Circle::Circle(vec3 color)
 {
   vec3 c = color / vec3(255.f, 255.f, 255.f);
@@ -23,10 +27,6 @@ Circle::~Circle()
   //Deletes the color buffer
   glDeleteBuffers(1, &verticeColorId);
 }
-
-std::vector<GLfloat>Circle::verticeBuffer = std::vector<GLfloat>(180);
-
-GLuint Circle::verticeBufferId = 0;
 
 void Circle::Init()
 {

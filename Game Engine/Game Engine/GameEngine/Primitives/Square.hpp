@@ -1,12 +1,11 @@
-/**
- * @file Square.hpp
- *
- * @brief Square class, defines how a circle is drawn,
- *   contains the vertex and color buffers.
- *
- * @author Dário Santos
- * Contact: dariovfsantos@gmail.com
- */
+/*********************************************************************
+	 * \file   Square.hpp
+	 * \brief  Square class, defines how a square is drawn,
+	 *   contains the vertex and color geometry
+	 *
+	 * \author Dário Santos
+	 * \date   April 2020
+	***********************************************************************/
 #pragma once
 
 #include <GL/glew.h>
@@ -18,60 +17,53 @@ using namespace glm;
 
 #include "IPrimitive.hpp"
 
-
-/*
- * Class: Square
- * --------------------------------
- *  Interface: Primitive
+/**
+ * Square
  */
-
 class Square : public IPrimitive
 {
 private:
-	// The vertex buffer, contains the (x,y,z) points of the circle
+	/** The vertex buffer, contains the (x,y,z) points of the square */
 	static std::vector<GLfloat> verticeBuffer;
-	// The id of the vertex buffer array
+	/** The id of the vertex buffer array */
 	static GLuint verticeBufferId;
-	// The color buffer, contains the color of each point of the circle
+	/** The color buffer, contains the color of each point of the square */
 	std::vector<GLfloat> verticeColor = std::vector<GLfloat>(18);
-	// The id of the color buffer array
+	/** The id of the color buffer array */
 	GLuint verticeColorId;
 
 public:
-	/*
-	* Function: Square
-	* --------------------------------
-	*  Square constructor
-	*
-	*  transform: The transform that will be used to calculate the vertex buffer;
-	*  color: The rgb color of the primitive.
-	*/
-	Square(vec3 color);
-	
-	/*
-	* Function: ~Square
-	* --------------------------------
-	*  Square destructor, frees the vertex and color buffer.
-	*/
-	~Square();
+  /**
+   * Square
+   *
+   * \param color The rgb color
+   */
+  Square(vec3 color);
 
-	static void Init();
+  /**
+   * ~Square
+   *
+   */
+  ~Square();
 
-	/*
-	* Function: Draw
-	* --------------------------------
-	*  Draws the primitive to the screen
-	*
-	*  shaderId: The shader that will be used to draw;
-	*  transform: The transform that will be used to perform translations, rotations and scales.
-	*/
-	void Draw(GLuint shaderId, mat4 mvp);
-	/*
-	 * Function: UpdateColor
-	 * --------------------------------
-	 *  Updates the color buffer of a primitive
-	 *
-	 *  color: The new rgb color;
-	 */
-	void UpdateColor(vec3 color);
+  /**
+   * Init
+   *
+   */
+  static void Init();
+
+  /**
+   * Draw
+   *
+   * \param shaderId The shader id that will be used
+   * \param mvp The Model-View-Projection matrix
+   */
+  void Draw(GLuint shaderId, mat4 mvp);
+
+  /**
+   * UpdateColor
+   *
+   * \param color The new rgb color
+   */
+  void UpdateColor(vec3 color);
 };

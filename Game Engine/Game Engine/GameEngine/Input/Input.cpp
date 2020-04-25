@@ -1,10 +1,42 @@
 #include "Input.hpp"
 
 map<int, int> Input::keys = {
+  {GLFW_KEY_0,     GLFW_RELEASE},
+  {GLFW_KEY_1,     GLFW_RELEASE},
+  {GLFW_KEY_2,     GLFW_RELEASE},
+  {GLFW_KEY_3,     GLFW_RELEASE},
+  {GLFW_KEY_4,     GLFW_RELEASE},
+  {GLFW_KEY_5,     GLFW_RELEASE},
+  {GLFW_KEY_6,     GLFW_RELEASE},
+  {GLFW_KEY_7,     GLFW_RELEASE},
+  {GLFW_KEY_8,     GLFW_RELEASE},
+  {GLFW_KEY_9,     GLFW_RELEASE},
   {GLFW_KEY_A,     GLFW_RELEASE},
+  {GLFW_KEY_B,     GLFW_RELEASE},
+  {GLFW_KEY_C,     GLFW_RELEASE},  
   {GLFW_KEY_D,     GLFW_RELEASE},
+  {GLFW_KEY_E,     GLFW_RELEASE},
+  {GLFW_KEY_F,     GLFW_RELEASE},
+  {GLFW_KEY_G,     GLFW_RELEASE},
+  {GLFW_KEY_H,     GLFW_RELEASE},
+  {GLFW_KEY_I,     GLFW_RELEASE},
+  {GLFW_KEY_J,     GLFW_RELEASE},
+  {GLFW_KEY_K,     GLFW_RELEASE},
+  {GLFW_KEY_L,     GLFW_RELEASE},
+  {GLFW_KEY_M,     GLFW_RELEASE},
+  {GLFW_KEY_N,     GLFW_RELEASE},
+  {GLFW_KEY_O,     GLFW_RELEASE},
+  {GLFW_KEY_P,     GLFW_RELEASE},
+  {GLFW_KEY_Q,     GLFW_RELEASE},
+  {GLFW_KEY_R,     GLFW_RELEASE},
   {GLFW_KEY_S,     GLFW_RELEASE},
+  {GLFW_KEY_T,     GLFW_RELEASE},
+  {GLFW_KEY_U,     GLFW_RELEASE},
+  {GLFW_KEY_V,     GLFW_RELEASE},
   {GLFW_KEY_W,     GLFW_RELEASE},
+  {GLFW_KEY_X,     GLFW_RELEASE},
+  {GLFW_KEY_Y,     GLFW_RELEASE},
+  {GLFW_KEY_Z,     GLFW_RELEASE},
   {GLFW_KEY_UP,    GLFW_RELEASE},
   {GLFW_KEY_RIGHT, GLFW_RELEASE},
   {GLFW_KEY_LEFT,  GLFW_RELEASE},
@@ -12,13 +44,8 @@ map<int, int> Input::keys = {
   {GLFW_KEY_SPACE, GLFW_RELEASE},
 };
 
-vector<int> Input::gamepadsStatus = {GLFW_DISCONNECTED, 16};
-
 float Input::GetAxis(AxesCode axis, Gamepad device)
 {
-  if (gamepadsStatus[static_cast<int>(device)] == GLFW_DISCONNECTED)
-    return 0.0f;
-
   int count;
   const float* axes = glfwGetJoystickAxes(static_cast<int>(device), &count);
 
@@ -27,8 +54,6 @@ float Input::GetAxis(AxesCode axis, Gamepad device)
 
 bool Input::GetButton(ButtonCode button, Gamepad device)
 {
-  if (gamepadsStatus[static_cast<int>(device)] == GLFW_DISCONNECTED)
-    return false;
   int count;
   unsigned const char* buttons = glfwGetJoystickButtons(static_cast<int>(device), &count);
 
@@ -37,9 +62,6 @@ bool Input::GetButton(ButtonCode button, Gamepad device)
 
 bool Input::GetButtonDown(ButtonCode button, Gamepad device)
 {
-  if (gamepadsStatus[static_cast<int>(device)] == GLFW_DISCONNECTED)
-    return false;
-
   int count;
   unsigned const char* buttons = glfwGetJoystickButtons(static_cast<int>(device), &count);
 
@@ -48,9 +70,6 @@ bool Input::GetButtonDown(ButtonCode button, Gamepad device)
 
 bool Input::GetButtonUp(ButtonCode button, Gamepad device)
 {
-  if (gamepadsStatus[static_cast<int>(device)] == GLFW_DISCONNECTED)
-    return false;
-
   int count;
   unsigned const char* buttons = glfwGetJoystickButtons(static_cast<int>(device), &count);
 
@@ -79,5 +98,4 @@ void Input::KeyCallback(GLFWwindow* window, int key, int scancode, int action, i
 
 void Input::JoystickCallback(int jid, int event)
 {
-  gamepadsStatus[jid] = event;
 }

@@ -1,5 +1,9 @@
 ﻿#include "Square.hpp"
 
+std::vector<GLfloat>Square::verticeBuffer = std::vector<GLfloat>(0);
+
+GLuint Square::verticeBufferId = 0;
+
 Square::Square(vec3 color)
 {
     vec3 c = color / vec3(255.f, 255.f, 255.f);
@@ -23,10 +27,6 @@ Square::~Square()
     //Deletes the color buffer
     glDeleteBuffers(1, &verticeColorId);
 }
-
-std::vector<GLfloat>Square::verticeBuffer = std::vector<GLfloat>(0);
-
-GLuint Square::verticeBufferId = 0;
 
 void Square::Init()
 {

@@ -86,42 +86,29 @@ $(document).ready(function(){initNavTree('_i_primitive_8hpp_source.html',''); in
 <div class="title">IPrimitive.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="_i_primitive_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<a href="_i_primitive_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment"> /*********************************************************************</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  * \file   IPrimitive.hpp</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">  * \brief  IPrimitive Interface, defines the interface of the primitives</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">  *</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">  * \author Dário Santos</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">  * \date   April 2020</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> ***********************************************************************/</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;GL/glew.h&gt;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;GL/glew.h&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> * Interface: IPrimitive</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"> * --------------------------------</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="class_i_primitive.html">   20</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_i_primitive.html">IPrimitive</a></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{   </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="comment">/*</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">    * Function: Draw</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">    * --------------------------------</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">    *  Draws the primitive to the screen</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">    *  </span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">    *  shaderId: The shader that will be used to draw;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">    *  transform: The transform that will be used to perform translations, rotations and scales.</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">    */</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_i_primitive.html#acb3f441d53b5aa464c7b98322bdf5f25">Draw</a>(GLuint shaderId, glm::mat4 mvp) = 0;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="comment">/*</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">    * Function: UpdateColor</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">    * --------------------------------</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">    *  Updates the color buffer of a primitive</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">    *  </span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">    *  color: The new rgb color;</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">    */</span> </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_i_primitive.html#ab4900369adefc84f17dce08177fe2ae2">UpdateColor</a>(glm::vec3 color) = 0;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;};</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_i_primitive.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_i_primitive.html">IPrimitive</a></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_i_primitive.html#acb3f441d53b5aa464c7b98322bdf5f25">Draw</a>(GLuint shaderId, glm::mat4 mvp) = 0;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_i_primitive.html#ab4900369adefc84f17dce08177fe2ae2">UpdateColor</a>(glm::vec3 color) = 0;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclass_i_primitive_html"><div class="ttname"><a href="class_i_primitive.html">IPrimitive</a></div><div class="ttdef"><b>Definition:</b> IPrimitive.hpp:20</div></div>
+<div class="ttc" id="aclass_i_primitive_html"><div class="ttname"><a href="class_i_primitive.html">IPrimitive</a></div><div class="ttdef"><b>Definition:</b> IPrimitive.hpp:17</div></div>
 <div class="ttc" id="aclass_i_primitive_html_acb3f441d53b5aa464c7b98322bdf5f25"><div class="ttname"><a href="class_i_primitive.html#acb3f441d53b5aa464c7b98322bdf5f25">IPrimitive::Draw</a></div><div class="ttdeci">virtual void Draw(GLuint shaderId, glm::mat4 mvp)=0</div></div>
 <div class="ttc" id="aclass_i_primitive_html_ab4900369adefc84f17dce08177fe2ae2"><div class="ttname"><a href="class_i_primitive.html#ab4900369adefc84f17dce08177fe2ae2">IPrimitive::UpdateColor</a></div><div class="ttdeci">virtual void UpdateColor(glm::vec3 color)=0</div></div>
 <!-- start footer part -->

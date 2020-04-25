@@ -32,12 +32,13 @@ enum class Gamepad {
   Gamepad16 = GLFW_JOYSTICK_16,
 };
 
+// F310
 // id | Xbox    | Playstation  
-// 0 -> A       | X
-// 1 -> B       | O
-// 2 -> X       | Square
-// 3 -> Y       | Triangle
-// 4 -> LB      | L1
+// 0  | A       | X
+// 1  | B       | O
+// 2  | X       | Square
+// 3  | Y       | Triangle
+// 4  | LB      | L1
 // 5 -> RB      | R1
 // 6 -> select  | select
 // 7 -> start   | start
@@ -64,6 +65,7 @@ enum class ButtonCode {
   DPAD_LEFT,
 };
 
+// F310
 // id | Xbox    | Playstation  
 // 0 -> LAxis_X | LAxis_X
 // 1 -> LAxis_Y | LAxis_Y
@@ -81,10 +83,46 @@ enum class AxesCode {
 };
 
 enum class KeyCode {
-  RIGHT = 262,
-  LEFT = 263,
-  DOWN = 264,
-  UP = 265
+  Alpha0 = 48,
+  Alpha1 = 49,
+  Alpha2 = 50,
+  Alpha3 = 51,
+  Alpha4 = 52,
+  Alpha5 = 53,
+  Alpha6 = 54,
+  Alpha7 = 55,
+  Alpha8 = 56,
+  Alpha9 = 57,
+  A = 65,
+  B = 66,
+  C = 67,
+  D = 68,
+  E = 69,
+  F = 70,
+  G = 71,
+  H = 72,
+  I = 73,
+  J = 74,
+  K = 75,
+  L = 76,
+  M = 77,
+  N = 78,
+  O = 79,
+  P = 80,
+  Q = 81,
+  R = 82,
+  S = 83,
+  T = 84,
+  U = 85,
+  V = 86,
+  W = 87,
+  X = 88,
+  Y = 89,
+  Z = 90,
+  RightArrow = 262,
+  LeftArrow = 263,
+  DownArrow = 264,
+  UpArrow = 265
 };
 
 /**
@@ -93,11 +131,9 @@ enum class KeyCode {
 class Input
 {
   private:
-    // A hash map that represents if a key is being pressed or not.
+    // A hash map contains the status of the supported keys .
     static map<int, int> keys;
-    static vector<int> gamepadsStatus;
-    // This is private because we don't want Ball objects
-    Input();
+    Input(); 
     ~Input();
 
 public:
