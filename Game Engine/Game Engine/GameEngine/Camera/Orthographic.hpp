@@ -42,6 +42,10 @@ public:
 
   void SetProjection(mat4 projection);
 
+  void RotateTo(vec3 degrees);
+
+  void TranslateTo(vec3 position);
+
   vec3 GetOrigin();
 
   void SetOrigin(GLfloat x, GLfloat y, GLfloat z = 0.0f);

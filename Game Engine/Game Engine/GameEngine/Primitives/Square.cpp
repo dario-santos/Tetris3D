@@ -20,8 +20,6 @@ Square::Square(vec3 color)
 
 Square::~Square()
 {
-    //Deletes the vertex buffer
-    //glDeleteBuffers(1, &verticeBufferId);
     //Deletes the color buffer
     glDeleteBuffers(1, &verticeColorId);
 }

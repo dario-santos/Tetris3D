@@ -157,7 +157,7 @@ void loadGameObjects(Scene* scene)
 
   // Ball
   scene->AddGameObject(Ball::AddBall(
-    new Transform(vec3(0.0f, -15.0f, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 2.0f, 1.0f)), opaceShader));
+    new Transform(vec3(0.0f, -15.0f, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 2.0f, 50.0f)), opaceShader));
 
   // Player
   scene->AddGameObject(Player::AddPlayer(
@@ -193,14 +193,14 @@ void lifeCycle(Scene *scene)
       vec3 c2 = g2->GetTransform().position;
 
       // if the distance between the centers is smaller than the x and y radius there's a collision
-      if(abs(c1.x - c2.x) < r1.x && abs(c1.y - c2.y) < r1.y)
+      if(abs(c1.x - c2.x) < r1.x && abs(c1.y - c2.y) < r1.y && abs(c1.z - c2.z) < r1.z)
       {
         // Invokes the OnCollision method of the objects
         for(Script *s : g1->GetScripts())
-          s->OnCollision(vec3(c1.x - c2.x, c1.y - c2.y, 0.0f), g2->Tag());
+          s->OnCollision(vec3(c1.x - c2.x, c1.y - c2.y, c1.y - c2.y), g2->Tag());
 
         for(Script *s : g2->GetScripts())
-          s->OnCollision(-vec3(c1.x - c2.x, c1.y - c2.y, 0.0f), g1->Tag());
+          s->OnCollision(-vec3(c1.x - c2.x, c1.y - c2.y, c1.y - c2.y), g1->Tag());
       }
     }
   }

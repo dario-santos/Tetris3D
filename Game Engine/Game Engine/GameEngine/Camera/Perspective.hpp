@@ -37,4 +37,8 @@ public:
   mat4 GetProjection();
 
   void SetProjection(mat4 projection);
+
+  void RotateTo(vec3 degrees);
+
+  void TranslateTo(vec3 position);
 };

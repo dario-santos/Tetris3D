@@ -28,7 +28,7 @@ class PlayerMovement : public Script
     // Transform of the gameObject
     Transform *transform;
     // The horizontal movement speed
-    float horizontalSpeed = 1.0f;
+    float horizontalSpeed = 0.2f;
   
   public:
     /*

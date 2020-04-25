@@ -15,6 +15,7 @@
 #include "../GameEngine/Components/Renderer.hpp"
 
 #include "../GameEngine/Primitives/Circle.hpp"
+#include "../GameEngine/Primitives/Cube.hpp"
 
 #include "../Scripts/BallManager.hpp"
 #include "../Scripts/CameraMovement.hpp"
@@ -42,7 +43,7 @@ class Ball
     static GameObject *AddBall(Transform *t, GLuint shaderId)
     {
       // Sets the primitive of the gameObject, a circle
-      IPrimitive *p = new Circle(vec3(236, 240, 241));
+      IPrimitive *p = new Cube(vec3(236, 240, 241));
       GameObject *go = new GameObject(t, new Renderer(p, shaderId), "Ball");
 
       // Adds the BallManager script

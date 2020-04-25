@@ -27,14 +27,14 @@ void BallManager::OnCollision(vec3 force, std::string tag)
   if(tag == "Player")
   {
     step = force/5.f;
+    beep->Play2D("audio/beep.mp3");
   }
   else if(tag == "Brick")
   {
-    step = force/5.f;
+    step = vec3(force.x, force.y, 0.0f) / 5.0f;
     score += 10;
 
-    beep->Play2D("audio/beep.mp3");
-  
+    beep->Play2D("audio/beep.mp3");  
   }
   else if(tag == "DeathZone")
   {
@@ -46,7 +46,7 @@ void BallManager::OnCollision(vec3 force, std::string tag)
     else if(numberOfLives > 0)
     {
       step = vec3(0.3f, 0.6, 0.0f);
-      transform->TranslateTo(vec3(0.0f, -15, 0.0f));
+      transform->TranslateTo(vec3(0.0f, -15, 1.0f));
       --numberOfLives;
     }
   }

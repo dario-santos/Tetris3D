@@ -47,6 +47,7 @@ public:
 	*  color: The rgb color of the primitive.
 	*/
 	Square(vec3 color);
+	
 	/*
 	* Function: ~Square
 	* --------------------------------

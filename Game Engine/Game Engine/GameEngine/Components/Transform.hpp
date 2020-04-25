@@ -43,6 +43,7 @@ class Transform
     Transform(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
     
     void Translate(glm::vec3 translation);
+
     void TranslateTo(glm::vec3 position);
 
     void Scale(glm::vec3 scale);
