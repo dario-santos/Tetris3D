@@ -163,7 +163,6 @@
     <ClCompile Include="GameEngine\Components\Transform.cpp" />
     <ClCompile Include="GameEngine\Input\Input.cpp" />
     <ClCompile Include="GameEngine\Model\ModelLoader.cpp" />
-    <ClCompile Include="GameEngine\Parser\Parser.cpp" />
     <ClCompile Include="GameEngine\Primitives\Circle.cpp" />
     <ClCompile Include="GameEngine\Primitives\Cube.cpp" />
     <ClCompile Include="GameEngine\Primitives\Square.cpp" />
@@ -176,8 +175,10 @@
     <ClCompile Include="Scripts\PlayerMovement.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="GameEngine\Time\Time.cpp" />
+    <ClCompile Include="GameEngine\Config\Config.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameEngine\Config\Config.hpp" />
     <ClInclude Include="GameEngine\Audio\AudioDevice.hpp" />
     <ClInclude Include="GameEngine\Camera\ICamera.hpp" />
     <ClInclude Include="GameEngine\Camera\Orthographic.hpp" />
@@ -188,7 +189,6 @@
     <ClInclude Include="GameEngine\Components\Transform.hpp" />
     <ClInclude Include="GameEngine\Input\Input.hpp" />
     <ClInclude Include="GameEngine\Model\ModelLoader.hpp" />
-    <ClInclude Include="GameEngine\Parser\Parser.hpp" />
     <ClInclude Include="GameEngine\Primitives\Circle.hpp" />
     <ClInclude Include="GameEngine\Primitives\Cube.hpp" />
     <ClInclude Include="GameEngine\Primitives\IPrimitive.hpp" />
@@ -208,6 +208,7 @@
     <ClInclude Include="GameEngine\Time\Time.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="config.cfg" />
     <None Include="Shaders\OpaqueShader.fs" />
     <None Include="Shaders\OpaqueShader.vs" />
     <None Include="Shaders\TransparencyShader.fs" />

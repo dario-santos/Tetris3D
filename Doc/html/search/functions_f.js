@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['windowreshapecallback_299',['WindowReshapeCallback',['../class_window.html#ac21a1f71960f56d25ff3c1ca36fbb9cb',1,'Window']]]
+  ['_7ecircle_299',['~Circle',['../class_circle.html#ae3f30436e645d73e368e8ee55f8d1650',1,'Circle']]],
+  ['_7ecube_300',['~Cube',['../class_cube.html#aa814e979cecb8c451fdb332ded2cea1e',1,'Cube']]],
+  ['_7erenderer_301',['~Renderer',['../class_renderer.html#afeee408862d5bd6255a6882d47e6d5cd',1,'Renderer']]],
+  ['_7esquare_302',['~Square',['../class_square.html#a90af7ce1060cff7b717ceddb333846b8',1,'Square']]]
 ];

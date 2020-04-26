@@ -52,12 +52,28 @@ float Input::GetAxis(AxesCode axis, Gamepad device)
   return axes != NULL ? axes[static_cast<int>(axis)] : 0.0f;
 }
 
+float Input::GetAxis(string axis, Gamepad device)
+{
+  int count;
+  const float* axes = glfwGetJoystickAxes(static_cast<int>(device), &count);
+
+  return axes != NULL ? axes[Config::keys["Axis"][axis]] : 0.0f;
+}
+
 bool Input::GetButton(ButtonCode button, Gamepad device)
 {
   int count;
   unsigned const char* buttons = glfwGetJoystickButtons(static_cast<int>(device), &count);
 
   return buttons != NULL ? buttons[static_cast<int>(button)] != GLFW_RELEASE : false;
+}
+
+bool Input::GetButton(string button, Gamepad device)
+{
+  int count;
+  unsigned const char* buttons = glfwGetJoystickButtons(static_cast<int>(device), &count);
+
+  return buttons != NULL ? buttons[Config::keys["Gamepad"][button]] != GLFW_RELEASE : false;
 }
 
 bool Input::GetButtonDown(ButtonCode button, Gamepad device)
@@ -68,6 +84,14 @@ bool Input::GetButtonDown(ButtonCode button, Gamepad device)
   return buttons != NULL ? buttons[static_cast<int>(button)] == GLFW_PRESS : false;
 }
 
+bool Input::GetButtonDown(string button, Gamepad device)
+{
+  int count;
+  unsigned const char* buttons = glfwGetJoystickButtons(static_cast<int>(device), &count);
+
+  return buttons != NULL ? buttons[Config::keys["Gamepad"][button]] == GLFW_PRESS : false;
+}
+
 bool Input::GetButtonUp(ButtonCode button, Gamepad device)
 {
   int count;
@@ -76,9 +100,22 @@ bool Input::GetButtonUp(ButtonCode button, Gamepad device)
   return buttons != NULL ? buttons[static_cast<int>(button)] == GLFW_RELEASE : false;
 }
 
+bool Input::GetButtonUp(string button, Gamepad device)
+{
+  int count;
+  unsigned const char* buttons = glfwGetJoystickButtons(static_cast<int>(device), &count);
+
+  return buttons != NULL ? buttons[Config::keys["Gamepad"][button]] == GLFW_RELEASE : false;
+}
+
 bool Input::GetKey(KeyCode key)
 {
   return Input::keys[static_cast<int>(key)] != GLFW_RELEASE;
+}
+
+bool Input::GetKey(string key)
+{
+  return Input::keys[Config::keys["Keyboard"][key]] != GLFW_RELEASE;
 }
 
 bool Input::GetKeyDown(KeyCode key)
@@ -86,16 +123,22 @@ bool Input::GetKeyDown(KeyCode key)
   return Input::keys[static_cast<int>(key)] == GLFW_PRESS;
 }
 
+bool Input::GetKeyDown(string key)
+{
+  return Input::keys[Config::keys["Keyboard"][key]] == GLFW_PRESS;
+}
+
 bool Input::GetKeyUp(KeyCode key)
 {
   return Input::keys[static_cast<int>(key)] == GLFW_RELEASE;
 }
 
+bool Input::GetKeyUp(string key)
+{
+  return Input::keys[Config::keys["Keyboard"][key]] == GLFW_RELEASE;
+}
+
 void Input::KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
   Input::keys[key] = action;
-}
-
-void Input::JoystickCallback(int jid, int event)
-{
 }

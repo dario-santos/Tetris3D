@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>OMGE: Input/Input.hpp Source File</title>
+<title>OMGE: C:/Users/themu/Documents/GitHub/3DTetris/Game Engine/Game Engine/GameEngine/Input/Input.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -99,147 +99,139 @@ $(document).ready(function(){initNavTree('_input_8hpp_source.html',''); initResi
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">using namespace </span>std;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639">   16</a></span>&#160;<span class="keyword">enum class</span> <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639">Gamepad</a> {</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639a14fca82f42713015c6cba4f27057dcab">Gamepad1</a> = GLFW_JOYSTICK_1,</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639ad158e445f77505032b2787fff48c3fec">Gamepad2</a> = GLFW_JOYSTICK_2,</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639aa1aa12abfbc64281399c131bec36f304">Gamepad3</a> = GLFW_JOYSTICK_3,</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639a5b84d4a629f39ed38b457ae827a67bb9">Gamepad4</a> = GLFW_JOYSTICK_4,</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639a1e71172642c908d414805c761538dd3d">Gamepad5</a> = GLFW_JOYSTICK_5,</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639a565bdcd3dca4329b853730efc01fdb6c">Gamepad6</a> = GLFW_JOYSTICK_6,</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639af46844049370d7a7fbbf9e2365b65dcc">Gamepad7</a> = GLFW_JOYSTICK_7,</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639a5fc5c3ee5c53de3b46e6b410fac4dcb0">Gamepad8</a> = GLFW_JOYSTICK_8,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639a3c76486440d7b9a5ae59d5afa2d8fc12">Gamepad9</a> = GLFW_JOYSTICK_9,</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639afa1103d7655de155d7af9d9b1370ea6e">Gamepad10</a> = GLFW_JOYSTICK_10,</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639a8eabfa6df351376fcf61f54bf3315290">Gamepad11</a> = GLFW_JOYSTICK_11,</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639a943f4bd3440c368e56fccd62aedfb1a2">Gamepad12</a> = GLFW_JOYSTICK_12,</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639a367bb725b69e2e3a4a137983c9f022d0">Gamepad13</a> = GLFW_JOYSTICK_13,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639a8bb1f4c9c75a5a9e249aaf64156437d6">Gamepad14</a> = GLFW_JOYSTICK_14,</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639a74b06875c80e1a94c902111647cfd7df">Gamepad15</a> = GLFW_JOYSTICK_15,</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639ab29675aca32ec4aa4165ed3b1a1879c6">Gamepad16</a> = GLFW_JOYSTICK_16,</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;};</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">// F310</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">// id | Xbox    | Playstation  </span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">// 0  | A       | X</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">// 1  | B       | O</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">// 2  | X       | Square</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">// 3  | Y       | Triangle</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">// 4  | LB      | L1</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">// 5 -&gt; RB      | R1</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">// 6 -&gt; select  | select</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">// 7 -&gt; start   | start</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">// 8 -&gt; L3      | L3</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">// 9 -&gt; R3      | R3</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">// 10 -&gt; D-UP   | D-UP</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">// 11 -&gt; D-RIGHT| D-RIGHT</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">// 12 -&gt; D-DOWN | D-DOWN</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">// 13 -&gt; D-LEFT | D-LEFT </span></div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326d">   51</a></span>&#160;<span class="keyword">enum class</span> <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326d">ButtonCode</a> {</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326da7fc56270e7a70fa81a5935b72eacbe29">A</a> = 0,</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326da9d5ed678fe57bcca610140957afab571">B</a>,</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326da02129bb861061d1a052c592e2dc6b383">X</a>,</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326da57cec4137b614c87cb4e24a3d003a3e0">Y</a>,</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326dac951270e425b15fc20c64da4341c1d89">LB</a>,</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326dac8ee22e1fc2165dfd3d2b04aef93b2f2">RB</a>,</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326dae0626222614bdee31951d84c64e5e9ff">Select</a>,</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326daa6122a65eaa676f700ae68d393054a37">Start</a>,</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326da842ce6eb510f7e7047da883915ec90e0">L3</a>,</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326da5c108ce0fe89d0632cfce75f650b36c2">R3</a>,</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326da53f4f819b43470f230aea73335a5f091">DPAD_UP</a>,</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326da5faad20a625bae1d890868782aae45ba">DPAD_RIGHT</a>,</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326daed0ea47a6800b933a16cd91169c338f7">DPAD_DOWN</a>,</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326da2206bf25efcd102b0102f7ff4df45c99">DPAD_LEFT</a>,</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;};</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">// F310</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">// id | Xbox    | Playstation  </span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">// 0 -&gt; LAxis_X | LAxis_X</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">// 1 -&gt; LAxis_Y | LAxis_Y</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">// 2 -&gt; RAxis_X | RAxis_X</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">// 3 -&gt; RAxis_Y | RAxis_Y</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">// 4 -&gt; LT      | L2</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">// 5 -&gt; RT      | R2</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="_input_8hpp.html#a7ad14e081835d5a4e3c197e8622b4acd">   76</a></span>&#160;<span class="keyword">enum class</span> <a class="code" href="_input_8hpp.html#a7ad14e081835d5a4e3c197e8622b4acd">AxesCode</a> {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <a class="code" href="_input_8hpp.html#a7ad14e081835d5a4e3c197e8622b4acda2bbac59c2d447fc04721bde8b36f24f7">LAxis_X</a> = 0,</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <a class="code" href="_input_8hpp.html#a7ad14e081835d5a4e3c197e8622b4acda6a31cf5d56baa34f792c2c6a83ff5ceb">LAxis_Y</a>,</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <a class="code" href="_input_8hpp.html#a7ad14e081835d5a4e3c197e8622b4acdaf6ded8ee8132ebb44c2dcfb5ad64041c">RAxis_X</a>,</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <a class="code" href="_input_8hpp.html#a7ad14e081835d5a4e3c197e8622b4acda4196d1d945db12b3e74bafea6cf967b5">RAxis_Y</a>,</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <a class="code" href="_input_8hpp.html#a7ad14e081835d5a4e3c197e8622b4acdac562607189d77eb9dfb707464c1e7b0b">LT</a>,</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <a class="code" href="_input_8hpp.html#a7ad14e081835d5a4e3c197e8622b4acda705610ed3e5ec724f5cb0d76a5fd3aa1">RT</a></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;};</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2">   85</a></span>&#160;<span class="keyword">enum class</span> <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2">KeyCode</a> {</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a4f1896b0949181219100380f7328e442">Alpha0</a> = 48,</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a905b81f6ffb9ae0b60ff6184c1c099c0">Alpha1</a> = 49,</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2ab59cd2e6e89feb9ae15aea97bb5c6e8c">Alpha2</a> = 50,</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a45e199c3b864bd0b0b5d609860fd846c">Alpha3</a> = 51,</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a01633f1e1b4af1c6933da83c8063347a">Alpha4</a> = 52,</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a83ae9b0aff3420973c79ac1d273bccb2">Alpha5</a> = 53,</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a906c322eddfed40af6ca8b789aaa917b">Alpha6</a> = 54,</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a7e1401e8efcb718a68c57b20a68631ae">Alpha7</a> = 55,</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2afe20914526c7d83938bda15c24d3220a">Alpha8</a> = 56,</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a5ab466801223a5bdd2637ae199b7f4d4">Alpha9</a> = 57,</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326da7fc56270e7a70fa81a5935b72eacbe29">A</a> = 65,</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326da9d5ed678fe57bcca610140957afab571">B</a> = 66,</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a0d61f8370cad1d412f80b84d143e1257">C</a> = 67,</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2af623e75af30e62bbd73d6df5b50bb7b5">D</a> = 68,</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a3a3ea00cfc35332cedf6e5e9a32e94da">E</a> = 69,</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a800618943025315f869e4e1f09471012">F</a> = 70,</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2adfcf28d0734569a6a693bc8194de62bf">G</a> = 71,</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2ac1d9f50f86825a1a2302ec2449c17196">H</a> = 72,</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2add7536794b63bf90eccfd37f9b147d7f">I</a> = 73,</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2aff44570aca8241914870afbc310cdb85">J</a> = 74,</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2aa5f3c6a11b03839d46af9fb43c97c188">K</a> = 75,</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2ad20caec3b48a1eef164cb4ca81ba2587">L</a> = 76,</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a69691c7bdcc3ce6d5d8a1361f22d04ac">M</a> = 77,</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a8d9c307cb7f3c4a32822a51922d1ceaa">N</a> = 78,</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2af186217753c37b9b9f958d906208506e">O</a> = 79,</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a44c29edb103a2872f519ad0c9a0fdaaa">P</a> = 80,</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2af09564c9ca56850d4cd6b3319e541aee">Q</a> = 81,</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2ae1e1d3d40573127e9ee0480caf1283d6">R</a> = 82,</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a5dbc98dcc983a70728bd082d1a47546e">S</a> = 83,</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> = 84,</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a4c614360da93c0a041b22e537de151eb">U</a> = 85,</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a5206560a306a2e085a437fd258eb57ce">V</a> = 86,</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a61e9c06ea9a85a5088a499df6458d276">W</a> = 87,</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326da02129bb861061d1a052c592e2dc6b383">X</a> = 88,</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326da57cec4137b614c87cb4e24a3d003a3e0">Y</a> = 89,</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a21c2e59531c8710156d34a3c30ac81d5">Z</a> = 90,</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a026be376ee5c529a3d0a35866d1242ad">RightArrow</a> = 262,</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a1a45924fabe821ad288bd081b0bbf93b">LeftArrow</a> = 263,</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a0a3f89b5a028cc88370ad5a49dfab276">DownArrow</a> = 264,</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a0b513090f0a012194da83d5515882b13">UpArrow</a> = 265</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;};</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00131"></a><span class="lineno"><a class="line" href="class_input.html">  131</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_input.html">Input</a></div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;{</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="comment">// A hash map contains the status of the supported keys .</span></div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keyword">static</span> map&lt;int, int&gt; keys;</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <a class="code" href="class_input.html">Input</a>(); </div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    ~<a class="code" href="class_input.html">Input</a>();</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">float</span> GetAxis(<a class="code" href="_input_8hpp.html#a7ad14e081835d5a4e3c197e8622b4acd">AxesCode</a> axis, <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639">Gamepad</a> device);</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">bool</span> GetButton(<a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326d">ButtonCode</a> button, <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639">Gamepad</a> device);</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">bool</span> GetButtonDown(<a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326d">ButtonCode</a> button, <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639">Gamepad</a> device);</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">bool</span> GetButtonUp(<a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326d">ButtonCode</a> button, <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639">Gamepad</a> device);</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">bool</span> GetKey(<a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2">KeyCode</a> key);</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">bool</span> GetKeyDown(<a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2">KeyCode</a> key);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">using namespace </span>std;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;../Config/Config.hpp&quot;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639">   20</a></span>&#160;<span class="keyword">enum class</span> <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639">Gamepad</a> {</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639a14fca82f42713015c6cba4f27057dcab">Gamepad1</a> = GLFW_JOYSTICK_1,</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639ad158e445f77505032b2787fff48c3fec">Gamepad2</a> = GLFW_JOYSTICK_2,</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639aa1aa12abfbc64281399c131bec36f304">Gamepad3</a> = GLFW_JOYSTICK_3,</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639a5b84d4a629f39ed38b457ae827a67bb9">Gamepad4</a> = GLFW_JOYSTICK_4,</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639a1e71172642c908d414805c761538dd3d">Gamepad5</a> = GLFW_JOYSTICK_5,</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639a565bdcd3dca4329b853730efc01fdb6c">Gamepad6</a> = GLFW_JOYSTICK_6,</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639af46844049370d7a7fbbf9e2365b65dcc">Gamepad7</a> = GLFW_JOYSTICK_7,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639a5fc5c3ee5c53de3b46e6b410fac4dcb0">Gamepad8</a> = GLFW_JOYSTICK_8,</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639a3c76486440d7b9a5ae59d5afa2d8fc12">Gamepad9</a> = GLFW_JOYSTICK_9,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639afa1103d7655de155d7af9d9b1370ea6e">Gamepad10</a> = GLFW_JOYSTICK_10,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639a8eabfa6df351376fcf61f54bf3315290">Gamepad11</a> = GLFW_JOYSTICK_11,</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639a943f4bd3440c368e56fccd62aedfb1a2">Gamepad12</a> = GLFW_JOYSTICK_12,</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639a367bb725b69e2e3a4a137983c9f022d0">Gamepad13</a> = GLFW_JOYSTICK_13,</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639a8bb1f4c9c75a5a9e249aaf64156437d6">Gamepad14</a> = GLFW_JOYSTICK_14,</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639a74b06875c80e1a94c902111647cfd7df">Gamepad15</a> = GLFW_JOYSTICK_15,</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639ab29675aca32ec4aa4165ed3b1a1879c6">Gamepad16</a> = GLFW_JOYSTICK_16,</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;};</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326d">   39</a></span>&#160;<span class="keyword">enum class</span> <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326d">ButtonCode</a> {</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326da7fc56270e7a70fa81a5935b72eacbe29">A</a> = 0,</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326da9d5ed678fe57bcca610140957afab571">B</a>,</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326da02129bb861061d1a052c592e2dc6b383">X</a>,</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326da57cec4137b614c87cb4e24a3d003a3e0">Y</a>,</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326dac951270e425b15fc20c64da4341c1d89">LB</a>,</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326dac8ee22e1fc2165dfd3d2b04aef93b2f2">RB</a>,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326dae0626222614bdee31951d84c64e5e9ff">Select</a>,</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326daa6122a65eaa676f700ae68d393054a37">Start</a>,</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326da842ce6eb510f7e7047da883915ec90e0">L3</a>,</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326da5c108ce0fe89d0632cfce75f650b36c2">R3</a>,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326da53f4f819b43470f230aea73335a5f091">DPAD_UP</a>,</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326da5faad20a625bae1d890868782aae45ba">DPAD_RIGHT</a>,</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326daed0ea47a6800b933a16cd91169c338f7">DPAD_DOWN</a>,</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326da2206bf25efcd102b0102f7ff4df45c99">DPAD_LEFT</a>,</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;};</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="_input_8hpp.html#a7ad14e081835d5a4e3c197e8622b4acd">   56</a></span>&#160;<span class="keyword">enum class</span> <a class="code" href="_input_8hpp.html#a7ad14e081835d5a4e3c197e8622b4acd">AxesCode</a> {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <a class="code" href="_input_8hpp.html#a7ad14e081835d5a4e3c197e8622b4acda2bbac59c2d447fc04721bde8b36f24f7">LAxis_X</a> = 0,</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <a class="code" href="_input_8hpp.html#a7ad14e081835d5a4e3c197e8622b4acda6a31cf5d56baa34f792c2c6a83ff5ceb">LAxis_Y</a>,</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <a class="code" href="_input_8hpp.html#a7ad14e081835d5a4e3c197e8622b4acdaf6ded8ee8132ebb44c2dcfb5ad64041c">RAxis_X</a>,</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <a class="code" href="_input_8hpp.html#a7ad14e081835d5a4e3c197e8622b4acda4196d1d945db12b3e74bafea6cf967b5">RAxis_Y</a>,</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <a class="code" href="_input_8hpp.html#a7ad14e081835d5a4e3c197e8622b4acdac562607189d77eb9dfb707464c1e7b0b">LT</a>,</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <a class="code" href="_input_8hpp.html#a7ad14e081835d5a4e3c197e8622b4acda705610ed3e5ec724f5cb0d76a5fd3aa1">RT</a></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;};</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2">   65</a></span>&#160;<span class="keyword">enum class</span> <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2">KeyCode</a> {</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a4f1896b0949181219100380f7328e442">Alpha0</a> = 48,</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a905b81f6ffb9ae0b60ff6184c1c099c0">Alpha1</a> = 49,</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2ab59cd2e6e89feb9ae15aea97bb5c6e8c">Alpha2</a> = 50,</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a45e199c3b864bd0b0b5d609860fd846c">Alpha3</a> = 51,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a01633f1e1b4af1c6933da83c8063347a">Alpha4</a> = 52,</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a83ae9b0aff3420973c79ac1d273bccb2">Alpha5</a> = 53,</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a906c322eddfed40af6ca8b789aaa917b">Alpha6</a> = 54,</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a7e1401e8efcb718a68c57b20a68631ae">Alpha7</a> = 55,</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2afe20914526c7d83938bda15c24d3220a">Alpha8</a> = 56,</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a5ab466801223a5bdd2637ae199b7f4d4">Alpha9</a> = 57,</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326da7fc56270e7a70fa81a5935b72eacbe29">A</a> = 65,</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326da9d5ed678fe57bcca610140957afab571">B</a> = 66,</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a0d61f8370cad1d412f80b84d143e1257">C</a> = 67,</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2af623e75af30e62bbd73d6df5b50bb7b5">D</a> = 68,</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a3a3ea00cfc35332cedf6e5e9a32e94da">E</a> = 69,</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a800618943025315f869e4e1f09471012">F</a> = 70,</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2adfcf28d0734569a6a693bc8194de62bf">G</a> = 71,</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2ac1d9f50f86825a1a2302ec2449c17196">H</a> = 72,</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2add7536794b63bf90eccfd37f9b147d7f">I</a> = 73,</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2aff44570aca8241914870afbc310cdb85">J</a> = 74,</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2aa5f3c6a11b03839d46af9fb43c97c188">K</a> = 75,</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2ad20caec3b48a1eef164cb4ca81ba2587">L</a> = 76,</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a69691c7bdcc3ce6d5d8a1361f22d04ac">M</a> = 77,</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a8d9c307cb7f3c4a32822a51922d1ceaa">N</a> = 78,</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2af186217753c37b9b9f958d906208506e">O</a> = 79,</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a44c29edb103a2872f519ad0c9a0fdaaa">P</a> = 80,</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2af09564c9ca56850d4cd6b3319e541aee">Q</a> = 81,</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2ae1e1d3d40573127e9ee0480caf1283d6">R</a> = 82,</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a5dbc98dcc983a70728bd082d1a47546e">S</a> = 83,</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> = 84,</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a4c614360da93c0a041b22e537de151eb">U</a> = 85,</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a5206560a306a2e085a437fd258eb57ce">V</a> = 86,</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a61e9c06ea9a85a5088a499df6458d276">W</a> = 87,</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326da02129bb861061d1a052c592e2dc6b383">X</a> = 88,</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326da57cec4137b614c87cb4e24a3d003a3e0">Y</a> = 89,</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a21c2e59531c8710156d34a3c30ac81d5">Z</a> = 90,</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a026be376ee5c529a3d0a35866d1242ad">RightArrow</a> = 262,</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a1a45924fabe821ad288bd081b0bbf93b">LeftArrow</a> = 263,</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a0a3f89b5a028cc88370ad5a49dfab276">DownArrow</a> = 264,</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  <a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a0b513090f0a012194da83d5515882b13">UpArrow</a> = 265</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;};</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="class_input.html">  111</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_input.html">Input</a></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;{</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="comment">// A hash map contains the status of the supported keys .</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keyword">static</span> map&lt;int, int&gt; keys;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <a class="code" href="class_input.html">Input</a>(); </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    ~<a class="code" href="class_input.html">Input</a>();</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">float</span> GetAxis(<a class="code" href="_input_8hpp.html#a7ad14e081835d5a4e3c197e8622b4acd">AxesCode</a> axis, <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639">Gamepad</a> device);</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">float</span> GetAxis(<span class="keywordtype">string</span> axis, <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639">Gamepad</a> device);</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">bool</span> GetButton(<a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326d">ButtonCode</a> button, <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639">Gamepad</a> device);</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">bool</span> GetButton(<span class="keywordtype">string</span> button, <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639">Gamepad</a> device);</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">bool</span> GetButtonDown(<a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326d">ButtonCode</a> button, <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639">Gamepad</a> device);</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">bool</span> GetButtonDown(<span class="keywordtype">string</span> button, <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639">Gamepad</a> device);</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">bool</span> GetButtonUp(<a class="code" href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326d">ButtonCode</a> button, <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639">Gamepad</a> device);</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">bool</span> GetButtonUp(<span class="keywordtype">string</span> button, <a class="code" href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639">Gamepad</a> device);</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">bool</span> GetKeyUp(<a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2">KeyCode</a> key);</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">bool</span> GetKey(<a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2">KeyCode</a> key);</div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">void</span> KeyCallback(GLFWwindow* window, <span class="keywordtype">int</span> key, <span class="keywordtype">int</span> scancode, <span class="keywordtype">int</span> action, <span class="keywordtype">int</span> mods);</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">void</span> JoystickCallback(<span class="keywordtype">int</span> jid, <span class="keywordtype">int</span> event);</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;};</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">bool</span> GetKey(<span class="keywordtype">string</span> key);</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">bool</span> GetKeyDown(<a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2">KeyCode</a> key);</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160; </div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">bool</span> GetKeyDown(<span class="keywordtype">string</span> key);</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160; </div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">bool</span> GetKeyUp(<a class="code" href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2">KeyCode</a> key);</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160; </div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">bool</span> GetKeyUp(<span class="keywordtype">string</span> key);</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; </div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">void</span> KeyCallback(GLFWwindow* window, <span class="keywordtype">int</span> key, <span class="keywordtype">int</span> scancode, <span class="keywordtype">int</span> action, <span class="keywordtype">int</span> mods);</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="a_input_8hpp_html_a7885f47644a0388f981f416fa20389b2a45e199c3b864bd0b0b5d609860fd846c"><div class="ttname"><a href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a45e199c3b864bd0b0b5d609860fd846c">KeyCode::Alpha3</a></div><div class="ttdeci">@ Alpha3</div></div>
@@ -285,15 +277,15 @@ $(document).ready(function(){initNavTree('_input_8hpp_source.html',''); initResi
 <div class="ttc" id="a_input_8hpp_html_a7885f47644a0388f981f416fa20389b2a0d61f8370cad1d412f80b84d143e1257"><div class="ttname"><a href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a0d61f8370cad1d412f80b84d143e1257">KeyCode::C</a></div><div class="ttdeci">@ C</div></div>
 <div class="ttc" id="a_input_8hpp_html_a0fde216a06b5a2edf9f61153666ee639a943f4bd3440c368e56fccd62aedfb1a2"><div class="ttname"><a href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639a943f4bd3440c368e56fccd62aedfb1a2">Gamepad::Gamepad12</a></div><div class="ttdeci">@ Gamepad12</div></div>
 <div class="ttc" id="a_input_8hpp_html_a0fde216a06b5a2edf9f61153666ee639a5b84d4a629f39ed38b457ae827a67bb9"><div class="ttname"><a href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639a5b84d4a629f39ed38b457ae827a67bb9">Gamepad::Gamepad4</a></div><div class="ttdeci">@ Gamepad4</div></div>
-<div class="ttc" id="a_input_8hpp_html_a0fde216a06b5a2edf9f61153666ee639"><div class="ttname"><a href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639">Gamepad</a></div><div class="ttdeci">Gamepad</div><div class="ttdef"><b>Definition:</b> Input.hpp:16</div></div>
-<div class="ttc" id="aclass_input_html"><div class="ttname"><a href="class_input.html">Input</a></div><div class="ttdef"><b>Definition:</b> Input.hpp:131</div></div>
+<div class="ttc" id="a_input_8hpp_html_a0fde216a06b5a2edf9f61153666ee639"><div class="ttname"><a href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639">Gamepad</a></div><div class="ttdeci">Gamepad</div><div class="ttdef"><b>Definition:</b> Input.hpp:20</div></div>
+<div class="ttc" id="aclass_input_html"><div class="ttname"><a href="class_input.html">Input</a></div><div class="ttdef"><b>Definition:</b> Input.hpp:111</div></div>
 <div class="ttc" id="a_input_8hpp_html_a0fde216a06b5a2edf9f61153666ee639af46844049370d7a7fbbf9e2365b65dcc"><div class="ttname"><a href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639af46844049370d7a7fbbf9e2365b65dcc">Gamepad::Gamepad7</a></div><div class="ttdeci">@ Gamepad7</div></div>
 <div class="ttc" id="a_input_8hpp_html_ad019d1ac01d6f8b3d2c6e9c451ab326da5faad20a625bae1d890868782aae45ba"><div class="ttname"><a href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326da5faad20a625bae1d890868782aae45ba">ButtonCode::DPAD_RIGHT</a></div><div class="ttdeci">@ DPAD_RIGHT</div></div>
 <div class="ttc" id="a_input_8hpp_html_a7ad14e081835d5a4e3c197e8622b4acdac562607189d77eb9dfb707464c1e7b0b"><div class="ttname"><a href="_input_8hpp.html#a7ad14e081835d5a4e3c197e8622b4acdac562607189d77eb9dfb707464c1e7b0b">AxesCode::LT</a></div><div class="ttdeci">@ LT</div></div>
 <div class="ttc" id="a_input_8hpp_html_a7885f47644a0388f981f416fa20389b2a7e1401e8efcb718a68c57b20a68631ae"><div class="ttname"><a href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a7e1401e8efcb718a68c57b20a68631ae">KeyCode::Alpha7</a></div><div class="ttdeci">@ Alpha7</div></div>
 <div class="ttc" id="a_input_8hpp_html_a7885f47644a0388f981f416fa20389b2a800618943025315f869e4e1f09471012"><div class="ttname"><a href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a800618943025315f869e4e1f09471012">KeyCode::F</a></div><div class="ttdeci">@ F</div></div>
-<div class="ttc" id="a_input_8hpp_html_a7ad14e081835d5a4e3c197e8622b4acd"><div class="ttname"><a href="_input_8hpp.html#a7ad14e081835d5a4e3c197e8622b4acd">AxesCode</a></div><div class="ttdeci">AxesCode</div><div class="ttdef"><b>Definition:</b> Input.hpp:76</div></div>
-<div class="ttc" id="a_input_8hpp_html_a7885f47644a0388f981f416fa20389b2"><div class="ttname"><a href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2">KeyCode</a></div><div class="ttdeci">KeyCode</div><div class="ttdef"><b>Definition:</b> Input.hpp:85</div></div>
+<div class="ttc" id="a_input_8hpp_html_a7ad14e081835d5a4e3c197e8622b4acd"><div class="ttname"><a href="_input_8hpp.html#a7ad14e081835d5a4e3c197e8622b4acd">AxesCode</a></div><div class="ttdeci">AxesCode</div><div class="ttdef"><b>Definition:</b> Input.hpp:56</div></div>
+<div class="ttc" id="a_input_8hpp_html_a7885f47644a0388f981f416fa20389b2"><div class="ttname"><a href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2">KeyCode</a></div><div class="ttdeci">KeyCode</div><div class="ttdef"><b>Definition:</b> Input.hpp:65</div></div>
 <div class="ttc" id="a_input_8hpp_html_a0fde216a06b5a2edf9f61153666ee639a14fca82f42713015c6cba4f27057dcab"><div class="ttname"><a href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639a14fca82f42713015c6cba4f27057dcab">Gamepad::Gamepad1</a></div><div class="ttdeci">@ Gamepad1</div></div>
 <div class="ttc" id="a_input_8hpp_html_a0fde216a06b5a2edf9f61153666ee639a8bb1f4c9c75a5a9e249aaf64156437d6"><div class="ttname"><a href="_input_8hpp.html#a0fde216a06b5a2edf9f61153666ee639a8bb1f4c9c75a5a9e249aaf64156437d6">Gamepad::Gamepad14</a></div><div class="ttdeci">@ Gamepad14</div></div>
 <div class="ttc" id="a_input_8hpp_html_a7885f47644a0388f981f416fa20389b2a44c29edb103a2872f519ad0c9a0fdaaa"><div class="ttname"><a href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a44c29edb103a2872f519ad0c9a0fdaaa">KeyCode::P</a></div><div class="ttdeci">@ P</div></div>
@@ -302,7 +294,7 @@ $(document).ready(function(){initNavTree('_input_8hpp_source.html',''); initResi
 <div class="ttc" id="a_input_8hpp_html_a7885f47644a0388f981f416fa20389b2a3a3ea00cfc35332cedf6e5e9a32e94da"><div class="ttname"><a href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a3a3ea00cfc35332cedf6e5e9a32e94da">KeyCode::E</a></div><div class="ttdeci">@ E</div></div>
 <div class="ttc" id="a_input_8hpp_html_a7885f47644a0388f981f416fa20389b2a5206560a306a2e085a437fd258eb57ce"><div class="ttname"><a href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a5206560a306a2e085a437fd258eb57ce">KeyCode::V</a></div><div class="ttdeci">@ V</div></div>
 <div class="ttc" id="a_input_8hpp_html_ad019d1ac01d6f8b3d2c6e9c451ab326da5c108ce0fe89d0632cfce75f650b36c2"><div class="ttname"><a href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326da5c108ce0fe89d0632cfce75f650b36c2">ButtonCode::R3</a></div><div class="ttdeci">@ R3</div></div>
-<div class="ttc" id="a_input_8hpp_html_ad019d1ac01d6f8b3d2c6e9c451ab326d"><div class="ttname"><a href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326d">ButtonCode</a></div><div class="ttdeci">ButtonCode</div><div class="ttdef"><b>Definition:</b> Input.hpp:51</div></div>
+<div class="ttc" id="a_input_8hpp_html_ad019d1ac01d6f8b3d2c6e9c451ab326d"><div class="ttname"><a href="_input_8hpp.html#ad019d1ac01d6f8b3d2c6e9c451ab326d">ButtonCode</a></div><div class="ttdeci">ButtonCode</div><div class="ttdef"><b>Definition:</b> Input.hpp:39</div></div>
 <div class="ttc" id="a_input_8hpp_html_a7885f47644a0388f981f416fa20389b2a906c322eddfed40af6ca8b789aaa917b"><div class="ttname"><a href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a906c322eddfed40af6ca8b789aaa917b">KeyCode::Alpha6</a></div><div class="ttdeci">@ Alpha6</div></div>
 <div class="ttc" id="a_input_8hpp_html_a7885f47644a0388f981f416fa20389b2afe20914526c7d83938bda15c24d3220a"><div class="ttname"><a href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2afe20914526c7d83938bda15c24d3220a">KeyCode::Alpha8</a></div><div class="ttdeci">@ Alpha8</div></div>
 <div class="ttc" id="a_input_8hpp_html_a7885f47644a0388f981f416fa20389b2a83ae9b0aff3420973c79ac1d273bccb2"><div class="ttname"><a href="_input_8hpp.html#a7885f47644a0388f981f416fa20389b2a83ae9b0aff3420973c79ac1d273bccb2">KeyCode::Alpha5</a></div><div class="ttdeci">@ Alpha5</div></div>
@@ -322,7 +314,7 @@ $(document).ready(function(){initNavTree('_input_8hpp_source.html',''); initResi
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_e540aa96518235b344e655c4cbbe7889.html">Input</a></li><li class="navelem"><a class="el" href="_input_8hpp.html">Input.hpp</a></li>
+    <li class="navelem"><a class="el" href="dir_d522931ffa1371640980b621734a4381.html">Users</a></li><li class="navelem"><a class="el" href="dir_7204d3c333a4aceca55f515621462e81.html">themu</a></li><li class="navelem"><a class="el" href="dir_99f5bbaac9bcd9429e657145814f8336.html">Documents</a></li><li class="navelem"><a class="el" href="dir_cde08c71f169d40bae5b1d4d9e79de8f.html">GitHub</a></li><li class="navelem"><a class="el" href="dir_c1da3e5d451631b0164dda3cf57436a4.html">3DTetris</a></li><li class="navelem"><a class="el" href="dir_efa2fa680dca64a668a8e3c3d8380115.html">Game Engine</a></li><li class="navelem"><a class="el" href="dir_41bf2e20d8e41a15d76ea57c9ee40d11.html">Game Engine</a></li><li class="navelem"><a class="el" href="dir_e6895904eec0642baf219b0c4a39cc9b.html">GameEngine</a></li><li class="navelem"><a class="el" href="dir_ddc7e87e780743b1c04c16b00cecf69c.html">Input</a></li><li class="navelem"><a class="el" href="_input_8hpp.html">Input.hpp</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

@@ -7,7 +7,7 @@ float Time::time = 0.0f;
 void Time::UpdateValues()
 {
   Time::lastTime = Time::time;
-  Time::time = glfwGetTime();
+  Time::time = (float) glfwGetTime();
   Time::deltaTime = Time::time - Time::lastTime;
 }
 

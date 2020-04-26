@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['oncollision_275',['OnCollision',['../class_script.html#a6ea35cbc5eaf238486f5bca9e82b61a1',1,'Script']]],
-  ['orthographic_276',['Orthographic',['../class_orthographic.html#a2f35264956e30afb06e8c30d3a37efbe',1,'Orthographic::Orthographic(vec3 origin, vec3 dimensions)'],['../class_orthographic.html#aa3b8cb9ee9a45f6e1e9daee6e19c6d9b',1,'Orthographic::Orthographic(vec2 origin, vec2 dimensions)']]]
+  ['perspective_277',['Perspective',['../class_perspective.html#ad49936bd25543f98369144a4dc42e418',1,'Perspective']]],
+  ['play2d_278',['Play2D',['../class_audio_device.html#aa98ba823a3e2fa883dcd675b4b34d2df',1,'AudioDevice']]]
 ];

@@ -57,9 +57,6 @@
     <ClCompile Include="GameEngine\Model\ModelLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngine\Parser\Parser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameEngine\Primitives\Circle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -85,6 +82,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\Time\Time.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Config\Config.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -137,9 +137,6 @@
     <ClInclude Include="GameEngine\Model\ModelLoader.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngine\Parser\Parser.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameEngine\Primitives\Circle.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -173,6 +170,9 @@
     <ClInclude Include="GameEngine\Time\Time.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngine\Config\Config.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\OpaqueShader.fs">
@@ -187,5 +187,6 @@
     <None Include="Shaders\TransparencyShader.vs">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="config.cfg" />
   </ItemGroup>
 </Project>

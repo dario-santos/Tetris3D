@@ -69,7 +69,7 @@ void Cube::Init()
     +1.0f, -1.0f, +1.0f
   };
 
-  for(int i = 0; i < verticeBuffer.size(); i++)
+  for(GLuint i = 0; i < verticeBuffer.size(); i++)
     verticeBuffer[i] *= 0.5;
   
   // Move vertex data to video memory; specifically to VBO called vertexbuffer

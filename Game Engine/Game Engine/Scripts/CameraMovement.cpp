@@ -24,7 +24,7 @@ void CameraMovement::Update()
   { 
     cam->RotateTo(vec3(0.0f, delta, 0.0f));
 
-    current += delta;
+    current += (int) delta;
     if (current >= 90 || current <= -90)
     {
       current = 0;

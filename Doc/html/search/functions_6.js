@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['joystickcallback_271',['JoystickCallback',['../class_input.html#a7430f2345c9c16140d0aab17d39c07a2',1,'Input']]]
+  ['keycallback_271',['KeyCallback',['../class_input.html#aeb342f15bb2b10271b01cf540c1b702e',1,'Input']]]
 ];

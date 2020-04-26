@@ -19,6 +19,7 @@ using namespace glm;
 
 #include "./GameEngine/Input/Input.hpp"
 #include "./GameEngine/Time/Time.hpp"
+#include "./GameEngine/Config/Config.hpp"
 
 #include "./GameEngine/Model/ModelLoader.hpp"
 
@@ -41,6 +42,8 @@ GLuint opaceShader;
 
 int main(void)
 {
+  Config::LoadConfig("./config.cfg");
+
   // Initialization of the GLFW
   glfwInit();
 
@@ -53,7 +56,7 @@ int main(void)
   // Creates the window
   vec2 dimensions = vec2(800, 600);
   Window::SetDimensions(dimensions);
-  GLFWwindow *window = glfwCreateWindow(dimensions.x, dimensions.y, "Breakout With Sound", NULL, NULL);
+  GLFWwindow *window = glfwCreateWindow((int)dimensions.x, (int)dimensions.y, "Breakout With Sound", NULL, NULL);
 
   // Create window context
   glfwMakeContextCurrent(window);
@@ -71,7 +74,6 @@ int main(void)
 
   // Callbacks
   glfwSetKeyCallback(window, Input::KeyCallback);
-  glfwSetJoystickCallback(Input::JoystickCallback);
   glfwSetWindowSizeCallback(window, Window::WindowReshapeCallback);
 
   // Background Color

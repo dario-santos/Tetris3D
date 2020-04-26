@@ -6,7 +6,7 @@ void Window::WindowReshapeCallback(GLFWwindow* window, int width, int height)
 {
   Window::dimensions = vec2(width, height);
   
-  glViewport(.0f, .0f, width, height);
+  glViewport(0, 0, width, height);
 }
 
 vec2 Window::GetDimensions()

@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['parsefile_277',['ParseFile',['../class_parser.html#a6bc9c9341604ab47bc0b0b0575a37f0e',1,'Parser']]],
-  ['perspective_278',['Perspective',['../class_perspective.html#ad49936bd25543f98369144a4dc42e418',1,'Perspective']]],
-  ['play2d_279',['Play2D',['../class_audio_device.html#aa98ba823a3e2fa883dcd675b4b34d2df',1,'AudioDevice']]]
+  ['removecamera_279',['RemoveCamera',['../class_scene.html#a390c9beec61666d701ae3728046a47aa',1,'Scene']]],
+  ['removegameobject_280',['RemoveGameObject',['../class_scene.html#adf79e1e81389c6a9576d8ec0a9e49b18',1,'Scene']]],
+  ['renderer_281',['Renderer',['../class_renderer.html#ae669dc84e70388e57ea7f6ed81f63b6b',1,'Renderer']]],
+  ['rotateto_282',['RotateTo',['../class_i_camera.html#a3d820e4fc1090d89cadce8d6e47701b5',1,'ICamera::RotateTo()'],['../class_orthographic.html#ad2e0808e95dac33321f3f1c95e9b5d61',1,'Orthographic::RotateTo()'],['../class_perspective.html#ad72bc09bfb5f9c9b39ae2326d6a7db39',1,'Perspective::RotateTo()']]]
 ];

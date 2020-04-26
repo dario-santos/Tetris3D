@@ -18,6 +18,7 @@ using namespace glm;
 
 #include "../GameEngine/Input/Input.hpp"
 #include "../GameEngine/Time/Time.hpp"
+#include "../GameEngine/Config/Config.hpp"
 
 #include "../GameEngine/Scene.hpp"
 /*
