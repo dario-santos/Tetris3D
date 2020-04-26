@@ -7,13 +7,13 @@ AudioDevice::AudioDevice(short volume)
   else if(volume > 100)
     volume = 100;
 
-  this->soundEngine = createIrrKlangDevice();
-  this->soundEngine->setSoundVolume(volume / 100.0f);
+  this->soundDevice = createIrrKlangDevice();
+  this->soundDevice->setSoundVolume(volume / 100.0f);
 }
 
 void AudioDevice::Play2D(const char* path, GLboolean loop)
 {
-  this->soundEngine->play2D(path, loop);
+  this->soundDevice->play2D(path, loop);
 }
 
 void AudioDevice::SetVolume(short volume)
@@ -23,5 +23,10 @@ void AudioDevice::SetVolume(short volume)
   else if (volume > 100)
     volume = 100;
 
-  this->soundEngine->setSoundVolume(volume / 100.0f);
+  this->soundDevice->setSoundVolume(volume / 100.0f);
+}
+
+bool AudioDevice::IsPlaying() 
+{
+  return this->isPlaying;
 }

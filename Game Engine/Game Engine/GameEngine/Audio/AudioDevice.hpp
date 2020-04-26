@@ -18,7 +18,8 @@ using namespace irrklang;
 class AudioDevice
 {
 private:
-  ISoundEngine* soundEngine;
+  bool isPlaying;
+  ISoundEngine* soundDevice;
 
 public:
   /**
@@ -42,4 +43,11 @@ public:
    * \param volume The volume of the AudioDevice, the volume ranges from 0 to 100
    */
   void SetVolume(short volume);
+
+  /**
+   * IsPlaying
+   *
+   * Readonly property
+   */
+  bool IsPlaying();
 };

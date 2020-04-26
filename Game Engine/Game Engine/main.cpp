@@ -42,7 +42,6 @@ GLuint opaceShader;
 
 int main(void)
 {
-  Config::LoadConfig("./config.cfg");
 
   // Initialization of the GLFW
   glfwInit();
@@ -65,9 +64,6 @@ int main(void)
   glewExperimental = true; // Needed for core profile
   // Initialization of GLEW
   glewInit();
-
-  AudioDevice *theme = new AudioDevice(0);
-  theme->Play2D("audio/tetris.mp3", GL_TRUE);
 
   // Ensure we can capture the escape key being pressed below
   glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
@@ -93,9 +89,14 @@ int main(void)
   glGenVertexArrays(1, &VertexArrayID);
   glBindVertexArray(VertexArrayID);
   
+  // Initializations and configurations
   Square::Init();
   Circle::Init();
   Cube::Init();
+  Config::LoadConfig("./config.cfg");
+
+  AudioDevice *theme = new AudioDevice(0);
+  theme->Play2D("audio/tetris.mp3", GL_TRUE);
 
   // Loads the scene and sets it as the active one
   Scene* scene = new Scene();

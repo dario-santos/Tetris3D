@@ -26,7 +26,7 @@ class BallManager : public Script
     // The ball gameObject
     GameObject *gameObject;
     // Audio device
-    AudioDevice *beep = new AudioDevice();
+    AudioDevice *beep = new AudioDevice(20);
     // Velocity of movement
     vec3 step = vec3(10.0f, 6.0f, 0.0f);
     // Number of lives

@@ -124,7 +124,7 @@ public:
    * \param device The gamepad that will be tested
    * \return The value of the virtual axis identified by axisName. The value is in the range [-1.0, 1.0]
    */
-  static float GetAxis(AxesCode axis, Gamepad device);
+  static float GetAxis(AxesCode axis, Gamepad device = Gamepad::Gamepad1);
 
   /**
    * GetAxis
@@ -133,7 +133,7 @@ public:
    * \param device The gamepad that will be tested
    * \return The value of the virtual axis identified by axisName. The value is in the range [-1.0, 1.0]
    */
-  static float GetAxis(string axis, Gamepad device);
+  static float GetAxis(string axis, Gamepad device = Gamepad::Gamepad1);
 
   /**
    * GetButton
@@ -142,7 +142,7 @@ public:
    * \param device The gamepad that will be tested
    * \return True while the virtual button identified by button is held down
    */
-  static bool GetButton(ButtonCode button, Gamepad device);
+  static bool GetButton(ButtonCode button, Gamepad device = Gamepad::Gamepad1);
 
   /**
    * GetButton
@@ -151,7 +151,7 @@ public:
    * \param device The gamepad that will be tested
    * \return True while the virtual button identified by button is held down
    */
-  static bool GetButton(string button, Gamepad device);
+  static bool GetButton(string button, Gamepad device = Gamepad::Gamepad1);
 
   /**
    * GetButtonDown
@@ -160,7 +160,7 @@ public:
    * \param device The gamepad that will be tested
    * \return True while the virtual button identified by button is held down
    */
-  static bool GetButtonDown(ButtonCode button, Gamepad device);
+  static bool GetButtonDown(ButtonCode button, Gamepad device = Gamepad::Gamepad1);
 
   /**
    * GetButtonDown
@@ -169,7 +169,7 @@ public:
    * \param device The gamepad that will be tested
    * \return True while the virtual button identified by button is held down
    */
-  static bool GetButtonDown(string button, Gamepad device);
+  static bool GetButtonDown(string button, Gamepad device = Gamepad::Gamepad1);
 
   /**
    * GetButtonUp
@@ -178,7 +178,7 @@ public:
    * \param device The gamepad that will be tested
    * \return True while the virtual button identified by button is held down
    */
-  static bool GetButtonUp(ButtonCode button, Gamepad device);
+  static bool GetButtonUp(ButtonCode button, Gamepad device = Gamepad::Gamepad1);
 
   /**
    * GetButtonUp
@@ -187,7 +187,7 @@ public:
    * \param device The gamepad that will be tested
    * \return True while the virtual button identified by button is held down
    */
-  static bool GetButtonUp(string button, Gamepad device);
+  static bool GetButtonUp(string button, Gamepad device = Gamepad::Gamepad1);
 
   /**
    * GetKey
