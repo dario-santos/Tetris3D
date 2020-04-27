@@ -31,6 +31,8 @@ class CameraMovement : public Script
     bool isMoving = false;
 
   public:
+    string test = "EITA PORA";
+
     /*
     * Function: CameraMovement
     * --------------------------------

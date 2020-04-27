@@ -19,6 +19,8 @@
 
 #include "../Scripts/BallManager.hpp"
 #include "../Scripts/CameraMovement.hpp"
+#include "../Scripts/GameManager.hpp"
+
 
 /*
  * Class: Ball
@@ -49,6 +51,8 @@ class Ball
       // Adds the BallManager script
       go->AddScript(new CameraMovement());
       go->AddScript(new BallManager(t, go));
+      go->AddScript(new GameManager());
+
       return go;
     }
 };

@@ -155,9 +155,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BoardObjects\BoardObject.cpp" />
+    <ClCompile Include="BoardObjects\LineObject.cpp" />
+    <ClCompile Include="BoardObjects\LInverseObject.cpp" />
+    <ClCompile Include="BoardObjects\LObject.cpp" />
+    <ClCompile Include="BoardObjects\SObject.cpp" />
+    <ClCompile Include="BoardObjects\SquareObject.cpp" />
+    <ClCompile Include="BoardObjects\TObject.cpp" />
+    <ClCompile Include="BoardObjects\ZObject.cpp" />
     <ClCompile Include="GameEngine\Audio\AudioDevice.cpp" />
     <ClCompile Include="GameEngine\Camera\Orthographic.cpp" />
     <ClCompile Include="GameEngine\Camera\Perspective.cpp" />
+    <ClCompile Include="GameEngine\Components\Component.cpp" />
     <ClCompile Include="GameEngine\Components\GameObject.cpp" />
     <ClCompile Include="GameEngine\Components\Renderer.cpp" />
     <ClCompile Include="GameEngine\Components\Transform.cpp" />
@@ -172,12 +181,22 @@
     <ClCompile Include="Scripts\BallManager.cpp" />
     <ClCompile Include="Scripts\BrickManager.cpp" />
     <ClCompile Include="Scripts\CameraMovement.cpp" />
+    <ClCompile Include="Scripts\GameManager.cpp" />
     <ClCompile Include="Scripts\PlayerMovement.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="GameEngine\Time\Time.cpp" />
     <ClCompile Include="GameEngine\Config\Config.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BoardObjects\BoardObject.hpp" />
+    <ClInclude Include="BoardObjects\LineObject.hpp" />
+    <ClInclude Include="BoardObjects\LInverseObject.hpp" />
+    <ClInclude Include="BoardObjects\LObject.hpp" />
+    <ClInclude Include="BoardObjects\SObject.hpp" />
+    <ClInclude Include="BoardObjects\SquareObject.hpp" />
+    <ClInclude Include="BoardObjects\TObject.hpp" />
+    <ClInclude Include="BoardObjects\ZObject.hpp" />
+    <ClInclude Include="GameEngine\Components\Component.hpp" />
     <ClInclude Include="GameEngine\Config\Config.hpp" />
     <ClInclude Include="GameEngine\Audio\AudioDevice.hpp" />
     <ClInclude Include="GameEngine\Camera\ICamera.hpp" />
@@ -203,6 +222,7 @@
     <ClInclude Include="Scripts\BallManager.hpp" />
     <ClInclude Include="Scripts\BrickManager.hpp" />
     <ClInclude Include="Scripts\CameraMovement.hpp" />
+    <ClInclude Include="Scripts\GameManager.hpp" />
     <ClInclude Include="Scripts\PlayerMovement.hpp" />
     <ClInclude Include="shader.hpp" />
     <ClInclude Include="GameEngine\Time\Time.hpp" />

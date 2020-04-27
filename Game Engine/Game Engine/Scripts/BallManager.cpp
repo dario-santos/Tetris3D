@@ -2,10 +2,15 @@
 
 #include <iostream>
 
+#include <typeinfo>
+
 BallManager::BallManager(Transform *transform, GameObject *gameObject)
 {
   this->transform = transform;
   this->gameObject = gameObject;
+
+  std::cout << (typeid(this->gameObject->GetScripts().front()).name()) << std::endl;
+
 }
 
 void BallManager::Update()
