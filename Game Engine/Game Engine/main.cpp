@@ -30,6 +30,13 @@ using namespace glm;
 #include "./Prefabs/Player.hpp"
 #include "./Prefabs/Deathzone.hpp"
 #include "./Prefabs/Ball.hpp"
+#include "./Prefabs/OBlock.hpp"
+#include "./Prefabs/ZBlock.hpp"
+#include "./Prefabs/TBlock.hpp"
+#include "./Prefabs/SBlock.hpp"
+#include "./Prefabs/LBlock.hpp"
+#include "./Prefabs/JBlock.hpp"
+#include "./Prefabs/IBlock.hpp"
 
 #include "shader.hpp"
 #include "main.hpp"
@@ -95,7 +102,7 @@ int main(void)
   Cube::Init();
   Config::LoadConfig("./config.cfg");
 
-  AudioDevice *theme = new AudioDevice(0);
+  AudioDevice *theme = new AudioDevice(10);
   theme->Play2D("audio/tetris.mp3", GL_TRUE);
 
   // Loads the scene and sets it as the active one
@@ -145,6 +152,8 @@ void loadGameObjects(Scene* scene)
   transparencyShader = LoadShaders("./Shaders/TransparencyShader.vs", "./Shaders/TransparencyShader.fs");
   opaceShader = LoadShaders("./Shaders/OpaqueShader.vs", "./Shaders/OpaqueShader.fs");
 
+
+  //    Tabuleiro
   scene->AddGameObject(Brick::AddBrick(
     new Transform(vec3(0, 0, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(100.0f, 1.0f, 10.0f)), vec3(125, 200, 10), opaceShader));
 
@@ -153,6 +162,13 @@ void loadGameObjects(Scene* scene)
 
   scene->AddGameObject(Brick::AddBrick(
     new Transform(vec3(-50, 100, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(20, 200, 10), opaceShader));
+
+  //    Blocos
+  std::vector<GameObject*> BLOCKS = IBlock::AddIBlock(vec3(255, 213, 0), opaceShader);
+  
+  for(GameObject* go : BLOCKS)
+      scene->AddGameObject(go);
+  
 }
 
 void lifeCycle(Scene *scene)

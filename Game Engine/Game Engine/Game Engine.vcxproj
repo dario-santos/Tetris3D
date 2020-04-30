@@ -218,7 +218,14 @@
     <ClInclude Include="Prefabs\Ball.hpp" />
     <ClInclude Include="Prefabs\Brick.hpp" />
     <ClInclude Include="Prefabs\DeathZone.hpp" />
+    <ClInclude Include="Prefabs\IBlock.hpp" />
+    <ClInclude Include="Prefabs\JBlock.hpp" />
+    <ClInclude Include="Prefabs\LBlock.hpp" />
+    <ClInclude Include="Prefabs\OBlock.hpp" />
     <ClInclude Include="Prefabs\Player.hpp" />
+    <ClInclude Include="Prefabs\SBlock.hpp" />
+    <ClInclude Include="Prefabs\TBlock.hpp" />
+    <ClInclude Include="Prefabs\ZBlock.hpp" />
     <ClInclude Include="Scripts\BallManager.hpp" />
     <ClInclude Include="Scripts\BrickManager.hpp" />
     <ClInclude Include="Scripts\CameraMovement.hpp" />
