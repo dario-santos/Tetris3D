@@ -6,9 +6,8 @@
 #include "../GameEngine/Components/GameObject.hpp"
 #include "../GameEngine/Components/Renderer.hpp"
 
-#include "../GameEngine/Primitives/Square.hpp"
+#include "../GameEngine/Primitives/Cube.hpp"
 
-#include "../Scripts/BrickManager.hpp"
 
 /*
  * Class: Brick
@@ -37,8 +36,6 @@ class Brick
       IPrimitive *p = new Cube(color);
       GameObject *go = new GameObject(t, new Renderer(p, programID), "Brick");
 
-      // Adds the BallManager script
-      go->AddScript(new BrickManager(go));
       return go;
     }
 };

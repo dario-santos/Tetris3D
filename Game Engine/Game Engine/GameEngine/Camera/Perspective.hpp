@@ -24,6 +24,7 @@ using namespace glm;
 class Perspective : public ICamera
 {
 private:
+  vec3 position;
   mat4 view;
   mat4 projection;
 
@@ -38,7 +39,7 @@ public:
 
   void SetProjection(mat4 projection);
 
-  void RotateTo(vec3 degrees);
+  void Rotate(vec3 degrees);
 
-  void TranslateTo(vec3 position);
+  void Translate(vec3 translation);
 };

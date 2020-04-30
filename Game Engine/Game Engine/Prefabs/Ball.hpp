@@ -51,7 +51,7 @@ class Ball
       // Adds the BallManager script
       go->AddScript(new CameraMovement());
       go->AddScript(new BallManager(t, go));
-      go->AddScript(new GameManager());
+      // go->AddScript(new GameManager());
 
       return go;
     }

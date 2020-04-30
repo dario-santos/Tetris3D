@@ -100,8 +100,8 @@ int main(void)
 
   // Loads the scene and sets it as the active one
   Scene* scene = new Scene();
-  scene->AddCamera(new Perspective(45.0f, 4/3.0f, 0.1f, 500.0f, vec3(0, 0, 70), vec3(0, 0, 0), vec3(0, 1, 0)));
-  //scene->AddCamera(new Orthographic(vec2(-40.0f, -30.0f), vec2(40, 30)));
+  scene->AddCamera(new Perspective(45.0f, 4/3.0f, 0.1f, 500.0f, vec3(0, 75, 250), vec3(0, 100, 0), vec3(0, 1, 0)));
+  //scene->AddCamera(new Orthographic(vec2(-75.0f, -5.0f), vec2(75, 250)));
   Scene::LoadScene(scene);
   loadGameObjects(scene);
 
@@ -145,31 +145,14 @@ void loadGameObjects(Scene* scene)
   transparencyShader = LoadShaders("./Shaders/TransparencyShader.vs", "./Shaders/TransparencyShader.fs");
   opaceShader = LoadShaders("./Shaders/OpaqueShader.vs", "./Shaders/OpaqueShader.fs");
 
-  bool tmp = false;
-  // Bricks
-  for (int i = 25; i >= 10; i -= 3)
-    for (int j = -35; j <= 35; j += 5)
-    {
-      if (tmp)
-        scene->AddGameObject(Brick::AddBrick(
-          new Transform(vec3(j, i, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(5.0f, 2.0f, 10.0f)), vec3(abs(j) * i * 0.5f, abs(j) * i + 200, 10), transparencyShader));
-      else
-        scene->AddGameObject(Brick::AddBrick(
-          new Transform(vec3(j, i, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(5.0f, 2.0f, 10.0f)), vec3(abs(j) * i * 0.5f, abs(j) * i + 200, 10), opaceShader));
-      tmp = !tmp;
-    }
+  scene->AddGameObject(Brick::AddBrick(
+    new Transform(vec3(0, 0, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(100.0f, 1.0f, 10.0f)), vec3(125, 200, 10), opaceShader));
 
-  // Ball
-  scene->AddGameObject(Ball::AddBall(
-    new Transform(vec3(0.0f, -15.0f, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 2.0f, 50.0f)), opaceShader));
+  scene->AddGameObject(Brick::AddBrick(
+    new Transform(vec3(50, 100, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(75, 200, 10), opaceShader));
 
-  // Player
-  scene->AddGameObject(Player::AddPlayer(
-    new Transform(vec3(0.0f, -20.0f, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(10.0f, 2.0f, 1.0f)), opaceShader));
-
-  // DeathZone
-  scene->AddGameObject(DeathZone::AddDeathZone(
-    new Transform(vec3(0.0f, -30.0f, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(80.0f, 2.0f,1.0f))));
+  scene->AddGameObject(Brick::AddBrick(
+    new Transform(vec3(-50, 100, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(20, 200, 10), opaceShader));
 }
 
 void lifeCycle(Scene *scene)

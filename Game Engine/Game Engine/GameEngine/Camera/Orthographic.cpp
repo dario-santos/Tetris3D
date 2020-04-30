@@ -38,16 +38,16 @@ void Orthographic::SetProjection(mat4 projection)
   this->projection = projection;
 }
 
-void Orthographic::RotateTo(vec3 degrees)
+void Orthographic::Rotate(vec3 degrees)
 {
   this->view = rotate(this->view, radians(degrees.x), vec3(1.0f, 0.0f, 0.0f));
   this->view = rotate(this->view, radians(degrees.y), vec3(0.0f, 1.0f, 0.0f));
   this->view = rotate(this->view, radians(degrees.z), vec3(0.0f, 0.0f, 1.0f));
 }
 
-void Orthographic::TranslateTo(vec3 position)
+void Orthographic::Translate(vec3 translation)
 {
-
+  this->view = translate(view, translation);
 }
 
 vec3 Orthographic::GetOrigin()

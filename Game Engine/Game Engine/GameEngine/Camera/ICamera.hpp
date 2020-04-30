@@ -28,7 +28,7 @@ public:
 
   virtual void SetProjection(mat4 projection) = 0;
 
-  virtual void RotateTo(vec3 degrees) = 0;
+  virtual void Rotate(vec3 degrees) = 0;
 
-  virtual void TranslateTo(vec3 position) = 0;
+  virtual void Translate(vec3 translation) = 0;
 };
