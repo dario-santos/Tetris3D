@@ -231,7 +231,14 @@ void GameManager::Game_loop()
     if (_seconds < time(NULL))
     {
         _seconds = time(NULL) + 2;
-        MoveObjectDown();
+
+        if (!_generateNewObject)
+        {
+            // Cannot move the object down 
+            // if this object is no longer valid
+            // and a new object needs to be generated first
+            MoveObjectDown();
+        }
     }
     
     //if (_drawSeconds < time(NULL) )
