@@ -11,6 +11,7 @@ using namespace glm;
 #include "./GameEngine/Primitives/Square.hpp"
 #include "./GameEngine/Primitives/Circle.hpp"
 #include "./GameEngine/Primitives/Cube.hpp"
+
 #include "./GameEngine/Camera/Orthographic.hpp"
 #include "./GameEngine/Camera/Perspective.hpp"
 
@@ -21,15 +22,10 @@ using namespace glm;
 #include "./GameEngine/Time/Time.hpp"
 #include "./GameEngine/Config/Config.hpp"
 
-#include "./GameEngine/Model/ModelLoader.hpp"
-
 #include "./GameEngine/Audio/AudioDevice.hpp"
 
 // Prefabs
 #include "./Prefabs/Brick.hpp"
-#include "./Prefabs/Player.hpp"
-#include "./Prefabs/Deathzone.hpp"
-#include "./Prefabs/Ball.hpp"
 #include "./Prefabs/OBlock.hpp"
 #include "./Prefabs/ZBlock.hpp"
 #include "./Prefabs/TBlock.hpp"
@@ -45,7 +41,7 @@ using namespace glm;
 
 // Shaders
 GLuint transparencyShader;
-GLuint opaceShader;
+GLuint opaqueShader;
 
 int main(void)
 {
@@ -139,7 +135,7 @@ int main(void)
 
   // Frees the shaders
   glDeleteProgram(transparencyShader);
-  glDeleteProgram(opaceShader);
+  glDeleteProgram(opaqueShader);
 
   // Close OpenGL window and terminate GLFW
   glfwTerminate();
@@ -149,26 +145,25 @@ int main(void)
 void loadGameObjects(Scene* scene)
 {
   // Load Vertex and Fragments shaders
-  transparencyShader = LoadShaders("./Shaders/TransparencyShader.vs", "./Shaders/TransparencyShader.fs");
-  opaceShader = LoadShaders("./Shaders/OpaqueShader.vs", "./Shaders/OpaqueShader.fs");
+  transparencyShader = LoadShaders("./Shaders/TransparencyShader.vert", "./Shaders/TransparencyShader.frag");
+  opaqueShader = LoadShaders("./Shaders/OpaqueShader.vert", "./Shaders/OpaqueShader.frag");
 
 
-  //    Tabuleiro
+  // Tabuleiro
   scene->AddGameObject(Brick::AddBrick(
-    new Transform(vec3(0, 0, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(100.0f, 1.0f, 10.0f)), vec3(125, 200, 10), opaceShader));
-
-  scene->AddGameObject(Brick::AddBrick(
-    new Transform(vec3(50, 100, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(75, 200, 10), opaceShader));
+    new Transform(vec3(0, 0, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(100.0f, 1.0f, 10.0f)), vec3(125, 200, 10), opaqueShader));
 
   scene->AddGameObject(Brick::AddBrick(
-    new Transform(vec3(-50, 100, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(20, 200, 10), opaceShader));
+    new Transform(vec3(50, 100, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(75, 200, 10), opaqueShader));
 
-  //    Blocos
-  std::vector<GameObject*> BLOCKS = IBlock::AddIBlock(vec3(255, 213, 0), opaceShader);
+  scene->AddGameObject(Brick::AddBrick(
+    new Transform(vec3(-50, 100, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(20, 200, 10), opaqueShader));
+
+  // Blocos
+  std::vector<GameObject*> blocks = ZBlock::AddZBlock(vec3(255, 213, 0), opaqueShader);
   
-  for(GameObject* go : BLOCKS)
+  for(GameObject* go : blocks)
       scene->AddGameObject(go);
-  
 }
 
 void lifeCycle(Scene *scene)

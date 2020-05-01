@@ -215,9 +215,7 @@
     <ClInclude Include="GameEngine\Scene.hpp" />
     <ClInclude Include="GameEngine\Window.hpp" />
     <ClInclude Include="main.hpp" />
-    <ClInclude Include="Prefabs\Ball.hpp" />
     <ClInclude Include="Prefabs\Brick.hpp" />
-    <ClInclude Include="Prefabs\DeathZone.hpp" />
     <ClInclude Include="Prefabs\IBlock.hpp" />
     <ClInclude Include="Prefabs\JBlock.hpp" />
     <ClInclude Include="Prefabs\LBlock.hpp" />
@@ -236,10 +234,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="config.cfg" />
-    <None Include="Shaders\OpaqueShader.fs" />
-    <None Include="Shaders\OpaqueShader.vs" />
-    <None Include="Shaders\TransparencyShader.fs" />
-    <None Include="Shaders\TransparencyShader.vs" />
+    <None Include="Shaders\OpaqueShader.frag" />
+    <None Include="Shaders\OpaqueShader.vert" />
+    <None Include="Shaders\TransparencyShader.frag" />
+    <None Include="Shaders\TransparencyShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

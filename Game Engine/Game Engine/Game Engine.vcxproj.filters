@@ -125,13 +125,7 @@
     <ClInclude Include="main.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Prefabs\Ball.hpp">
-      <Filter>Prefabs</Filter>
-    </ClInclude>
     <ClInclude Include="Prefabs\Brick.hpp">
-      <Filter>Prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="Prefabs\DeathZone.hpp">
       <Filter>Prefabs</Filter>
     </ClInclude>
     <ClInclude Include="Prefabs\Player.hpp">
@@ -256,18 +250,18 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shaders\OpaqueShader.fs">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="Shaders\OpaqueShader.vs">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="Shaders\TransparencyShader.fs">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="Shaders\TransparencyShader.vs">
-      <Filter>Shaders</Filter>
-    </None>
     <None Include="config.cfg" />
+    <None Include="Shaders\OpaqueShader.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\OpaqueShader.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\TransparencyShader.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\TransparencyShader.vert">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

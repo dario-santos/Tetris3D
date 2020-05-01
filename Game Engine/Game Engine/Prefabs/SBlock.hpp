@@ -2,57 +2,53 @@
 
 #include <GL/glew.h>
 
+#include <vector>
+using namespace std;
+
 #include "../GameEngine/Components/Transform.hpp"
 #include "../GameEngine/Components/GameObject.hpp"
 #include "../GameEngine/Components/Renderer.hpp"
 
 #include "../GameEngine/Primitives/Cube.hpp"
 
-
-/*
- * Class: SBlock
- * --------------------------------
+/**
+ * SBlock
  */
 class SBlock
 {
 private:
-    // This is private because we don't want SBlock objects
-    SBlock();
-    ~SBlock();
+  // This is private because we don't want SBlock objects
+  SBlock();
+  ~SBlock();
 
 public:
-    /*
-    * Function: AddSBlock
-    * --------------------------------
-    *  Creates SBlock game objects
-    *
-    *  color: The brick color;
-    *  shaderId: the Id of the shader.
-    */
-    static std::vector<GameObject*> AddSBlock(vec3 color, GLuint programID)
-    {
-        // Sets the primitive of the gameObject, a square
-        IPrimitive* pDL = new Cube(color);
-        IPrimitive* pD = new Cube(color);
-        IPrimitive* pU = new Cube(color);
-        IPrimitive* pUR = new Cube(color);
+  /**
+   * AddSBlock
+   * 
+   * \param color The S block color
+   * \param programID The Id of the shader
+   * \return S block game objects, 4 blocks made a tetromino.
+   */
+  static vector<GameObject*> AddSBlock(vec3 color, GLuint programID)
+  {
+    vector<GameObject*> gameObjects;
+    // D  = [-50,50]
+    // D' = [0, 200]
+    // for reference, 0 is the middle line
+    // 3 blocks left half, 1 right half
 
-        // D  = [-50,50]
-        // D' = [0, 200]
-        // for reference, 0 is the middle line
-        // 3 blocks left half, 1 right half
+    Transform* t = new Transform(vec3(-15, 185, 1), vec3(0, 0, 0), vec3(10, 10, 10));
+    gameObjects.push_back(new GameObject(t, new Renderer(new Cube(color), programID), "SBlock"));
 
-        Transform* tDL = new Transform(vec3(-15, 185, 1), vec3(0, 0, 0), vec3(10, 10, 10));
-        Transform* tD  = new Transform(vec3(-5, 185, 1), vec3(0, 0, 0), vec3(10, 10, 10));
-        Transform* tU  = new Transform(vec3(-5, 195, 1), vec3(0, 0, 0), vec3(10, 10, 10));
-        Transform* tUR = new Transform(vec3(5, 195, 1), vec3(0, 0, 0), vec3(10, 10, 10));
+    t = new Transform(vec3(-5, 185, 1), vec3(0, 0, 0), vec3(10, 10, 10));
+    gameObjects.push_back(new GameObject(t, new Renderer(new Cube(color), programID), "SBlock"));
 
-        GameObject* goDL = new GameObject(tDL, new Renderer(pDL, programID), "SBlock");
-        GameObject* goD  = new GameObject(tD, new Renderer(pD, programID), "SBlock");
-        GameObject* goU  = new GameObject(tU, new Renderer(pU, programID), "SBlock");
-        GameObject* goUR = new GameObject(tUR, new Renderer(pUR, programID), "SBlock");
+    t = new Transform(vec3(-5, 195, 1), vec3(0, 0, 0), vec3(10, 10, 10));
+    gameObjects.push_back(new GameObject(t, new Renderer(new Cube(color), programID), "SBlock"));
 
-        std::vector<GameObject*> go = { goDL, goD, goU, goUR };
-        return go;
-    }
+    t = new Transform(vec3(5, 195, 1), vec3(0, 0, 0), vec3(10, 10, 10));
+    gameObjects.push_back(new GameObject(t, new Renderer(new Cube(color), programID), "SBlock"));
+
+    return gameObjects;
+  }
 };
