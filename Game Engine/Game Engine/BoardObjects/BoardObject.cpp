@@ -10,12 +10,6 @@ bool BoardObject::VerifyColision( const GameBoard& board, const Position& pos) c
 
     for (size_t i = 0; i < shape.size(); ++i)
     {
-        if (pos._x + mappingVector[i] < 0)
-        {
-            // Por cima do tabuleiro
-            continue;
-        }
-
         for (size_t j = 0; j < shape.size(); ++j)
         {
             if (shape[i][j] == 1)
@@ -33,7 +27,7 @@ bool BoardObject::VerifyColision( const GameBoard& board, const Position& pos) c
                     return true;
                 }
 
-                if (board[pos._x + mappingVector[i]][pos._y + mappingVector[j]] == 1)
+                if ( pos._x + mappingVector[i] >= 0 && board[pos._x + mappingVector[i]][pos._y + mappingVector[j]] == 1)
                 {
                     // Colisao com outro objecto
                     return true;
