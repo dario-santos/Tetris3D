@@ -16,7 +16,7 @@
 
 #include "../GameEngine/Primitives/Square.hpp"
 
-#include "../Scripts/PlayerMovement.hpp"
+#include "../Scripts/GameManager.hpp"
 
 /*
  * Class: DeathZone
@@ -38,14 +38,12 @@ class Player
     *  t: The transform of the new game object;
     *  shaderId: the Id of the shader.
     */
-    static GameObject *AddPlayer(Transform *t, GLuint shaderId)
+    static GameObject *AddPlayer(Transform *t)
     {
-      // Sets the primitive of the gameObject, a circle
-      IPrimitive *p = new Square(vec3(245, 0, 80));
-      GameObject *go = new GameObject(t, new Renderer(p, shaderId), "Player");
+      GameObject *go = new GameObject(t, nullptr, "Player");
       
       // Adds the PlayerMovement script
-      go->AddScript(new PlayerMovement(t));
+      go->AddScript(new GameManager());
       return go;
     }
 };

@@ -25,6 +25,7 @@ using namespace glm;
 #include "./GameEngine/Audio/AudioDevice.hpp"
 
 // Prefabs
+#include "./Prefabs/Player.hpp"
 #include "./Prefabs/Brick.hpp"
 #include "./Prefabs/OBlock.hpp"
 #include "./Prefabs/ZBlock.hpp"
@@ -147,6 +148,9 @@ void loadGameObjects(Scene* scene)
   // Load Vertex and Fragments shaders
   transparencyShader = LoadShaders("./Shaders/TransparencyShader.vert", "./Shaders/TransparencyShader.frag");
   opaqueShader = LoadShaders("./Shaders/OpaqueShader.vert", "./Shaders/OpaqueShader.frag");
+
+  scene->AddGameObject(Player::AddPlayer(
+    new Transform(vec3(-200, -200, -200), vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f))));
 
 
   // Tabuleiro
