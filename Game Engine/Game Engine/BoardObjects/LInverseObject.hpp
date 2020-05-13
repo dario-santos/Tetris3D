@@ -20,14 +20,13 @@ public:
 
     virtual void Transformation() override;
 
-    const Shape& GetShape() const override;
-
     std::unique_ptr<BoardObject> Clone() const override;
     //void Update() override;
 
 
 protected:
-    
+
+    const Shape& _GetShape() const override;
     const std::vector< int >& _GetMapping() const override;
 
 private:

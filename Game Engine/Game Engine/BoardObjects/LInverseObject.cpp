@@ -29,7 +29,7 @@ LInverseObject::LInverseObject() :
 
 }
 
-const LInverseObject::Shape& LInverseObject::GetShape() const
+const LInverseObject::Shape& LInverseObject::_GetShape() const
 {
     return _shape[_state];
 }
