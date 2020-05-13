@@ -21,7 +21,7 @@ ZObject::ZObject() :
 
 }
 
-const ZObject::Shape& ZObject::GetShape() const
+const ZObject::Shape& ZObject::_GetShape() const
 {
     return _shape[ _state ];
 }
