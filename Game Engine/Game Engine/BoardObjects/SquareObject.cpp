@@ -14,7 +14,7 @@ SquareObject::SquareObject()
 
 }
 
-const SquareObject::Shape& SquareObject::_GetShape() const
+const SquareObject::Shape& SquareObject::GetShape() const
 {
     return _shape;
 }

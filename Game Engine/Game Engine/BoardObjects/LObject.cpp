@@ -32,7 +32,7 @@ LObject::LObject() :
 
 }
 
-const LObject::Shape& LObject::_GetShape() const
+const LObject::Shape& LObject::GetShape() const
 {
     return _shape[_state];
 }
