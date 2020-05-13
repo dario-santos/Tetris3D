@@ -29,7 +29,7 @@ LineObject::LineObject() :
 
 }
 
-const LineObject::Shape& LineObject::_GetShape() const
+const LineObject::Shape& LineObject::GetShape() const
 {
     return _shape[_state];
 }

@@ -32,7 +32,7 @@ TObject::TObject() :
 
 }
 
-const TObject::Shape& TObject::_GetShape() const
+const TObject::Shape& TObject::GetShape() const
 {
     return _shape[_state];
 }

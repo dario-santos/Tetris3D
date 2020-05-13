@@ -223,6 +223,7 @@ void GameManager::Game_loop()
     {
         ClearLine();
         ChoosePiece();
+
         _generateNewObject = false;
     }
 

@@ -5,7 +5,7 @@ const int FILL  = 1;
 
 bool BoardObject::VerifyColision( const GameBoard& board, const Position& pos) const
 {
-    const Shape& shape = _GetShape();
+    const Shape& shape = GetShape();
     const std::vector< int >& mappingVector = _GetMapping();
 
     for (size_t i = 0; i < shape.size(); ++i)
@@ -51,7 +51,7 @@ void BoardObject::Erase(GameBoard& board, const Position& pos) const
 
 void BoardObject::_Draw(GameBoard& board, const Position& pos, const int value) const
 {
-    const Shape& shape = _GetShape();
+    const Shape& shape = GetShape();
     const std::vector< int >& mappingVector = _GetMapping();
 
     for (size_t i = 0; i < shape.size(); ++i)

@@ -62,6 +62,8 @@ struct Position
 
 class BoardObject;
 
+typedef std::vector< std::vector < int > > Shape;
+
 /*
  * Class: GameManager
  * --------------------------------

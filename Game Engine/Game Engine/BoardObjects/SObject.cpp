@@ -21,7 +21,7 @@ SObject::SObject() :
 
 }
 
-const SObject::Shape& SObject::_GetShape() const
+const SObject::Shape& SObject::GetShape() const
 {
     return _shape[_state];
 }
