@@ -104,7 +104,7 @@ int main(void)
 
   // Loads the scene and sets it as the active one
   Scene* scene = new Scene();
-  scene->AddCamera(new Perspective(45.0f, 4/3.0f, 0.1f, 500.0f, vec3(0, 75, 250), vec3(0, 100, 0), vec3(0, 1, 0)));
+  scene->AddCamera(new Perspective(45.0f, 4/3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
   //scene->AddCamera(new Orthographic(vec2(-75.0f, -5.0f), vec2(75, 250)));
   Scene::LoadScene(scene);
   loadGameObjects(scene);
@@ -149,19 +149,21 @@ void loadGameObjects(Scene* scene)
   transparencyShader = LoadShaders("./Shaders/TransparencyShader.vert", "./Shaders/TransparencyShader.frag");
   opaqueShader = LoadShaders("./Shaders/OpaqueShader.vert", "./Shaders/OpaqueShader.frag");
 
-  scene->AddGameObject(Player::AddPlayer(
-    new Transform(vec3(-200, -200, -200), vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f)), opaqueShader));
+  GameObject* go = new GameObject(
+    new Transform(vec3(-200, -200, -200), vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f)), nullptr, "GameManager");
+  go->AddScript(new GameManager(opaqueShader));
 
+  scene->AddGameObject(go);
 
   // Tabuleiro
   scene->AddGameObject(Brick::AddBrick(
-    new Transform(vec3(0, 0, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(100.0f, 1.0f, 10.0f)), vec3(125, 200, 10), opaqueShader));
+    new Transform(vec3(45, -195, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(100.0f, 1.0f, 10.0f)), vec3(125, 200, 10), opaqueShader));
 
   scene->AddGameObject(Brick::AddBrick(
-    new Transform(vec3(50, 100, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(75, 200, 10), opaqueShader));
+    new Transform(vec3(95, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(75, 200, 10), opaqueShader));
 
   scene->AddGameObject(Brick::AddBrick(
-    new Transform(vec3(-50, 100, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(20, 200, 10), opaqueShader));
+    new Transform(vec3(-5, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(20, 200, 10), opaqueShader));
 }
 
 void lifeCycle(Scene *scene)

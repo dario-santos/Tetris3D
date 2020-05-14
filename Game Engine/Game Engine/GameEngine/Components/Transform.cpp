@@ -7,12 +7,13 @@ Transform::Transform(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
   this->scale = scale;
 
   // Rotation
-  this->model = glm::rotate(model, glm::radians(rotation.x), glm::vec3(1, 0, 0));
-  this->model = glm::rotate(model, glm::radians(rotation.y), glm::vec3(0, 1, 0));
-  this->model = glm::rotate(model, glm::radians(rotation.z), glm::vec3(0, 0, 1));
+  //this->model = glm::rotate(model, glm::radians(rotation.x), glm::vec3(1, 0, 0));
+  //this->model = glm::rotate(model, glm::radians(rotation.y), glm::vec3(0, 1, 0));
+  //this->model = glm::rotate(model, glm::radians(rotation.z), glm::vec3(0, 0, 1));
 
   //Translate
   this->model = glm::translate(model, position);
+
   // Scale
   this->model = glm::scale(model, scale);
 }
@@ -41,10 +42,14 @@ void Transform::Rotate(glm::vec3 r)
 void Transform::TranslateTo(glm::vec3 position)
 {
   // Put model in the center of the world
-  this->model = glm::translate(model, -this->position);
+  this->model = glm::translate(this->model, -(this->position/ this->scale));
+
   // Translates to the desired position
-  this->model = glm::translate(model, position);
-  this->position = position;
+  this->model = glm::translate(this->model, position/this->scale);
+
+  this->position.x = this->model[3].x;
+  this->position.y = this->model[3].y;
+  this->position.z = this->model[3].z;
 }
 
 void Transform::Scale(glm::vec3 scale)

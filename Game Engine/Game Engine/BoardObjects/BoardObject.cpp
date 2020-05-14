@@ -3,31 +3,31 @@
 const int BLANK = 0;
 const int FILL  = 1;
 
-bool BoardObject::VerifyColision( const GameBoard& board, const Position& pos) const
+bool BoardObject::VerifyColision(const GameBoard& board, const Position& pos) const
 {
     const Shape& shape = _GetShape();
-    const std::vector< int >& mappingVector = _GetMapping();
+    const std::vector<int>& mappingVector = _GetMapping();
 
-    for (size_t i = 0; i < shape.size(); ++i)
+    for(size_t i = 0 ; i < shape.size() ; ++i)
     {
-        for (size_t j = 0; j < shape.size(); ++j)
+        for(size_t j = 0 ; j < shape.size() ; ++j)
         {
-            if (shape[i][j] == 1)
+            if(shape[i][j] == 1)
             {
                 // Check boundaries 
-                if (pos._x + mappingVector[i] >= board.size())
+                if(pos._x + mappingVector[i] >= board.size())
                 {
                     // Fora do tabuleiro por baixo.
                     return true;
                 }
 
-                if (pos._y + mappingVector[j] < 0 || pos._y + mappingVector[j] >= board[i].size())
+                if(pos._y + mappingVector[j] < 0 || pos._y + mappingVector[j] >= board[i].size())
                 {
                     // Fora do tabuleiro à esquerda ou à direita
                     return true;
                 }
 
-                if ( pos._x + mappingVector[i] >= 0 && board[pos._x + mappingVector[i]][pos._y + mappingVector[j]] == 1)
+                if(pos._x + mappingVector[i] >= 0 && board[pos._x + mappingVector[i]][pos._y + mappingVector[j]] == 1)
                 {
                     // Colisao com outro objecto
                     return true;
@@ -39,35 +39,46 @@ bool BoardObject::VerifyColision( const GameBoard& board, const Position& pos) c
     return false;
 }
 
-void BoardObject::Draw( GameBoard& board, const Position& pos) const
+void BoardObject::Draw(GameBoard& board, vector<vector<GameObject*>>& graphicBoard, const Position& pos, vector<GameObject*> tetromino) const
 {
-    _Draw( board, pos, FILL);
+    _Draw(board, graphicBoard, pos, FILL, tetromino);
 }
 
-void BoardObject::Erase(GameBoard& board, const Position& pos) const
+void BoardObject::Erase(GameBoard& board, vector<vector<GameObject*>>& graphicBoard, const Position& pos, vector<GameObject*> tetromino) const
 {
-    _Draw( board, pos, BLANK);
+    _Draw(board, graphicBoard, pos, BLANK, tetromino);
 }
 
-void BoardObject::_Draw(GameBoard& board, const Position& pos, const int value) const
+void BoardObject::_Draw(GameBoard& board, vector<vector<GameObject*>>& graphicBoard, const Position& center, const int value, vector<GameObject*> tetromino) const
 {
+    int cnt = 0;
     const Shape& shape = _GetShape();
-    const std::vector< int >& mappingVector = _GetMapping();
-
+    const std::vector<int>& mappingVector = _GetMapping();
     for (size_t i = 0; i < shape.size(); ++i)
     {
-        if (pos._x + mappingVector[i] < 0)
-        {
-            // Por cima do tabuleiro
+        // Por cima do tabuleiro
+        if (center._x + mappingVector[i] < 0)
             continue;
-        }
 
-        for (size_t j = 0; j < shape.size(); ++j)
-        {
-            if (shape[i][j] == 1)
+
+        for (size_t j = 0 ; j < shape.size() ; ++j)
+          if (shape[i][j] == 1)
+          {
+            int x = center._x + mappingVector[i];
+            int y = center._y + mappingVector[j];
+
+            if(value == 1)
             {
-                board[pos._x + mappingVector[i]][pos._y + mappingVector[j]] = value;
+              tetromino[cnt]->GetTransform()->TranslateTo(vec3(y * 10, x * -10, 1.0f));
+              graphicBoard[center._x + mappingVector[i]][center._y + mappingVector[j]] = tetromino[cnt];
+              cnt++;
             }
-        }
+            else
+            {
+              graphicBoard[center._x + mappingVector[i]][center._y + mappingVector[j]] = nullptr;
+            }
+
+            board[center._x + mappingVector[i]][center._y + mappingVector[j]] = value;
+          }
     }
 }

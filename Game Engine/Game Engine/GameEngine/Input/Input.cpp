@@ -120,7 +120,7 @@ bool Input::GetKey(string key)
 
 bool Input::GetKeyDown(KeyCode key)
 {
-  return Input::keys[static_cast<int>(key)] == GLFW_PRESS;
+  return Input::keys[static_cast<int>(key)] == Status::Press;
 }
 
 bool Input::GetKeyDown(string key)
@@ -140,5 +140,8 @@ bool Input::GetKeyUp(string key)
 
 void Input::KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-  Input::keys[key] = action;
+  if((Input::keys[key] == Status::Press || Input::keys[key] == Status::Hold) && (action == GLFW_PRESS || action == GLFW_REPEAT))
+    Input::keys[key] = Status::Hold;
+  else
+    Input::keys[key] = action;
 }

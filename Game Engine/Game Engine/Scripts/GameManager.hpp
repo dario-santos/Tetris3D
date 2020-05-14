@@ -5,6 +5,7 @@
 using namespace glm;
 
 #include <string>
+#include <list>
 #include <vector>
 #include <set>
 
@@ -14,6 +15,17 @@ using namespace glm;
 
 #include "../GameEngine/Audio/AudioDevice.hpp"
 #include "../GameEngine/Input/Input.hpp"
+
+#include "../GameEngine/Scene.hpp"
+
+
+#include "../Prefabs/IBlock.hpp"
+#include "../Prefabs/JBlock.hpp"
+#include "../Prefabs/LBlock.hpp"
+#include "../Prefabs/OBlock.hpp"
+#include "../Prefabs/SBlock.hpp"
+#include "../Prefabs/ZBlock.hpp"
+#include "../Prefabs/TBlock.hpp"
 
 
 const float SPEED_X_DIRECTION = 0.3f;
@@ -70,36 +82,38 @@ class BoardObject;
 class GameManager : public Script
 {
     private:
-        
-        enum BoardObjectType {
-            BOARD_OBJECT_TYPE_SQUARE = 0,
-            BOARD_OBJECT_TYPE_LINE,
-            BOARD_OBJECT_TYPE_L,
-            BOARD_OBJECT_TYPE_LINVERSE,
-            BOARD_OBJECT_TYPE_T,
-            BOARD_OBJECT_TYPE_Z,
-            BOARD_OBJECT_TYPE_S,
-            BOARD_OBJECT_TYPE_TOTAL_OBJECTS
+        enum tetrominos{
+            O = 0,
+            I,
+            L,
+            J,
+            T,
+            Z,
+            S,
+            Total
         };
 
         // Transform of the gameObject
-        std::unique_ptr < Transform > transform;
+        std::unique_ptr<Transform> transform;
         // The ball gameObject
-        std::unique_ptr< GameObject > gameObject;
+        std::unique_ptr<GameObject> gameObject;
         // Audio device
-        std::unique_ptr< AudioDevice > beep;
+        std::unique_ptr<AudioDevice> beep;
         // Velocity of movement
         vec3 step;
         // Score of the game
         int score;
+        
+        GLuint shaderId;
 
-//        ofstream myfile;
         bool _generateNewObject;
 
         time_t _seconds;
         time_t _drawSeconds;
 
-        
+        vector<GameObject*> piece;
+
+        vector<vector<GameObject*>> graphicBoard;
         GameBoard _board;
         std::unique_ptr< BoardObject > _currenctObject;
         Position _currentPosition;
@@ -115,6 +129,7 @@ class GameManager : public Script
         void UpdatePosition(const Position& newPosition, const bool createNewObjectIfFailed = false);
         void DetectLinesToRemove(std::set< int >& linesToRemove) const;
         void CopyLineToOtherBoard(int dstIndex, int srcIndex, GameBoard& destBoard, const GameBoard& srcBoard) const;
+        void CopyLineToOtherBoard(int dstIndex, int srcIndex, vector<vector<GameObject*>>& dstBoard, vector<vector<GameObject*>>& srcBoard);
         void ClearLine();
         void ClearScreen();
         void Game_loop();
@@ -127,9 +142,7 @@ class GameManager : public Script
         *  GameManager constructor
         *
         */
-        GameManager(/*Transform* transform, GameObject* gameObject*/);
-
-        ~GameManager() = default;
+        GameManager(GLuint shaderId);
 
         GameManager(const GameManager& other) = delete;
         GameManager& operator=(const GameManager& other) = delete;

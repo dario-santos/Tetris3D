@@ -19,9 +19,9 @@ const BoardObject::Shape LineObject::_shapeVertical = {      { 0, 0, 0, 0, 0 },
 
 
 
-const std::vector< LineObject::Shape > LineObject::_shape = { _shapeHorizontal, _shapeVertical };
+const std::vector<LineObject::Shape> LineObject::_shape = { _shapeHorizontal, _shapeVertical };
 
-const std::vector < int > LineObject::_mappingVector = { -2, -1, 0, 1, 2 };
+const std::vector<int> LineObject::_mappingVector = { -2, -1, 0, 1, 2 };
 
 LineObject::LineObject() :
     _state(State::STATE_HORIZONTAL)

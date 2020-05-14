@@ -43,7 +43,7 @@ class Player
       GameObject *go = new GameObject(t, nullptr, "Player");
       
       // Adds the PlayerMovement script
-      go->AddScript(new GameManager());
+      // go->AddScript(new GameManager());
       return go;
     }
 };

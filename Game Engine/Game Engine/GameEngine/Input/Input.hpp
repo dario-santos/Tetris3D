@@ -113,6 +113,7 @@ class Input
   private:
     // A hash map contains the status of the supported keys .
     static map<int, int> keys;
+    enum Status { Release = 0, Press, Hold};
     Input(); 
     ~Input();
 
