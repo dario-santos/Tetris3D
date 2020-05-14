@@ -26,6 +26,18 @@ void Transform::Translate(glm::vec3 translation)
   this->position.z = this->model[3].z;
 }
 
+void Transform::Rotate(glm::vec3 r)
+{
+  //this->model = glm::translate(model, -position);
+
+  this->model = glm::rotate(this->model, glm::radians(r.x), glm::vec3(1, 0, 0));
+  this->model = glm::rotate(this->model, glm::radians(r.y), glm::vec3(0, 1, 0));
+  this->model = glm::rotate(this->model, glm::radians(r.z), glm::vec3(0, 0, 1));
+
+  //this->model = glm::translate(model, position);
+}
+
+
 void Transform::TranslateTo(glm::vec3 position)
 {
   // Put model in the center of the world

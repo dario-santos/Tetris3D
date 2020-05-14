@@ -150,7 +150,7 @@ void loadGameObjects(Scene* scene)
   opaqueShader = LoadShaders("./Shaders/OpaqueShader.vert", "./Shaders/OpaqueShader.frag");
 
   scene->AddGameObject(Player::AddPlayer(
-    new Transform(vec3(-200, -200, -200), vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f))));
+    new Transform(vec3(-200, -200, -200), vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f)), opaqueShader));
 
 
   // Tabuleiro
@@ -162,12 +162,6 @@ void loadGameObjects(Scene* scene)
 
   scene->AddGameObject(Brick::AddBrick(
     new Transform(vec3(-50, 100, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(20, 200, 10), opaqueShader));
-
-  // Blocos
-  std::vector<GameObject*> blocks = ZBlock::AddZBlock(vec3(255, 213, 0), opaqueShader);
-  
-  for(GameObject* go : blocks)
-      scene->AddGameObject(go);
 }
 
 void lifeCycle(Scene *scene)
@@ -187,12 +181,12 @@ void lifeCycle(Scene *scene)
       if(g1 == g2 || !g2->IsEnabled()) continue; // if it's the same object or if it's not enabled
 
       // Center of g1
-      vec3 c1 = g1->GetTransform().position;
+      vec3 c1 = g1->GetTransform()->position;
       // Radius of g1
-      vec3 r1 = g1->GetTransform().scale * vec3(0.5f, 0.5f, 0.5f);
+      vec3 r1 = g1->GetTransform()->scale * vec3(0.5f, 0.5f, 0.5f);
 
       // Center of g2
-      vec3 c2 = g2->GetTransform().position;
+      vec3 c2 = g2->GetTransform()->position;
 
       // if the distance between the centers is smaller than the x and y radius there's a collision
       if(abs(c1.x - c2.x) < r1.x && abs(c1.y - c2.y) < r1.y && abs(c1.z - c2.z) < r1.z)

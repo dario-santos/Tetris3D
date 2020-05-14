@@ -124,7 +124,7 @@ class GameObject
     * 
     * return: the transform of the game object.
     */
-    Transform GetTransform();
+    Transform* GetTransform();
 
     /*
     * Function: Tag

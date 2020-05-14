@@ -52,9 +52,9 @@ void GameObject::Destroy()
   this->canDestroy = true;
 }
 
-Transform GameObject::GetTransform()
+Transform* GameObject::GetTransform()
 {
-  return *this->transform;
+  return this->transform;
 }
 
 std::string GameObject::Tag()
