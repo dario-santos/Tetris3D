@@ -1,9 +1,6 @@
 #include "GameManager.hpp"
 
-#include <iostream>
-#include <ctime>   
-#include <set>   
-#include <fstream>   
+#include <iostream>  
 #include "../BoardObjects/ZObject.hpp"
 #include "../BoardObjects/SObject.hpp"
 #include "../BoardObjects/LObject.hpp"
@@ -15,21 +12,14 @@
 const size_t BOARD_HEIGHT = 20;
 const size_t BOARD_LENGTH = 10;
 
-
 GameManager::GameManager(GLuint shaderId) :
     _board(BOARD_HEIGHT, std::vector<int>(BOARD_LENGTH, 0)),
-    graphicBoard(BOARD_HEIGHT, vector<GameObject*>(BOARD_LENGTH, nullptr)),
-    _seconds(time(NULL)),
-    _drawSeconds(time(NULL))
-    
+    graphicBoard(BOARD_HEIGHT, vector<GameObject*>(BOARD_LENGTH, nullptr))    
 {
   this->shaderId = shaderId;
 
     beep.reset( new AudioDevice());
-    
-    score = 0;
     _generateNewObject = true;
-    step = vec3(SPEED_X_DIRECTION, SPEED_Y_DIRECTION, SPEED_Z_DIRECTION);
 }
 
 void GameManager::ChoosePiece()
@@ -87,16 +77,28 @@ void GameManager::DrawBoard()
 
 void GameManager::ManageInput()
 {
-  if(Input::GetKey(KeyCode::RightArrow) || Input::GetButton(ButtonCode::DPAD_RIGHT))
-    MoveObjectRight();
-  else if(Input::GetKey(KeyCode::LeftArrow) || Input::GetButton(ButtonCode::DPAD_LEFT))
-    MoveObjectLeft();
+  if (Time::GetTime() > inputDelayTime + startInputCycleTime)
+  {
+    startInputCycleTime = Time::GetTime();
+    if (Input::GetKey(KeyCode::RightArrow) || Input::GetButton(ButtonCode::DPAD_RIGHT))
+      MoveObjectRight();
+    else if (Input::GetKey(KeyCode::LeftArrow) || Input::GetButton(ButtonCode::DPAD_LEFT))
+      MoveObjectLeft();
 
-  if(Input::GetKey(KeyCode::DownArrow) || Input::GetButton(ButtonCode::DPAD_DOWN))
-    MoveObjectDown();
-
-  if(Input::GetKeyDown(KeyCode::UpArrow) || Input::GetButton(ButtonCode::RB))
+    if (Input::GetKey(KeyCode::DownArrow) || Input::GetButton(ButtonCode::DPAD_DOWN))
+    {
+      MoveObjectDown();
+      startCycleTime = Time::GetTime();
+    }
+  }
+  
+  if((Input::GetKey(KeyCode::UpArrow) || Input::GetButton(ButtonCode::RB)) && !isRotationKeyPressed)
+  {
+    isRotationKeyPressed = true;
     Transformation();
+  }
+
+  isRotationKeyPressed = Input::GetKey(KeyCode::UpArrow) || Input::GetButton(ButtonCode::RB);
 }
 
 void GameManager::Transformation()
@@ -200,7 +202,6 @@ void GameManager::CopyLineToOtherBoard(int dstIndex, int srcIndex, vector<vector
   }
 }
 
-
 void GameManager::ClearLine()
 {
     std::set< int > linesToRemove;
@@ -209,6 +210,7 @@ void GameManager::ClearLine()
 
     if (linesToRemove.empty())
         return;
+    this->UpdateScore(linesToRemove.size());
 
     GameBoard tmp (BOARD_HEIGHT, vector<int>(BOARD_LENGTH, 0));
 
@@ -240,7 +242,15 @@ void GameManager::ClearLine()
     }
 }
 
-void GameManager::Game_loop()
+void GameManager::UpdateScore(int linesCleared)
+{
+  this->linesCleared += linesCleared;
+  this->score += linesCleared > 1 ? ((100*linesCleared) + ((linesCleared * 100) / 2)) : 100 * linesCleared;
+
+  this->delayTime = 1.0f - (this->linesCleared / 3) / 10.f;
+}
+
+void GameManager::GameLoop()
 {
     const bool createNewObjectIfFailed = true;
 
@@ -251,28 +261,32 @@ void GameManager::Game_loop()
         _generateNewObject = false;
     }
 
-    ManageInput();
+     ManageInput();
 
-    if (_seconds < time(NULL))
+    if (Time::GetTime() > delayTime + startCycleTime)
     {
-        _seconds = time(NULL) + 2;
-
-        if (!_generateNewObject)
-        {
-            // Cannot move the object down 
-            // if this object is no longer valid
-            // and a new object needs to be generated first
-            MoveObjectDown();
-        }
+      startCycleTime = Time::GetTime();
+      if(!_generateNewObject)
+      {
+        // Cannot move the object down 
+        // if this object is no longer valid
+        // and a new object needs to be generated first
+        MoveObjectDown();
+       }
+    
     }
     
-    ClearScreen();
-    DrawBoard();
+    //ClearScreen();
+    //DrawBoard();
 }
 
 void GameManager::Update()
 {
-    
-    Game_loop();
-}
+  GameLoop();
 
+  ClearScreen();
+  cout << "Score: " << this->score << endl;
+  cout << "Level: " << this->linesCleared/3 << endl;
+  cout << "Cleared Lines: " << this->linesCleared<< endl;
+  cout << "Delay Time: " << this->delayTime << endl;
+}

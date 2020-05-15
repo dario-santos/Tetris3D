@@ -138,10 +138,9 @@ bool Input::GetKeyUp(string key)
   return Input::keys[Config::keys["Keyboard"][key]] == GLFW_RELEASE;
 }
 
+#include <iostream>
+
 void Input::KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-  if((Input::keys[key] == Status::Press || Input::keys[key] == Status::Hold) && (action == GLFW_PRESS || action == GLFW_REPEAT))
-    Input::keys[key] = Status::Hold;
-  else
-    Input::keys[key] = action;
+  Input::keys[key] = action;
 }
