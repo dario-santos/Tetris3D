@@ -1,6 +1,7 @@
 #include "GameManager.hpp"
 
-#include <iostream>  
+#include <iostream>
+
 #include "../BoardObjects/ZObject.hpp"
 #include "../BoardObjects/SObject.hpp"
 #include "../BoardObjects/LObject.hpp"
@@ -18,7 +19,7 @@ GameManager::GameManager(GLuint shaderId) :
 {
   this->shaderId = shaderId;
 
-    beep.reset( new AudioDevice());
+    beep.reset(new AudioDevice(50));
     _generateNewObject = true;
 }
 
@@ -92,13 +93,13 @@ void GameManager::ManageInput()
     }
   }
   
-  if((Input::GetKey(KeyCode::UpArrow) || Input::GetButton(ButtonCode::RB)) && !isRotationKeyPressed)
+  if((Input::GetKey(KeyCode::UpArrow) || Input::GetButton(ButtonCode::A)) && !isRotationKeyPressed)
   {
     isRotationKeyPressed = true;
     Transformation();
   }
 
-  isRotationKeyPressed = Input::GetKey(KeyCode::UpArrow) || Input::GetButton(ButtonCode::RB);
+  isRotationKeyPressed = Input::GetKey(KeyCode::UpArrow) || Input::GetButton(ButtonCode::A);
 }
 
 void GameManager::Transformation()
@@ -107,8 +108,11 @@ void GameManager::Transformation()
     tmpObject->Transformation();
     
     _currenctObject->Erase(_board, graphicBoard,_currentPosition, this->piece);
-    if ( !tmpObject->VerifyColision( _board, _currentPosition))
-        _currenctObject.reset( tmpObject.release());
+    if(!tmpObject->VerifyColision( _board, _currentPosition))
+    {
+      beep.get()->Play2D("./audio/SFX_PieceRotate.wav");
+      _currenctObject.reset(tmpObject.release());
+    }
 
     _currenctObject->Draw(_board, graphicBoard, _currentPosition, this->piece);
 }
@@ -117,14 +121,16 @@ void GameManager::MoveObjectLeft()
 {
     Position newPosition = _currentPosition;
     newPosition.GoLeft();
-    UpdatePosition(newPosition);
+    if(!UpdatePosition(newPosition))
+      beep.get()->Play2D("./audio/SFX_PieceMove.wav");
 }
 
 void GameManager::MoveObjectRight()
 {
     Position newPosition = _currentPosition;
     newPosition.GoRight();
-    UpdatePosition(newPosition);
+    if(!UpdatePosition(newPosition))
+      beep.get()->Play2D("./audio/SFX_PieceMove.wav");
 }
 
 void GameManager::MoveObjectDown()
@@ -132,10 +138,11 @@ void GameManager::MoveObjectDown()
     const bool createNewObjectIfFailed = true;
     Position newPosition = _currentPosition;
     newPosition.GoDown();
-    UpdatePosition( newPosition, createNewObjectIfFailed);
+    if(UpdatePosition(newPosition, createNewObjectIfFailed))
+      beep.get()->Play2D("./audio/SFX_PieceFall.wav");
 }
 
-void GameManager::UpdatePosition(const Position& newPosition, const bool createNewObjectIfFailed)
+bool GameManager::UpdatePosition(const Position& newPosition, const bool createNewObjectIfFailed)
 {
     _currenctObject->Erase(_board, graphicBoard, _currentPosition, this->piece);
 
@@ -148,11 +155,13 @@ void GameManager::UpdatePosition(const Position& newPosition, const bool createN
             _generateNewObject = true;
             _currentPosition.Reset();
         }
+        return true;
     }
     else
     {
         _currenctObject->Draw(_board, graphicBoard, newPosition, this->piece);
         _currentPosition = newPosition;
+        return false;
     }
 }
 
@@ -248,6 +257,24 @@ void GameManager::UpdateScore(int linesCleared)
   this->score += linesCleared > 1 ? ((100*linesCleared) + ((linesCleared * 100) / 2)) : 100 * linesCleared;
 
   this->delayTime = 1.0f - (this->linesCleared / 3) / 10.f;
+
+
+  // Play sound effect
+  switch (linesCleared)
+  {
+    case 1:
+      beep.get()->Play2D("./audio/SFX_ClearSingle.wav");
+      break;  
+    case 2:
+      beep.get()->Play2D("./audio/SFX_ClearDouble.wav");
+      break;  
+    case 3:
+      beep.get()->Play2D("./audio/SFX_ClearTriple.wav");
+      break;
+    case 4:
+      beep.get()->Play2D("./audio/SFX_ClearTetris.wav");
+      break;
+  }
 }
 
 void GameManager::GameLoop()
@@ -273,7 +300,6 @@ void GameManager::GameLoop()
         // and a new object needs to be generated first
         MoveObjectDown();
        }
-    
     }
     
     //ClearScreen();

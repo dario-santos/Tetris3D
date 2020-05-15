@@ -3,8 +3,6 @@
 #include <glm/glm.hpp>
 using namespace glm;
 
-#include <memory>
-#include <string>
 #include <vector>
 #include <set>
 
@@ -120,7 +118,7 @@ class GameManager : public Script
         void MoveObjectLeft();
         void MoveObjectRight();
         void MoveObjectDown();
-        void UpdatePosition(const Position& newPosition, const bool createNewObjectIfFailed = false);
+        bool UpdatePosition(const Position& newPosition, const bool createNewObjectIfFailed = false);
         void DetectLinesToRemove(std::set< int >& linesToRemove) const;
         void CopyLineToOtherBoard(int dstIndex, int srcIndex, GameBoard& destBoard, const GameBoard& srcBoard) const;
         void CopyLineToOtherBoard(int dstIndex, int srcIndex, vector<vector<GameObject*>>& dstBoard, vector<vector<GameObject*>>& srcBoard);

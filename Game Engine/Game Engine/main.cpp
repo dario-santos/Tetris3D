@@ -46,7 +46,6 @@ GLuint opaqueShader;
 
 int main(void)
 {
-
   // Initialization of the GLFW
   glfwInit();
 
@@ -99,8 +98,8 @@ int main(void)
   Cube::Init();
   Config::LoadConfig("./config.cfg");
 
-  AudioDevice *theme = new AudioDevice(10);
-  theme->Play2D("audio/tetris.mp3", GL_TRUE);
+  AudioDevice *theme = new AudioDevice(30);
+  theme->Play2D("audio/Theme_A.mp3", GL_TRUE);
 
   // Loads the scene and sets it as the active one
   Scene* scene = new Scene();
