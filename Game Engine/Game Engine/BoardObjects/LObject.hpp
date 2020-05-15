@@ -18,7 +18,7 @@ public:
     LObject(const LObject& other) = default;
     LObject& operator=(const LObject& other) = default;
 
-    virtual void Transformation() override;
+    virtual void Transformation(bool isClockWise) override;
 
     std::unique_ptr<BoardObject> Clone() const override;
     //void Update() override;

@@ -14,7 +14,7 @@ public:
 	
 	void Erase(GameBoard& board, vector<vector<GameObject*>>& graphicBoard, const Position& pos, vector<GameObject*> tetromino, float boardCenter) const;
 
-	virtual void Transformation() = 0;
+	virtual void Transformation(bool isClockWise) = 0;
 
 	virtual std::unique_ptr<BoardObject> Clone() const = 0;
 	

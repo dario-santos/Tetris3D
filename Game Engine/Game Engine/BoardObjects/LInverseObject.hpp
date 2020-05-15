@@ -18,7 +18,7 @@ public:
     LInverseObject(const LInverseObject& other) = default;
     LInverseObject& operator=(const LInverseObject& other) = default;
 
-    virtual void Transformation() override;
+    virtual void Transformation(bool isClockWise) override;
 
     std::unique_ptr<BoardObject> Clone() const override;
     //void Update() override;

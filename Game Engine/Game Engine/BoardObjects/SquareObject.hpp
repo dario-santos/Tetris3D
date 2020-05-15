@@ -18,7 +18,7 @@ public:
     SquareObject(const SquareObject& other) = default;
     SquareObject& operator=(const SquareObject& other) = default;
 
-    virtual void Transformation() override;
+    virtual void Transformation(bool isClockWise) override;
 
     std::unique_ptr<BoardObject> Clone() const override;
     //void Update() override;

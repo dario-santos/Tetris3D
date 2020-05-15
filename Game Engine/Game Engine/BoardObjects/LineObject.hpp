@@ -18,7 +18,7 @@ public:
     LineObject(const LineObject& other) = default;
     LineObject& operator=(const LineObject& other) = default;
 
-    virtual void Transformation() override;
+    virtual void Transformation(bool isClockWise) override;
 
     std::unique_ptr<BoardObject> Clone() const override;
     //void Update() override;

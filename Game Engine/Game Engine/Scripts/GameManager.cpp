@@ -114,25 +114,25 @@ void GameManager::ManageInput()
   if((Input::GetKey("RotateR" + player) || Input::GetButton(ButtonCode::A, gamepad)) && !isRotationKeyPressed)
   {
     isRotationKeyPressed = true;
-    Transformation();
+    Transformation(true);
   }
   else if ((Input::GetKey("RotateL" + player) || Input::GetButton(ButtonCode::B, gamepad)) && !isRotationKeyPressed)
   {
     isRotationKeyPressed = true;
-    Transformation();
+    Transformation(false);
   }
 
   isHardDropKeyPressed = Input::GetKey("HardDrop" + player) || Input::GetButton(ButtonCode::DPAD_UP, gamepad);
   isRotationKeyPressed = Input::GetKey("RotateR" + player) || Input::GetKey("RotateL" + player) || Input::GetButton(ButtonCode::A, gamepad) || Input::GetButton(ButtonCode::B, gamepad);;
 }
 
-void GameManager::Transformation()
+void GameManager::Transformation(bool isClockWise)
 {   
     unique_ptr<BoardObject> tmpObject = _currenctObject->Clone();
-    tmpObject->Transformation();
+    tmpObject->Transformation(isClockWise);
     
     _currenctObject->Erase(_board, graphicBoard,_currentPosition, this->piece, this->boardCenter);
-    if(!tmpObject->VerifyColision( _board, _currentPosition))
+    if(!tmpObject->VerifyColision(_board, _currentPosition))
     {
       beep.get()->Play2D("./audio/SFX_PieceRotate.wav");
       _currenctObject.reset(tmpObject.release());

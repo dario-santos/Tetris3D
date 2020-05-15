@@ -24,7 +24,7 @@ const std::vector< int >& SquareObject::_GetMapping() const
     return _mappingVector;
 }
 
-void SquareObject::Transformation()
+void SquareObject::Transformation(bool isClockWise)
 {
     //Nothing to be done
 }

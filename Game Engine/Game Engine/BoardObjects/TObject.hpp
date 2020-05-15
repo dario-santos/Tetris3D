@@ -18,7 +18,7 @@ public:
     TObject(const TObject& other) = default;
     TObject& operator=(const TObject& other) = default;
 
-    virtual void Transformation() override;
+    virtual void Transformation(bool isClockWise) override;
 
     std::unique_ptr<BoardObject> Clone() const override;
     //void Update() override;
