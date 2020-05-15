@@ -94,7 +94,7 @@ class GameManager : public Script
         int score = 0;
         int linesCleared = 0;
         Gamepad gamepad;
-        
+        int lastPiece = -1;
         bool isHardDropKeyPressed = false;
         bool isRotationKeyPressed = false;
         bool _generateNewObject = true;

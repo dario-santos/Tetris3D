@@ -1,6 +1,7 @@
 #include "GameManager.hpp"
 
 #include <iostream>
+#include <ctime>
 
 #include "../BoardObjects/ZObject.hpp"
 #include "../BoardObjects/SObject.hpp"
@@ -21,11 +22,20 @@ GameManager::GameManager(GLuint shaderId, float boardCenter, Gamepad gamepad) :
   this->boardCenter = boardCenter;
   this->gamepad     = gamepad;
   beep.reset(new AudioDevice(50));
+
+  // Set random sequence
+  srand((unsigned)time(0));
 }
 
 void GameManager::ChoosePiece()
 {
-  switch (rand() % tetrominos::Total) // [0, 7[
+  // Nes randomizer
+  int r = rand() % tetrominos::Total;
+  if (lastPiece == r)
+    r = rand() % tetrominos::Total;
+  lastPiece = r;
+
+  switch(lastPiece) // [0, 7[
   {
     case tetrominos::O:
       _currenctObject.reset(new SquareObject());
@@ -113,7 +123,7 @@ void GameManager::ManageInput()
   }
 
   isHardDropKeyPressed = Input::GetKey("HardDrop" + player) || Input::GetButton(ButtonCode::DPAD_UP, gamepad);
-  isRotationKeyPressed = Input::GetKey("RotateR" + player) || Input::GetKey("RotateL" + player) || Input::GetButton(ButtonCode::A, gamepad);
+  isRotationKeyPressed = Input::GetKey("RotateR" + player) || Input::GetKey("RotateL" + player) || Input::GetButton(ButtonCode::A, gamepad) || Input::GetButton(ButtonCode::B, gamepad);;
 }
 
 void GameManager::Transformation()
