@@ -95,6 +95,7 @@ class GameManager : public Script
         int linesCleared = 0;
         Gamepad gamepad;
         
+        bool isHardDropKeyPressed = false;
         bool isRotationKeyPressed = false;
         bool _generateNewObject = true;
 
@@ -119,6 +120,7 @@ class GameManager : public Script
         void MoveObjectLeft();
         void MoveObjectRight();
         void MoveObjectDown();
+        void MoveObjectHardDrop();
         bool UpdatePosition(const Position& newPosition, const bool createNewObjectIfFailed = false);
         void DetectLinesToRemove(std::set< int >& linesToRemove) const;
         void CopyLineToOtherBoard(int dstIndex, int srcIndex, GameBoard& destBoard, const GameBoard& srcBoard) const;

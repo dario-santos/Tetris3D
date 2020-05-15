@@ -88,25 +88,37 @@ void GameManager::ManageInput()
     else if (Input::GetKey("Left" + player) || Input::GetButton(ButtonCode::DPAD_LEFT, gamepad))
       MoveObjectLeft();
 
-    if(Input::GetKey("Down" + player) || Input::GetButton(ButtonCode::DPAD_DOWN, gamepad))
+    if(Input::GetKey("Drop" + player) || Input::GetButton(ButtonCode::DPAD_DOWN, gamepad))
     {
       MoveObjectDown();
       startCycleTime = Time::GetTime();
     }
   }
-  
-  if((Input::GetKey("Up" + player) || Input::GetButton(ButtonCode::A, gamepad)) && !isRotationKeyPressed)
+  if ((Input::GetKey("HardDrop" + player) || Input::GetButton(ButtonCode::DPAD_UP, gamepad)) && !isHardDropKeyPressed)
+  {
+    isHardDropKeyPressed = true;
+    MoveObjectHardDrop();
+  }
+
+
+  if((Input::GetKey("RotateR" + player) || Input::GetButton(ButtonCode::A, gamepad)) && !isRotationKeyPressed)
+  {
+    isRotationKeyPressed = true;
+    Transformation();
+  }
+  else if ((Input::GetKey("RotateL" + player) || Input::GetButton(ButtonCode::B, gamepad)) && !isRotationKeyPressed)
   {
     isRotationKeyPressed = true;
     Transformation();
   }
 
-  isRotationKeyPressed = Input::GetKey("Up" + player) || Input::GetButton(ButtonCode::A, gamepad);
+  isHardDropKeyPressed = Input::GetKey("HardDrop" + player) || Input::GetButton(ButtonCode::DPAD_UP, gamepad);
+  isRotationKeyPressed = Input::GetKey("RotateR" + player) || Input::GetKey("RotateL" + player) || Input::GetButton(ButtonCode::A, gamepad);
 }
 
 void GameManager::Transformation()
 {   
-    std::unique_ptr< BoardObject > tmpObject = _currenctObject->Clone();
+    unique_ptr<BoardObject> tmpObject = _currenctObject->Clone();
     tmpObject->Transformation();
     
     _currenctObject->Erase(_board, graphicBoard,_currentPosition, this->piece, this->boardCenter);
@@ -142,6 +154,24 @@ void GameManager::MoveObjectDown()
     newPosition.GoDown();
     if(UpdatePosition(newPosition, createNewObjectIfFailed))
       beep.get()->Play2D("./audio/SFX_PieceFall.wav");
+}
+
+void GameManager::MoveObjectHardDrop()
+{
+  const bool createNewObjectIfFailed = true;
+  Position newPosition = _currentPosition;
+  
+  while (true)
+  {
+    const bool createNewObjectIfFailed = true;
+    Position newPosition = _currentPosition;
+    newPosition.GoDown();
+    if (UpdatePosition(newPosition, createNewObjectIfFailed))
+    {
+      beep.get()->Play2D("./audio/SFX_PieceHardDrop.wav");
+      return;
+    }
+  }
 }
 
 bool GameManager::UpdatePosition(const Position& newPosition, const bool createNewObjectIfFailed)
@@ -283,7 +313,7 @@ void GameManager::GameLoop()
 {
     const bool createNewObjectIfFailed = true;
 
-    if (_generateNewObject)
+    if(_generateNewObject)
     {
         ClearLine();
         ChoosePiece();
@@ -292,7 +322,7 @@ void GameManager::GameLoop()
      
      ManageInput();
 
-    if (Time::GetTime() > delayTime + startCycleTime)
+    if(Time::GetTime() > delayTime + startCycleTime)
     {
       startCycleTime = Time::GetTime();
       if(!_generateNewObject)

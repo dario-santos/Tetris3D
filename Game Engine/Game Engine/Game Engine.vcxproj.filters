@@ -117,6 +117,9 @@
     <ClCompile Include="BoardObjects\ZObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Scripts\CubeTetrisManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shader.hpp">
@@ -246,6 +249,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Prefabs\ZBlock.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\CubeTetrisManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
