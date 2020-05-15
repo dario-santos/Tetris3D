@@ -153,7 +153,7 @@ void loadLevelSingleplayer(Scene* scene)
 
   GameObject* go = new GameObject(
     new Transform(vec3(-200, -200, -200), vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f)), nullptr, "GameManager");
-  go->AddScript(new GameManager(opaqueShader, 0));
+  go->AddScript(new GameManager(opaqueShader, 0, Gamepad::Gamepad1));
 
   scene->AddGameObject(go);
 

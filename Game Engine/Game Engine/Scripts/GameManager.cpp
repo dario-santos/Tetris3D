@@ -17,9 +17,9 @@ GameManager::GameManager(GLuint shaderId, float boardCenter, Gamepad gamepad) :
     _board(BOARD_HEIGHT, std::vector<int>(BOARD_LENGTH, 0)),
     graphicBoard(BOARD_HEIGHT, vector<GameObject*>(BOARD_LENGTH, nullptr))    
 {
-  this->shaderId = shaderId;
+  this->shaderId    = shaderId;
   this->boardCenter = boardCenter;
-  this->gamepad = gamepad;
+  this->gamepad     = gamepad;
   beep.reset(new AudioDevice(50));
 }
 
@@ -78,28 +78,30 @@ void GameManager::DrawBoard()
 
 void GameManager::ManageInput()
 {
+  string player = std::to_string((static_cast<int>(gamepad)));
+
   if (Time::GetTime() > inputDelayTime + startInputCycleTime)
   {
     startInputCycleTime = Time::GetTime();
-    if (Input::GetKey(KeyCode::RightArrow) || Input::GetButton(ButtonCode::DPAD_RIGHT, gamepad))
+    if (Input::GetKey("Right" + player) || Input::GetButton(ButtonCode::DPAD_RIGHT, gamepad))
       MoveObjectRight();
-    else if (Input::GetKey(KeyCode::LeftArrow) || Input::GetButton(ButtonCode::DPAD_LEFT, gamepad))
+    else if (Input::GetKey("Left" + player) || Input::GetButton(ButtonCode::DPAD_LEFT, gamepad))
       MoveObjectLeft();
 
-    if (Input::GetKey(KeyCode::DownArrow) || Input::GetButton(ButtonCode::DPAD_DOWN, gamepad))
+    if(Input::GetKey("Down" + player) || Input::GetButton(ButtonCode::DPAD_DOWN, gamepad))
     {
       MoveObjectDown();
       startCycleTime = Time::GetTime();
     }
   }
   
-  if((Input::GetKey(KeyCode::UpArrow) || Input::GetButton(ButtonCode::A, gamepad)) && !isRotationKeyPressed)
+  if((Input::GetKey("Up" + player) || Input::GetButton(ButtonCode::A, gamepad)) && !isRotationKeyPressed)
   {
     isRotationKeyPressed = true;
     Transformation();
   }
 
-  isRotationKeyPressed = Input::GetKey(KeyCode::UpArrow) || Input::GetButton(ButtonCode::A, gamepad);
+  isRotationKeyPressed = Input::GetKey("Up" + player) || Input::GetButton(ButtonCode::A, gamepad);
 }
 
 void GameManager::Transformation()
@@ -205,8 +207,7 @@ void GameManager::CopyLineToOtherBoard(int dstIndex, int srcIndex, vector<vector
     {
       vec3 translate = vec3(0, -abs(dstIndex - srcIndex), 0.0f);
       srcBoard[srcIndex][j]->GetTransform()->Translate(translate);
-    }
-      
+    } 
     dstBoard[dstIndex][j] = srcBoard[srcIndex][j];
   }
 }
@@ -219,6 +220,7 @@ void GameManager::ClearLine()
 
     if (linesToRemove.empty())
         return;
+
     this->UpdateScore(linesToRemove.size());
 
     GameBoard tmp (BOARD_HEIGHT, vector<int>(BOARD_LENGTH, 0));

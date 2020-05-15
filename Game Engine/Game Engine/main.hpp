@@ -24,7 +24,7 @@ void loadLevelSingleplayer(Scene *scene);
  *
  *   scene: The scene that the objects will get loaded into;
  */
-void loadLevelMultiplayer(Scene* scene);
+void loadLevelMultiplayer(Scene *scene);
 
 /*
  * Function: lifeCycle
