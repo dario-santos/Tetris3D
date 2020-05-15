@@ -296,27 +296,42 @@ void GameManager::ClearLine()
 void GameManager::UpdateScore(int linesCleared)
 {
   this->linesCleared += linesCleared;
-  this->score += linesCleared > 1 ? ((100*linesCleared) + ((linesCleared * 100) / 2)) : 100 * linesCleared;
-
-  this->delayTime = 1.0f - (this->linesCleared / 20) / 10.f;
-
-
-  // Play sound effect
+  int level = this->linesCleared / 20;
+  
+  // Score
   switch (linesCleared)
   {
-    case 1:
-      beep.get()->Play2D("./audio/SFX_ClearSingle.wav");
-      break;  
-    case 2:
-      beep.get()->Play2D("./audio/SFX_ClearDouble.wav");
-      break;  
-    case 3:
-      beep.get()->Play2D("./audio/SFX_ClearTriple.wav");
-      break;
-    case 4:
-      beep.get()->Play2D("./audio/SFX_ClearTetris.wav");
-      break;
+  case 1:
+    this->score += 40 * (level + 1);
+    beep.get()->Play2D("./audio/SFX_ClearSingle.wav");
+    break;
+  case 2:
+    this->score += 100 * (level + 1);
+    beep.get()->Play2D("./audio/SFX_ClearDouble.wav");
+    break;
+  case 3:
+    this->score += 300 * (level + 1);
+    beep.get()->Play2D("./audio/SFX_ClearTriple.wav");
+    break;
+  case 4:
+    this->score += 1200 * (level + 1);
+    beep.get()->Play2D("./audio/SFX_ClearTetris.wav");
+    break;
   }
+
+  // Progression
+  if (level < 10)
+    this->delayTime = 1.0f - (0.04f * level);
+  else if (level < 12)
+    this->delayTime = 0.1f;
+  else if (level < 15)
+    this->delayTime = 0.08f;
+  else if (level < 18)
+    this->delayTime = 0.06f;
+  else if (level < 28)
+    this->delayTime = 0.04f;
+  else
+    this->delayTime = 0.02f;
 }
 
 void GameManager::GameLoop()
