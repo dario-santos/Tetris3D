@@ -103,10 +103,13 @@ int main(void)
 
   // Loads the scene and sets it as the active one
   Scene* scene = new Scene();
-  scene->AddCamera(new Perspective(45.0f, 4/3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
-  //scene->AddCamera(new Orthographic(vec2(-75.0f, -5.0f), vec2(75, 250)));
+  // Single Player camera
+  //scene->AddCamera(new Perspective(45.0f, 4/3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
+  // Multiplayer camera
+  scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(125, -100, 250), vec3(125, -100, 0), vec3(0, 1, 0)));
+
   Scene::LoadScene(scene);
-  loadGameObjects(scene);
+  loadLevelMultiplayer(scene);
 
   // render scene for each frame
   do
@@ -142,7 +145,7 @@ int main(void)
   return 0;
 }
 
-void loadGameObjects(Scene* scene)
+void loadLevelSingleplayer(Scene* scene)
 {
   // Load Vertex and Fragments shaders
   transparencyShader = LoadShaders("./Shaders/TransparencyShader.vert", "./Shaders/TransparencyShader.frag");
@@ -150,7 +153,7 @@ void loadGameObjects(Scene* scene)
 
   GameObject* go = new GameObject(
     new Transform(vec3(-200, -200, -200), vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f)), nullptr, "GameManager");
-  go->AddScript(new GameManager(opaqueShader));
+  go->AddScript(new GameManager(opaqueShader, 0));
 
   scene->AddGameObject(go);
 
@@ -163,6 +166,45 @@ void loadGameObjects(Scene* scene)
 
   scene->AddGameObject(Brick::AddBrick(
     new Transform(vec3(-5, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(20, 200, 10), opaqueShader));
+}
+
+void loadLevelMultiplayer(Scene* scene)
+{
+  // Load Vertex and Fragments shaders
+  transparencyShader = LoadShaders("./Shaders/TransparencyShader.vert", "./Shaders/TransparencyShader.frag");
+  opaqueShader = LoadShaders("./Shaders/OpaqueShader.vert", "./Shaders/OpaqueShader.frag");
+
+  GameObject* p1 = new GameObject(
+    new Transform(vec3(-200, -200, -200), vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f)), nullptr, "GameManager");
+  p1->AddScript(new GameManager(opaqueShader, 0, Gamepad::Gamepad1));
+
+  scene->AddGameObject(p1);
+
+  GameObject* p2 = new GameObject(
+    new Transform(vec3(-200, -200, -200), vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f)), nullptr, "GameManager");
+  p2->AddScript(new GameManager(opaqueShader, 150, Gamepad::Gamepad2));
+
+  scene->AddGameObject(p2);
+
+  // Tabuleiro P1
+  scene->AddGameObject(Brick::AddBrick(
+    new Transform(vec3(45, -195, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(100.0f, 1.0f, 10.0f)), vec3(125, 200, 10), opaqueShader));
+
+  scene->AddGameObject(Brick::AddBrick(
+    new Transform(vec3(95, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(75, 200, 10), opaqueShader));
+
+  scene->AddGameObject(Brick::AddBrick(
+    new Transform(vec3(-5, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(20, 200, 10), opaqueShader));
+
+  // Tabuleiro P2
+  scene->AddGameObject(Brick::AddBrick(
+    new Transform(vec3(45 + 150, -195, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(100.0f, 1.0f, 10.0f)), vec3(125, 200, 10), opaqueShader));
+
+  scene->AddGameObject(Brick::AddBrick(
+    new Transform(vec3(95 + 150, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(75, 200, 10), opaqueShader));
+
+  scene->AddGameObject(Brick::AddBrick(
+    new Transform(vec3(-5 + 150, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(20, 200, 10), opaqueShader));
 }
 
 void lifeCycle(Scene *scene)

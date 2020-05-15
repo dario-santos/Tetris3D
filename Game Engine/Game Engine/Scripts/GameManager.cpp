@@ -13,11 +13,13 @@
 const size_t BOARD_HEIGHT = 20;
 const size_t BOARD_LENGTH = 10;
 
-GameManager::GameManager(GLuint shaderId) :
+GameManager::GameManager(GLuint shaderId, float boardCenter, Gamepad gamepad) :
     _board(BOARD_HEIGHT, std::vector<int>(BOARD_LENGTH, 0)),
     graphicBoard(BOARD_HEIGHT, vector<GameObject*>(BOARD_LENGTH, nullptr))    
 {
   this->shaderId = shaderId;
+  this->boardCenter = boardCenter;
+  this->gamepad = gamepad;
   beep.reset(new AudioDevice(50));
 }
 
@@ -79,25 +81,25 @@ void GameManager::ManageInput()
   if (Time::GetTime() > inputDelayTime + startInputCycleTime)
   {
     startInputCycleTime = Time::GetTime();
-    if (Input::GetKey(KeyCode::RightArrow) || Input::GetButton(ButtonCode::DPAD_RIGHT))
+    if (Input::GetKey(KeyCode::RightArrow) || Input::GetButton(ButtonCode::DPAD_RIGHT, gamepad))
       MoveObjectRight();
-    else if (Input::GetKey(KeyCode::LeftArrow) || Input::GetButton(ButtonCode::DPAD_LEFT))
+    else if (Input::GetKey(KeyCode::LeftArrow) || Input::GetButton(ButtonCode::DPAD_LEFT, gamepad))
       MoveObjectLeft();
 
-    if (Input::GetKey(KeyCode::DownArrow) || Input::GetButton(ButtonCode::DPAD_DOWN))
+    if (Input::GetKey(KeyCode::DownArrow) || Input::GetButton(ButtonCode::DPAD_DOWN, gamepad))
     {
       MoveObjectDown();
       startCycleTime = Time::GetTime();
     }
   }
   
-  if((Input::GetKey(KeyCode::UpArrow) || Input::GetButton(ButtonCode::A)) && !isRotationKeyPressed)
+  if((Input::GetKey(KeyCode::UpArrow) || Input::GetButton(ButtonCode::A, gamepad)) && !isRotationKeyPressed)
   {
     isRotationKeyPressed = true;
     Transformation();
   }
 
-  isRotationKeyPressed = Input::GetKey(KeyCode::UpArrow) || Input::GetButton(ButtonCode::A);
+  isRotationKeyPressed = Input::GetKey(KeyCode::UpArrow) || Input::GetButton(ButtonCode::A, gamepad);
 }
 
 void GameManager::Transformation()
@@ -105,14 +107,14 @@ void GameManager::Transformation()
     std::unique_ptr< BoardObject > tmpObject = _currenctObject->Clone();
     tmpObject->Transformation();
     
-    _currenctObject->Erase(_board, graphicBoard,_currentPosition, this->piece);
+    _currenctObject->Erase(_board, graphicBoard,_currentPosition, this->piece, this->boardCenter);
     if(!tmpObject->VerifyColision( _board, _currentPosition))
     {
       beep.get()->Play2D("./audio/SFX_PieceRotate.wav");
       _currenctObject.reset(tmpObject.release());
     }
 
-    _currenctObject->Draw(_board, graphicBoard, _currentPosition, this->piece);
+    _currenctObject->Draw(_board, graphicBoard, _currentPosition, this->piece, this->boardCenter);
 }
 
 void GameManager::MoveObjectLeft()
@@ -142,11 +144,11 @@ void GameManager::MoveObjectDown()
 
 bool GameManager::UpdatePosition(const Position& newPosition, const bool createNewObjectIfFailed)
 {
-    _currenctObject->Erase(_board, graphicBoard, _currentPosition, this->piece);
+    _currenctObject->Erase(_board, graphicBoard, _currentPosition, this->piece, this->boardCenter);
 
     if (_currenctObject->VerifyColision(_board, newPosition))
     {
-        _currenctObject->Draw(_board, graphicBoard, _currentPosition, this->piece);
+        _currenctObject->Draw(_board, graphicBoard, _currentPosition, this->piece, this->boardCenter);
 
         if (createNewObjectIfFailed)
         {
@@ -157,7 +159,7 @@ bool GameManager::UpdatePosition(const Position& newPosition, const bool createN
     }
     else
     {
-        _currenctObject->Draw(_board, graphicBoard, newPosition, this->piece);
+        _currenctObject->Draw(_board, graphicBoard, newPosition, this->piece, this->boardCenter);
         _currentPosition = newPosition;
         return false;
     }

@@ -10,9 +10,9 @@ class BoardObject
 public:
 	bool VerifyColision( const GameBoard& board, const Position& pos) const;
 	
-	void Draw(GameBoard& board, vector<vector<GameObject*>>& graphicBoard, const Position& pos, vector<GameObject*> tetromino) const;
+	void Draw(GameBoard& board, vector<vector<GameObject*>>& graphicBoard, const Position& pos, vector<GameObject*> tetromino, float boardCenter) const;
 	
-	void Erase(GameBoard& board, vector<vector<GameObject*>>& graphicBoard, const Position& pos, vector<GameObject*> tetromino) const;
+	void Erase(GameBoard& board, vector<vector<GameObject*>>& graphicBoard, const Position& pos, vector<GameObject*> tetromino, float boardCenter) const;
 
 	virtual void Transformation() = 0;
 
@@ -29,5 +29,5 @@ protected:
 	virtual const std::vector<int>& _GetMapping() const = 0;
 
 private:
-	void _Draw(GameBoard& board, vector<vector<GameObject*>>& graphicBoard, const Position& pos, const int value, vector<GameObject*> tetromino) const;
+	void _Draw(GameBoard& board, vector<vector<GameObject*>>& graphicBoard, const Position& pos, const int value, vector<GameObject*> tetromino, float boardCenter) const;
 };

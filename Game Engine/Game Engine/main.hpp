@@ -15,7 +15,16 @@
  *   
  *   scene: The scene that the objects will get loaded into;
  */
-void loadGameObjects(Scene *scene);
+void loadLevelSingleplayer(Scene *scene);
+
+/*
+ * Function: loadGameObjects
+ * --------------------------------
+ *   Loads game objects into scene with a certain shader.
+ *
+ *   scene: The scene that the objects will get loaded into;
+ */
+void loadLevelMultiplayer(Scene* scene);
 
 /*
  * Function: lifeCycle

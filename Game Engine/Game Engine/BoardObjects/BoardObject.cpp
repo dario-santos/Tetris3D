@@ -39,17 +39,17 @@ bool BoardObject::VerifyColision(const GameBoard& board, const Position& pos) co
     return false;
 }
 
-void BoardObject::Draw(GameBoard& board, vector<vector<GameObject*>>& graphicBoard, const Position& pos, vector<GameObject*> tetromino) const
+void BoardObject::Draw(GameBoard& board, vector<vector<GameObject*>>& graphicBoard, const Position& pos, vector<GameObject*> tetromino, float boardCenter) const
 {
-    _Draw(board, graphicBoard, pos, FILL, tetromino);
+    _Draw(board, graphicBoard, pos, FILL, tetromino, boardCenter);
 }
 
-void BoardObject::Erase(GameBoard& board, vector<vector<GameObject*>>& graphicBoard, const Position& pos, vector<GameObject*> tetromino) const
+void BoardObject::Erase(GameBoard& board, vector<vector<GameObject*>>& graphicBoard, const Position& pos, vector<GameObject*> tetromino, float boardCenter) const
 {
-    _Draw(board, graphicBoard, pos, BLANK, tetromino);
+    _Draw(board, graphicBoard, pos, BLANK, tetromino, boardCenter);
 }
 
-void BoardObject::_Draw(GameBoard& board, vector<vector<GameObject*>>& graphicBoard, const Position& center, const int value, vector<GameObject*> tetromino) const
+void BoardObject::_Draw(GameBoard& board, vector<vector<GameObject*>>& graphicBoard, const Position& center, const int value, vector<GameObject*> tetromino, float boardCenter) const
 {
     int cnt = 0;
     const Shape& shape = _GetShape();
@@ -60,7 +60,6 @@ void BoardObject::_Draw(GameBoard& board, vector<vector<GameObject*>>& graphicBo
         if (center._x + mappingVector[i] < 0)
             continue;
 
-
         for (size_t j = 0 ; j < shape.size() ; ++j)
           if (shape[i][j] == 1)
           {
@@ -69,7 +68,7 @@ void BoardObject::_Draw(GameBoard& board, vector<vector<GameObject*>>& graphicBo
 
             if(value == 1)
             {
-              tetromino[cnt]->GetTransform()->TranslateTo(vec3(y * 10, x * -10, 1.0f));
+              tetromino[cnt]->GetTransform()->TranslateTo(vec3(y * 10 + boardCenter, x * -10, 1.0f));
               graphicBoard[center._x + mappingVector[i]][center._y + mappingVector[j]] = tetromino[cnt];
               cnt++;
             }

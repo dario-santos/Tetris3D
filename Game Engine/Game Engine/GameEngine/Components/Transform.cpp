@@ -38,7 +38,6 @@ void Transform::Rotate(glm::vec3 r)
   //this->model = glm::translate(model, position);
 }
 
-
 void Transform::TranslateTo(glm::vec3 position)
 {
   // Put model in the center of the world

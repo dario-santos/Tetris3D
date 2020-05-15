@@ -24,7 +24,7 @@ using namespace glm;
 #include "../Prefabs/ZBlock.hpp"
 #include "../Prefabs/TBlock.hpp"
 
-typedef std::vector< std::vector< int > > GameBoard;
+typedef vector<vector<int>>GameBoard;
 
 struct Position
 {
@@ -85,16 +85,17 @@ class GameManager : public Script
             Total
         };
 
+        float boardCenter;
+        GLuint shaderId;
+
         // Audio device
-        std::unique_ptr<AudioDevice> beep;
+        unique_ptr<AudioDevice> beep;
         // Score of the game
         int score = 0;
         int linesCleared = 0;
+        Gamepad gamepad;
         
         bool isRotationKeyPressed = false;
-
-        GLuint shaderId;
-
         bool _generateNewObject = true;
 
         // In seconds
@@ -104,11 +105,11 @@ class GameManager : public Script
         float startCycleTime = Time::GetTime();
 
         vector<GameObject*> piece;
-        
         vector<vector<GameObject*>> graphicBoard;
+        
+        unique_ptr<BoardObject> _currenctObject;
         GameBoard _board;
         
-        std::unique_ptr<BoardObject> _currenctObject;
         Position _currentPosition;
 
         void ChoosePiece();
@@ -129,14 +130,13 @@ class GameManager : public Script
         void GameLoop();
 
     public:
-
         /*
         * Function: GameManager
         * --------------------------------
         *  GameManager constructor
         *
         */
-        GameManager(GLuint shaderId);
+        GameManager(GLuint shaderId, float boardCenter, Gamepad gamepad);
 
         GameManager(const GameManager& other) = delete;
         GameManager& operator=(const GameManager& other) = delete;
@@ -146,6 +146,5 @@ class GameManager : public Script
         * --------------------------------
         *  The Update event
         */
-        void Update() override; 
-        
+        void Update() override;
 };
