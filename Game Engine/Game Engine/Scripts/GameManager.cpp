@@ -18,9 +18,7 @@ GameManager::GameManager(GLuint shaderId) :
     graphicBoard(BOARD_HEIGHT, vector<GameObject*>(BOARD_LENGTH, nullptr))    
 {
   this->shaderId = shaderId;
-
-    beep.reset(new AudioDevice(50));
-    _generateNewObject = true;
+  beep.reset(new AudioDevice(50));
 }
 
 void GameManager::ChoosePiece()
@@ -304,6 +302,44 @@ void GameManager::GameLoop()
     
     //ClearScreen();
     //DrawBoard();
+}
+
+void GameManager::ResetGame() 
+{
+  this->score = 0;
+  this->linesCleared = 0;
+
+  this->_generateNewObject = true;
+
+  this->delayTime = 1.0f;
+  this->startCycleTime = Time::GetTime();
+  this->startInputCycleTime = Time::GetTime();
+
+  for(int i = 0 ; i < piece.size() ; i++)
+  {
+    piece[i]->Destroy();
+    piece[i] = nullptr;
+  }
+
+  for(int i = 0; i < this->graphicBoard.size(); i++)
+  {
+    for(int j = 0; j < this->graphicBoard[i].size(); j++)
+    {
+      if(this->graphicBoard[i][j] != nullptr)
+      {
+        this->graphicBoard[i][j]->Destroy();
+        this->graphicBoard[i][j] = nullptr;
+      }
+    }
+  }
+
+  for (int i = 0; i < this->_board.size(); i++)
+    for (int j = 0; j < this->_board[i].size(); j++)
+      this->_board[i][j] = 0;
+
+  this->_currenctObject.reset(nullptr);
+
+  this->_currentPosition.Reset();
 }
 
 void GameManager::Update()

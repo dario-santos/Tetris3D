@@ -95,7 +95,7 @@ class GameManager : public Script
 
         GLuint shaderId;
 
-        bool _generateNewObject;
+        bool _generateNewObject = true;
 
         // In seconds
         float inputDelayTime = 0.1f;
@@ -108,7 +108,7 @@ class GameManager : public Script
         vector<vector<GameObject*>> graphicBoard;
         GameBoard _board;
         
-        std::unique_ptr< BoardObject > _currenctObject;
+        std::unique_ptr<BoardObject> _currenctObject;
         Position _currentPosition;
 
         void ChoosePiece();
@@ -125,6 +125,7 @@ class GameManager : public Script
         void ClearLine();
         void UpdateScore(int linesCleared);
         void ClearScreen();
+        void ResetGame();
         void GameLoop();
 
     public:
