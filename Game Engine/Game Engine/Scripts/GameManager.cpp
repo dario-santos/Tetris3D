@@ -258,7 +258,7 @@ void GameManager::UpdateScore(int linesCleared)
   this->linesCleared += linesCleared;
   this->score += linesCleared > 1 ? ((100*linesCleared) + ((linesCleared * 100) / 2)) : 100 * linesCleared;
 
-  this->delayTime = 1.0f - (this->linesCleared / 3) / 10.f;
+  this->delayTime = 1.0f - (this->linesCleared / 20) / 10.f;
 
 
   // Play sound effect
@@ -289,7 +289,7 @@ void GameManager::GameLoop()
         ChoosePiece();
         _generateNewObject = false;
     }
-
+     
      ManageInput();
 
     if (Time::GetTime() > delayTime + startCycleTime)
@@ -352,7 +352,7 @@ void GameManager::Update()
 
   ClearScreen();
   cout << "Score: " << this->score << endl;
-  cout << "Level: " << this->linesCleared/3 << endl;
+  cout << "Level: " << this->linesCleared/20 << endl;
   cout << "Cleared Lines: " << this->linesCleared<< endl;
   cout << "Delay Time: " << this->delayTime << endl;
 }

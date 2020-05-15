@@ -104,12 +104,12 @@ int main(void)
   // Loads the scene and sets it as the active one
   Scene* scene = new Scene();
   // Single Player camera
-  //scene->AddCamera(new Perspective(45.0f, 4/3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
+  scene->AddCamera(new Perspective(45.0f, 4/3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
   // Multiplayer camera
-  scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(125, -100, 250), vec3(125, -100, 0), vec3(0, 1, 0)));
+  //scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(125, -100, 250), vec3(125, -100, 0), vec3(0, 1, 0)));
 
   Scene::LoadScene(scene);
-  loadLevelMultiplayer(scene);
+  loadLevelSingleplayer(scene);
 
   // render scene for each frame
   do
