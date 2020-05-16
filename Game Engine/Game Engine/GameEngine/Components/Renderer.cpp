@@ -1,9 +1,10 @@
 ﻿#include "Renderer.hpp"
 
-Renderer::Renderer(IPrimitive *primitive, GLuint shaderId)
+Renderer::Renderer(IPrimitive *primitive, GLuint shaderId , bool hasShading)
 {
   this->primitive = primitive;
   this->shaderId = shaderId;
+  this->hasShading = hasShading;
 }
 
 Renderer::~Renderer()
@@ -13,7 +14,10 @@ Renderer::~Renderer()
 
 void Renderer::Draw(mat4 model, mat4 view, mat4 projection)
 {
-  this->primitive->Draw(this->shaderId, model, view, projection);
+  if(hasShading)
+    this->primitive->DrawShading(this->shaderId, model, view, projection);
+  else
+    this->primitive->Draw(this->shaderId, model, view, projection);
 }
 
 void Renderer::UpdateShader(GLuint shaderId)

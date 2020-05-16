@@ -34,7 +34,7 @@ class Brick
     {
       //Sets the primitive of the gameObject, a square
       IPrimitive *p = new Cube(color);
-      GameObject *go = new GameObject(t, new Renderer(p, programID), "Brick");
+      GameObject *go = new GameObject(t, new Renderer(p, programID, false), "Brick");
 
       return go;
     }

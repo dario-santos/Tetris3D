@@ -162,6 +162,7 @@ void GameManager::Transformation(bool isClockWise)
     }
 
     _currenctObject->Draw(_board, graphicBoard, _currentPosition, this->piece, this->boardCenter);
+    tmpObject.release();
 }
 
 void GameManager::MoveObjectLeft()
@@ -182,7 +183,7 @@ void GameManager::MoveObjectRight()
 
 void GameManager::MoveObjectDown()
 {
-    const bool createNewObjectIfFailed = true;
+    bool createNewObjectIfFailed = true;
     Position newPosition = _currentPosition;
     newPosition.GoDown();
     if(UpdatePosition(newPosition, createNewObjectIfFailed))
@@ -191,7 +192,7 @@ void GameManager::MoveObjectDown()
 
 void GameManager::MoveObjectHardDrop()
 {
-  const bool createNewObjectIfFailed = true;
+  bool createNewObjectIfFailed = true;
   Position newPosition = _currentPosition;
   
   while(true)
@@ -263,11 +264,13 @@ void GameManager::CopyLineToOtherBoard(int dstIndex, int srcIndex, GameBoard& ds
 
 void GameManager::CopyLineToOtherBoard(int dstIndex, int srcIndex, vector<vector<GameObject*>>& dstBoard, vector<vector<GameObject*>>& srcBoard)
 {
+  vec3 translate;
+
   for (size_t j = 0; j < dstBoard[dstIndex].size(); j++) 
   {
     if (srcBoard[srcIndex][j] != nullptr && dstIndex != srcIndex)
     {
-      vec3 translate = vec3(0, -abs(dstIndex - srcIndex), 0.0f);
+      translate = vec3(0, -abs(dstIndex - srcIndex), 0.0f);
       srcBoard[srcIndex][j]->GetTransform()->Translate(translate);
     } 
     dstBoard[dstIndex][j] = srcBoard[srcIndex][j];
@@ -276,11 +279,11 @@ void GameManager::CopyLineToOtherBoard(int dstIndex, int srcIndex, vector<vector
 
 void GameManager::ClearLine()
 {
-    std::set< int > linesToRemove;
+    set<int> linesToRemove;
 
     DetectLinesToRemove(linesToRemove);
 
-    if (linesToRemove.empty())
+    if(linesToRemove.empty())
         return;
 
     this->UpdateScore(linesToRemove.size());
@@ -291,10 +294,11 @@ void GameManager::ClearLine()
 
     for (int i : linesToRemove)
     {
-      for (GameObject* g : graphicBoard[i])
-        g->Destroy();
       for (int j = 0; j < graphicBoard[i].size(); j++)
+      {
+        graphicBoard[i][j]->Destroy();
         graphicBoard[i][j] = nullptr;
+      }
     }
 
     int j = tmpGraphicBoard.size() - 1;
@@ -358,7 +362,7 @@ void GameManager::UpdateScore(int linesCleared)
 
 void GameManager::GameLoop()
 {
-    const bool createNewObjectIfFailed = true;
+    bool createNewObjectIfFailed = true;
 
     if(_generateNewObject)
     {

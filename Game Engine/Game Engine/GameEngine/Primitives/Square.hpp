@@ -55,6 +55,7 @@ public:
    * \param mvp The Model-View-Projection matrix
    */
   void Draw(GLuint shaderId, mat4 model, mat4 view, mat4 projection);
+  void DrawShading(GLuint shaderId, mat4 model, mat4 view, mat4 projection);
 
   /**
    * UpdateColor

@@ -60,6 +60,7 @@ public:
     *  transform: The transform that will be used to perform translations, rotations and scales.
     */
     void Draw(GLuint shaderId, mat4 model, mat4 view, mat4 projection);
+    void DrawShading(GLuint shaderId, mat4 model, mat4 view, mat4 projection);
 
     /*
      * Function: UpdateColor

@@ -97,7 +97,7 @@ int main(void)
   Cube::Init();
   Config::LoadConfig("./config.cfg");
 
-  AudioDevice *theme = new AudioDevice(75);
+  AudioDevice *theme = new AudioDevice(100);
   theme->Play2D("audio/Theme_A.mp3", GL_TRUE);
 
   // Loads the scene and sets it as the active one
@@ -163,7 +163,7 @@ void loadLevelSingleplayer(Scene* scene)
     new Transform(vec3(45, -195, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(100.0f, 1.0f, 10.0f)), vec3(125, 200, 10), phongShader));
 
   scene->AddGameObject(Brick::AddBrick(
-    new Transform(vec3(95, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(75, 200, 10), phongShader));
+    new Transform(vec3(95, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(75, 200, 10), opaqueShader));
 
   scene->AddGameObject(Brick::AddBrick(
     new Transform(vec3(-5, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(20, 200, 10), phongShader));
@@ -184,7 +184,7 @@ void loadLevelMultiplayer(Scene* scene)
 
   GameObject* p2 = new GameObject(
     new Transform(vec3(-200, -200, -200), vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f)), nullptr, "GameManager");
-  p2->AddScript(new GameManager(phongShader, 150, Gamepad::Gamepad2));
+  p2->AddScript(new GameManager(transparencyShader, 150, Gamepad::Gamepad2));
 
   scene->AddGameObject(p2);
 

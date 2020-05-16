@@ -25,6 +25,8 @@ class Renderer
     GLuint shaderId;
     // The primitive of the renderer: ex.: triangle, square, circle, etc.
     IPrimitive *primitive;
+    // Does this objet has shading?
+    bool hasShading;
 
   public:
     /*
@@ -35,7 +37,7 @@ class Renderer
     *  primitive: The renderer primitive;
     *  shaderId: The shader id.
     */
-    Renderer(IPrimitive *primitive, GLuint shaderId);
+    Renderer(IPrimitive *primitive, GLuint shaderId, bool hasShading = true);
     
     /*
     * Function: ~Renderer
