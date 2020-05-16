@@ -23,14 +23,16 @@ using namespace glm;
 class Square : public IPrimitive
 {
 private:
+  /** The Square VAO */
+  static GLuint squareVAO;
 	/** The vertex buffer, contains the (x,y,z) points of the square */
 	static std::vector<GLfloat> verticeBuffer;
 	/** The id of the vertex buffer array */
 	static GLuint verticeBufferId;
 	/** The color buffer, contains the color of each point of the square */
 	std::vector<GLfloat> verticeColor = std::vector<GLfloat>(18);
-	/** The id of the color buffer array */
-	GLuint verticeColorId;
+	/** The RGB color of the object*/
+	vec3 color;
 
 public:
   /**
@@ -39,12 +41,6 @@ public:
    * \param color The rgb color
    */
   Square(vec3 color);
-
-  /**
-   * ~Square
-   *
-   */
-  ~Square();
 
   /**
    * Init
@@ -58,7 +54,7 @@ public:
    * \param shaderId The shader id that will be used
    * \param mvp The Model-View-Projection matrix
    */
-  void Draw(GLuint shaderId, mat4 mvp);
+  void Draw(GLuint shaderId, mat4 model, mat4 view, mat4 projection);
 
   /**
    * UpdateColor

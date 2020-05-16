@@ -57,9 +57,6 @@
     <ClCompile Include="GameEngine\Model\ModelLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngine\Primitives\Circle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameEngine\Primitives\Cube.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -164,9 +161,6 @@
     <ClInclude Include="GameEngine\Model\ModelLoader.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngine\Primitives\Circle.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameEngine\Primitives\Cube.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -269,5 +263,7 @@
     <None Include="Shaders\TransparencyShader.vert">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="Shaders\PhongShader.vert" />
+    <None Include="Shaders\PhongShader.frag" />
   </ItemGroup>
 </Project>

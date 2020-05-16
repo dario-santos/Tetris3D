@@ -172,7 +172,6 @@
     <ClCompile Include="GameEngine\Components\Transform.cpp" />
     <ClCompile Include="GameEngine\Input\Input.cpp" />
     <ClCompile Include="GameEngine\Model\ModelLoader.cpp" />
-    <ClCompile Include="GameEngine\Primitives\Circle.cpp" />
     <ClCompile Include="GameEngine\Primitives\Cube.cpp" />
     <ClCompile Include="GameEngine\Primitives\Square.cpp" />
     <ClCompile Include="GameEngine\Scene.cpp" />
@@ -209,7 +208,6 @@
     <ClInclude Include="GameEngine\Components\Transform.hpp" />
     <ClInclude Include="GameEngine\Input\Input.hpp" />
     <ClInclude Include="GameEngine\Model\ModelLoader.hpp" />
-    <ClInclude Include="GameEngine\Primitives\Circle.hpp" />
     <ClInclude Include="GameEngine\Primitives\Cube.hpp" />
     <ClInclude Include="GameEngine\Primitives\IPrimitive.hpp" />
     <ClInclude Include="GameEngine\Primitives\Square.hpp" />
@@ -238,6 +236,8 @@
     <None Include="config.cfg" />
     <None Include="Shaders\OpaqueShader.frag" />
     <None Include="Shaders\OpaqueShader.vert" />
+    <None Include="Shaders\PhongShader.frag" />
+    <None Include="Shaders\PhongShader.vert" />
     <None Include="Shaders\TransparencyShader.frag" />
     <None Include="Shaders\TransparencyShader.vert" />
   </ItemGroup>

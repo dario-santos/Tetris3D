@@ -95,6 +95,8 @@ class GameManager : public Script
         int linesCleared = 0;
         Gamepad gamepad;
         int lastPiece = -1;
+        
+        // Movement
         int movementAmmount = 0;
         bool isHardDropKeyPressed = false;
         bool isRotationKeyPressed = false;

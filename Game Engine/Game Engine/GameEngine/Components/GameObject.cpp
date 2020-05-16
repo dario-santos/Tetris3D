@@ -23,7 +23,7 @@ void GameObject::Draw(mat4 view, mat4 projection)
   // this allows to have game objects that are not drawn.
   // An exempla is a death zone that works solely as a trigger collider.
   if(renderer != nullptr)
-    this->renderer->Draw(projection * view * this->transform->model);
+    this->renderer->Draw(this->transform->model, view, projection);
 }
 
 bool GameObject::IsEnabled()

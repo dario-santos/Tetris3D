@@ -9,7 +9,6 @@ using namespace glm;
 #include "./GameEngine/Components/GameObject.hpp"
 #include "./GameEngine/Components/Transform.hpp"
 #include "./GameEngine/Primitives/Square.hpp"
-#include "./GameEngine/Primitives/Circle.hpp"
 #include "./GameEngine/Primitives/Cube.hpp"
 
 #include "./GameEngine/Camera/Orthographic.hpp"
@@ -43,6 +42,7 @@ using namespace glm;
 // Shaders
 GLuint transparencyShader;
 GLuint opaqueShader;
+GLuint phongShader;
 
 int main(void)
 {
@@ -94,12 +94,11 @@ int main(void)
   
   // Initializations and configurations
   Square::Init();
-  Circle::Init();
   Cube::Init();
   Config::LoadConfig("./config.cfg");
 
   AudioDevice *theme = new AudioDevice(75);
-  theme->Play2D("audio/Theme_B.mp3", GL_TRUE);
+  theme->Play2D("audio/Theme_A.mp3", GL_TRUE);
 
   // Loads the scene and sets it as the active one
   Scene* scene = new Scene();
@@ -139,6 +138,7 @@ int main(void)
   // Frees the shaders
   glDeleteProgram(transparencyShader);
   glDeleteProgram(opaqueShader);
+  glDeleteProgram(phongShader);
 
   // Close OpenGL window and terminate GLFW
   glfwTerminate();
@@ -150,22 +150,23 @@ void loadLevelSingleplayer(Scene* scene)
   // Load Vertex and Fragments shaders
   transparencyShader = LoadShaders("./Shaders/TransparencyShader.vert", "./Shaders/TransparencyShader.frag");
   opaqueShader = LoadShaders("./Shaders/OpaqueShader.vert", "./Shaders/OpaqueShader.frag");
+  phongShader = LoadShaders("./Shaders/PhongShader.vert", "./Shaders/PhongShader.frag");
 
   GameObject* go = new GameObject(
     new Transform(vec3(-200, -200, -200), vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f)), nullptr, "GameManager");
-  go->AddScript(new GameManager(opaqueShader, 0, Gamepad::Gamepad1));
+  go->AddScript(new GameManager(phongShader, 0, Gamepad::Gamepad1));
 
   scene->AddGameObject(go);
 
   // Tabuleiro
   scene->AddGameObject(Brick::AddBrick(
-    new Transform(vec3(45, -195, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(100.0f, 1.0f, 10.0f)), vec3(125, 200, 10), opaqueShader));
+    new Transform(vec3(45, -195, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(100.0f, 1.0f, 10.0f)), vec3(125, 200, 10), phongShader));
 
   scene->AddGameObject(Brick::AddBrick(
-    new Transform(vec3(95, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(75, 200, 10), opaqueShader));
+    new Transform(vec3(95, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(75, 200, 10), phongShader));
 
   scene->AddGameObject(Brick::AddBrick(
-    new Transform(vec3(-5, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(20, 200, 10), opaqueShader));
+    new Transform(vec3(-5, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(20, 200, 10), phongShader));
 }
 
 void loadLevelMultiplayer(Scene* scene)
@@ -173,28 +174,29 @@ void loadLevelMultiplayer(Scene* scene)
   // Load Vertex and Fragments shaders
   transparencyShader = LoadShaders("./Shaders/TransparencyShader.vert", "./Shaders/TransparencyShader.frag");
   opaqueShader = LoadShaders("./Shaders/OpaqueShader.vert", "./Shaders/OpaqueShader.frag");
+  phongShader = LoadShaders("./Shaders/PhongShader.vert", "./Shaders/PhongShader.frag");
 
   GameObject* p1 = new GameObject(
     new Transform(vec3(-200, -200, -200), vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f)), nullptr, "GameManager");
-  p1->AddScript(new GameManager(opaqueShader, 0, Gamepad::Gamepad1));
+  p1->AddScript(new GameManager(phongShader, 0, Gamepad::Gamepad1));
 
   scene->AddGameObject(p1);
 
   GameObject* p2 = new GameObject(
     new Transform(vec3(-200, -200, -200), vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f)), nullptr, "GameManager");
-  p2->AddScript(new GameManager(opaqueShader, 150, Gamepad::Gamepad2));
+  p2->AddScript(new GameManager(phongShader, 150, Gamepad::Gamepad2));
 
   scene->AddGameObject(p2);
 
   // Tabuleiro P1
   scene->AddGameObject(Brick::AddBrick(
-    new Transform(vec3(45, -195, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(100.0f, 1.0f, 10.0f)), vec3(125, 200, 10), opaqueShader));
+    new Transform(vec3(45, -195, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(100.0f, 1.0f, 10.0f)), vec3(125, 200, 10), phongShader));
 
   scene->AddGameObject(Brick::AddBrick(
-    new Transform(vec3(95, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(75, 200, 10), opaqueShader));
+    new Transform(vec3(95, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(75, 200, 10), phongShader));
 
   scene->AddGameObject(Brick::AddBrick(
-    new Transform(vec3(-5, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(20, 200, 10), opaqueShader));
+    new Transform(vec3(-5, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(20, 200, 10), phongShader));
 
   // Tabuleiro P2
   scene->AddGameObject(Brick::AddBrick(

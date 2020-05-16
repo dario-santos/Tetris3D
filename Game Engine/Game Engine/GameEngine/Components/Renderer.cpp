@@ -11,9 +11,9 @@ Renderer::~Renderer()
   this->primitive->~IPrimitive();
 }
 
-void Renderer::Draw(mat4 mvp)
+void Renderer::Draw(mat4 model, mat4 view, mat4 projection)
 {
-  this->primitive->Draw(this->shaderId, mvp);
+  this->primitive->Draw(this->shaderId, model, view, projection);
 }
 
 void Renderer::UpdateShader(GLuint shaderId)
