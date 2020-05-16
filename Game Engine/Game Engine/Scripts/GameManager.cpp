@@ -21,7 +21,7 @@ GameManager::GameManager(GLuint shaderId, float boardCenter, Gamepad gamepad) :
   this->shaderId    = shaderId;
   this->boardCenter = boardCenter;
   this->gamepad     = gamepad;
-  beep.reset(new AudioDevice(50));
+  beep.reset(new AudioDevice(100));
 
   // Set random sequence
   srand((unsigned)time(0));
@@ -90,27 +90,50 @@ void GameManager::ManageInput()
 {
   string player = std::to_string((static_cast<int>(gamepad)));
 
-  if (Time::GetTime() > inputDelayTime + startInputCycleTime)
+  // Movement
+  if(Time::GetTime() > inputDelayTime + startInputCycleTime)
   {
     startInputCycleTime = Time::GetTime();
-    if (Input::GetKey("Right" + player) || Input::GetButton(ButtonCode::DPAD_RIGHT, gamepad))
+    
+    if(Input::GetKey("Right" + player) || Input::GetButton(ButtonCode::DPAD_RIGHT, gamepad))
+    {
       MoveObjectRight();
+      movementAmmount++;
+    }
     else if (Input::GetKey("Left" + player) || Input::GetButton(ButtonCode::DPAD_LEFT, gamepad))
+    {
       MoveObjectLeft();
-
+      movementAmmount++;
+    }
     if(Input::GetKey("Drop" + player) || Input::GetButton(ButtonCode::DPAD_DOWN, gamepad))
     {
       MoveObjectDown();
+      movementAmmount++;
       startCycleTime = Time::GetTime();
     }
+
+    if (!Input::GetKey("Right" + player) && !Input::GetButton(ButtonCode::DPAD_RIGHT, gamepad)
+     && !Input::GetKey("Left" + player) && !Input::GetButton(ButtonCode::DPAD_LEFT, gamepad)
+     && !Input::GetKey("Drop" + player) && !Input::GetButton(ButtonCode::DPAD_DOWN, gamepad))
+      movementAmmount = 0;
+
+    // Update DAS status
+    if (movementAmmount == 0)
+      inputDelayTime = 0.0f;
+    else if (movementAmmount == 1)
+      inputDelayTime = 0.28f;
+    else
+      inputDelayTime = 0.08f;
   }
+
+  // HardDrop
   if ((Input::GetKey("HardDrop" + player) || Input::GetButton(ButtonCode::DPAD_UP, gamepad)) && !isHardDropKeyPressed)
   {
     isHardDropKeyPressed = true;
     MoveObjectHardDrop();
   }
 
-
+  // Rotations
   if((Input::GetKey("RotateR" + player) || Input::GetButton(ButtonCode::A, gamepad)) && !isRotationKeyPressed)
   {
     isRotationKeyPressed = true;
@@ -171,10 +194,9 @@ void GameManager::MoveObjectHardDrop()
   const bool createNewObjectIfFailed = true;
   Position newPosition = _currentPosition;
   
-  while (true)
+  while(true)
   {
-    const bool createNewObjectIfFailed = true;
-    Position newPosition = _currentPosition;
+    newPosition = _currentPosition;
     newPosition.GoDown();
     if (UpdatePosition(newPosition, createNewObjectIfFailed))
     {
@@ -370,6 +392,7 @@ void GameManager::ResetGame()
 
   this->_generateNewObject = true;
 
+  this->inputDelayTime = 0.28f;
   this->delayTime = 1.0f;
   this->startCycleTime = Time::GetTime();
   this->startInputCycleTime = Time::GetTime();
@@ -405,7 +428,7 @@ void GameManager::Update()
 {
   GameLoop();
 
-  ClearScreen();
+  //ClearScreen();
   cout << "Score: " << this->score << endl;
   cout << "Level: " << this->linesCleared/20 << endl;
   cout << "Cleared Lines: " << this->linesCleared<< endl;

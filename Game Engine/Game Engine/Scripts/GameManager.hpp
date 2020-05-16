@@ -95,12 +95,13 @@ class GameManager : public Script
         int linesCleared = 0;
         Gamepad gamepad;
         int lastPiece = -1;
+        int movementAmmount = 0;
         bool isHardDropKeyPressed = false;
         bool isRotationKeyPressed = false;
         bool _generateNewObject = true;
 
         // In seconds
-        float inputDelayTime = 0.1f;
+        float inputDelayTime = 0.28f;
         float startInputCycleTime = Time::GetTime();
         float delayTime = 1;
         float startCycleTime = Time::GetTime();

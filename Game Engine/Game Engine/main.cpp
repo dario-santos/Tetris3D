@@ -58,7 +58,7 @@ int main(void)
   // Creates the window
   vec2 dimensions = vec2(800, 600);
   Window::SetDimensions(dimensions);
-  GLFWwindow *window = glfwCreateWindow((int)dimensions.x, (int)dimensions.y, "Breakout With Sound", NULL, NULL);
+  GLFWwindow *window = glfwCreateWindow((int)dimensions.x, (int)dimensions.y, "Tetris", NULL, NULL);
 
   // Create window context
   glfwMakeContextCurrent(window);
@@ -98,8 +98,8 @@ int main(void)
   Cube::Init();
   Config::LoadConfig("./config.cfg");
 
-  AudioDevice *theme = new AudioDevice(30);
-  theme->Play2D("audio/Theme_A.mp3", GL_TRUE);
+  AudioDevice *theme = new AudioDevice(75);
+  theme->Play2D("audio/Theme_B.mp3", GL_TRUE);
 
   // Loads the scene and sets it as the active one
   Scene* scene = new Scene();
