@@ -11,10 +11,28 @@ AudioDevice::AudioDevice(short volume)
   this->soundDevice->setSoundVolume(volume / 100.0f);
 }
 
-void AudioDevice::Play2D(const char* path, GLboolean loop)
+AudioDevice::~AudioDevice() 
+{
+  if (this->soundDevice != nullptr)
+  {
+    delete this->soundDevice;
+    soundDevice = nullptr;
+  }
+}
+
+void AudioDevice::Play2D(const char* clipPath, GLboolean loop)
+{
+  this->soundDevice->play2D(clipPath, loop);
+}
+
+void AudioDevice::Play3D(const char* clipPath, glm::vec3 position, GLboolean loop)
+{
+  this->soundDevice->play3D(clipPath, irrklang::vec3df(position.x, position.y, position.z), loop);
+}
+
+void AudioDevice::Stop()
 {
   this->soundDevice->stopAllSounds();
-  this->soundDevice->play2D(path, loop);
 }
 
 void AudioDevice::SetVolume(short volume)

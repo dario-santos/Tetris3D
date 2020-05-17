@@ -9,7 +9,11 @@ Renderer::Renderer(IPrimitive *primitive, GLuint shaderId , bool hasShading)
 
 Renderer::~Renderer()
 {
-  this->primitive->~IPrimitive();
+  if (primitive != nullptr)
+  {
+    delete primitive;
+    primitive = nullptr;
+  }
 }
 
 void Renderer::Draw(mat4 model, mat4 view, mat4 projection)

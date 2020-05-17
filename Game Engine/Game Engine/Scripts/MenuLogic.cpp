@@ -14,8 +14,6 @@ MenuLogic::MenuLogic(Canvas* canvas)
 bool MenuLogic::isKeyHeld = false;
 bool MenuLogic::isInvokeKey = false;
 
-#include <iostream>
-
 void MenuLogic::Update()
 {
     if (canvas == nullptr || !canvas->IsEnabled()) 
@@ -56,6 +54,6 @@ void MenuLogic::Update()
     }
     
     MenuLogic::isKeyHeld = !(Input::GetKeyUp(KeyCode::DownArrow) && Input::GetKeyUp(KeyCode::UpArrow)
-                          && Input::GetButtonUp(ButtonCode::DPAD_DOWN) && Input::GetButtonUp(ButtonCode::DPAD_UP));
-    MenuLogic::isInvokeKey = !(Input::GetKeyUp(KeyCode::M) && Input::GetButtonUp(ButtonCode::A));
+                          && !Input::GetButton(ButtonCode::DPAD_DOWN) && !Input::GetButton(ButtonCode::DPAD_UP));
+    MenuLogic::isInvokeKey = !(Input::GetKeyUp(KeyCode::M) && !Input::GetButton(ButtonCode::A));
 }

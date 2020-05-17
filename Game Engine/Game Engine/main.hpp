@@ -8,9 +8,12 @@
  */
 #pragma once
 
-void loadLevelOptionMenu(Scene* scene);
+#include <memory>
+using namespace std;
 
-void loadLevelMainMenu(Scene* scene);
+void loadLevelOptionMenu(unique_ptr<Scene>& scene);
+
+void loadLevelMainMenu(unique_ptr<Scene>& scene);
 
 /*
  * Function: loadGameObjects
@@ -19,7 +22,7 @@ void loadLevelMainMenu(Scene* scene);
  *   
  *   scene: The scene that the objects will get loaded into;
  */
-void loadLevelSingleplayer(Scene *scene);
+void loadLevelSingleplayer(unique_ptr<Scene>& scene);
 
 /*
  * Function: loadGameObjects
@@ -28,7 +31,7 @@ void loadLevelSingleplayer(Scene *scene);
  *
  *   scene: The scene that the objects will get loaded into;
  */
-void loadLevelMultiplayer(Scene *scene);
+void loadLevelMultiplayer(unique_ptr<Scene>& scene);
 
 /*
  * Function: lifeCycle
@@ -37,4 +40,4 @@ void loadLevelMultiplayer(Scene *scene);
  *   
  *   scene: The current scene;
  */
-void lifeCycle(Scene *scene);
+void lifeCycle(unique_ptr<Scene>& scene);

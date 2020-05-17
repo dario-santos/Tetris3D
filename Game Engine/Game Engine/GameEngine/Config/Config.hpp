@@ -22,8 +22,8 @@ using namespace std;
 class Config
 {
 private:
-  Config();
-  ~Config();
+  Config() = default;
+  ~Config() = default;
 
 public:
   /** Map from section to (key, value) */

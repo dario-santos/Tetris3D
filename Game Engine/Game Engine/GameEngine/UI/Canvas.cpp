@@ -1,17 +1,20 @@
 #include "Canvas.hpp"
 
-
 Canvas::~Canvas()
 {
-    for (Button* b: buttons)
-        b->~Button();
+  for (Button* b : buttons)
+  {
+    delete b;
+    b = nullptr;
+  }
     
-    for (Sprite* s : sprites)
-        s->~Sprite();
-    
-    buttons.erase(buttons.begin(), buttons.end());
-    sprites.erase(sprites.begin(), sprites.end());
-
+  for (Sprite* s : sprites)
+  {
+    delete s;
+    s = nullptr;
+  }
+  buttons.clear();
+  sprites.clear();
 }
 
 void Canvas::AddButton(Button* b)

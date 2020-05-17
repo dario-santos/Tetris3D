@@ -1,24 +1,28 @@
 #pragma once
-#include <vector>
 
-#include "Sprite.hpp"
+#include <vector>
+using namespace std;
+
+#include "./Sprite.hpp"
+
 #include "../Components/Transform.hpp"
 #include "../Components/Renderer.hpp"
 
-using namespace std;
-
-
 class Button
 {
-
 	private:
-		Renderer* render;
-		Transform* t;
-		void (*func)(void);
+		Renderer* renderer;
+		Transform* transform;
+		void (*funcEvent)(void);
 
 	public:
-		Button(Renderer* render, Transform* t, void (*func)(void));
+		Button(Renderer* renderer, Transform* transform, void (*funcEvent)(void));
+
+		~Button();
+
 		void OnClick();
+
 		Renderer* GetRenderer();
+
 		Transform* GetTransform();
 };

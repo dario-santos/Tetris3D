@@ -12,3 +12,12 @@ void Sprite::UpdateTexture(texture2d texture)
 	this->texture = texture;
 }
 */
+
+Sprite::~Sprite() 
+{
+	if(transform != nullptr)
+	{
+		delete transform;
+		transform = nullptr;
+	}
+}

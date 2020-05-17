@@ -1,69 +1,72 @@
-/**
- * @file Renderer.hpp
+/*********************************************************************
+ * \file   Renderer.hpp
+ * \brief  Renderer class, defines how a game object is drawn.
  *
- * @brief Renderer class, defines how a game object is drawn.
- *
- * @author Dário Santos
- * Contact: dariovfsantos@gmail.com
- */
+ * \author Dário Santos
+ * \date   May 2020
+***********************************************************************/
 #pragma once
 
 #include <glm/glm.hpp>
 using namespace glm;
 
 #include "./Transform.hpp"
+
 #include "../Primitives/IPrimitive.hpp"
 
-/*
- * Class: Renderer
- * --------------------------------
+/**
+ * Renderer.
  */
 class Renderer
 {
   private:
-    // The shader id
+    /** The shader id */
     GLuint shaderId;
-    // The primitive of the renderer: ex.: triangle, square, circle, etc.
+    /** The primitive of the renderer: ex.: triangle, square, circle, etc. */
     IPrimitive *primitive;
-    // Does this objet has shading?
+    /** Does this renderer has shading? */
     bool hasShading;
 
   public:
-    /*
-    * Function: Renderer
-    * --------------------------------
-    *  Renderer constructor
-    *  
-    *  primitive: The renderer primitive;
-    *  shaderId: The shader id.
-    */
+    /**
+     * Renderer.
+     * 
+     * \param primitive The renderer primitive
+     * \param shaderId The shader id
+     * \param hasShading If the renderer is affected by shading
+     */
     Renderer(IPrimitive *primitive, GLuint shaderId, bool hasShading = true);
     
-    /*
-    * Function: ~Renderer
-    * --------------------------------
-    *  Renderer Desctructor
-    */
+    /**
+     * ~Renderer.
+     * 
+     * Renderer desctructir
+     * 
+     */
     ~Renderer();
 
-    /*
-    * Function: Draw
-    * --------------------------------
-    *  The function draw is called every frame and 
-    *    its responsible for drawing the game object.
-    * 
-    *  transform: The transform that will be used in the draw,
-    *   decides the position, scale and rotation of the object.
-    */
+    /**
+     * Draw.
+     * 
+     * \param model The model matrix
+     * \param view The view matrix
+     * \param projection The projection matrix
+     */
     void Draw(mat4 model, mat4 view, mat4 projection);
 
-    /*
-    * Function: UpdateShader
-    * --------------------------------
-    *  Updates the shader that is being used by this renderer.
-    *  This function is used to change the shader of the renderer.
-    */
+    /**
+     * UpdateShader.
+     * 
+     * Updates the shader that is being used by this renderer.
+     * 
+     * \param shaderId The new shaderId
+     */
     void UpdateShader(GLuint shaderId);
 
+    /**
+     * GetIPrimitive.
+     * 
+     * \return The primitive of this renderer
+     */
     IPrimitive* GetIPrimitive();
 };

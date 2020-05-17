@@ -84,9 +84,6 @@
     <ClCompile Include="GameEngine\Config\Config.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngine\Components\Component.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Scripts\GameManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -204,9 +201,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\Config\Config.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameEngine\Components\Component.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Scripts\GameManager.hpp">

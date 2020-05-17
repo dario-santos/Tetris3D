@@ -1,27 +1,50 @@
 #include "GameObject.hpp"
 
-GameObject::GameObject(Transform *transform, Renderer *renderer, string tag)
+GameObject::GameObject(Transform* transform, Renderer* renderer, string tag)
 {
   this->transform = transform;
   this->renderer = renderer;
   this->tag = tag;
 }
 
-void GameObject::AddScript(Script *script)
+GameObject::~GameObject() 
+{
+  // Deletes Renderer
+  if(renderer != nullptr)
+  {
+    delete this->renderer;
+    this->renderer = nullptr;
+  }
+  // Delete Transform
+  if(transform != nullptr)
+  {
+    delete this->transform;
+    this->renderer = nullptr;
+  }
+  // Delete scripts
+  for (Script* s : this->scripts)
+  {
+    delete s;
+    s = nullptr;
+  }
+  scripts.clear;
+}
+
+void GameObject::AddScript(Script* script)
 {
   this->scripts.push_back(script);
 }
 
-list<Script *> GameObject::GetScripts()
+list<Script*> GameObject::GetScripts()
 {
   return this->scripts;
 }
 
 void GameObject::Draw(mat4 view, mat4 projection)
 {
-  // If there is a renderer draw the object
+  // If there is a renderer then draw the object
   // this allows to have game objects that are not drawn.
-  // An exempla is a death zone that works solely as a trigger collider.
+  // An exemple is a death zone that works solely as a trigger collider.
   if(renderer != nullptr)
     this->renderer->Draw(this->transform->model, view, projection);
 }

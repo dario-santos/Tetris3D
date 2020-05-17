@@ -1,12 +1,10 @@
-/**
- * @file GameObject.hpp
+/*********************************************************************
+ * \file   GameObject.hpp
+ * \brief  GameObject class, in the game world every object is a game object.
  *
- * @brief GameObject class, used by all prefabs,
- *   all objects are game objects.
- *
- * @author Dário Santos
- * Contact: dariovfsantos@gmail.com
- */
+ * \author Dário Santos
+ * \date   May 2020
+***********************************************************************/
 #pragma once
 
 #include <GL/glew.h>
@@ -19,119 +17,118 @@ using namespace std;
 #include "Script.hpp"
 #include "Renderer.hpp"
 
-/*
- * Class: GameObject
- * --------------------------------
+/**
+ * GameObject.
  */
 class GameObject
 {
   private:
-    // The transform of the game object
-    Transform *transform;
-    // The renderer of the game object
-    Renderer *renderer;
-    // The tag of the game object, its name
+    /** The transform of the game object*/
+    Transform* transform;
+    /** The renderer of the game object */
+    Renderer* renderer;
+    /** The list of scripts that this game object contains */
+    list<Script*> scripts;
+    /** The name of the game object */
     string tag;
-    // if is active
+    /** Informs the game engine if the game object is enabled or disabled, a disabled game object is not drawn */
     bool isEnabled  = true;
-    // if it can be destroyed by the garbage collector
+    /** Informs the game engine that this game object will be destroyed in the next frame */
     bool canDestroy = false;
-    // The list of scripts
-    list<Script *> scripts;
 
   public:
-    /*
-    * Function: GameObject
-    * --------------------------------
-    *  GameObject constructor
-    *  
-    *  transform: The transform of the game object;
-    *  renderer: The renderer of the game object.
-    *  tag :The tag of the game object, its name
-    */
-    GameObject(Transform *transform, Renderer *renderer, string tag);
+    /**
+     * GameObject constructor.
+     * 
+     * \param transform The transform of the game object
+     * \param renderer The renderer of the game object
+     * \param tag The tag of the game object, its name
+     */
+    GameObject(Transform* transform, Renderer* renderer, string tag);
     
-    /*
-    * Function: AddScript
-    * --------------------------------
-    *  Adds a script to the script list.
-    *  
-    *  script: The script that will be added.
-    */
+    /**
+     * ~GameObject.
+     * 
+     * The descructor of the GameObject class
+     * 
+     */
+    ~GameObject();
+    
+    /**
+     * AddScript.
+     *
+     * Attaches a script to this game object
+     * 
+     * \param script The script that will be attached
+     */
     void AddScript(Script *script);
 
-    /*
-    * Function: GetScripts
-    * --------------------------------
-    *  Returns the script list
-    *  
-    *  return: The script list.
-    */
-    list<Script *> GetScripts();
+    /**
+     * GetScripts.
+     * 
+     * \return list of scripts attached to this game object.
+     */
+    list<Script*> GetScripts();
 
-    /*
-    * Function: Draw
-    * --------------------------------
-    *  The function draw is called every frame and 
-    *    its responsible for drawing the game object.
-    */
+    /**
+     * Draw.
+     * 
+     * Draws this game object to the scene using the given values of view and projection
+     * 
+     * \param view The view matrix
+     * \param projection The projection matrix
+     */
     void Draw(mat4 view, mat4 projection);
     
-    /*
-    * Function: IsEnabled
-    * --------------------------------
-    *  Returns the status of the game object.
-    * 
-    *  return: true if is enabled, false otherwise.
-    */
+    /**
+     * IsEnabled.
+     * 
+     * \return true if is enabled, false otherwise
+     */
     bool IsEnabled();
 
-    /*
-    * Function: CanDestroy
-    * --------------------------------
-    *  Returns if the game object can be destroyed, 
-    *   is used by the garbage collector.
-    * 
-    *  return: true if is to be destroyed, false otherwise.
-    */
+    /**
+     * CanDestroy.
+     * 
+     * \return true if is to be destroyed, false otherwise.
+     */
     bool CanDestroy();
 
-    /*
-    * Function: Enable
-    * --------------------------------
-    *  Enables the game object
-    */
+    /**
+     * Enable.
+     * 
+     * Enables this game object
+     * 
+     */
     void Enable();
 
-    /*
-    * Function: Disable
-    * --------------------------------
-    *  Disables the game object
-    */
+    /**
+     * Disable.
+     * 
+     * Disables this game object
+     * 
+     */
     void Disable();
 
-    /*
-    * Function: Destroy
-    * --------------------------------
-    * Destroys the game object in the next frame.
-    */
+    /**
+     * Destroy.
+     * 
+     * Destroys this game object in the next fram
+     * 
+     */
     void Destroy();
 
-    /*
-    * Function: GetTransform
-    * --------------------------------
-    * Returns the transform of the game object.
-    * 
-    * return: the transform of the game object.
-    */
+    /**
+     * GetTransform.
+     * 
+     * \return The transform of this game object
+     */
     Transform* GetTransform();
 
-    /*
-    * Function: Tag
-    * --------------------------------
-    * Returns tag of the game object.
-    * 
-    * return: the tag of the game object.
-    */
+    /**
+     * Tag.
+     * 
+     * \return The tag of the game object
+     */
     string Tag();
 };

@@ -52,8 +52,8 @@ GLuint transparencyShader;
 GLuint opaqueShader;
 GLuint phongShader;
 
-Scene* scene = new Scene();
-AudioDevice* theme = new AudioDevice(75);
+unique_ptr<Scene> scene (new Scene());
+unique_ptr<AudioDevice> theme(new AudioDevice(75));
 
 int main(void)
 {
@@ -109,19 +109,13 @@ int main(void)
   Config::LoadConfig("./config.cfg");
 
   // Loads the scene and sets it as the active one
-  //Scene* scene = new Scene();
-  // Single Player camera
   scene->AddCamera(new Perspective(45.0f, 4/3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
-  // Multiplayer camera
-  //scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(125, -100, 250), vec3(125, -100, 0), vec3(0, 1, 0)));
-  
-
-
-  Scene::LoadScene(scene);
   
   loadLevelMainMenu(scene);
+  Scene::LoadScene(scene);
 
   theme->Play2D("audio/Theme_A.mp3", GL_TRUE);
+
   // render scene for each frame
   do
   {
@@ -157,12 +151,59 @@ int main(void)
   return 0;
 }
 
+void lifeCycle(unique_ptr<Scene>& scene)
+{
+  // Garbage Collector
+  for (GameObject* g : scene->GetGameObjects())
+    if (g->CanDestroy())
+      scene->RemoveGameObject(g);
+
+  // Collision
+  for (GameObject* g1 : scene->GetGameObjects())
+  {
+    if (!g1->IsEnabled()) continue;
+
+    for (GameObject* g2 : scene->GetGameObjects())
+    {
+      if (g1 == g2 || !g2->IsEnabled()) continue; // if it's the same object or if it's not enabled
+
+      // Center of g1
+      vec3 c1 = g1->GetTransform()->position;
+      // Radius of g1
+      vec3 r1 = g1->GetTransform()->scale * vec3(0.5f, 0.5f, 0.5f);
+
+      // Center of g2
+      vec3 c2 = g2->GetTransform()->position;
+
+      // if the distance between the centers is smaller than the x and y radius there's a collision
+      if (abs(c1.x - c2.x) < r1.x && abs(c1.y - c2.y) < r1.y && abs(c1.z - c2.z) < r1.z)
+      {
+        // Invokes the OnCollision method of the objects
+        for (Script* s : g1->GetScripts())
+          s->OnCollision(vec3(c1.x - c2.x, c1.y - c2.y, c1.y - c2.y), g2->Tag());
+
+        for (Script* s : g2->GetScripts())
+          s->OnCollision(-vec3(c1.x - c2.x, c1.y - c2.y, c1.y - c2.y), g1->Tag());
+      }
+    }
+  }
+
+  // Invokes the Update callback
+  for (GameObject* g : scene->GetGameObjects())
+    if (g->IsEnabled())
+      for (Script* s : g->GetScripts())
+        s->Update();
+
+  // Invokes the Draw callback
+  scene->DrawScene();
+
+  scene->DrawGUI();
+}
 
 void callLoadLevelSinglePlayer()
 {
-    scene->DestroyScene();
+    scene.reset(new Scene());
 
-    scene = new Scene();
     // Single Player camera
     scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
     Scene::LoadScene(scene);
@@ -172,9 +213,8 @@ void callLoadLevelSinglePlayer()
 
 void callLoadLevelMultiPlayer()
 {
-    scene->DestroyScene();
+    scene.reset(new Scene());
 
-    scene = new Scene();
     // Single Player camera
     scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(125, -100, 250), vec3(125, -100, 0), vec3(0, 1, 0)));
     Scene::LoadScene(scene);
@@ -184,9 +224,8 @@ void callLoadLevelMultiPlayer()
 
 void callLoadLevelOptionMenu()
 {
-    scene->DestroyScene();
+    scene.reset(new Scene());
 
-    scene = new Scene();
     // Single Player camera
     scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
     Scene::LoadScene(scene);
@@ -196,39 +235,35 @@ void callLoadLevelOptionMenu()
 
 void callLoadLevelMainMenu()
 {
-    scene->DestroyScene();
+    scene.reset(new Scene());
 
-    scene = new Scene();
     // Single Player camera
     scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
     Scene::LoadScene(scene);
-
     loadLevelMainMenu(scene);
+
 }
-
-
 
 void setThemeA()
 {
+    theme->Stop();
     theme->Play2D("audio/Theme_A.mp3", GL_TRUE);
 }
 
 void setThemeB()
 {
+    theme->Stop();
     theme->Play2D("audio/Theme_B.mp3", GL_TRUE);
 }
 
 void setThemeC()
 {
+    theme->Stop();
     theme->Play2D("audio/Theme_C.mp3", GL_TRUE);
 }
 
-
-
-
-void loadLevelOptionMenu(Scene* scene)
+void loadLevelOptionMenu(unique_ptr<Scene>& scene)
 {
-
     opaqueShader = LoadShaders("./Shaders/OpaqueShader.vert", "./Shaders/OpaqueShader.frag");
 
     Canvas* canvas = new Canvas();
@@ -260,9 +295,8 @@ void loadLevelOptionMenu(Scene* scene)
 
 }
 
-void loadLevelMainMenu(Scene* scene)
+void loadLevelMainMenu(unique_ptr<Scene>& scene)
 {
-
     opaqueShader = LoadShaders("./Shaders/OpaqueShader.vert", "./Shaders/OpaqueShader.frag");
 
     Canvas* canvas = new Canvas();
@@ -295,8 +329,7 @@ void loadLevelMainMenu(Scene* scene)
 
 }
 
-
-void loadLevelSingleplayer(Scene* scene)
+void loadLevelSingleplayer(unique_ptr<Scene>& scene)
 {
   // Load Vertex and Fragments shaders
   transparencyShader = LoadShaders("./Shaders/TransparencyShader.vert", "./Shaders/TransparencyShader.frag");
@@ -321,7 +354,7 @@ void loadLevelSingleplayer(Scene* scene)
 
 }
 
-void loadLevelMultiplayer(Scene* scene)
+void loadLevelMultiplayer(unique_ptr<Scene>& scene)
 {
   // Load Vertex and Fragments shaders
   transparencyShader = LoadShaders("./Shaders/TransparencyShader.vert", "./Shaders/TransparencyShader.frag");
@@ -359,53 +392,4 @@ void loadLevelMultiplayer(Scene* scene)
 
   scene->AddGameObject(Brick::AddBrick(
     new Transform(vec3(-5 + 150, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(20, 200, 10), opaqueShader));
-}
-
-void lifeCycle(Scene *scene)
-{
-  // Garbage Collector
-  for(GameObject *g : scene->GetGameObjects())
-    if(g->CanDestroy())
-      scene->RemoveGameObject(g);
-
-  // Collision
-  for(GameObject *g1: scene->GetGameObjects())
-  {
-    if(!g1->IsEnabled()) continue;
-
-    for(GameObject *g2: scene->GetGameObjects())
-    {
-      if(g1 == g2 || !g2->IsEnabled()) continue; // if it's the same object or if it's not enabled
-
-      // Center of g1
-      vec3 c1 = g1->GetTransform()->position;
-      // Radius of g1
-      vec3 r1 = g1->GetTransform()->scale * vec3(0.5f, 0.5f, 0.5f);
-
-      // Center of g2
-      vec3 c2 = g2->GetTransform()->position;
-
-      // if the distance between the centers is smaller than the x and y radius there's a collision
-      if(abs(c1.x - c2.x) < r1.x && abs(c1.y - c2.y) < r1.y && abs(c1.z - c2.z) < r1.z)
-      {
-        // Invokes the OnCollision method of the objects
-        for(Script *s : g1->GetScripts())
-          s->OnCollision(vec3(c1.x - c2.x, c1.y - c2.y, c1.y - c2.y), g2->Tag());
-
-        for(Script *s : g2->GetScripts())
-          s->OnCollision(-vec3(c1.x - c2.x, c1.y - c2.y, c1.y - c2.y), g1->Tag());
-      }
-    }
-  }
-
-  // Invokes the Update callback
-  for(GameObject *g : scene->GetGameObjects())
-    if(g->IsEnabled())
-      for(Script *s : g->GetScripts())
-        s->Update();
-
-  // Invokes the Draw callback
-  scene->DrawScene();
-
-  scene->DrawGUI();
 }

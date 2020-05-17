@@ -1,23 +1,39 @@
 #include "Button.hpp"
 
-Button::Button(Renderer* render, Transform* t, void (*func)(void))
+Button::Button(Renderer* renderer, Transform* transform, void (*funcEvent)(void))
 {
-	this->render = render;
-	this->t = t;
-	this->func = func;
+	this->renderer = renderer;
+	this->transform = transform;
+	this->funcEvent = funcEvent;
+}
+
+Button::~Button() 
+{
+	// Deletes renderer
+	if(renderer != nullptr)
+	{
+		delete renderer;
+		renderer = nullptr;
+	}
+	// Deletes transform
+	if(this->transform != nullptr)
+	{
+		delete this->transform;
+		this->transform = nullptr;
+	}
 }
 
 void Button::OnClick()
 {
-	func();
+	this->funcEvent();
 }
 
 Renderer* Button::GetRenderer()
 {
-	return this->render;
+	return this->renderer;
 }
 
 Transform* Button::GetTransform()
 {
-	return this->t;
+	return this->transform;
 }

@@ -1,13 +1,38 @@
 #include "Scene.hpp"
 
-Scene *Scene::currentScene = nullptr;
-
-void Scene::LoadScene(Scene *scene)
+Scene::~Scene() 
 {
-  Scene::currentScene = scene;
+  for (ICamera* cam : cameras)
+  {
+    delete cam;
+    cam = nullptr;
+  }
+
+  for (GameObject* go : gameObjects)
+  {
+    delete go;
+    go = nullptr;
+  }
+
+  for (Canvas* c : canvas)
+  {
+    delete c;
+    c = nullptr;
+  }
+
+  cameras.clear();
+  gameObjects.clear();
+  canvas.clear();
 }
 
-Scene *Scene::CurrentScene()
+Scene* Scene::currentScene = nullptr;
+
+void Scene::LoadScene(unique_ptr<Scene>& scene)
+{
+  Scene::currentScene = scene.get();
+}
+
+Scene* Scene::CurrentScene()
 {
   return Scene::currentScene;
 }
@@ -19,14 +44,14 @@ void Scene::AddGameObject(GameObject *gameObject)
 
 void Scene::RemoveGameObject(GameObject *gameObject)
 {
-  // Frees the game object memory
-  gameObject->~GameObject();
   this->gameObjects.remove(gameObject);
+  delete gameObject;
+  gameObject = nullptr;
 }
 
-list<GameObject *> Scene::GetGameObjects()
+list<GameObject*> Scene::GetGameObjects()
 {
-    return this->gameObjects;
+  return this->gameObjects;
 }
 
 void Scene::AddCamera(ICamera* camera) 
@@ -36,8 +61,9 @@ void Scene::AddCamera(ICamera* camera)
 
 void Scene::RemoveCamera(ICamera* camera)
 {
-  //  camera->~ICamera();
   this->cameras.remove(camera);
+  delete camera;
+  camera = nullptr;
 }
 
 list<ICamera*> Scene::GetCameras()
@@ -53,6 +79,8 @@ void Scene::AddCanvas(Canvas* canvas)
 void Scene::RemoveCanvas(Canvas* canvas)
 {
     this->canvas.remove(canvas);
+    delete canvas;
+    canvas = nullptr;
 }
 
 list<Canvas*> Scene::GetCanvas()
@@ -60,47 +88,27 @@ list<Canvas*> Scene::GetCanvas()
     return this->canvas;
 }
 
-
 void Scene::DrawScene()
 {
-  for (ICamera* c : cameras)
-    for (GameObject *g: this->gameObjects)
+  for(ICamera* c: cameras)
+    for(GameObject *g: this->gameObjects)
       if(g->IsEnabled())
         g->Draw(c->GetView(), c->GetProjection());
-      
 }
 
 void Scene::DrawGUI()
 {
-    for (ICamera* cam : cameras)
+  for(ICamera* cam: cameras)
+  {
+    for(Canvas* c: this->canvas)
     {
-        for (Canvas* c : this->canvas)
+      if(c->IsEnabled())
         {
-            if (c->IsEnabled())
-            {
-                for (Button* b : c->GetButtons())
-                    b->GetRenderer()->Draw(b->GetTransform()->model, cam->GetView(), cam->GetProjection());
+          for (Button* b : c->GetButtons())
+            b->GetRenderer()->Draw(b->GetTransform()->model, cam->GetView(), cam->GetProjection());
                 
-                //  TODO : Draw sprites
-                
-            }
-
+          //  TODO : Draw sprites
         }
     }
-}
-
-void Scene::DestroyScene()
-{
-    for (ICamera* cam : cameras)
-        cam->~ICamera();
-
-    for (GameObject* go: gameObjects)
-        go->~GameObject();
-    
-    for (Canvas* c : canvas)
-        c->~Canvas();
-    
-    cameras.erase(cameras.begin(), cameras.end());
-    gameObjects.erase(gameObjects.begin(), gameObjects.end());
-    canvas.erase(canvas.begin(), canvas.end());
+  }
 }

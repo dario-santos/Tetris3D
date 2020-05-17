@@ -2,6 +2,7 @@
 
 #include <list>
 #include <vector>
+#include <memory>
 using namespace std;
 
 #include "./Components/GameObject.hpp"
@@ -25,6 +26,14 @@ class Scene
     list<Canvas*> canvas;
 
   public:
+    /**
+     * ~Scene.
+     * 
+     * The Scene destructor
+     * 
+     */
+    ~Scene();
+
     /*
     * Function: LoadScene
     * --------------------------------
@@ -32,7 +41,7 @@ class Scene
     *  
     *  scene: the scene.
     */
-    static void LoadScene(Scene* scene);
+    static void LoadScene(unique_ptr<Scene>& scene);
     
     /*
     * Function: CurrentScene

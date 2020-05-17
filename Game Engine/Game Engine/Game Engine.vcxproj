@@ -166,7 +166,6 @@
     <ClCompile Include="GameEngine\Audio\AudioDevice.cpp" />
     <ClCompile Include="GameEngine\Camera\Orthographic.cpp" />
     <ClCompile Include="GameEngine\Camera\Perspective.cpp" />
-    <ClCompile Include="GameEngine\Components\Component.cpp" />
     <ClCompile Include="GameEngine\Components\GameObject.cpp" />
     <ClCompile Include="GameEngine\Components\Renderer.cpp" />
     <ClCompile Include="GameEngine\Components\Transform.cpp" />
@@ -200,7 +199,6 @@
     <ClInclude Include="BoardObjects\SquareObject.hpp" />
     <ClInclude Include="BoardObjects\TObject.hpp" />
     <ClInclude Include="BoardObjects\ZObject.hpp" />
-    <ClInclude Include="GameEngine\Components\Component.hpp" />
     <ClInclude Include="GameEngine\Config\Config.hpp" />
     <ClInclude Include="GameEngine\Audio\AudioDevice.hpp" />
     <ClInclude Include="GameEngine\Camera\ICamera.hpp" />
