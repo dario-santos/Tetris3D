@@ -13,6 +13,7 @@ AudioDevice::AudioDevice(short volume)
 
 void AudioDevice::Play2D(const char* path, GLboolean loop)
 {
+  this->soundDevice->stopAllSounds();
   this->soundDevice->play2D(path, loop);
 }
 

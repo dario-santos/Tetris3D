@@ -8,6 +8,10 @@
  */
 #pragma once
 
+void loadLevelOptionMenu(Scene* scene);
+
+void loadLevelMainMenu(Scene* scene);
+
 /*
  * Function: loadGameObjects
  * --------------------------------

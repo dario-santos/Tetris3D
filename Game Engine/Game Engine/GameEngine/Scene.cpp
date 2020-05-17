@@ -45,9 +45,62 @@ list<ICamera*> Scene::GetCameras()
   return this->cameras;
 }
 
+void Scene::AddCanvas(Canvas* canvas)
+{
+    this->canvas.push_back(canvas);
+}
+
+void Scene::RemoveCanvas(Canvas* canvas)
+{
+    this->canvas.remove(canvas);
+}
+
+list<Canvas*> Scene::GetCanvas()
+{
+    return this->canvas;
+}
+
+
 void Scene::DrawScene()
 {
   for (ICamera* c : cameras)
     for (GameObject *g: this->gameObjects)
-      g->Draw(c->GetView(), c->GetProjection());
+      if(g->IsEnabled())
+        g->Draw(c->GetView(), c->GetProjection());
+      
+}
+
+void Scene::DrawGUI()
+{
+    for (ICamera* cam : cameras)
+    {
+        for (Canvas* c : this->canvas)
+        {
+            if (c->IsEnabled())
+            {
+                for (Button* b : c->GetButtons())
+                    b->GetRenderer()->Draw(b->GetTransform()->model, cam->GetView(), cam->GetProjection());
+                
+                //  TODO : Draw sprites
+                
+            }
+
+        }
+    }
+}
+
+void Scene::DestroyScene()
+{
+    for (ICamera* cam : cameras)
+        cam->~ICamera();
+
+    for (GameObject* go: gameObjects)
+        go->~GameObject();
+    
+    for (Canvas* c : canvas)
+        c->~Canvas();
+    
+    cameras.erase(cameras.begin(), cameras.end());
+    gameObjects.erase(gameObjects.begin(), gameObjects.end());
+    canvas.erase(canvas.begin(), canvas.end());
 }

@@ -158,3 +158,8 @@ void Cube::UpdateColor(vec3 color)
 {
   this->color = color / vec3(255.f, 255.f, 255.f);
 }
+
+vec3 Cube::GetColor()
+{
+    return this->color;
+}

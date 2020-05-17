@@ -6,6 +6,7 @@ using namespace std;
 
 #include "./Components/GameObject.hpp"
 #include "./Camera/ICamera.hpp"
+#include "./UI/Canvas.hpp"
 
 /*
  * Class: Scene
@@ -15,11 +16,13 @@ class Scene
 {
   private:
     // The current active scene, intended to be used by scripts
-    static Scene *currentScene;
+    static Scene* currentScene;
     // The game objects that constitute this scene
-    list<GameObject *> gameObjects;
+    list<GameObject*> gameObjects;
     // Cameras in the scene
-    list<ICamera *> cameras;
+    list<ICamera*> cameras;
+    // Canvas in scene
+    list<Canvas*> canvas;
 
   public:
     /*
@@ -29,7 +32,7 @@ class Scene
     *  
     *  scene: the scene.
     */
-    static void LoadScene(Scene *scene);
+    static void LoadScene(Scene* scene);
     
     /*
     * Function: CurrentScene
@@ -38,7 +41,7 @@ class Scene
     *  
     *  returns: the active scene.
     */
-    static Scene *CurrentScene();
+    static Scene* CurrentScene();
     
     /*
     * Function: AddGameObject
@@ -47,7 +50,7 @@ class Scene
     *  
     *  gameObject: the game object that will be added.
     */
-    void AddGameObject(GameObject *gameObject);
+    void AddGameObject(GameObject* gameObject);
     
     /*
     * Function: RemoveGameObject
@@ -56,7 +59,7 @@ class Scene
     *  
     *  gameObject: the game object that will be removed.
     */
-    void RemoveGameObject(GameObject *gameObject);
+    void RemoveGameObject(GameObject* gameObject);
 
     /*
     * Function: GetGameObjects
@@ -65,7 +68,7 @@ class Scene
     *  
     *  return: the list of game objects of the scene.
     */ 
-    list<GameObject *> GetGameObjects();
+    list<GameObject*> GetGameObjects();
 
     /*
     * Function: AddCamera
@@ -94,10 +97,27 @@ class Scene
     */
     list<ICamera*> GetCameras();
 
+    
+    void AddCanvas(Canvas* canvas);
+
+    
+    void RemoveCanvas(Canvas* Canvas);
+
+
+    list<Canvas*> GetCanvas();
+
+
+
+
+
     /*
     * Function: DrawScene
     * --------------------------------
     *  Draws the scene
     */
     void DrawScene();
+
+    void DrawGUI();
+
+    void DestroyScene();
 };

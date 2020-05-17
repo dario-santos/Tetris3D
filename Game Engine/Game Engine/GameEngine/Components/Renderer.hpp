@@ -64,4 +64,6 @@ class Renderer
     *  This function is used to change the shader of the renderer.
     */
     void UpdateShader(GLuint shaderId);
+
+    IPrimitive* GetIPrimitive();
 };

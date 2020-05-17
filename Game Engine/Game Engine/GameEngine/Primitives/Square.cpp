@@ -96,7 +96,7 @@ void Square::DrawShading(GLuint shaderId, mat4 model, mat4 view, mat4 projection
 
   // be sure to activate shader when setting uniforms/drawing objects
   glUniform3f(glGetUniformLocation(shaderId, "objectColor"), color.x, color.y, color.z);
-  glUniform3f(glGetUniformLocation(shaderId, "lightColor"), 1.0f, (69.69 * 3) / 255, 0);
+  glUniform3f(glGetUniformLocation(shaderId, "lightColor"), 1.0f, 1.0f, 1.0f);
   glUniform3f(glGetUniformLocation(shaderId, "lightPos"), 1.2f, 1.0f, 2.0f);
 
   glBindVertexArray(verticeBufferId);
@@ -122,4 +122,10 @@ void Square::DrawShading(GLuint shaderId, mat4 model, mat4 view, mat4 projection
 void Square::UpdateColor(vec3 color)
 {
     this->color = color / vec3(255.f, 255.f, 255.f);
+}
+
+vec3 Square::GetColor()
+{
+    vec3 norm = vec3(255,255,255);
+    return this->color * norm;
 }

@@ -23,6 +23,11 @@ using namespace glm;
 
 #include "./GameEngine/Audio/AudioDevice.hpp"
 
+// UI
+#include "./GameEngine/UI/Canvas.hpp"
+#include "./GameEngine/UI/Button.hpp"
+
+
 // Prefabs
 #include "./Prefabs/Player.hpp"
 #include "./Prefabs/Brick.hpp"
@@ -34,6 +39,9 @@ using namespace glm;
 #include "./Prefabs/JBlock.hpp"
 #include "./Prefabs/IBlock.hpp"
 
+// Scripts
+#include "./Scripts/MenuLogic.hpp"
+
 #include "shader.hpp"
 #include "main.hpp"
 
@@ -43,6 +51,9 @@ using namespace glm;
 GLuint transparencyShader;
 GLuint opaqueShader;
 GLuint phongShader;
+
+Scene* scene = new Scene();
+AudioDevice* theme = new AudioDevice(75);
 
 int main(void)
 {
@@ -97,19 +108,20 @@ int main(void)
   Cube::Init();
   Config::LoadConfig("./config.cfg");
 
-  AudioDevice *theme = new AudioDevice(100);
-  theme->Play2D("audio/Theme_A.mp3", GL_TRUE);
-
   // Loads the scene and sets it as the active one
-  Scene* scene = new Scene();
+  //Scene* scene = new Scene();
   // Single Player camera
   scene->AddCamera(new Perspective(45.0f, 4/3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
   // Multiplayer camera
   //scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(125, -100, 250), vec3(125, -100, 0), vec3(0, 1, 0)));
+  
+
 
   Scene::LoadScene(scene);
-  loadLevelSingleplayer(scene);
+  
+  loadLevelMainMenu(scene);
 
+  theme->Play2D("audio/Theme_A.mp3", GL_TRUE);
   // render scene for each frame
   do
   {
@@ -145,6 +157,145 @@ int main(void)
   return 0;
 }
 
+
+void callLoadLevelSinglePlayer()
+{
+    scene->DestroyScene();
+
+    scene = new Scene();
+    // Single Player camera
+    scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
+    Scene::LoadScene(scene);
+
+    loadLevelSingleplayer(scene);
+}
+
+void callLoadLevelMultiPlayer()
+{
+    scene->DestroyScene();
+
+    scene = new Scene();
+    // Single Player camera
+    scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(125, -100, 250), vec3(125, -100, 0), vec3(0, 1, 0)));
+    Scene::LoadScene(scene);
+
+    loadLevelMultiplayer(scene);
+}
+
+void callLoadLevelOptionMenu()
+{
+    scene->DestroyScene();
+
+    scene = new Scene();
+    // Single Player camera
+    scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
+    Scene::LoadScene(scene);
+
+    loadLevelOptionMenu(scene);
+}
+
+void callLoadLevelMainMenu()
+{
+    scene->DestroyScene();
+
+    scene = new Scene();
+    // Single Player camera
+    scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
+    Scene::LoadScene(scene);
+
+    loadLevelMainMenu(scene);
+}
+
+
+
+void setThemeA()
+{
+    theme->Play2D("audio/Theme_A.mp3", GL_TRUE);
+}
+
+void setThemeB()
+{
+    theme->Play2D("audio/Theme_B.mp3", GL_TRUE);
+}
+
+void setThemeC()
+{
+    theme->Play2D("audio/Theme_C.mp3", GL_TRUE);
+}
+
+
+
+
+void loadLevelOptionMenu(Scene* scene)
+{
+
+    opaqueShader = LoadShaders("./Shaders/OpaqueShader.vert", "./Shaders/OpaqueShader.frag");
+
+    Canvas* canvas = new Canvas();
+
+    canvas->AddButton(new Button(new Renderer(new Square(vec3(255, 50, 0)), opaqueShader),
+        new Transform(vec3(50, -50, 1), vec3(0, 0, 0), vec3(5, 5, 5)),
+        &setThemeA));
+
+    canvas->AddButton(new Button(new Renderer(new Square(vec3(0, 255, 50)), opaqueShader),
+        new Transform(vec3(25, -50, 1), vec3(0, 0, 0), vec3(5, 5, 5)),
+        &setThemeB));
+
+    canvas->AddButton(new Button(new Renderer(new Square(vec3(50, 0, 255)), opaqueShader),
+        new Transform(vec3(0, -50, 1), vec3(0, 0, 0), vec3(5, 5, 5)),
+        &setThemeC));
+
+    canvas->AddButton(new Button(new Renderer(new Square(vec3(50, 100, 100)), opaqueShader),
+        new Transform(vec3(-100, -50, 1), vec3(0, 0, 0), vec3(5, 5, 5)),
+        &callLoadLevelMainMenu));
+
+    
+    GameObject* go = new GameObject(
+        new Transform(vec3(-200, -200, -200), vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f)), nullptr, "Menu");
+    go->AddScript(new MenuLogic(canvas));
+
+    scene->AddGameObject(go);
+
+    scene->AddCanvas(canvas);
+
+}
+
+void loadLevelMainMenu(Scene* scene)
+{
+
+    opaqueShader = LoadShaders("./Shaders/OpaqueShader.vert", "./Shaders/OpaqueShader.frag");
+
+    Canvas* canvas = new Canvas();
+
+    
+    Button* b = new Button(new Renderer(new Square(vec3(255, 0, 0)), opaqueShader),
+        new Transform(vec3(50, -50, 1), vec3(0,0,0), vec3(5, 5, 5)),
+        &callLoadLevelSinglePlayer);
+
+    Button* b2 = new Button(new Renderer(new Square(vec3(0, 255, 0)), opaqueShader),
+        new Transform(vec3(25, -50, 1), vec3(0, 0, 0), vec3(5, 5, 5)),
+        &callLoadLevelMultiPlayer);
+
+    Button* b3 = new Button(new Renderer(new Square(vec3(0, 0, 255)), opaqueShader),
+        new Transform(vec3(0, -50, 1), vec3(0, 0, 0), vec3(5, 5, 5)),
+        &callLoadLevelOptionMenu);
+
+
+    canvas->AddButton(b);
+    canvas->AddButton(b2);
+    canvas->AddButton(b3);
+
+    GameObject* go = new GameObject(
+        new Transform(vec3(-200, -200, -200), vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f)), nullptr, "Menu");
+    go->AddScript(new MenuLogic(canvas));
+
+    scene->AddGameObject(go);
+
+    scene->AddCanvas(canvas);
+
+}
+
+
 void loadLevelSingleplayer(Scene* scene)
 {
   // Load Vertex and Fragments shaders
@@ -167,6 +318,7 @@ void loadLevelSingleplayer(Scene* scene)
 
   scene->AddGameObject(Brick::AddBrick(
     new Transform(vec3(-5, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(20, 200, 10), phongShader));
+
 }
 
 void loadLevelMultiplayer(Scene* scene)
@@ -254,4 +406,6 @@ void lifeCycle(Scene *scene)
 
   // Invokes the Draw callback
   scene->DrawScene();
+
+  scene->DrawGUI();
 }

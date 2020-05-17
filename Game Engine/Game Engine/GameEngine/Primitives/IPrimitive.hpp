@@ -32,4 +32,5 @@ public:
    * \param color The new rgb color
    */
   virtual void UpdateColor(glm::vec3 color) = 0;
+  virtual glm::vec3 GetColor() = 0;
 };

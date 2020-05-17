@@ -24,3 +24,8 @@ void Renderer::UpdateShader(GLuint shaderId)
 {
   this->shaderId = shaderId;
 }
+
+IPrimitive* Renderer::GetIPrimitive()
+{
+    return this->primitive;
+}

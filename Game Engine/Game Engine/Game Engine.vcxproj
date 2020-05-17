@@ -92,7 +92,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)OpenGL\irrKlang\include;$(SolutionDir)OpenGL\glm;$(SolutionDir)OpenGL\glew\include;$(SolutionDir)OpenGL\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)OpenGL\irrKlang\include;$(SolutionDir)OpenGL\glm;$(SolutionDir)OpenGL\glew\include;$(SolutionDir)OpenGL\glfw\include;$(SolutionDir)OpenGL\gli;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -125,7 +125,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)OpenGL\irrKlang\include;$(SolutionDir)OpenGL\glm;$(SolutionDir)OpenGL\glew\include;$(SolutionDir)OpenGL\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)OpenGL\irrKlang\include;$(SolutionDir)OpenGL\glm;$(SolutionDir)OpenGL\glew\include;$(SolutionDir)OpenGL\glfw\include;$(SolutionDir)OpenGL\gli;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -175,6 +175,9 @@
     <ClCompile Include="GameEngine\Primitives\Cube.cpp" />
     <ClCompile Include="GameEngine\Primitives\Square.cpp" />
     <ClCompile Include="GameEngine\Scene.cpp" />
+    <ClCompile Include="GameEngine\UI\Button.cpp" />
+    <ClCompile Include="GameEngine\UI\Canvas.cpp" />
+    <ClCompile Include="GameEngine\UI\Sprite.cpp" />
     <ClCompile Include="GameEngine\Window.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Scripts\BallManager.cpp" />
@@ -182,6 +185,7 @@
     <ClCompile Include="Scripts\CameraMovement.cpp" />
     <ClCompile Include="Scripts\CubeTetrisManager.cpp" />
     <ClCompile Include="Scripts\GameManager.cpp" />
+    <ClCompile Include="Scripts\MenuLogic.cpp" />
     <ClCompile Include="Scripts\PlayerMovement.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="GameEngine\Time\Time.cpp" />
@@ -212,6 +216,9 @@
     <ClInclude Include="GameEngine\Primitives\IPrimitive.hpp" />
     <ClInclude Include="GameEngine\Primitives\Square.hpp" />
     <ClInclude Include="GameEngine\Scene.hpp" />
+    <ClInclude Include="GameEngine\UI\Button.hpp" />
+    <ClInclude Include="GameEngine\UI\Canvas.hpp" />
+    <ClInclude Include="GameEngine\UI\Sprite.hpp" />
     <ClInclude Include="GameEngine\Window.hpp" />
     <ClInclude Include="main.hpp" />
     <ClInclude Include="Prefabs\Brick.hpp" />
@@ -228,6 +235,7 @@
     <ClInclude Include="Scripts\CameraMovement.hpp" />
     <ClInclude Include="Scripts\CubeTetrisManager.hpp" />
     <ClInclude Include="Scripts\GameManager.hpp" />
+    <ClInclude Include="Scripts\MenuLogic.hpp" />
     <ClInclude Include="Scripts\PlayerMovement.hpp" />
     <ClInclude Include="shader.hpp" />
     <ClInclude Include="GameEngine\Time\Time.hpp" />

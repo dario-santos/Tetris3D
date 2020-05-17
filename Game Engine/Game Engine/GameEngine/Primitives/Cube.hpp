@@ -70,4 +70,6 @@ public:
      *  color: The new rgb color;
      */
     void UpdateColor(vec3 color);
+    vec3 GetColor();
+    
 };
