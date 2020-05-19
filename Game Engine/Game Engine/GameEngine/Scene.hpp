@@ -6,7 +6,10 @@
 using namespace std;
 
 #include "./Components/GameObject.hpp"
+#include "./Components/LightSource.hpp"
+
 #include "./Camera/ICamera.hpp"
+
 #include "./UI/Canvas.hpp"
 
 /*
@@ -19,11 +22,13 @@ class Scene
     // The current active scene, intended to be used by scripts
     static Scene* currentScene;
     // The game objects that constitute this scene
-    list<GameObject*> gameObjects;
+    list<GameObject*> gameObjects = list<GameObject*>();
     // Cameras in the scene
-    list<ICamera*> cameras;
+    list<ICamera*> cameras = list<ICamera*>();
     // Canvas in scene
-    list<Canvas*> canvas;
+    list<Canvas*> canvas = list<Canvas*>();
+    /** List of light sources */
+    vector<LightSource*> lights = vector<LightSource*>();
 
   public:
     /**
@@ -115,7 +120,13 @@ class Scene
 
     list<Canvas*> GetCanvas();
 
+    void AddLightSource(LightSource* light);
 
+
+    void RemoveLightSource(LightSource* light);
+
+
+    vector<LightSource*> GetLigthSources();
 
 
 

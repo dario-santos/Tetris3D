@@ -34,11 +34,11 @@ private:
   // The vertex buffer, contains the (x,y,z) points of the circle
   static std::vector<GLfloat> verticeBuffer;
   // The id of the vertex buffer array
-  static GLuint verticeBufferId;
   // The rgb color of the cube
-  vec3 color;
+  vec3 color = vec3(1.0f);
 
 public:
+  static GLuint verticeBufferId;
    /*
     * Function: Square
     * --------------------------------
@@ -51,16 +51,7 @@ public:
 
     static void Init();
 
-    /*
-    * Function: Draw
-    * --------------------------------
-    *  Draws the primitive to the screen
-    *
-    *  shaderId: The shader that will be used to draw;
-    *  transform: The transform that will be used to perform translations, rotations and scales.
-    */
-    void Draw(GLuint shaderId, mat4 model, mat4 view, mat4 projection);
-    void DrawShading(GLuint shaderId, mat4 model, mat4 view, mat4 projection);
+    void Render() override;
 
     /*
      * Function: UpdateColor

@@ -15,8 +15,8 @@ AudioDevice::~AudioDevice()
 {
   if (this->soundDevice != nullptr)
   {
-    delete this->soundDevice;
-    soundDevice = nullptr;
+    this->soundDevice->drop();
+    this->soundDevice = nullptr;
   }
 }
 

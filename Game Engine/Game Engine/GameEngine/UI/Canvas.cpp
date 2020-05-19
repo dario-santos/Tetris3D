@@ -2,17 +2,18 @@
 
 Canvas::~Canvas()
 {
-  for (Button* b : buttons)
+  for(Button* b : buttons)
   {
     delete b;
     b = nullptr;
   }
     
-  for (Sprite* s : sprites)
+  for(Sprite* s : sprites)
   {
     delete s;
     s = nullptr;
   }
+
   buttons.clear();
   sprites.clear();
 }

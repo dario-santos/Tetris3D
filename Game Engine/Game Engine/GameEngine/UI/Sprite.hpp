@@ -12,7 +12,7 @@ class Sprite
 {
 	private:
 		//texture2d texture;
-		Transform* transform;
+		Transform* transform = nullptr;
 	
 	public:
 		//Sprite(texture2d texture, Transform* t);

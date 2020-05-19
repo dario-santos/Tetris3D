@@ -6,23 +6,23 @@ using namespace std;
 #include "./Sprite.hpp"
 
 #include "../Components/Transform.hpp"
-#include "../Components/Renderer.hpp"
+#include "../Shader/Shader.hpp"
 
 class Button
 {
 	private:
-		Renderer* renderer;
-		Transform* transform;
-		void (*funcEvent)(void);
+		Shader* shader = nullptr;
+		Transform* transform = nullptr;
+		void (*funcEvent)(void) = nullptr;
 
 	public:
-		Button(Renderer* renderer, Transform* transform, void (*funcEvent)(void));
+		Button(Shader* shader, Transform* transform, void (*funcEvent)(void));
 
 		~Button();
 
 		void OnClick();
 
-		Renderer* GetRenderer();
+		Shader* GetShader();
 
 		Transform* GetTransform();
 };

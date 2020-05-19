@@ -10,6 +10,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+using glm::vec3;
+using glm::mat4;
 
 /**
  * Transform.
@@ -18,13 +20,13 @@ class Transform
 {   
   public:
     /** Position (x, y, z), represents a position in the game world */
-    glm::vec3 position;
+    vec3 position = vec3(0.0f);
     /** Rotation (x, y, z), in degrees, represents the rotation of a game object */
-    glm::vec3 rotation;
+    vec3 rotation = vec3(0.0f);
     /** Scale (x, y, z), the size of a game object */
-    glm::vec3 scale;
+    vec3 scale = vec3(1.0f);
     /** The object model */
-    glm::mat4 model = glm::mat4(1.0f);
+    mat4 model = mat4(1.0f);
 
     /**
      * Transform.
@@ -33,7 +35,7 @@ class Transform
      * \param rotation The rotation of the game object
      * \param scale The size of the game object
      */
-    Transform(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
+    Transform(vec3 position, vec3 rotation, vec3 scale);
     
     /**
      * Translate.
@@ -42,7 +44,7 @@ class Transform
      *  
      * \param translation The translation vector
      */
-    void Translate(glm::vec3 translation);
+    void Translate(vec3 translation);
 
     /**
      * TranslateTo.
@@ -51,7 +53,7 @@ class Transform
      * 
      * \param position The new position of the model
      */
-    void TranslateTo(glm::vec3 position);
+    void TranslateTo(vec3 position);
 
     /**
      * Rotate.
@@ -60,12 +62,12 @@ class Transform
      * 
      * \param rotation The rotation vector
      */
-    void Rotate(glm::vec3 rotation);
+    void Rotate(vec3 rotation);
 
     /**
      * Scale.
      * 
      * \param scale The ammount of scale that will be done
      */
-    void Scale(glm::vec3 scale);
+    void Scale(vec3 scale);
 };

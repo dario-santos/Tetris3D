@@ -23,8 +23,7 @@ public:
     * \param shaderId The shader id that will be used
     * \param mvp The Model-View-Projection matrix
     */
-  virtual void Draw(GLuint shaderId, glm::mat4 model, glm::mat4 view, glm::mat4 projection) = 0;
-  virtual void DrawShading(GLuint shaderId, glm::mat4 model, glm::mat4 view, glm::mat4 projection) = 0;
+  virtual void Render() = 0;
 
   /**
    * UpdateColor

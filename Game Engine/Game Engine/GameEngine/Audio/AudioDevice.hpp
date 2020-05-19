@@ -20,7 +20,7 @@ using namespace irrklang;
 class AudioDevice
 {
 private:
-  ISoundEngine* soundDevice;
+  ISoundEngine* soundDevice = nullptr;
   bool isPlaying = false;
 
 public:

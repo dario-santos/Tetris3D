@@ -10,8 +10,8 @@ class Canvas
 {
 	private:
 
-		vector<Sprite*> sprites;
-		vector<Button*> buttons;
+		vector<Sprite*> sprites = vector<Sprite*>();
+		vector<Button*> buttons = vector<Button*>();
 		bool isEnabled = true;
 
 	public:

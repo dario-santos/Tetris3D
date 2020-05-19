@@ -1,35 +1,43 @@
 ﻿#include "Renderer.hpp"
 
-Renderer::Renderer(IPrimitive *primitive, GLuint shaderId , bool hasShading)
+Renderer::Renderer(IPrimitive* mesh, Material* material)
 {
-  this->primitive = primitive;
-  this->shaderId = shaderId;
-  this->hasShading = hasShading;
+  this->mesh = mesh;
+  this->material = material;
 }
 
 Renderer::~Renderer()
 {
-  if (primitive != nullptr)
+  if(mesh != nullptr)
   {
-    delete primitive;
-    primitive = nullptr;
+    delete mesh;
+    mesh = nullptr;
+  }
+  if (material != nullptr)
+  {
+    delete material;
+    material = nullptr;
   }
 }
 
-void Renderer::Draw(mat4 model, mat4 view, mat4 projection)
+void Renderer::Render()
 {
-  if(hasShading)
-    this->primitive->DrawShading(this->shaderId, model, view, projection);
-  else
-    this->primitive->Draw(this->shaderId, model, view, projection);
-}
-
-void Renderer::UpdateShader(GLuint shaderId)
-{
-  this->shaderId = shaderId;
+  mesh->Render();
 }
 
 IPrimitive* Renderer::GetIPrimitive()
 {
-    return this->primitive;
+    return this->mesh;
+}
+
+Material* Renderer::GetMaterial()
+{
+  return this->material;
+}
+
+void Renderer::SetMaterial(Material* material)
+{
+  delete this->material;
+
+  this->material = material;
 }

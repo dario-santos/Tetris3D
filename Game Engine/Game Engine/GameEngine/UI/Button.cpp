@@ -1,8 +1,8 @@
 #include "Button.hpp"
 
-Button::Button(Renderer* renderer, Transform* transform, void (*funcEvent)(void))
+Button::Button(Shader* shader, Transform* transform, void (*funcEvent)(void))
 {
-	this->renderer = renderer;
+	this->shader = shader;
 	this->transform = transform;
 	this->funcEvent = funcEvent;
 }
@@ -10,10 +10,10 @@ Button::Button(Renderer* renderer, Transform* transform, void (*funcEvent)(void)
 Button::~Button() 
 {
 	// Deletes renderer
-	if(renderer != nullptr)
+	if(shader != nullptr)
 	{
-		delete renderer;
-		renderer = nullptr;
+		delete this->shader;
+		this->shader = nullptr;
 	}
 	// Deletes transform
 	if(this->transform != nullptr)
@@ -28,9 +28,9 @@ void Button::OnClick()
 	this->funcEvent();
 }
 
-Renderer* Button::GetRenderer()
+Shader* Button::GetShader()
 {
-	return this->renderer;
+	return this->shader;
 }
 
 Transform* Button::GetTransform()

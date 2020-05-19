@@ -6,43 +6,46 @@
 using namespace glm;
 
 // GameEngine
-#include "./GameEngine/Components/GameObject.hpp"
-#include "./GameEngine/Components/Transform.hpp"
-#include "./GameEngine/Primitives/Square.hpp"
-#include "./GameEngine/Primitives/Cube.hpp"
+#include "GameEngine/Components/GameObject.hpp"
+#include "GameEngine/Components/Transform.hpp"
+#include "GameEngine/Primitives/Square.hpp"
+#include "GameEngine/Primitives/Cube.hpp"
 
-#include "./GameEngine/Camera/Orthographic.hpp"
-#include "./GameEngine/Camera/Perspective.hpp"
+#include "GameEngine/Camera/Orthographic.hpp"
+#include "GameEngine/Camera/Perspective.hpp"
 
-#include "./GameEngine/Scene.hpp"
-#include "./GameEngine/Window.hpp"
+#include "GameEngine/Scene.hpp"
+#include "GameEngine/Window.hpp"
 
-#include "./GameEngine/Input/Input.hpp"
-#include "./GameEngine/Time/Time.hpp"
-#include "./GameEngine/Config/Config.hpp"
+#include "GameEngine/Input/Input.hpp"
+#include "GameEngine/Time/Time.hpp"
+#include "GameEngine/Config/Config.hpp"
 
-#include "./GameEngine/Audio/AudioDevice.hpp"
+#include "GameEngine/Audio/AudioDevice.hpp"
 
 // UI
-#include "./GameEngine/UI/Canvas.hpp"
-#include "./GameEngine/UI/Button.hpp"
+#include "GameEngine/UI/Canvas.hpp"
+#include "GameEngine/UI/Button.hpp"
 
 
 // Prefabs
-#include "./Prefabs/Player.hpp"
-#include "./Prefabs/Brick.hpp"
-#include "./Prefabs/OBlock.hpp"
-#include "./Prefabs/ZBlock.hpp"
-#include "./Prefabs/TBlock.hpp"
-#include "./Prefabs/SBlock.hpp"
-#include "./Prefabs/LBlock.hpp"
-#include "./Prefabs/JBlock.hpp"
-#include "./Prefabs/IBlock.hpp"
+#include "Assets/Prefabs/Player.hpp"
+#include "Assets/Prefabs/Brick.hpp"
+#include "Assets/Prefabs/OBlock.hpp"
+#include "Assets/Prefabs/ZBlock.hpp"
+#include "Assets/Prefabs/TBlock.hpp"
+#include "Assets/Prefabs/SBlock.hpp"
+#include "Assets/Prefabs/LBlock.hpp"
+#include "Assets/Prefabs/JBlock.hpp"
+#include "Assets/Prefabs/IBlock.hpp"
 
 // Scripts
-#include "./Scripts/MenuLogic.hpp"
+#include "Assets/Scripts/MenuLogic.hpp"
 
-#include "shader.hpp"
+#include "Assets/Shaders/OpaqueShader.hpp"
+#include "Assets/Shaders/PhongShader.hpp"
+
+
 #include "main.hpp"
 
 #include <iostream>
@@ -114,7 +117,7 @@ int main(void)
   loadLevelMainMenu(scene);
   Scene::LoadScene(scene);
 
-  theme->Play2D("audio/Theme_A.mp3", GL_TRUE);
+  theme->Play2D("Assets/Audio/Theme_A.mp3", GL_TRUE);
 
   // render scene for each frame
   do
@@ -157,36 +160,6 @@ void lifeCycle(unique_ptr<Scene>& scene)
   for (GameObject* g : scene->GetGameObjects())
     if (g->CanDestroy())
       scene->RemoveGameObject(g);
-
-  // Collision
-  for (GameObject* g1 : scene->GetGameObjects())
-  {
-    if (!g1->IsEnabled()) continue;
-
-    for (GameObject* g2 : scene->GetGameObjects())
-    {
-      if (g1 == g2 || !g2->IsEnabled()) continue; // if it's the same object or if it's not enabled
-
-      // Center of g1
-      vec3 c1 = g1->GetTransform()->position;
-      // Radius of g1
-      vec3 r1 = g1->GetTransform()->scale * vec3(0.5f, 0.5f, 0.5f);
-
-      // Center of g2
-      vec3 c2 = g2->GetTransform()->position;
-
-      // if the distance between the centers is smaller than the x and y radius there's a collision
-      if (abs(c1.x - c2.x) < r1.x && abs(c1.y - c2.y) < r1.y && abs(c1.z - c2.z) < r1.z)
-      {
-        // Invokes the OnCollision method of the objects
-        for (Script* s : g1->GetScripts())
-          s->OnCollision(vec3(c1.x - c2.x, c1.y - c2.y, c1.y - c2.y), g2->Tag());
-
-        for (Script* s : g2->GetScripts())
-          s->OnCollision(-vec3(c1.x - c2.x, c1.y - c2.y, c1.y - c2.y), g1->Tag());
-      }
-    }
-  }
 
   // Invokes the Update callback
   for (GameObject* g : scene->GetGameObjects())
@@ -247,40 +220,38 @@ void callLoadLevelMainMenu()
 void setThemeA()
 {
     theme->Stop();
-    theme->Play2D("audio/Theme_A.mp3", GL_TRUE);
+    theme->Play2D("Assets/Audio/Theme_A.mp3", GL_TRUE);
 }
 
 void setThemeB()
 {
     theme->Stop();
-    theme->Play2D("audio/Theme_B.mp3", GL_TRUE);
+    theme->Play2D("Assets/Audio/Theme_B.mp3", GL_TRUE);
 }
 
 void setThemeC()
 {
     theme->Stop();
-    theme->Play2D("audio/Theme_C.mp3", GL_TRUE);
+    theme->Play2D("Assets/Audio/Theme_C.mp3", GL_TRUE);
 }
 
 void loadLevelOptionMenu(unique_ptr<Scene>& scene)
-{
-    opaqueShader = LoadShaders("./Shaders/OpaqueShader.vert", "./Shaders/OpaqueShader.frag");
-
+{    
     Canvas* canvas = new Canvas();
 
-    canvas->AddButton(new Button(new Renderer(new Square(vec3(255, 50, 0)), opaqueShader),
+    canvas->AddButton(new Button(new OpaqueShader(new Renderer(new Square(vec3(255, 50, 0)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f))),
         new Transform(vec3(50, -50, 1), vec3(0, 0, 0), vec3(5, 5, 5)),
         &setThemeA));
 
-    canvas->AddButton(new Button(new Renderer(new Square(vec3(0, 255, 50)), opaqueShader),
+    canvas->AddButton(new Button(new OpaqueShader(new Renderer(new Square(vec3(0, 255, 50)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f))),
         new Transform(vec3(25, -50, 1), vec3(0, 0, 0), vec3(5, 5, 5)),
         &setThemeB));
 
-    canvas->AddButton(new Button(new Renderer(new Square(vec3(50, 0, 255)), opaqueShader),
+    canvas->AddButton(new Button(new OpaqueShader(new Renderer(new Square(vec3(50, 0, 255)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f))),
         new Transform(vec3(0, -50, 1), vec3(0, 0, 0), vec3(5, 5, 5)),
         &setThemeC));
-
-    canvas->AddButton(new Button(new Renderer(new Square(vec3(50, 100, 100)), opaqueShader),
+    
+    canvas->AddButton(new Button(new OpaqueShader(new Renderer(new Square(vec3(50, 100, 100)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f))),
         new Transform(vec3(-100, -50, 1), vec3(0, 0, 0), vec3(5, 5, 5)),
         &callLoadLevelMainMenu));
 
@@ -292,28 +263,23 @@ void loadLevelOptionMenu(unique_ptr<Scene>& scene)
     scene->AddGameObject(go);
 
     scene->AddCanvas(canvas);
-
 }
 
 void loadLevelMainMenu(unique_ptr<Scene>& scene)
 {
-    opaqueShader = LoadShaders("./Shaders/OpaqueShader.vert", "./Shaders/OpaqueShader.frag");
-
     Canvas* canvas = new Canvas();
 
-    
-    Button* b = new Button(new Renderer(new Square(vec3(255, 0, 0)), opaqueShader),
+    Button* b = new Button(new OpaqueShader(new Renderer(new Square(vec3(255, 0, 0)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f))),
         new Transform(vec3(50, -50, 1), vec3(0,0,0), vec3(5, 5, 5)),
         &callLoadLevelSinglePlayer);
 
-    Button* b2 = new Button(new Renderer(new Square(vec3(0, 255, 0)), opaqueShader),
+    Button* b2 = new Button(new OpaqueShader(new Renderer(new Square(vec3(0, 255, 0)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f))),
         new Transform(vec3(25, -50, 1), vec3(0, 0, 0), vec3(5, 5, 5)),
         &callLoadLevelMultiPlayer);
 
-    Button* b3 = new Button(new Renderer(new Square(vec3(0, 0, 255)), opaqueShader),
+    Button* b3 = new Button(new OpaqueShader(new Renderer(new Square(vec3(0, 0, 255)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f))),
         new Transform(vec3(0, -50, 1), vec3(0, 0, 0), vec3(5, 5, 5)),
         &callLoadLevelOptionMenu);
-
 
     canvas->AddButton(b);
     canvas->AddButton(b2);
@@ -331,65 +297,61 @@ void loadLevelMainMenu(unique_ptr<Scene>& scene)
 
 void loadLevelSingleplayer(unique_ptr<Scene>& scene)
 {
-  // Load Vertex and Fragments shaders
-  transparencyShader = LoadShaders("./Shaders/TransparencyShader.vert", "./Shaders/TransparencyShader.frag");
-  opaqueShader = LoadShaders("./Shaders/OpaqueShader.vert", "./Shaders/OpaqueShader.frag");
-  phongShader = LoadShaders("./Shaders/PhongShader.vert", "./Shaders/PhongShader.frag");
-
   GameObject* go = new GameObject(
     new Transform(vec3(-200, -200, -200), vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f)), nullptr, "GameManager");
-  go->AddScript(new GameManager(phongShader, 0, Gamepad::Gamepad1));
-
+  go->AddScript(new GameManager(new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f), 0, Gamepad::Gamepad1));
+  go->shader = nullptr;
   scene->AddGameObject(go);
+
+
+  scene->AddLightSource(new LightSource(vec3(1.0f), vec3(0.4), vec3(1.0f), vec4(5.0f, 5.0f, 2.0f, 1.0f)));
+  scene->AddLightSource(new LightSource(vec3(1.0f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), vec4(-5.0f, 5.0f, 2.0f, 1.0f)));
+
 
   // Tabuleiro
   scene->AddGameObject(Brick::AddBrick(
-    new Transform(vec3(45, -195, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(100.0f, 1.0f, 10.0f)), vec3(125, 200, 10), phongShader));
+    new Transform(vec3(45, -195, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(100.0f, 1.0f, 10.0f)), vec3(125, 200, 10), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)));
 
   scene->AddGameObject(Brick::AddBrick(
-    new Transform(vec3(95, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(75, 200, 10), opaqueShader));
+    new Transform(vec3(95, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(75, 200, 10), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)));
 
   scene->AddGameObject(Brick::AddBrick(
-    new Transform(vec3(-5, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(20, 200, 10), phongShader));
-
+    new Transform(vec3(-5, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(20, 200, 10), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)));
 }
 
 void loadLevelMultiplayer(unique_ptr<Scene>& scene)
 {
-  // Load Vertex and Fragments shaders
-  transparencyShader = LoadShaders("./Shaders/TransparencyShader.vert", "./Shaders/TransparencyShader.frag");
-  opaqueShader = LoadShaders("./Shaders/OpaqueShader.vert", "./Shaders/OpaqueShader.frag");
-  phongShader = LoadShaders("./Shaders/PhongShader.vert", "./Shaders/PhongShader.frag");
-
   GameObject* p1 = new GameObject(
     new Transform(vec3(-200, -200, -200), vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f)), nullptr, "GameManager");
-  p1->AddScript(new GameManager(phongShader, 0, Gamepad::Gamepad1));
+  p1->AddScript(new GameManager(new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f), 0, Gamepad::Gamepad1));
+  p1->shader = nullptr;
 
   scene->AddGameObject(p1);
 
   GameObject* p2 = new GameObject(
     new Transform(vec3(-200, -200, -200), vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f)), nullptr, "GameManager");
-  p2->AddScript(new GameManager(transparencyShader, 150, Gamepad::Gamepad2));
+  p2->AddScript(new GameManager(new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f), 150, Gamepad::Gamepad2));
+  p2->shader = nullptr;
 
   scene->AddGameObject(p2);
 
   // Tabuleiro P1
   scene->AddGameObject(Brick::AddBrick(
-    new Transform(vec3(45, -195, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(100.0f, 1.0f, 10.0f)), vec3(125, 200, 10), phongShader));
+    new Transform(vec3(45, -195, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(100.0f, 1.0f, 10.0f)), vec3(125, 200, 10), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)));
 
   scene->AddGameObject(Brick::AddBrick(
-    new Transform(vec3(95, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(75, 200, 10), phongShader));
+    new Transform(vec3(95, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(75, 200, 10), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)));
 
   scene->AddGameObject(Brick::AddBrick(
-    new Transform(vec3(-5, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(20, 200, 10), phongShader));
+    new Transform(vec3(-5, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(20, 200, 10), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)));
 
   // Tabuleiro P2
   scene->AddGameObject(Brick::AddBrick(
-    new Transform(vec3(45 + 150, -195, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(100.0f, 1.0f, 10.0f)), vec3(125, 200, 10), opaqueShader));
+    new Transform(vec3(45 + 150, -195, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(100.0f, 1.0f, 10.0f)), vec3(125, 200, 10), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)));
 
   scene->AddGameObject(Brick::AddBrick(
-    new Transform(vec3(95 + 150, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(75, 200, 10), opaqueShader));
+    new Transform(vec3(95 + 150, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(75, 200, 10), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)));
 
   scene->AddGameObject(Brick::AddBrick(
-    new Transform(vec3(-5 + 150, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(20, 200, 10), opaqueShader));
+    new Transform(vec3(-5 + 150, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(20, 200, 10), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)));
 }

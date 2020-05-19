@@ -16,6 +16,7 @@ using namespace std;
 #include "Transform.hpp"
 #include "Script.hpp"
 #include "Renderer.hpp"
+#include "../Shader/Shader.hpp"
 
 /**
  * GameObject.
@@ -23,20 +24,22 @@ using namespace std;
 class GameObject
 {
   private:
-    /** The transform of the game object*/
-    Transform* transform;
+    /** The transform of the game object */
+    Transform* transform = nullptr;
     /** The renderer of the game object */
-    Renderer* renderer;
+    Renderer* renderer = nullptr;
+    /**  The shader of the game object */
     /** The list of scripts that this game object contains */
-    list<Script*> scripts;
+    list<Script*> scripts = list<Script*>();
     /** The name of the game object */
-    string tag;
+    string tag = "";
     /** Informs the game engine if the game object is enabled or disabled, a disabled game object is not drawn */
     bool isEnabled  = true;
     /** Informs the game engine that this game object will be destroyed in the next frame */
     bool canDestroy = false;
 
   public:
+    Shader* shader = nullptr;
     /**
      * GameObject constructor.
      * 

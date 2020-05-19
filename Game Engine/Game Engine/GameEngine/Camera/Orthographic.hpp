@@ -24,10 +24,10 @@ using namespace glm;
 class Orthographic : public ICamera
 {
 private:
-  vec3 origin;
-  vec3 dimensions;
+  vec3 origin = vec3(0.0f);
+  vec3 dimensions = vec3(1.0f);
   mat4 view = mat4(1.0f);
-  mat4 projection;
+  mat4 projection = mat4(1.0f);
 
 public:
   Orthographic(vec3 origin, vec3 dimensions);

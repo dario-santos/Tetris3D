@@ -19,15 +19,28 @@ GameObject::~GameObject()
   if(transform != nullptr)
   {
     delete this->transform;
-    this->renderer = nullptr;
+    this->transform = nullptr;
   }
-  // Delete scripts
-  for (Script* s : this->scripts)
+  // Delete Shader
+  if (shader != nullptr)
   {
-    delete s;
-    s = nullptr;
+    delete this->shader;
+    this->shader = nullptr;
   }
-  scripts.clear;
+
+  // Delete scripts
+  if(scripts.size() > 0)
+  {
+    for (Script* s : this->scripts)
+    {
+      if (s != nullptr)
+      {
+        delete s;
+        s = nullptr;
+      }
+    }
+    scripts.clear();
+  }
 }
 
 void GameObject::AddScript(Script* script)
@@ -45,8 +58,11 @@ void GameObject::Draw(mat4 view, mat4 projection)
   // If there is a renderer then draw the object
   // this allows to have game objects that are not drawn.
   // An exemple is a death zone that works solely as a trigger collider.
-  if(renderer != nullptr)
-    this->renderer->Draw(this->transform->model, view, projection);
+  if (shader != nullptr)
+  {
+    this->shader->LoadShader(this->transform->model, view, projection);
+    return;
+  }
 }
 
 bool GameObject::IsEnabled()

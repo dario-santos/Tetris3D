@@ -2,7 +2,7 @@
 
 Scene::~Scene() 
 {
-  for (ICamera* cam : cameras)
+  for(ICamera* cam : cameras)
   {
     delete cam;
     cam = nullptr;
@@ -88,6 +88,23 @@ list<Canvas*> Scene::GetCanvas()
     return this->canvas;
 }
 
+void Scene::AddLightSource(LightSource* light)
+{
+  this->lights.push_back(light);
+}
+
+void Scene::RemoveLightSource(LightSource* light)
+{
+  //Todo: this->lights.remove(light);
+  delete light;
+  light = nullptr;
+}
+
+vector<LightSource*> Scene::GetLigthSources()
+{
+  return this->lights;
+}
+
 void Scene::DrawScene()
 {
   for(ICamera* c: cameras)
@@ -105,7 +122,7 @@ void Scene::DrawGUI()
       if(c->IsEnabled())
         {
           for (Button* b : c->GetButtons())
-            b->GetRenderer()->Draw(b->GetTransform()->model, cam->GetView(), cam->GetProjection());
+            b->GetShader()->LoadShader(b->GetTransform()->model, cam->GetView(), cam->GetProjection());
                 
           //  TODO : Draw sprites
         }

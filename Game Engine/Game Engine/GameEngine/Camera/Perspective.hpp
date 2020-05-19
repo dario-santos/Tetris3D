@@ -24,9 +24,9 @@ using namespace glm;
 class Perspective : public ICamera
 {
 private:
-  vec3 position;
-  mat4 view;
-  mat4 projection;
+  vec3 position = vec3(0.0f);;
+  mat4 view = mat4(1.0f);
+  mat4 projection = mat4(1.0f);
 
 public:
   Perspective(GLfloat fov, GLfloat aspect, GLfloat near, GLfloat far, vec3 eye, vec3 origin, vec3 up);

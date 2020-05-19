@@ -27,18 +27,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Scripts\BallManager.cpp">
-      <Filter>Scripts</Filter>
-    </ClCompile>
-    <ClCompile Include="Scripts\BrickManager.cpp">
-      <Filter>Scripts</Filter>
-    </ClCompile>
-    <ClCompile Include="Scripts\PlayerMovement.cpp">
-      <Filter>Scripts</Filter>
-    </ClCompile>
     <ClCompile Include="GameEngine\Audio\AudioDevice.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -52,9 +40,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\Input\Input.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameEngine\Model\ModelLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\Primitives\Cube.cpp">
@@ -75,43 +60,10 @@
     <ClCompile Include="GameEngine\Camera\Perspective.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Scripts\CameraMovement.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameEngine\Time\Time.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\Config\Config.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Scripts\GameManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BoardObjects\BoardObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BoardObjects\LineObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BoardObjects\LInverseObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BoardObjects\LObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BoardObjects\SObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BoardObjects\SquareObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BoardObjects\TObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BoardObjects\ZObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Scripts\CubeTetrisManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\UI\Sprite.cpp">
@@ -123,31 +75,58 @@
     <ClCompile Include="GameEngine\UI\Button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Scripts\MenuLogic.cpp">
+    <ClCompile Include="GameEngine\Shader\Material.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Shader\GLSLProgram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\Shaders\OpaqueShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Components\LightSource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\Shaders\PhongShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\Scripts\BoardObjects\BoardObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\Scripts\BoardObjects\LineObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\Scripts\BoardObjects\LInverseObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\Scripts\BoardObjects\LObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\Scripts\BoardObjects\SObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\Scripts\BoardObjects\SquareObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\Scripts\BoardObjects\TObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\Scripts\BoardObjects\ZObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\Scripts\CubeTetrisManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\Scripts\GameManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\Scripts\MenuLogic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="shader.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="main.hpp">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Prefabs\Brick.hpp">
-      <Filter>Prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="Prefabs\Player.hpp">
-      <Filter>Prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="Scripts\BallManager.hpp">
-      <Filter>Scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="Scripts\BrickManager.hpp">
-      <Filter>Scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="Scripts\PlayerMovement.hpp">
-      <Filter>Scripts</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\Audio\AudioDevice.hpp">
       <Filter>Header Files</Filter>
@@ -165,9 +144,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\Input\Input.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameEngine\Model\ModelLoader.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\Primitives\Cube.hpp">
@@ -194,64 +170,10 @@
     <ClInclude Include="GameEngine\Camera\Perspective.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Scripts\CameraMovement.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameEngine\Time\Time.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\Config\Config.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Scripts\GameManager.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BoardObjects\BoardObject.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BoardObjects\LineObject.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BoardObjects\LInverseObject.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BoardObjects\LObject.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BoardObjects\SObject.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BoardObjects\SquareObject.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BoardObjects\TObject.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BoardObjects\ZObject.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Prefabs\IBlock.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Prefabs\JBlock.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Prefabs\LBlock.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Prefabs\OBlock.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Prefabs\SBlock.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Prefabs\TBlock.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Prefabs\ZBlock.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Scripts\CubeTetrisManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\UI\Sprite.hpp">
@@ -263,25 +185,100 @@
     <ClInclude Include="GameEngine\UI\Button.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Scripts\MenuLogic.hpp">
+    <ClInclude Include="GameEngine\Shader\Material.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Shader\Shader.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Shader\GLSLProgram.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Shaders\OpaqueShader.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Components\LightSource.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Shaders\PhongShader.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Scripts\BoardObjects\BoardObject.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Scripts\BoardObjects\LineObject.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Scripts\BoardObjects\LInverseObject.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Scripts\BoardObjects\LObject.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Scripts\BoardObjects\SObject.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Scripts\BoardObjects\SquareObject.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Scripts\BoardObjects\TObject.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Scripts\BoardObjects\ZObject.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Scripts\CubeTetrisManager.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Scripts\GameManager.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Scripts\MenuLogic.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Prefabs\ZBlock.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Prefabs\Brick.hpp">
+      <Filter>Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Prefabs\IBlock.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Prefabs\JBlock.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Prefabs\LBlock.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Prefabs\OBlock.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Prefabs\Player.hpp">
+      <Filter>Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Prefabs\SBlock.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Prefabs\TBlock.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="config.cfg" />
-    <None Include="Shaders\OpaqueShader.frag">
+    <None Include="Assets\Shaders\GLSLShaders\OpaqueShader.vert">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="Shaders\OpaqueShader.vert">
+    <None Include="Assets\Shaders\GLSLShaders\OpaqueShader.frag">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="Shaders\TransparencyShader.frag">
+    <None Include="Assets\Shaders\GLSLShaders\PhongShader.vert" />
+    <None Include="Assets\Shaders\GLSLShaders\PhongShader.frag" />
+    <None Include="Assets\Shaders\GLSLShaders\TransparencyShader.frag">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="Shaders\TransparencyShader.vert">
+    <None Include="Assets\Shaders\GLSLShaders\TransparencyShader.vert">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="Shaders\PhongShader.vert" />
-    <None Include="Shaders\PhongShader.frag" />
   </ItemGroup>
 </Project>

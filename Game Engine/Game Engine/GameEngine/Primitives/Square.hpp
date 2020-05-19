@@ -15,7 +15,7 @@ using namespace glm;
 
 #include <vector>
 
-#include "IPrimitive.hpp"
+#include "GameEngine/Primitives/IPrimitive.hpp"
 
 /**
  * Square
@@ -29,10 +29,8 @@ private:
 	static std::vector<GLfloat> verticeBuffer;
 	/** The id of the vertex buffer array */
 	static GLuint verticeBufferId;
-	/** The color buffer, contains the color of each point of the square */
-	std::vector<GLfloat> verticeColor = std::vector<GLfloat>(18);
 	/** The RGB color of the object*/
-	vec3 color;
+	vec3 color = vec3(1.0f);
 
 public:
   /**
@@ -48,14 +46,7 @@ public:
    */
   static void Init();
 
-  /**
-   * Draw
-   *
-   * \param shaderId The shader id that will be used
-   * \param mvp The Model-View-Projection matrix
-   */
-  void Draw(GLuint shaderId, mat4 model, mat4 view, mat4 projection);
-  void DrawShading(GLuint shaderId, mat4 model, mat4 view, mat4 projection);
+  void Render() override;
 
   /**
    * UpdateColor
@@ -63,5 +54,6 @@ public:
    * \param color The new rgb color
    */
   void UpdateColor(vec3 color);
+
   vec3 GetColor();
 };

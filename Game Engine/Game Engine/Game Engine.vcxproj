@@ -92,7 +92,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)OpenGL\irrKlang\include;$(SolutionDir)OpenGL\glm;$(SolutionDir)OpenGL\glew\include;$(SolutionDir)OpenGL\glfw\include;$(SolutionDir)OpenGL\gli;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)OpenGL\irrKlang\include;$(SolutionDir)OpenGL\glm;$(SolutionDir)OpenGL\glew\include;$(SolutionDir)OpenGL\glfw\include;$(SolutionDir)OpenGL\gli;$(SolutionDir)Game Engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -125,7 +125,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)OpenGL\irrKlang\include;$(SolutionDir)OpenGL\glm;$(SolutionDir)OpenGL\glew\include;$(SolutionDir)OpenGL\glfw\include;$(SolutionDir)OpenGL\gli;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)OpenGL\irrKlang\include;$(SolutionDir)OpenGL\glm;$(SolutionDir)OpenGL\glew\include;$(SolutionDir)OpenGL\glfw\include;$(SolutionDir)OpenGL\gli;$(SolutionDir)Game Engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -155,50 +155,52 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BoardObjects\BoardObject.cpp" />
-    <ClCompile Include="BoardObjects\LineObject.cpp" />
-    <ClCompile Include="BoardObjects\LInverseObject.cpp" />
-    <ClCompile Include="BoardObjects\LObject.cpp" />
-    <ClCompile Include="BoardObjects\SObject.cpp" />
-    <ClCompile Include="BoardObjects\SquareObject.cpp" />
-    <ClCompile Include="BoardObjects\TObject.cpp" />
-    <ClCompile Include="BoardObjects\ZObject.cpp" />
+    <ClCompile Include="Assets\Shaders\PhongShader.cpp" />
+    <ClCompile Include="Assets\Shaders\OpaqueShader.cpp" />
+    <ClCompile Include="Assets\Scripts\BoardObjects\BoardObject.cpp" />
+    <ClCompile Include="Assets\Scripts\BoardObjects\LineObject.cpp" />
+    <ClCompile Include="Assets\Scripts\BoardObjects\LInverseObject.cpp" />
+    <ClCompile Include="Assets\Scripts\BoardObjects\LObject.cpp" />
+    <ClCompile Include="Assets\Scripts\BoardObjects\SObject.cpp" />
+    <ClCompile Include="Assets\Scripts\BoardObjects\SquareObject.cpp" />
+    <ClCompile Include="Assets\Scripts\BoardObjects\TObject.cpp" />
+    <ClCompile Include="Assets\Scripts\BoardObjects\ZObject.cpp" />
     <ClCompile Include="GameEngine\Audio\AudioDevice.cpp" />
     <ClCompile Include="GameEngine\Camera\Orthographic.cpp" />
     <ClCompile Include="GameEngine\Camera\Perspective.cpp" />
     <ClCompile Include="GameEngine\Components\GameObject.cpp" />
+    <ClCompile Include="GameEngine\Components\LightSource.cpp" />
     <ClCompile Include="GameEngine\Components\Renderer.cpp" />
     <ClCompile Include="GameEngine\Components\Transform.cpp" />
     <ClCompile Include="GameEngine\Input\Input.cpp" />
-    <ClCompile Include="GameEngine\Model\ModelLoader.cpp" />
     <ClCompile Include="GameEngine\Primitives\Cube.cpp" />
     <ClCompile Include="GameEngine\Primitives\Square.cpp" />
     <ClCompile Include="GameEngine\Scene.cpp" />
+    <ClCompile Include="GameEngine\Shader\GLSLProgram.cpp" />
+    <ClCompile Include="GameEngine\Shader\Material.cpp" />
     <ClCompile Include="GameEngine\UI\Button.cpp" />
     <ClCompile Include="GameEngine\UI\Canvas.cpp" />
     <ClCompile Include="GameEngine\UI\Sprite.cpp" />
     <ClCompile Include="GameEngine\Window.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Scripts\BallManager.cpp" />
-    <ClCompile Include="Scripts\BrickManager.cpp" />
-    <ClCompile Include="Scripts\CameraMovement.cpp" />
-    <ClCompile Include="Scripts\CubeTetrisManager.cpp" />
-    <ClCompile Include="Scripts\GameManager.cpp" />
-    <ClCompile Include="Scripts\MenuLogic.cpp" />
-    <ClCompile Include="Scripts\PlayerMovement.cpp" />
-    <ClCompile Include="shader.cpp" />
+    <ClCompile Include="Assets\Scripts\CubeTetrisManager.cpp" />
+    <ClCompile Include="Assets\Scripts\GameManager.cpp" />
+    <ClCompile Include="Assets\Scripts\MenuLogic.cpp" />
     <ClCompile Include="GameEngine\Time\Time.cpp" />
     <ClCompile Include="GameEngine\Config\Config.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BoardObjects\BoardObject.hpp" />
-    <ClInclude Include="BoardObjects\LineObject.hpp" />
-    <ClInclude Include="BoardObjects\LInverseObject.hpp" />
-    <ClInclude Include="BoardObjects\LObject.hpp" />
-    <ClInclude Include="BoardObjects\SObject.hpp" />
-    <ClInclude Include="BoardObjects\SquareObject.hpp" />
-    <ClInclude Include="BoardObjects\TObject.hpp" />
-    <ClInclude Include="BoardObjects\ZObject.hpp" />
+    <ClInclude Include="Assets\Shaders\OpaqueShader.hpp" />
+    <ClInclude Include="Assets\Shaders\PhongShader.hpp" />
+    <ClInclude Include="Assets\Scripts\BoardObjects\BoardObject.hpp" />
+    <ClInclude Include="Assets\Scripts\BoardObjects\LineObject.hpp" />
+    <ClInclude Include="Assets\Scripts\BoardObjects\LInverseObject.hpp" />
+    <ClInclude Include="Assets\Scripts\BoardObjects\LObject.hpp" />
+    <ClInclude Include="Assets\Scripts\BoardObjects\SObject.hpp" />
+    <ClInclude Include="Assets\Scripts\BoardObjects\SquareObject.hpp" />
+    <ClInclude Include="Assets\Scripts\BoardObjects\TObject.hpp" />
+    <ClInclude Include="Assets\Scripts\BoardObjects\ZObject.hpp" />
+    <ClInclude Include="GameEngine\Components\LightSource.hpp" />
     <ClInclude Include="GameEngine\Config\Config.hpp" />
     <ClInclude Include="GameEngine\Audio\AudioDevice.hpp" />
     <ClInclude Include="GameEngine\Camera\ICamera.hpp" />
@@ -209,43 +211,40 @@
     <ClInclude Include="GameEngine\Components\Script.hpp" />
     <ClInclude Include="GameEngine\Components\Transform.hpp" />
     <ClInclude Include="GameEngine\Input\Input.hpp" />
-    <ClInclude Include="GameEngine\Model\ModelLoader.hpp" />
     <ClInclude Include="GameEngine\Primitives\Cube.hpp" />
     <ClInclude Include="GameEngine\Primitives\IPrimitive.hpp" />
     <ClInclude Include="GameEngine\Primitives\Square.hpp" />
     <ClInclude Include="GameEngine\Scene.hpp" />
+    <ClInclude Include="GameEngine\Shader\GLSLProgram.hpp" />
+    <ClInclude Include="GameEngine\Shader\Material.hpp" />
+    <ClInclude Include="GameEngine\Shader\Shader.hpp" />
     <ClInclude Include="GameEngine\UI\Button.hpp" />
     <ClInclude Include="GameEngine\UI\Canvas.hpp" />
     <ClInclude Include="GameEngine\UI\Sprite.hpp" />
     <ClInclude Include="GameEngine\Window.hpp" />
     <ClInclude Include="main.hpp" />
-    <ClInclude Include="Prefabs\Brick.hpp" />
-    <ClInclude Include="Prefabs\IBlock.hpp" />
-    <ClInclude Include="Prefabs\JBlock.hpp" />
-    <ClInclude Include="Prefabs\LBlock.hpp" />
-    <ClInclude Include="Prefabs\OBlock.hpp" />
-    <ClInclude Include="Prefabs\Player.hpp" />
-    <ClInclude Include="Prefabs\SBlock.hpp" />
-    <ClInclude Include="Prefabs\TBlock.hpp" />
-    <ClInclude Include="Prefabs\ZBlock.hpp" />
-    <ClInclude Include="Scripts\BallManager.hpp" />
-    <ClInclude Include="Scripts\BrickManager.hpp" />
-    <ClInclude Include="Scripts\CameraMovement.hpp" />
-    <ClInclude Include="Scripts\CubeTetrisManager.hpp" />
-    <ClInclude Include="Scripts\GameManager.hpp" />
-    <ClInclude Include="Scripts\MenuLogic.hpp" />
-    <ClInclude Include="Scripts\PlayerMovement.hpp" />
-    <ClInclude Include="shader.hpp" />
+    <ClInclude Include="Assets\Prefabs\Brick.hpp" />
+    <ClInclude Include="Assets\Prefabs\IBlock.hpp" />
+    <ClInclude Include="Assets\Prefabs\JBlock.hpp" />
+    <ClInclude Include="Assets\Prefabs\LBlock.hpp" />
+    <ClInclude Include="Assets\Prefabs\OBlock.hpp" />
+    <ClInclude Include="Assets\Prefabs\Player.hpp" />
+    <ClInclude Include="Assets\Prefabs\SBlock.hpp" />
+    <ClInclude Include="Assets\Prefabs\TBlock.hpp" />
+    <ClInclude Include="Assets\Prefabs\ZBlock.hpp" />
+    <ClInclude Include="Assets\Scripts\CubeTetrisManager.hpp" />
+    <ClInclude Include="Assets\Scripts\GameManager.hpp" />
+    <ClInclude Include="Assets\Scripts\MenuLogic.hpp" />
     <ClInclude Include="GameEngine\Time\Time.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Shaders\GLSLShaders\PhongShader.frag" />
+    <None Include="Assets\Shaders\GLSLShaders\PhongShader.vert" />
     <None Include="config.cfg" />
-    <None Include="Shaders\OpaqueShader.frag" />
-    <None Include="Shaders\OpaqueShader.vert" />
-    <None Include="Shaders\PhongShader.frag" />
-    <None Include="Shaders\PhongShader.vert" />
-    <None Include="Shaders\TransparencyShader.frag" />
-    <None Include="Shaders\TransparencyShader.vert" />
+    <None Include="Assets\Shaders\GLSLShaders\OpaqueShader.frag" />
+    <None Include="Assets\Shaders\GLSLShaders\OpaqueShader.vert" />
+    <None Include="Assets\Shaders\GLSLShaders\TransparencyShader.frag" />
+    <None Include="Assets\Shaders\GLSLShaders\TransparencyShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

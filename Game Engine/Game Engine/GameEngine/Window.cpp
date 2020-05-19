@@ -1,6 +1,6 @@
 #include "Window.hpp"
 
-glm::vec2 Window::dimensions = glm::vec2(0.0f, 0.0f);
+glm::vec2 Window::dimensions = glm::vec2(0.0f);
 
 glm::vec2 Window::GetDimensions()
 {
