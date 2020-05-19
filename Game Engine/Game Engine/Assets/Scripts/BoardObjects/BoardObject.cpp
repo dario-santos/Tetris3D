@@ -62,12 +62,22 @@ void BoardObject::_Draw(GameBoard& board, vector<vector<GameObject*>>& graphicBo
         for (size_t j = 0 ; j < shape.size() ; ++j)
           if (shape[i][j] == 1)
           {
-            int x = center._x + mappingVector[i];
-            int y = center._y + mappingVector[j];
+            int world_y = center._x + mappingVector[i] - 2; // BoardSize is 22, 22 - 20 = 2
+            int world_x = center._y + mappingVector[j];
 
             if(value == 1)
             {
-              tetromino[cnt]->GetTransform()->TranslateTo(vec3(y * 10 + boardCenter, x * -10, 1.0f));
+
+              if (world_y < 0)
+              {
+                tetromino[cnt]->Disable();
+              }
+              else
+              {
+                tetromino[cnt]->Enable();
+
+              }
+              tetromino[cnt]->GetTransform()->TranslateTo(vec3(world_x * 10 + boardCenter, world_y * -10, 1.0f));
               graphicBoard[center._x + mappingVector[i]][center._y + mappingVector[j]] = tetromino[cnt];
               cnt++;
             }

@@ -28,19 +28,7 @@ GameObject::~GameObject()
     this->shader = nullptr;
   }
 
-  // Delete scripts
-  if(scripts.size() > 0)
-  {
-    for (Script* s : this->scripts)
-    {
-      if (s != nullptr)
-      {
-        delete s;
-        s = nullptr;
-      }
-    }
-    scripts.clear();
-  }
+  scripts.clear();
 }
 
 void GameObject::AddScript(Script* script)

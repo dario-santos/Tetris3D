@@ -58,7 +58,7 @@ struct Position
 
     void Reset() 
     {
-        _x = 0;
+        _x = 2;
         _y = 5;
     }
 
@@ -95,6 +95,10 @@ class GameManager : public Script
         // Score of the game
         int score = 0;
         int linesCleared = 0;
+
+        int level = 0;
+        int startLevel = 0;
+        int linesToNextLevel = 10;
         Gamepad gamepad;
         int lastPiece = -1;
         
@@ -105,7 +109,7 @@ class GameManager : public Script
         bool _generateNewObject = true;
 
         // In seconds
-        float inputDelayTime = 0.28f;
+        float inputDelayTime = 0.26f;
         float startInputCycleTime = Time::GetTime();
         float delayTime = 1;
         float startCycleTime = Time::GetTime();
@@ -143,10 +147,7 @@ class GameManager : public Script
         *  GameManager constructor
         *
         */
-        GameManager(Material* material, float boardCenter, Gamepad gamepad);
-
-        GameManager(const GameManager& other) = delete;
-        GameManager& operator=(const GameManager& other) = delete;
+        GameManager(Material* material, float boardCenter = 0.0f, int startLevel = 0, Gamepad gamepad = Gamepad::Gamepad1);
 
         /*
         * Function: Update

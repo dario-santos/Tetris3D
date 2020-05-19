@@ -11,17 +11,39 @@
 #include "BoardObjects/SquareObject.hpp"
 #include "BoardObjects/LineObject.hpp"
 
-const
 
-
-size_t BOARD_HEIGHT = 20;
+const size_t BOARD_HEIGHT = 22;
 const size_t BOARD_LENGTH = 10;
 
-GameManager::GameManager(Material* material, float boardCenter, Gamepad gamepad) :
+GameManager::GameManager(Material* material, float boardCenter, int startLevel, Gamepad gamepad) :
     _board(BOARD_HEIGHT, std::vector<int>(BOARD_LENGTH, 0)),
     graphicBoard(BOARD_HEIGHT, vector<GameObject*>(BOARD_LENGTH, nullptr))    
 {
+  this->startLevel = startLevel;
+  this->level      = startLevel;
+
+  if (level >= 25)
+    this->linesToNextLevel = 200;
+  else
+    this->linesToNextLevel = min((startLevel * 10 + 10), max(100, startLevel * 10 - 50));
+
+  // Progression
+  if (level < 10)
+    this->delayTime = (48 - (5 * level)) / 60.0f;
+  else if (level < 12)
+    this->delayTime = 5 / 60.0f;
+  else if (level < 15)
+    this->delayTime = 4 / 60.0f;
+  else if (level < 18)
+    this->delayTime = 3 / 60.0f;
+  else if (level < 28)
+    this->delayTime = 2 / 60.0f;
+  else
+    this->delayTime = 1 / 60.0f;
+
   this->material = material;
+
+
   this->boardCenter = boardCenter;
   this->gamepad     = gamepad;
   beep.reset(new AudioDevice(100));
@@ -124,9 +146,9 @@ void GameManager::ManageInput()
     if (movementAmmount == 0)
       inputDelayTime = 0.0f;
     else if (movementAmmount == 1)
-      inputDelayTime = 0.28f;
+      inputDelayTime = 0.26;
     else
-      inputDelayTime = 0.08f;
+      inputDelayTime = 0.1f;
   }
 
   // HardDrop
@@ -325,10 +347,17 @@ void GameManager::ClearLine()
 void GameManager::UpdateScore(int linesCleared)
 {
   this->linesCleared += linesCleared;
-  int level = this->linesCleared / 20;
+  this->linesToNextLevel -= linesCleared;
+
+  if (this->linesToNextLevel <= 0)
+  {
+    // Maximum -> 29
+    this->level = min(29, this->level + 1);
+    this->linesToNextLevel += 10;
+  }
   
   // Score
-  switch (linesCleared)
+  switch(linesCleared)
   {
   case 1:
     this->score += 40 * (level + 1);
@@ -350,17 +379,17 @@ void GameManager::UpdateScore(int linesCleared)
 
   // Progression
   if (level < 10)
-    this->delayTime = 1.0f - (0.04f * level);
+    this->delayTime = (48 - (5 * level))/60.0f;
   else if (level < 12)
-    this->delayTime = 0.1f;
+    this->delayTime = 5 / 60.0f;
   else if (level < 15)
-    this->delayTime = 0.08f;
+    this->delayTime = 4 / 60.0f;
   else if (level < 18)
-    this->delayTime = 0.06f;
+    this->delayTime = 3 / 60.0f;
   else if (level < 28)
-    this->delayTime = 0.04f;
+    this->delayTime = 2 / 60.0f;
   else
-    this->delayTime = 0.02f;
+    this->delayTime = 1 / 60.0f;
 }
 
 void GameManager::GameLoop()
@@ -437,7 +466,8 @@ void GameManager::Update()
 
   //ClearScreen();
   cout << "Score: " << this->score << endl;
-  cout << "Level: " << this->linesCleared/20 << endl;
-  cout << "Cleared Lines: " << this->linesCleared<< endl;
+  cout << "Level: " << this->level << endl;
+  cout << "Lines to Next Level: " << this->linesToNextLevel << endl;
+  cout << "Cleared Lines: " << this->linesCleared << endl;
   cout << "Delay Time: " << this->delayTime << endl;
 }

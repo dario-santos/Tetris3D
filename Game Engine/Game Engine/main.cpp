@@ -118,6 +118,7 @@ int main(void)
   Scene::LoadScene(scene);
 
   theme->Play2D("Assets/Audio/Theme_A.mp3", GL_TRUE);
+  glfwSwapInterval(1);
 
   // render scene for each frame
   do
@@ -134,6 +135,7 @@ int main(void)
 
     // looking for events
     glfwPollEvents();
+
   }while(glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS && glfwWindowShouldClose(window) == 0);
 
   // Cleanup VAO, VBOs, and shaders from GPU
@@ -299,7 +301,7 @@ void loadLevelSingleplayer(unique_ptr<Scene>& scene)
 {
   GameObject* go = new GameObject(
     new Transform(vec3(-200, -200, -200), vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f)), nullptr, "GameManager");
-  go->AddScript(new GameManager(new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f), 0, Gamepad::Gamepad1));
+  go->AddScript(new GameManager(new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f), 0));
   go->shader = nullptr;
   scene->AddGameObject(go);
 
@@ -323,14 +325,14 @@ void loadLevelMultiplayer(unique_ptr<Scene>& scene)
 {
   GameObject* p1 = new GameObject(
     new Transform(vec3(-200, -200, -200), vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f)), nullptr, "GameManager");
-  p1->AddScript(new GameManager(new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f), 0, Gamepad::Gamepad1));
+  p1->AddScript(new GameManager(new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f), 0));
   p1->shader = nullptr;
 
   scene->AddGameObject(p1);
 
   GameObject* p2 = new GameObject(
     new Transform(vec3(-200, -200, -200), vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f)), nullptr, "GameManager");
-  p2->AddScript(new GameManager(new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f), 150, Gamepad::Gamepad2));
+  p2->AddScript(new GameManager(new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f), 150, 0, Gamepad::Gamepad2));
   p2->shader = nullptr;
 
   scene->AddGameObject(p2);
