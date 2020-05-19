@@ -367,6 +367,18 @@ void GameManager::GameLoop()
 {
     bool createNewObjectIfFailed = true;
 
+    if (Time::GetTime() > delayTime + startCycleTime)
+    {
+      startCycleTime = Time::GetTime();
+      if (!_generateNewObject)
+      {
+        // Cannot move the object down 
+        // if this object is no longer valid
+        // and a new object needs to be generated first
+        MoveObjectDown();
+      }
+    }
+
     if(_generateNewObject)
     {
         ClearLine();
@@ -375,18 +387,6 @@ void GameManager::GameLoop()
     }
      
      ManageInput();
-
-    if(Time::GetTime() > delayTime + startCycleTime)
-    {
-      startCycleTime = Time::GetTime();
-      if(!_generateNewObject)
-      {
-        // Cannot move the object down 
-        // if this object is no longer valid
-        // and a new object needs to be generated first
-        MoveObjectDown();
-       }
-    }
     
     //ClearScreen();
     //DrawBoard();

@@ -6,11 +6,11 @@ const
 
 
 
-BoardObject::Shape ZObject::_shapeHorizontal = {   { 1, 1, 0 },
-                                                         { 0, 1, 1 },
-                                                         { 0, 0, 0 } };
+BoardObject::Shape ZObject::_shapeHorizontal = {     { 0, 0, 0 },
+                                                     { 1, 1, 0 },
+                                                     { 0, 1, 1 } };
 
-const BoardObject::Shape ZObject::_shapeVertical = {  { 0, 0, 1 },
+const BoardObject::Shape ZObject::_shapeVertical = { { 0, 0, 1 },
                                                      { 0, 1, 1 },
                                                      { 0, 1, 0 } };
 

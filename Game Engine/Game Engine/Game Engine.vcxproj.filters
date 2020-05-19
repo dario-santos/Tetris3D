@@ -93,9 +93,6 @@
     <ClCompile Include="Assets\Scripts\BoardObjects\BoardObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Assets\Scripts\BoardObjects\LineObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Assets\Scripts\BoardObjects\LInverseObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -121,6 +118,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Assets\Scripts\MenuLogic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\Scripts\BoardObjects\LineObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

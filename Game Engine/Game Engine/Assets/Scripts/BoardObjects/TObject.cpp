@@ -3,19 +3,6 @@
 #include <assert.h> 
 #include <iostream> 
 
-const
-
-
-
-
-
-BoardObject::Shape TObject::_shapeUp = {    { 0, 1, 0 },
-                                                  { 1, 1, 1 },
-                                                  { 0, 0, 0 } };
-
-const BoardObject::Shape TObject::_shapeRight = {  { 0, 1, 0 },
-                                                   { 0, 1, 1 },
-                                                   { 0, 1, 0 } };
 
 const BoardObject::Shape TObject::_shapeDown = {  { 0, 0, 0 },
                                                   { 1, 1, 1 },
@@ -25,10 +12,19 @@ const BoardObject::Shape TObject::_shapeLeft = {  { 0, 1, 0 },
                                                   { 1, 1, 0 },
                                                   { 0, 1, 0 } };
 
+const BoardObject::Shape TObject::_shapeUp = {    { 0, 1, 0 },
+                                                  { 1, 1, 1 },
+                                                  { 0, 0, 0 } };
+
+const BoardObject::Shape TObject::_shapeRight = {  { 0, 1, 0 },
+                                                   { 0, 1, 1 },
+                                                   { 0, 1, 0 } };
 
 
 
-const std::vector< TObject::Shape > TObject::_shape = { _shapeUp, _shapeRight, _shapeDown, _shapeLeft };
+
+
+const std::vector< TObject::Shape > TObject::_shape = { _shapeDown, _shapeLeft, _shapeUp, _shapeRight };
 
 const std::vector < int > TObject::_mappingVector = { -1, 0, 1 };
 

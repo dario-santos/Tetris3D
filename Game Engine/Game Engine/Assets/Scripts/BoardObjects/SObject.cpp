@@ -5,13 +5,13 @@
 const
 
 
-BoardObject::Shape SObject::_shapeHorizontal = {   { 0, 1, 1 },
-                                                         { 1, 1, 0 },
-                                                         { 0, 0, 0 } };
+BoardObject::Shape SObject::_shapeHorizontal = {   { 0, 0, 0 },
+                                                   { 0, 1, 1 },
+                                                   { 1, 1, 0 } };
 
-const BoardObject::Shape SObject::_shapeVertical = {  { 1, 0, 0 },
-                                                     { 1, 1, 0 },
-                                                     { 0, 1, 0 } };
+const BoardObject::Shape SObject::_shapeVertical = { { 0, 1, 0 },
+                                                     { 0, 1, 1 },
+                                                     { 0, 0, 1 } };
 
 
 const std::vector< SObject::Shape > SObject::_shape = { _shapeHorizontal, _shapeVertical };

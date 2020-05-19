@@ -14,7 +14,6 @@ bool BoardObject::VerifyColision(const GameBoard& board, const Position& pos) co
         {
             if(shape[i][j] == 1)
             {
-                // Check boundaries 
                 if(pos._x + mappingVector[i] >= board.size())
                 {
                     // Fora do tabuleiro por baixo.

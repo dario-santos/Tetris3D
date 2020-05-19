@@ -59,7 +59,7 @@ struct Position
     void Reset() 
     {
         _x = 0;
-        _y = 4;
+        _y = 5;
     }
 
     int _x;

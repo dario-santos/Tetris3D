@@ -3,15 +3,13 @@
 #include <assert.h> 
 #include <iostream> 
 
-const
 
+const BoardObject::Shape SquareObject::_shape = { { 0, 0, 0, 0 },
+                                                  { 0, 1, 1, 0 },
+                                                  { 0, 1, 1, 0 },
+                                                  { 0, 0, 0, 0 } };
 
-
-BoardObject::Shape SquareObject::_shape = {    { 1, 1, 0 },
-                                                     { 1, 1, 0 },
-                                                     { 0, 0, 0 } };
-
-const std::vector < int > SquareObject::_mappingVector = { -1, 0, 1 };
+const std::vector < int > SquareObject::_mappingVector = { -2, -1, 0, 1, 2 };
 
 SquareObject::SquareObject()
 {
@@ -23,7 +21,7 @@ const SquareObject::Shape& SquareObject::_GetShape() const
     return _shape;
 }
 
-const std::vector< int >& SquareObject::_GetMapping() const
+const std::vector<int>& SquareObject::_GetMapping() const
 {
     return _mappingVector;
 }
