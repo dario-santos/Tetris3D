@@ -137,7 +137,6 @@ void GameManager::ChooseNextPiece()
   if (currentPieceType != -1)
   {
     _currenctObject->UpdateWorldPosition(this->piece, vec3(_currentPosition._x, _currentPosition._y, 1), this->boardCenter, pieceScale);
-    canHoldPiece = true;
   }
   
 }
@@ -214,8 +213,6 @@ void GameManager::ManageInput()
   {
     isRotationKeyPressed = true;
     Transformation(false);
-    _currenctObject->UpdateWorldPosition(this->piece, vec3(-20, -20, 1), this->boardCenter, pieceScale);
-
   }
 
   // Hold
@@ -223,10 +220,11 @@ void GameManager::ManageInput()
   {
     canHoldPiece = false;
 
-
-    _currenctObject->Restart();
     _currenctObject->UpdateWorldPosition(this->piece, vec3(5, 13, 1), this->boardCenter, pieceScale);
     _currenctObject->Erase(_board, graphicBoard, _currentPosition, this->piece, this->boardCenter, pieceScale);
+    for (GameObject* g : piece)
+      g->Enable();
+    _currenctObject->Restart();
 
     _currentPosition.Reset();
 
@@ -570,7 +568,7 @@ void GameManager::GameLoop()
      ManageInput();
     
     //ClearScreen();
-    //DrawBoard();
+    // DrawBoard();
 }
 
 void GameManager::ResetGame() 

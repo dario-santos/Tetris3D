@@ -113,7 +113,7 @@ class GameManager : public Script
         bool isHardDropKeyPressed = false;
         bool isRotationKeyPressed = false;
         bool _generateNewObject = true;
-        bool canHoldPiece = true;
+        bool canHoldPiece = false;
 
         // In seconds
         float inputDelayTime = 0.26f;
