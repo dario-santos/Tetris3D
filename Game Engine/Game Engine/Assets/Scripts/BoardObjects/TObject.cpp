@@ -59,8 +59,12 @@ void TObject::Transformation(bool isClockWise)
   }
 }
 
-
 std::unique_ptr<BoardObject> TObject::Clone() const
 {
     return std::make_unique< TObject >(*this);
+}
+
+void TObject::Restart()
+{
+  _state = static_cast<State>(0);
 }

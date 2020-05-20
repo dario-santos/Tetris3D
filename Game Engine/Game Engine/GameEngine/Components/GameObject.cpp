@@ -28,6 +28,15 @@ GameObject::~GameObject()
     this->shader = nullptr;
   }
 
+  for (Script* s : scripts)
+  {
+    if (s != nullptr)
+    {
+      delete s;
+      s = nullptr;
+    }
+  }
+
   scripts.clear();
 }
 

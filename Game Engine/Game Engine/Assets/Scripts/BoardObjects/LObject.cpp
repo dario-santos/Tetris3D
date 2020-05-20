@@ -61,3 +61,8 @@ std::unique_ptr<BoardObject> LObject::Clone() const
 {
     return std::make_unique< LObject >(*this);
 }
+
+void LObject::Restart()
+{
+  _state = static_cast<State>(0);
+}

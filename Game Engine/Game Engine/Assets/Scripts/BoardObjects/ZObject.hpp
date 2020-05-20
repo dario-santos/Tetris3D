@@ -18,12 +18,14 @@ public:
       
       
       
-      ZObject& other) = default;
+    ZObject& other) = default;
     ZObject& operator=(const ZObject& other) = default;
                 
     virtual void Transformation(bool isClockWise) override;
 
     std::unique_ptr<BoardObject> Clone() const override;    
+
+    void Restart() override;
 
 protected:
     

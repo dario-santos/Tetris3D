@@ -52,48 +52,92 @@ GameManager::GameManager(Material* material, float boardCenter, int startLevel, 
   srand((unsigned)time(0));
 }
 
-void GameManager::ChoosePiece()
-{  
-    // Nes randomizer
+void GameManager::ChooseNextPiece()
+{
+  canHoldPiece = false;
+  currentPieceType = nextPieceType;
+
+  if (currentPieceType != -1)
+  {
+    // Passar a antiga para ativa
+    piece = nextPiece;
+  }
+
+
+  // Nes randomizer
   int r = rand() % tetrominos::Total;
   if (lastPiece == r)
     r = rand() % tetrominos::Total;
   lastPiece = r;
+  nextPieceType = r;
 
-  switch(lastPiece) // [0, 7[
+  switch (lastPiece) // [0, 7[
   {
-    case tetrominos::O:
-      _currenctObject.reset(new SquareObject());
-      this->piece = OBlock::AddOBlock(vec3(255, 213, 0), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f));
-      break;
-    case tetrominos::I:
-      _currenctObject.reset(new LineObject());
-      this->piece = IBlock::AddIBlock(vec3(0, 255, 255), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f));
-      break;
-    case tetrominos::L:
-      _currenctObject.reset(new LObject());
-      this->piece = LBlock::AddLBlock(vec3(3, 65, 174), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f));
-      break;
-    case tetrominos::J:
-      _currenctObject.reset(new LInverseObject());
-      this->piece = JBlock::AddJBlock(vec3(255, 151, 28), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f));
-      break;
-    case tetrominos::T:
-      _currenctObject.reset(new TObject());
-      this->piece = TBlock::AddTBlock(vec3(128, 0, 128), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f));
-      break;
-    case tetrominos::Z:
-      _currenctObject.reset(new ZObject());
-      this->piece = ZBlock::AddZBlock(vec3(255, 50, 19), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f));
-      break;    
-    case tetrominos::S:
-      _currenctObject.reset(new SObject());      
-      this->piece = SBlock::AddSBlock(vec3(114, 203, 59), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f));
-      break;
-    }
+  case tetrominos::O:
+    _currenctObject.reset(new SquareObject());
+    this->nextPiece = OBlock::AddOBlock(pieceScale, vec3(255, 213, 0), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f));
+    break;
+  case tetrominos::I:
+    _currenctObject.reset(new LineObject());
+    this->nextPiece = IBlock::AddIBlock(pieceScale, vec3(0, 255, 255), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f));
+    break;
+  case tetrominos::L:
+    _currenctObject.reset(new LObject());
+    this->nextPiece = LBlock::AddLBlock(pieceScale, vec3(3, 65, 174), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f));
+    break;
+  case tetrominos::J:
+    _currenctObject.reset(new LInverseObject());
+    this->nextPiece = JBlock::AddJBlock(pieceScale, vec3(255, 151, 28), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f));
+    break;
+  case tetrominos::T:
+    _currenctObject.reset(new TObject());
+    this->nextPiece = TBlock::AddTBlock(pieceScale, vec3(128, 0, 128), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f));
+    break;
+  case tetrominos::Z:
+    _currenctObject.reset(new ZObject());
+    this->nextPiece = ZBlock::AddZBlock(pieceScale, vec3(255, 50, 19), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f));
+    break;
+  case tetrominos::S:
+    _currenctObject.reset(new SObject());
+    this->nextPiece = SBlock::AddSBlock(pieceScale, vec3(114, 203, 59), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f));
+    break;
+  }
 
-  for(GameObject *g : this->piece)
+  for (GameObject* g : this->nextPiece)
     Scene::CurrentScene()->AddGameObject(g);
+
+  _currenctObject->UpdateWorldPosition(this->nextPiece, vec3(10, 13, 1), this->boardCenter, pieceScale);
+
+  switch (currentPieceType) // [0, 7[
+  {
+  case tetrominos::O:
+    _currenctObject.reset(new SquareObject());
+    break;
+  case tetrominos::I:
+    _currenctObject.reset(new LineObject());
+    break;
+  case tetrominos::L:
+    _currenctObject.reset(new LObject());
+    break;
+  case tetrominos::J:
+    _currenctObject.reset(new LInverseObject());
+    break;
+  case tetrominos::T:
+    _currenctObject.reset(new TObject());
+    break;
+  case tetrominos::Z:
+    _currenctObject.reset(new ZObject());
+    break;
+  case tetrominos::S:
+    _currenctObject.reset(new SObject());
+    break;
+  }
+  if (currentPieceType != -1)
+  {
+    _currenctObject->UpdateWorldPosition(this->piece, vec3(_currentPosition._x, _currentPosition._y, 1), this->boardCenter, pieceScale);
+    canHoldPiece = true;
+  }
+  
 }
 
 void GameManager::DrawBoard()
@@ -168,6 +212,66 @@ void GameManager::ManageInput()
   {
     isRotationKeyPressed = true;
     Transformation(false);
+    _currenctObject->UpdateWorldPosition(this->piece, vec3(-20, -20, 1), this->boardCenter, pieceScale);
+
+  }
+
+  // Hold
+  if((Input::GetKey("Hold" + player) || Input::GetButton(ButtonCode::RB, gamepad)) && canHoldPiece)
+  {
+    canHoldPiece = false;
+
+
+    _currenctObject->Restart();
+    _currenctObject->UpdateWorldPosition(this->piece, vec3(5, 13, 1), this->boardCenter, pieceScale);
+    _currenctObject->Erase(_board, graphicBoard, _currentPosition, this->piece, this->boardCenter, pieceScale);
+
+    _currentPosition.Reset();
+
+    if (holdPiece.empty())
+    {
+      _generateNewObject = true;
+      holdPiece = piece;
+      holdPieceType = currentPieceType;
+      currentPieceType = -1;
+    }
+    else
+    {
+      switch (holdPieceType) // [0, 7[
+      {
+      case tetrominos::O:
+        _currenctObject.reset(new SquareObject());
+        break;
+      case tetrominos::I:
+        _currenctObject.reset(new LineObject());
+        break;
+      case tetrominos::L:
+        _currenctObject.reset(new LObject());
+        break;
+      case tetrominos::J:
+        _currenctObject.reset(new LInverseObject());
+        break;
+      case tetrominos::T:
+        _currenctObject.reset(new TObject());
+        break;
+      case tetrominos::Z:
+        _currenctObject.reset(new ZObject());
+        break;
+      case tetrominos::S:
+        _currenctObject.reset(new SObject());
+        break;
+      }
+      int tmp = holdPieceType;
+      holdPieceType = currentPieceType;
+      currentPieceType = tmp;
+      
+      vector<GameObject*> tmpPiece = piece;
+      piece = holdPiece;
+      holdPiece = tmpPiece;
+    }
+    beep.get()->Play2D("Assets/Audio/SFX_PieceHold.wav");
+    
+    startCycleTime = startCycleTime - delayTime;
   }
 
   isHardDropKeyPressed = Input::GetKey("HardDrop" + player) || Input::GetButton(ButtonCode::DPAD_UP, gamepad);
@@ -179,14 +283,14 @@ void GameManager::Transformation(bool isClockWise)
     unique_ptr<BoardObject> tmpObject = _currenctObject->Clone();
     tmpObject->Transformation(isClockWise);
     
-    _currenctObject->Erase(_board, graphicBoard,_currentPosition, this->piece, this->boardCenter);
+    _currenctObject->Erase(_board, graphicBoard,_currentPosition, this->piece, this->boardCenter, pieceScale);
     if(!tmpObject->VerifyColision(_board, _currentPosition))
     {
       beep.get()->Play2D("Assets/Audio/SFX_PieceRotate.wav");
       _currenctObject.reset(tmpObject.release());
     }
 
-    _currenctObject->Draw(_board, graphicBoard, _currentPosition, this->piece, this->boardCenter);
+    _currenctObject->Draw(_board, graphicBoard, _currentPosition, this->piece, this->boardCenter, pieceScale);
     tmpObject.release();
 }
 
@@ -234,11 +338,12 @@ void GameManager::MoveObjectHardDrop()
 
 bool GameManager::UpdatePosition(const Position& newPosition, const bool createNewObjectIfFailed)
 {
-    _currenctObject->Erase(_board, graphicBoard, _currentPosition, this->piece, this->boardCenter);
+    _currenctObject->Erase(_board, graphicBoard, _currentPosition, this->piece, this->boardCenter, pieceScale);
 
     if (_currenctObject->VerifyColision(_board, newPosition))
     {
-        _currenctObject->Draw(_board, graphicBoard, _currentPosition, this->piece, this->boardCenter);
+
+        _currenctObject->Draw(_board, graphicBoard, _currentPosition, this->piece, this->boardCenter, pieceScale);
 
         if (createNewObjectIfFailed)
         {
@@ -249,7 +354,7 @@ bool GameManager::UpdatePosition(const Position& newPosition, const bool createN
     }
     else
     {
-        _currenctObject->Draw(_board, graphicBoard, newPosition, this->piece, this->boardCenter);
+        _currenctObject->Draw(_board, graphicBoard, newPosition, this->piece, this->boardCenter, pieceScale);
         _currentPosition = newPosition;
         return false;
     }
@@ -398,7 +503,6 @@ void GameManager::GameLoop()
 
     if (Time::GetTime() > delayTime + startCycleTime)
     {
-      startCycleTime = Time::GetTime();
       if (!_generateNewObject)
       {
         // Cannot move the object down 
@@ -406,12 +510,18 @@ void GameManager::GameLoop()
         // and a new object needs to be generated first
         MoveObjectDown();
       }
+      startCycleTime = Time::GetTime();
     }
 
     if(_generateNewObject)
     {
         ClearLine();
-        ChoosePiece();
+        if(nextPieceType == -1)
+        {
+          ChooseNextPiece();
+        }
+        ChooseNextPiece();
+        canHoldPiece = true;
         _generateNewObject = false;
     }
      

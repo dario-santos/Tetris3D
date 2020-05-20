@@ -2,22 +2,9 @@
 
 Scene::~Scene() 
 {
-  for(ICamera* cam : cameras)
+  for (auto* go : gameObjects)
   {
-    delete cam;
-    cam = nullptr;
-  }
-
-  for (GameObject* go : gameObjects)
-  {
-    delete go;
-    go = nullptr;
-  }
-
-  for (Canvas* c : canvas)
-  {
-    delete c;
-    c = nullptr;
+    //delete go;
   }
 
   cameras.clear();

@@ -104,9 +104,11 @@ class GameManager : public Script
         
         // Movement
         int movementAmmount = 0;
+        float pieceScale = 10.0f;
         bool isHardDropKeyPressed = false;
         bool isRotationKeyPressed = false;
         bool _generateNewObject = true;
+        bool canHoldPiece = true;
 
         // In seconds
         float inputDelayTime = 0.26f;
@@ -115,14 +117,21 @@ class GameManager : public Script
         float startCycleTime = Time::GetTime();
 
         vector<GameObject*> piece;
+        vector<GameObject*> nextPiece;
+        vector<GameObject*> holdPiece;
         vector<vector<GameObject*>> graphicBoard;
         
+        int holdPieceType = -1;
+        int currentPieceType = -1;
+        int nextPieceType = -1;
+
         unique_ptr<BoardObject> _currenctObject;
+
         GameBoard _board;
         
         Position _currentPosition;
 
-        void ChoosePiece();
+        void ChooseNextPiece();
         void DrawBoard();
         void ManageInput();
         void Transformation(bool isClockWise);
@@ -148,7 +157,6 @@ class GameManager : public Script
         *
         */
         GameManager(Material* material, float boardCenter = 0.0f, int startLevel = 0, Gamepad gamepad = Gamepad::Gamepad1);
-
         /*
         * Function: Update
         * --------------------------------

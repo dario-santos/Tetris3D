@@ -56,3 +56,8 @@ std::unique_ptr<BoardObject> LineObject::Clone() const
 {
     return std::make_unique< LineObject >(*this);
 }
+
+void LineObject::Restart()
+{
+  _state = static_cast<State>(0);
+}

@@ -63,3 +63,8 @@ std::unique_ptr<BoardObject> LInverseObject::Clone() const
 {
     return std::make_unique< LInverseObject >(*this);
 }
+
+void LInverseObject::Restart()
+{
+  _state = static_cast<State>(0);
+}

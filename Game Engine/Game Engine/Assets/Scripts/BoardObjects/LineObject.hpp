@@ -24,7 +24,8 @@ public:
     virtual void Transformation(bool isClockWise) override;
 
     std::unique_ptr<BoardObject> Clone() const override;
-    //void Update() override;
+    
+    void Restart() override;
 
 
 protected:
@@ -40,6 +41,7 @@ private:
         STATE_VERTICAL,
         STATES_TOTAL
     };
+
 
 
     static const Shape _shapeHorizontal;

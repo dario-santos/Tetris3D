@@ -183,7 +183,6 @@
     <ClCompile Include="GameEngine\UI\Sprite.cpp" />
     <ClCompile Include="GameEngine\Window.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Assets\Scripts\CubeTetrisManager.cpp" />
     <ClCompile Include="Assets\Scripts\GameManager.cpp" />
     <ClCompile Include="Assets\Scripts\MenuLogic.cpp" />
     <ClCompile Include="GameEngine\Time\Time.cpp" />
@@ -232,7 +231,6 @@
     <ClInclude Include="Assets\Prefabs\SBlock.hpp" />
     <ClInclude Include="Assets\Prefabs\TBlock.hpp" />
     <ClInclude Include="Assets\Prefabs\ZBlock.hpp" />
-    <ClInclude Include="Assets\Scripts\CubeTetrisManager.hpp" />
     <ClInclude Include="Assets\Scripts\GameManager.hpp" />
     <ClInclude Include="Assets\Scripts\MenuLogic.hpp" />
     <ClInclude Include="GameEngine\Time\Time.hpp" />

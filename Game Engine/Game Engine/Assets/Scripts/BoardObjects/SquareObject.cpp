@@ -35,3 +35,8 @@ std::unique_ptr<BoardObject> SquareObject::Clone() const
 {
     return std::make_unique< SquareObject >(*this);
 }
+
+void SquareObject::Restart()
+{
+  // Nothing
+}

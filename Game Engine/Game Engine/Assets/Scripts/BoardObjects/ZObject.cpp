@@ -54,3 +54,8 @@ std::unique_ptr<BoardObject> ZObject::Clone() const
 {
     return std::make_unique< ZObject >( *this );
 }
+
+void ZObject::Restart()
+{
+  _state = static_cast<State>(0);
+}

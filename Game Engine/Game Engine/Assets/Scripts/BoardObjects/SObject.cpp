@@ -53,3 +53,8 @@ std::unique_ptr<BoardObject> SObject::Clone() const
 {
     return std::make_unique< SObject >(*this);
 }
+
+void SObject::Restart()
+{
+  _state = static_cast<State>(0);
+}

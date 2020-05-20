@@ -38,17 +38,17 @@ bool BoardObject::VerifyColision(const GameBoard& board, const Position& pos) co
     return false;
 }
 
-void BoardObject::Draw(GameBoard& board, vector<vector<GameObject*>>& graphicBoard, const Position& pos, vector<GameObject*> tetromino, float boardCenter) const
+void BoardObject::Draw(GameBoard& board, vector<vector<GameObject*>>& graphicBoard, const Position& pos, vector<GameObject*> tetromino, float boardCenter, float pieceScale) const
 {
-    _Draw(board, graphicBoard, pos, FILL, tetromino, boardCenter);
+    _Draw(board, graphicBoard, pos, FILL, tetromino, boardCenter, pieceScale);
 }
 
-void BoardObject::Erase(GameBoard& board, vector<vector<GameObject*>>& graphicBoard, const Position& pos, vector<GameObject*> tetromino, float boardCenter) const
+void BoardObject::Erase(GameBoard& board, vector<vector<GameObject*>>& graphicBoard, const Position& pos, vector<GameObject*> tetromino, float boardCenter, float pieceScale) const
 {
-    _Draw(board, graphicBoard, pos, BLANK, tetromino, boardCenter);
+    _Draw(board, graphicBoard, pos, BLANK, tetromino, boardCenter, pieceScale);
 }
 
-void BoardObject::_Draw(GameBoard& board, vector<vector<GameObject*>>& graphicBoard, const Position& center, const int value, vector<GameObject*> tetromino, float boardCenter) const
+void BoardObject::_Draw(GameBoard& board, vector<vector<GameObject*>>& graphicBoard, const Position& center, const int value, vector<GameObject*> tetromino, float boardCenter, float pieceScale) const
 {
     int cnt = 0;
     const Shape& shape = _GetShape();
@@ -77,7 +77,7 @@ void BoardObject::_Draw(GameBoard& board, vector<vector<GameObject*>>& graphicBo
                 tetromino[cnt]->Enable();
 
               }
-              tetromino[cnt]->GetTransform()->TranslateTo(vec3(world_x * 10 + boardCenter, world_y * -10, 1.0f));
+              tetromino[cnt]->GetTransform()->TranslateTo(vec3(world_x * pieceScale + boardCenter, world_y * -pieceScale, 1.0f));
               graphicBoard[center._x + mappingVector[i]][center._y + mappingVector[j]] = tetromino[cnt];
               cnt++;
             }
@@ -89,4 +89,27 @@ void BoardObject::_Draw(GameBoard& board, vector<vector<GameObject*>>& graphicBo
             board[center._x + mappingVector[i]][center._y + mappingVector[j]] = value;
           }
     }
+}
+
+void BoardObject::UpdateWorldPosition(vector<GameObject*> tetromino, vec3 newPosition, float boardCenter, float pieceScale)
+{
+  int cnt = 0;
+
+  const Shape& shape = _GetShape();
+  const std::vector<int>& mappingVector = _GetMapping();
+
+  for(size_t i = 0; i < shape.size(); ++i)
+  {
+    for (size_t j = 0; j < shape.size(); ++j)
+    {
+      if (shape[i][j] == 1)
+      {
+        int world_y = newPosition.x + mappingVector[i] - 2; // BoardSize is 22, 22 - 20 = 2
+        int world_x = newPosition.y + mappingVector[j];
+
+        tetromino[cnt]->GetTransform()->TranslateTo(vec3(world_x * pieceScale + boardCenter, world_y * -pieceScale, 1.0f));
+        cnt++;
+      }
+    }
+  }
 }

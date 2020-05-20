@@ -180,7 +180,8 @@ void callLoadLevelSinglePlayer()
     scene.reset(new Scene());
 
     // Single Player camera
-    scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
+    // scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
+    scene->AddCamera(new Orthographic(vec3(-100, -200, 0), vec3(300 - 100, 225 - 200, 5)));
     Scene::LoadScene(scene);
 
     loadLevelSingleplayer(scene);
@@ -189,9 +190,10 @@ void callLoadLevelSinglePlayer()
 void callLoadLevelMultiPlayer()
 {
     scene.reset(new Scene());
-
+    
     // Single Player camera
-    scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(125, -100, 250), vec3(125, -100, 0), vec3(0, 1, 0)));
+    //scene->AddCamera(new Perspective(glm::radians(45.0f), 4 / 3.0f, 0.1f, 900, vec3(140, -90, 400), vec3(140, -90, 0), vec3(0, 1, 0)));
+    scene->AddCamera(new Orthographic(vec3(-50, -220, 0), vec3(400 - 50, 300 - 220, 5)));
     Scene::LoadScene(scene);
 
     loadLevelMultiplayer(scene);
@@ -213,7 +215,7 @@ void callLoadLevelMainMenu()
     scene.reset(new Scene());
 
     // Single Player camera
-    scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
+    scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(50, -100, 500), vec3(50, -100, 0), vec3(0, 1, 0)));
     Scene::LoadScene(scene);
     loadLevelMainMenu(scene);
 
@@ -332,10 +334,14 @@ void loadLevelMultiplayer(unique_ptr<Scene>& scene)
 
   GameObject* p2 = new GameObject(
     new Transform(vec3(-200, -200, -200), vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f)), nullptr, "GameManager");
-  p2->AddScript(new GameManager(new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f), 150, 0, Gamepad::Gamepad2));
+  p2->AddScript(new GameManager(new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f), 190, 0, Gamepad::Gamepad2));
   p2->shader = nullptr;
 
   scene->AddGameObject(p2);
+
+  scene->AddLightSource(new LightSource(vec3(1.0f), vec3(0.4), vec3(1.0f), vec4(5.0f, 5.0f, 2.0f, 1.0f)));
+  scene->AddLightSource(new LightSource(vec3(1.0f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), vec4(-5.0f, 5.0f, 2.0f, 1.0f)));
+
 
   // Tabuleiro P1
   scene->AddGameObject(Brick::AddBrick(
@@ -349,11 +355,11 @@ void loadLevelMultiplayer(unique_ptr<Scene>& scene)
 
   // Tabuleiro P2
   scene->AddGameObject(Brick::AddBrick(
-    new Transform(vec3(45 + 150, -195, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(100.0f, 1.0f, 10.0f)), vec3(125, 200, 10), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)));
+    new Transform(vec3(45 + 190, -195, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(100.0f, 1.0f, 10.0f)), vec3(125, 200, 10), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)));
 
   scene->AddGameObject(Brick::AddBrick(
-    new Transform(vec3(95 + 150, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(75, 200, 10), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)));
+    new Transform(vec3(95 + 190, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(75, 200, 10), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)));
 
   scene->AddGameObject(Brick::AddBrick(
-    new Transform(vec3(-5 + 150, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(20, 200, 10), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)));
+    new Transform(vec3(-5 + 190, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(20, 200, 10), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)));
 }
