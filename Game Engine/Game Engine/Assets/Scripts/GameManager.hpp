@@ -86,6 +86,11 @@ class GameManager : public Script
             S,
             Total
         };
+        
+        static vector<int> pieceList;
+
+        int pieceListIndex = 0;
+
 
         Material* material = nullptr;
         float boardCenter = 0.0f;

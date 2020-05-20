@@ -52,24 +52,26 @@ GameManager::GameManager(Material* material, float boardCenter, int startLevel, 
   srand((unsigned)time(0));
 }
 
+vector<int> GameManager::pieceList = vector<int>();
+
 void GameManager::ChooseNextPiece()
 {
-  canHoldPiece = false;
-  currentPieceType = nextPieceType;
+  //canHoldPiece = false;
+  //currentPieceType = nextPieceType;
 
-  if (currentPieceType != -1)
-  {
+  //if (currentPieceType != -1)
+  //{
     // Passar a antiga para ativa
-    piece = nextPiece;
-  }
+  //  piece = nextPiece;
+  //}
 
 
   // Nes randomizer
-  int r = rand() % tetrominos::Total;
-  if (lastPiece == r)
-    r = rand() % tetrominos::Total;
-  lastPiece = r;
-  nextPieceType = r;
+  //int r = rand() % tetrominos::Total;
+  //if (lastPiece == r)
+  //  r = rand() % tetrominos::Total;
+  //lastPiece = r;
+  //nextPieceType = r;
 
   switch (lastPiece) // [0, 7[
   {
@@ -515,11 +517,51 @@ void GameManager::GameLoop()
 
     if(_generateNewObject)
     {
+        canHoldPiece = false;
         ClearLine();
-        if(nextPieceType == -1)
+
+
+        if (nextPieceType == -1)
         {
+          // Add new int to vector
+          if (GameManager::pieceList.empty() || this->pieceListIndex >= GameManager::pieceList.size())
+          {
+            // Nes randomizer
+            int r = rand() % tetrominos::Total;
+            pieceList.push_back(r);
+          }
+
+          lastPiece = pieceList[pieceListIndex];
+          nextPieceType = pieceList[pieceListIndex];
+          pieceListIndex++;
+
           ChooseNextPiece();
         }
+         
+        // Add new int to vector
+        if (this->pieceListIndex >= GameManager::pieceList.size())
+        {
+          // Nes randomizer
+          int r = rand() % tetrominos::Total;
+          if (pieceList[pieceList.size() - 1] == r)
+            r = rand() % tetrominos::Total;
+
+          pieceList.push_back(r);
+        }
+        
+        currentPieceType = lastPiece;
+
+        lastPiece = pieceList[pieceListIndex];
+        nextPieceType = pieceList[pieceListIndex];
+        pieceListIndex++;
+        
+
+        if (currentPieceType != -1)
+        {
+            // Passar a antiga para ativa
+            piece = nextPiece;
+        }
+
         ChooseNextPiece();
         canHoldPiece = true;
         _generateNewObject = false;
