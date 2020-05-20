@@ -18,6 +18,14 @@ GameManager::GameManager(Material* material, float boardCenter, int startLevel, 
     _board(BOARD_HEIGHT, std::vector<int>(BOARD_LENGTH, 0)),
     graphicBoard(BOARD_HEIGHT, vector<GameObject*>(BOARD_LENGTH, nullptr))    
 {
+  this->shadowPiece = OBlock::AddOBlock(10.0f, vec3(255, 255, 255), material);
+  
+  for (GameObject* g : this->shadowPiece)
+    Scene::CurrentScene()->AddGameObject(g);
+
+  this->_currentPosition.Reset();
+
+
   this->startLevel = startLevel;
   this->level      = startLevel;
 
@@ -46,6 +54,9 @@ GameManager::GameManager(Material* material, float boardCenter, int startLevel, 
   this->boardCenter = boardCenter;
   this->gamepad     = gamepad;
   beep.reset(new AudioDevice(100));
+  
+  _holder.reset(new PieceHolder());
+  
 
   // Set random sequence
   srand((unsigned)time(0));
@@ -55,23 +66,6 @@ vector<int> GameManager::pieceList = vector<int>();
 
 void GameManager::ChooseNextPiece()
 {
-  //canHoldPiece = false;
-  //currentPieceType = nextPieceType;
-
-  //if (currentPieceType != -1)
-  //{
-    // Passar a antiga para ativa
-  //  piece = nextPiece;
-  //}
-
-
-  // Nes randomizer
-  //int r = rand() % tetrominos::Total;
-  //if (lastPiece == r)
-  //  r = rand() % tetrominos::Total;
-  //lastPiece = r;
-  //nextPieceType = r;
-
   switch (lastPiece) // [0, 7[
   {
   case tetrominos::O:
@@ -141,17 +135,19 @@ void GameManager::ChooseNextPiece()
 
 void GameManager::DrawBoard()
 {
-    for (size_t i = 0; i < _board.size(); i++)
+  for (size_t i = 0; i < _board.size(); i++)
+  {
+    cout << endl;
+    for (size_t j = 0; j < _board[i].size(); j++)
     {
-        cout << endl;
-        for (size_t j = 0; j < _board[i].size(); j++)
-        {
-            if (_board[i][j] == 0)
-                cout << ". ";
-            else
-                cout << "# ";
-        }
+      if (_board[i][j] == 0)
+        cout << ". ";
+      else if (_board[i][j] == 1)
+        cout << "# ";
+      else
+        cout << "o ";
     }
+  }
 }
 
 void GameManager::ManageInput()
@@ -239,6 +235,7 @@ void GameManager::HoldPiece()
     g->Enable();
   _currenctObject->Restart();
 
+
   _currentPosition.Reset();
 
   if (holdPiece.empty())
@@ -296,8 +293,10 @@ void GameManager::Transformation(bool isClockWise)
 
     if(!tmpObject->VerifyColision(_board, _currentPosition))
     {
+      EraseShadowHint();
       beep.get()->Play2D("Assets/Audio/SFX_PieceRotate.wav");
       _currenctObject.reset(tmpObject.get());
+      DrawShadowHint();
     }
     
     _currenctObject->Draw(_board, graphicBoard, _currentPosition, this->piece, this->boardCenter, pieceScale);
@@ -357,16 +356,20 @@ bool GameManager::UpdatePosition(const Position& newPosition, const bool createN
 
         if (createNewObjectIfFailed)
         {
-            _generateNewObject = true;
-            _currentPosition.Reset();
+          _currentPosition.Reset();
+          _generateNewObject = true;
         }
         return true;
     }
     else
     {
-        _currenctObject->Draw(_board, graphicBoard, newPosition, this->piece, this->boardCenter, pieceScale);
-        _currentPosition = newPosition;
-        return false;
+      EraseShadowHint();
+      _currenctObject->Draw(_board, graphicBoard, newPosition, this->piece, this->boardCenter, pieceScale);
+      _currentPosition = newPosition;
+      DrawShadowHint();
+
+
+      return false;
     }
 }
 
@@ -509,6 +512,17 @@ void GameManager::UpdateScore(int linesCleared)
     this->delayTime = 1 / 60.0f;
 }
 
+void GameManager::GameOver()
+{
+  if (_currenctObject->VerifyColision(_board, _currentPosition))
+  {
+    cout << "X: " << _currentPosition._x << "Y: " << _currentPosition._y << endl;
+    cout << "GameOver" << endl;
+    //Todo Restart game
+    _flagGameover = true;
+  }
+}
+
 void GameManager::GameLoop()
 {
     bool createNewObjectIfFailed = true;
@@ -523,11 +537,10 @@ void GameManager::GameLoop()
         MoveObjectDown();
       }
 
-     
       startCycleTime = Time::GetTime();
     }
-     if(!_generateNewObject)
-       ManageInput();
+
+     ManageInput();
     
      if(_generateNewObject)
     {
@@ -579,8 +592,14 @@ void GameManager::GameLoop()
         }
 
         ChooseNextPiece();
+
+        _holder->UpdateStatusToNotModified();
+        GameOver();
+        if (_flagGameover)
+          return;
         canHoldPiece = true;
         _generateNewObject = false;
+
     }
     
     //ClearScreen();
@@ -636,4 +655,47 @@ void GameManager::Update()
   cout << "Lines to Next Level: " << this->linesToNextLevel << endl;
   cout << "Cleared Lines: " << this->linesCleared << endl;
   cout << "Delay Time: " << this->delayTime << endl;
+}
+
+void GameManager::HoldPieces()
+{
+  EraseShadowHint();
+  _currenctObject->Erase(_board, graphicBoard, _currentPosition, piece, boardCenter, pieceScale);
+  _holder->ChangePiece(_currenctObject);
+
+  if (!_currenctObject) // nullptr => false
+    _generateNewObject = true;
+}
+
+void GameManager::DrawShadowHint()
+{
+  shadowHint.NewBlock(_currenctObject);
+
+  _currenctObject->Erase(_board, graphicBoard, _currentPosition, shadowPiece, boardCenter, pieceScale);
+
+  _positionHint = shadowHint.PositionShadowHint(_board, _currentPosition);
+
+  _currenctObject->Draw(_board, graphicBoard, _currentPosition, shadowPiece, boardCenter, pieceScale);
+
+  if (_positionHint._x != _currentPosition._x)
+    shadowHint.Draw(_board, graphicBoard, _positionHint, shadowPiece, boardCenter);
+
+}
+
+void GameManager::EraseShadowHint()
+{
+  shadowHint.NewBlock(_currenctObject);
+
+  _currenctObject->Erase(_board, graphicBoard, _currentPosition, shadowPiece, boardCenter, pieceScale);
+  _positionHint = shadowHint.PositionShadowHint(_board, _currentPosition);
+  //cout << "test" << endl;
+  //cout << "Valor position:" << std::to_string(_positionHint._x) << endl;
+  //cout << "Valor position:" << std::to_string(_currentPosition._x) << endl;
+  //cout << "Valor da condicao: "<<std::to_string(_positionHint._x != _currentPosition._x) << endl;
+
+  if (_positionHint._x != _currentPosition._x)
+  {
+    //cout << "Esta a fazer limpeza do objecto" << endl;
+    shadowHint.Erase(_board, graphicBoard, _positionHint, shadowPiece, boardCenter);
+  }
 }

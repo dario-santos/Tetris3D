@@ -26,45 +26,12 @@ using namespace glm;
 #include "Assets/Prefabs/ZBlock.hpp"
 #include "Assets/Prefabs/TBlock.hpp"
 
-typedef vector<vector<int>>GameBoard;
-
-struct Position
-{
-    Position()
-    {
-        Reset();
-    }
-
-    Position(const int x, const int y) :
-        _x(x),
-        _y(y)
-    {
-    }
-
-    void GoDown()
-    {
-        _x += 1;
-    }
-
-    void GoLeft()
-    {
-        _y -= 1;
-    }
-
-    void GoRight()
-    {
-        _y += 1;
-    }
-
-    void Reset() 
-    {
-        _x = 2;
-        _y = 5;
-    }
-
-    int _x;
-    int _y;
-};
+//
+#include "PieceHolder.hpp"
+#include "ObjectHint.hpp"
+#include "GameBoard.hpp"
+#include "Position.hpp"
+//
 
 class BoardObject;
 
@@ -136,6 +103,23 @@ class GameManager : public Script
         
         Position _currentPosition;
 
+        //
+        
+        vector<GameObject*> shadowPiece;
+        int _currentPieceType;
+        bool _flagGameover = false;
+
+        unique_ptr<PieceHolder> _holder;
+        bool _flag_change_piece = true;
+        ObjectHint shadowHint;
+        Position _positionHint;
+
+        void HoldPieces();
+        void DrawShadowHint();
+        void EraseShadowHint();
+        void GameOver();
+
+        //
         void ChooseNextPiece();
         void DrawBoard();
         void ManageInput();

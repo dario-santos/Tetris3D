@@ -155,6 +155,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Assets\Scripts\ObjectHint.cpp" />
+    <ClCompile Include="Assets\Scripts\PieceHolder.cpp" />
     <ClCompile Include="Assets\Shaders\PhongShader.cpp" />
     <ClCompile Include="Assets\Shaders\OpaqueShader.cpp" />
     <ClCompile Include="Assets\Scripts\BoardObjects\BoardObject.cpp" />
@@ -189,6 +191,10 @@
     <ClCompile Include="GameEngine\Config\Config.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Assets\Scripts\GameBoard.hpp" />
+    <ClInclude Include="Assets\Scripts\ObjectHint.hpp" />
+    <ClInclude Include="Assets\Scripts\PieceHolder.hpp" />
+    <ClInclude Include="Assets\Scripts\Position.hpp" />
     <ClInclude Include="Assets\Shaders\OpaqueShader.hpp" />
     <ClInclude Include="Assets\Shaders\PhongShader.hpp" />
     <ClInclude Include="Assets\Scripts\BoardObjects\BoardObject.hpp" />

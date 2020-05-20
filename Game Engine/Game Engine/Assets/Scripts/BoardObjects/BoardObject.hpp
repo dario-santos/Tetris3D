@@ -11,11 +11,14 @@ public:
 	
 	void Draw(GameBoard& board, vector<vector<GameObject*>>& graphicBoard, const Position& pos, vector<GameObject*> tetromino, float boardCenter, float pieceScale) const;
 	
+	void DrawShadow(GameBoard& board, vector<vector<GameObject*>>& graphicBoard, const Position& pos, vector<GameObject*> tetromino, float boardCenter, float pieceScale) const;
+
 	void Erase(GameBoard& board, vector<vector<GameObject*>>& graphicBoard, const Position& pos, vector<GameObject*> tetromino, float boardCenter, float pieceScale) const;
 
 	virtual void Transformation(bool isClockWise) = 0;
 
 	void UpdateWorldPosition(vector<GameObject*> tetromino, vec3 newPosition, float boardCenter, float pieceScale);
+
 
 	virtual std::unique_ptr<BoardObject> Clone() const = 0;
 
