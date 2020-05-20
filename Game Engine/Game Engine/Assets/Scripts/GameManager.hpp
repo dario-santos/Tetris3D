@@ -139,6 +139,7 @@ class GameManager : public Script
         void ChooseNextPiece();
         void DrawBoard();
         void ManageInput();
+        void HoldPiece();
         void Transformation(bool isClockWise);
         void MoveObjectLeft();
         void MoveObjectRight();

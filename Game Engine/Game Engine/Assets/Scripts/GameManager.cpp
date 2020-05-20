@@ -11,7 +11,6 @@
 #include "BoardObjects/SquareObject.hpp"
 #include "BoardObjects/LineObject.hpp"
 
-
 const size_t BOARD_HEIGHT = 22;
 const size_t BOARD_LENGTH = 10;
 
@@ -138,7 +137,6 @@ void GameManager::ChooseNextPiece()
   {
     _currenctObject->UpdateWorldPosition(this->piece, vec3(_currentPosition._x, _currentPosition._y, 1), this->boardCenter, pieceScale);
   }
-  
 }
 
 void GameManager::DrawBoard()
@@ -160,136 +158,148 @@ void GameManager::ManageInput()
 {
   string player = std::to_string((static_cast<int>(gamepad)));
 
+  // Reset DAS
+  if (!Input::GetKey("Right" + player) && !Input::GetButton(ButtonCode::DPAD_RIGHT, gamepad)
+    && !Input::GetKey("Left" + player) && !Input::GetButton(ButtonCode::DPAD_LEFT, gamepad)
+    && !Input::GetKey("Drop" + player) && !Input::GetButton(ButtonCode::DPAD_DOWN, gamepad))
+    movementAmmount = 0;
+
+  // Update DAS
+  if(movementAmmount == 0)
+    inputDelayTime = 0.0f;
+  else if(movementAmmount == 1)
+    inputDelayTime = 0.26;
+  else
+    inputDelayTime = 0.1f;
+
   // Movement
   if(Time::GetTime() > inputDelayTime + startInputCycleTime)
   {
     startInputCycleTime = Time::GetTime();
     
-    if(Input::GetKey("Right" + player) || Input::GetButton(ButtonCode::DPAD_RIGHT, gamepad))
+    if(Input::GetKey("Right" + player) || Input::GetButton("Right", gamepad))
     {
       MoveObjectRight();
       movementAmmount++;
     }
-    else if (Input::GetKey("Left" + player) || Input::GetButton(ButtonCode::DPAD_LEFT, gamepad))
+    else if (Input::GetKey("Left" + player) || Input::GetButton("Left", gamepad))
     {
       MoveObjectLeft();
       movementAmmount++;
     }
-    if(Input::GetKey("Drop" + player) || Input::GetButton(ButtonCode::DPAD_DOWN, gamepad))
+    if(Input::GetKey("Drop" + player) || Input::GetButton("Drop", gamepad))
     {
       MoveObjectDown();
       movementAmmount++;
       startCycleTime = Time::GetTime();
     }
-
-    if (!Input::GetKey("Right" + player) && !Input::GetButton(ButtonCode::DPAD_RIGHT, gamepad)
-     && !Input::GetKey("Left" + player) && !Input::GetButton(ButtonCode::DPAD_LEFT, gamepad)
-     && !Input::GetKey("Drop" + player) && !Input::GetButton(ButtonCode::DPAD_DOWN, gamepad))
-      movementAmmount = 0;
-
-    // Update DAS status
-    if (movementAmmount == 0)
-      inputDelayTime = 0.0f;
-    else if (movementAmmount == 1)
-      inputDelayTime = 0.26;
-    else
-      inputDelayTime = 0.1f;
   }
 
   // HardDrop
-  if ((Input::GetKey("HardDrop" + player) || Input::GetButton(ButtonCode::DPAD_UP, gamepad)) && !isHardDropKeyPressed)
+  if ((Input::GetKey("HardDrop" + player) || Input::GetButton("HardDrop", gamepad)) && !isHardDropKeyPressed)
   {
     isHardDropKeyPressed = true;
     MoveObjectHardDrop();
   }
 
   // Rotations
-  if((Input::GetKey("RotateR" + player) || Input::GetButton(ButtonCode::A, gamepad)) && !isRotationKeyPressed)
+  if((Input::GetKey("RotateR" + player) || Input::GetButton("RotateR", gamepad)) && !isRotationKeyPressed)
   {
     isRotationKeyPressed = true;
     Transformation(true);
   }
-  else if ((Input::GetKey("RotateL" + player) || Input::GetButton(ButtonCode::B, gamepad)) && !isRotationKeyPressed)
+  else if ((Input::GetKey("RotateL" + player) || Input::GetButton("RotateL", gamepad)) && !isRotationKeyPressed)
   {
     isRotationKeyPressed = true;
     Transformation(false);
   }
 
   // Hold
-  if((Input::GetKey("Hold" + player) || Input::GetButton(ButtonCode::RB, gamepad)) && canHoldPiece)
+  if((Input::GetKey("Hold" + player) || Input::GetButton("Hold", gamepad) || Input::GetButton("HoldAlt", gamepad)) && canHoldPiece)
   {
     canHoldPiece = false;
+    
+    HoldPiece();
 
-    _currenctObject->UpdateWorldPosition(this->piece, vec3(5, 13, 1), this->boardCenter, pieceScale);
-    _currenctObject->Erase(_board, graphicBoard, _currentPosition, this->piece, this->boardCenter, pieceScale);
-    for (GameObject* g : piece)
-      g->Enable();
-    _currenctObject->Restart();
-
-    _currentPosition.Reset();
-
-    if (holdPiece.empty())
-    {
-      _generateNewObject = true;
-      holdPiece = piece;
-      holdPieceType = currentPieceType;
-      currentPieceType = -1;
-    }
-    else
-    {
-      switch (holdPieceType) // [0, 7[
-      {
-      case tetrominos::O:
-        _currenctObject.reset(new SquareObject());
-        break;
-      case tetrominos::I:
-        _currenctObject.reset(new LineObject());
-        break;
-      case tetrominos::L:
-        _currenctObject.reset(new LObject());
-        break;
-      case tetrominos::J:
-        _currenctObject.reset(new LInverseObject());
-        break;
-      case tetrominos::T:
-        _currenctObject.reset(new TObject());
-        break;
-      case tetrominos::Z:
-        _currenctObject.reset(new ZObject());
-        break;
-      case tetrominos::S:
-        _currenctObject.reset(new SObject());
-        break;
-      }
-      int tmp = holdPieceType;
-      holdPieceType = currentPieceType;
-      currentPieceType = tmp;
-      
-      vector<GameObject*> tmpPiece = piece;
-      piece = holdPiece;
-      holdPiece = tmpPiece;
-    }
     beep.get()->Play2D("Assets/Audio/SFX_PieceHold.wav");
     
-    startCycleTime = startCycleTime - delayTime;
+    // Ends cycle loop
+    startCycleTime -= delayTime;
   }
 
-  isHardDropKeyPressed = Input::GetKey("HardDrop" + player) || Input::GetButton(ButtonCode::DPAD_UP, gamepad);
-  isRotationKeyPressed = Input::GetKey("RotateR" + player) || Input::GetKey("RotateL" + player) || Input::GetButton(ButtonCode::A, gamepad) || Input::GetButton(ButtonCode::B, gamepad);;
+  isHardDropKeyPressed = Input::GetKey("HardDrop" + player) || Input::GetButton("HardDrop", gamepad);
+  isRotationKeyPressed = Input::GetKey("RotateR" + player) || Input::GetKey("RotateL" + player) || Input::GetButton("RotateR", gamepad) || Input::GetButton("RotateL", gamepad);;
+}
+
+void GameManager::HoldPiece() 
+{
+  _currenctObject->UpdateWorldPosition(this->piece, vec3(5, 13, 1), this->boardCenter, pieceScale);
+  _currenctObject->Erase(_board, graphicBoard, _currentPosition, this->piece, this->boardCenter, pieceScale);
+  for (GameObject* g : piece)
+    g->Enable();
+  _currenctObject->Restart();
+
+  _currentPosition.Reset();
+
+  if (holdPiece.empty())
+  {
+    _generateNewObject = true;
+    holdPiece = piece;
+    holdPieceType = currentPieceType;
+    currentPieceType = -1;
+  }
+  else
+  {
+    switch (holdPieceType) // [0, 7[
+    {
+    case tetrominos::O:
+      _currenctObject.reset(new SquareObject());
+      break;
+    case tetrominos::I:
+      _currenctObject.reset(new LineObject());
+      break;
+    case tetrominos::L:
+      _currenctObject.reset(new LObject());
+      break;
+    case tetrominos::J:
+      _currenctObject.reset(new LInverseObject());
+      break;
+    case tetrominos::T:
+      _currenctObject.reset(new TObject());
+      break;
+    case tetrominos::Z:
+      _currenctObject.reset(new ZObject());
+      break;
+    case tetrominos::S:
+      _currenctObject.reset(new SObject());
+      break;
+    }
+    int tmp = holdPieceType;
+    holdPieceType = currentPieceType;
+    currentPieceType = tmp;
+
+    vector<GameObject*> tmpPiece = piece;
+    piece = holdPiece;
+    holdPiece = tmpPiece;
+  }
 }
 
 void GameManager::Transformation(bool isClockWise)
 {   
+  if (_generateNewObject)
+    return;
+
     unique_ptr<BoardObject> tmpObject = _currenctObject->Clone();
     tmpObject->Transformation(isClockWise);
     
-    _currenctObject->Erase(_board, graphicBoard,_currentPosition, this->piece, this->boardCenter, pieceScale);
+    _currenctObject->Erase(_board, graphicBoard, _currentPosition, this->piece, this->boardCenter, pieceScale);
+
     if(!tmpObject->VerifyColision(_board, _currentPosition))
     {
       beep.get()->Play2D("Assets/Audio/SFX_PieceRotate.wav");
-      _currenctObject.reset(tmpObject.release());
+      _currenctObject.reset(tmpObject.get());
     }
-
+    
     _currenctObject->Draw(_board, graphicBoard, _currentPosition, this->piece, this->boardCenter, pieceScale);
     tmpObject.release();
 }
@@ -483,8 +493,10 @@ void GameManager::UpdateScore(int linesCleared)
   }
 
   // Progression
-  if (level < 10)
+  if (level < 9)
     this->delayTime = (48 - (5 * level))/60.0f;
+  else if (level == 9)
+    this->delayTime = 6 / 60.0f;
   else if (level < 12)
     this->delayTime = 5 / 60.0f;
   else if (level < 15)
@@ -510,11 +522,17 @@ void GameManager::GameLoop()
         // and a new object needs to be generated first
         MoveObjectDown();
       }
+
+     
       startCycleTime = Time::GetTime();
     }
-
-    if(_generateNewObject)
+     if(!_generateNewObject)
+       ManageInput();
+    
+     if(_generateNewObject)
     {
+      // Delete hold piece
+
         canHoldPiece = false;
         ClearLine();
 
@@ -564,8 +582,6 @@ void GameManager::GameLoop()
         canHoldPiece = true;
         _generateNewObject = false;
     }
-     
-     ManageInput();
     
     //ClearScreen();
     // DrawBoard();
