@@ -295,7 +295,7 @@ void GameManager::Transformation(bool isClockWise)
     tmpObject->Transformation(isClockWise);
     
     _currenctObject->Erase(_board, graphicBoard, _currentPosition, this->piece, this->boardCenter, pieceScale);
-    //EraseShadowHint();
+    EraseShadowHint();
 
     if(!tmpObject->VerifyColision(_board, _currentPosition))
     {
@@ -304,7 +304,7 @@ void GameManager::Transformation(bool isClockWise)
     }
     
     _currenctObject->Draw(_board, graphicBoard, _currentPosition, this->piece, this->boardCenter, pieceScale);
-    //DrawShadowHint();
+    DrawShadowHint();
     tmpObject.release();
 }
 
@@ -371,11 +371,10 @@ bool GameManager::UpdatePosition(const Position& newPosition, const bool createN
     }
     else
     {
-      //EraseShadowHint();
+      EraseShadowHint();
       _currenctObject->Draw(_board, graphicBoard, newPosition, this->piece, this->boardCenter, pieceScale);
       _currentPosition = newPosition;
-      //DrawShadowHint();
-
+      DrawShadowHint();
 
       return false;
     }
@@ -480,6 +479,9 @@ void GameManager::UpdateScore(int linesCleared)
     // Maximum -> 29
     this->level = min(29, this->level + 1);
     this->linesToNextLevel += 10;
+
+    beep.get()->Play2D("Assets/Audio/SFX_LevelUp.wav");
+
   }
   
   // Score
@@ -610,9 +612,9 @@ void GameManager::GameLoop()
         canHoldPiece = true;
         _generateNewObject = false;
 
-        //EraseShadowHint();
+        EraseShadowHint();
 
-        //DrawShadowHint();
+        DrawShadowHint();
     }
     
     //ClearScreen();
