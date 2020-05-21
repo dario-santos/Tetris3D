@@ -21,10 +21,10 @@ using namespace glm;
 #include "Assets/Prefabs/IBlock.hpp"
 #include "Assets/Prefabs/JBlock.hpp"
 #include "Assets/Prefabs/LBlock.hpp"
-#include "Assets/Prefabs/OBlock.hpp"
 #include "Assets/Prefabs/SBlock.hpp"
 #include "Assets/Prefabs/ZBlock.hpp"
 #include "Assets/Prefabs/TBlock.hpp"
+#include "Assets/Prefabs/HintBlock.hpp"
 
 //
 #include "PieceHolder.hpp"

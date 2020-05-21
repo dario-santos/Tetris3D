@@ -31,12 +31,6 @@ using namespace glm;
 // Prefabs
 #include "Assets/Prefabs/Player.hpp"
 #include "Assets/Prefabs/Brick.hpp"
-#include "Assets/Prefabs/OBlock.hpp"
-#include "Assets/Prefabs/ZBlock.hpp"
-#include "Assets/Prefabs/TBlock.hpp"
-#include "Assets/Prefabs/SBlock.hpp"
-#include "Assets/Prefabs/LBlock.hpp"
-#include "Assets/Prefabs/JBlock.hpp"
 #include "Assets/Prefabs/IBlock.hpp"
 
 // Scripts
@@ -45,15 +39,9 @@ using namespace glm;
 #include "Assets/Shaders/OpaqueShader.hpp"
 #include "Assets/Shaders/PhongShader.hpp"
 
-
 #include "main.hpp"
 
 #include <iostream>
-
-// Shaders
-GLuint transparencyShader;
-GLuint opaqueShader;
-GLuint phongShader;
 
 unique_ptr<Scene> scene (new Scene());
 unique_ptr<AudioDevice> theme(new AudioDevice(75));
@@ -72,7 +60,7 @@ int main(void)
   // Creates the window
   vec2 dimensions = vec2(800, 600);
   Window::SetDimensions(dimensions);
-  GLFWwindow *window = glfwCreateWindow((int)dimensions.x, (int)dimensions.y, "Tetris", NULL, NULL);
+  GLFWwindow *window = glfwCreateWindow((int)dimensions.x, (int)dimensions.y, "Tetris 3D", NULL, NULL);
 
   // Create window context
   glfwMakeContextCurrent(window);
@@ -147,11 +135,6 @@ int main(void)
   /// Frees the vertex array
   glDeleteVertexArrays(1, &VertexArrayID);
 
-  // Frees the shaders
-  glDeleteProgram(transparencyShader);
-  glDeleteProgram(opaqueShader);
-  glDeleteProgram(phongShader);
-
   // Close OpenGL window and terminate GLFW
   glfwTerminate();
   return 0;
@@ -181,8 +164,9 @@ void callLoadLevelSinglePlayer()
     scene.reset(new Scene());
 
     // Single Player camera
-    //scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
-    scene->AddCamera(new Orthographic(vec3(-100, -200, 0), vec3(300 - 100, 225 - 200, 5)));
+    
+    scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
+    //scene->AddCamera(new Orthographic(vec3(-100, -200, -100), vec3(300 - 100, 225 - 200, 100)));
     Scene::LoadScene(scene);
 
     loadLevelSingleplayer(scene);
@@ -322,12 +306,6 @@ void loadLevelSingleplayer(unique_ptr<Scene>& scene)
   scene->AddLightSource(new LightSource(vec3(1.0f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), vec4(-5.0f, 5.0f, 2.0f, 1.0f)));
 
 
-  GameObject* go = new GameObject(
-    new Transform(vec3(-200, -200, -200), vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f)), nullptr, "GameManager");
-  go->AddScript(new GameManager(new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f), 0));
-  go->shader = nullptr;
-  scene->AddGameObject(go);
-
   // Tabuleiro
   scene->AddGameObject(Brick::AddBrick(
     new Transform(vec3(45, -195, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(100.0f, 1.0f, 10.0f)), vec3(125, 200, 10), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)));
@@ -337,6 +315,13 @@ void loadLevelSingleplayer(unique_ptr<Scene>& scene)
 
   scene->AddGameObject(Brick::AddBrick(
     new Transform(vec3(-5, -95, 1.0f), vec3(0.0f, 0.0f, 0.0f), vec3(2.0f, 200.f, 10.0f)), vec3(20, 200, 10), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)));
+
+  // GameManager
+  GameObject* go = new GameObject(
+    new Transform(vec3(-200, -200, -200), vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f)), nullptr, "GameManager");
+  go->AddScript(new GameManager(new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f), 0));
+  go->shader = nullptr;
+  scene->AddGameObject(go);
 }
 
 void loadLevelMultiplayer(unique_ptr<Scene>& scene)

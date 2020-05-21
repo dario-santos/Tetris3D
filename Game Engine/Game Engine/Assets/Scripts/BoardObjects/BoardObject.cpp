@@ -82,17 +82,15 @@ void BoardObject::_Draw(GameBoard& board, vector<vector<GameObject*>>& graphicBo
           else
           {
             tetromino[cnt]->Enable();
-
           }
           tetromino[cnt]->GetTransform()->TranslateTo(vec3(world_x * pieceScale + boardCenter, world_y * -pieceScale, 1.0f));
 
           graphicBoard[center._x + mappingVector[i]][center._y + mappingVector[j]] = tetromino[cnt];
 
           cnt++;
-        }
-        else if (value == SHADOW)
-        {
-
+      }
+      else if (value == SHADOW)
+      {          
           if (world_y < 0)
           {
             tetromino[cnt]->Disable();
@@ -100,19 +98,21 @@ void BoardObject::_Draw(GameBoard& board, vector<vector<GameObject*>>& graphicBo
           else
           {
             tetromino[cnt]->Enable();
-
           }
           tetromino[cnt]->GetTransform()->TranslateTo(vec3(world_x * pieceScale + boardCenter, world_y * -pieceScale, 1.0f));
-          cnt++;
-        }
-        else
-        {
-          graphicBoard[center._x + mappingVector[i]][center._y + mappingVector[j]] = nullptr;
-        }
 
-        if(value != SHADOW)
-          board[center._x + mappingVector[i]][center._y + mappingVector[j]] = value;
+          //graphicBoard[center._x + mappingVector[i]][center._y + mappingVector[j]] = tetromino[cnt];
+
+          cnt++;
       }
+      else
+      {
+        graphicBoard[center._x + mappingVector[i]][center._y + mappingVector[j]] = nullptr;
+      }
+
+      if(value != SHADOW)
+        board[center._x + mappingVector[i]][center._y + mappingVector[j]] = value;
+    }
   }
 }
 

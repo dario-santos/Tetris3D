@@ -167,6 +167,7 @@
     <ClCompile Include="Assets\Scripts\BoardObjects\SquareObject.cpp" />
     <ClCompile Include="Assets\Scripts\BoardObjects\TObject.cpp" />
     <ClCompile Include="Assets\Scripts\BoardObjects\ZObject.cpp" />
+    <ClCompile Include="Assets\Shaders\TransparencyShader.cpp" />
     <ClCompile Include="GameEngine\Audio\AudioDevice.cpp" />
     <ClCompile Include="GameEngine\Camera\Orthographic.cpp" />
     <ClCompile Include="GameEngine\Camera\Perspective.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="Assets\Scripts\BoardObjects\SquareObject.hpp" />
     <ClInclude Include="Assets\Scripts\BoardObjects\TObject.hpp" />
     <ClInclude Include="Assets\Scripts\BoardObjects\ZObject.hpp" />
+    <ClInclude Include="Assets\Shaders\TransparencyShader.hpp" />
     <ClInclude Include="GameEngine\Components\LightSource.hpp" />
     <ClInclude Include="GameEngine\Config\Config.hpp" />
     <ClInclude Include="GameEngine\Audio\AudioDevice.hpp" />
@@ -234,7 +236,7 @@
     <ClInclude Include="Assets\Prefabs\IBlock.hpp" />
     <ClInclude Include="Assets\Prefabs\JBlock.hpp" />
     <ClInclude Include="Assets\Prefabs\LBlock.hpp" />
-    <ClInclude Include="Assets\Prefabs\OBlock.hpp" />
+    <ClInclude Include="Assets\Prefabs\HintBlock.hpp" />
     <ClInclude Include="Assets\Prefabs\Player.hpp" />
     <ClInclude Include="Assets\Prefabs\SBlock.hpp" />
     <ClInclude Include="Assets\Prefabs\TBlock.hpp" />

@@ -18,7 +18,7 @@ GameManager::GameManager(Material* material, float boardCenter, int startLevel, 
     _board(BOARD_HEIGHT, std::vector<int>(BOARD_LENGTH, 0)),
     graphicBoard(BOARD_HEIGHT, vector<GameObject*>(BOARD_LENGTH, nullptr))    
 {
-  this->shadowPiece = OBlock::AddOBlock(10.0f, vec3(255, 255, 255), material);
+  this->shadowPiece = HintBlock::AddHintBlock(10, vec3(255, 255, 255), material);
   
   for (GameObject* g : this->shadowPiece)
     Scene::CurrentScene()->AddGameObject(g);
@@ -70,7 +70,7 @@ void GameManager::ChooseNextPiece()
   {
   case tetrominos::O:
     _currenctObject.reset(new SquareObject());
-    this->nextPiece = OBlock::AddOBlock(pieceScale, vec3(255, 213, 0), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f));
+    this->nextPiece = IBlock::AddIBlock(pieceScale, vec3(255, 213, 0), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f));
     break;
   case tetrominos::I:
     _currenctObject.reset(new LineObject());
@@ -130,6 +130,11 @@ void GameManager::ChooseNextPiece()
   if (currentPieceType != -1)
   {
     _currenctObject->UpdateWorldPosition(this->piece, vec3(_currentPosition._x, _currentPosition._y, 1), this->boardCenter, pieceScale);
+    // Update Shadow Color
+    vec3 color = piece[0]->shader->GetIPrimitive()->GetColor() * vec3(255);
+    for (GameObject* g : this->shadowPiece)
+      g->shader->GetIPrimitive()->UpdateColor(color);
+
   }
 }
 
@@ -284,6 +289,12 @@ void GameManager::HoldPiece()
     piece = holdPiece;
     holdPiece = tmpPiece;
   }
+
+
+  // Update Shadow Color
+  vec3 color = piece[0]->shader->GetIPrimitive()->GetColor() * vec3(255);
+  for (GameObject* g : this->shadowPiece)
+    g->shader->GetIPrimitive()->UpdateColor(color);
 }
 
 void GameManager::Transformation(bool isClockWise)
@@ -303,8 +314,8 @@ void GameManager::Transformation(bool isClockWise)
       _currenctObject.reset(tmpObject.get());
     }
     
-    _currenctObject->Draw(_board, graphicBoard, _currentPosition, this->piece, this->boardCenter, pieceScale);
     DrawShadowHint();
+    _currenctObject->Draw(_board, graphicBoard, _currentPosition, this->piece, this->boardCenter, pieceScale);
     tmpObject.release();
 }
 
@@ -555,10 +566,8 @@ void GameManager::GameLoop()
      if(_generateNewObject)
       {
         // Delete hold piece
-
         canHoldPiece = false;
         ClearLine();
-
 
         if (nextPieceType == -1)
         {
@@ -595,12 +604,10 @@ void GameManager::GameLoop()
         pieceListIndex++;
         
 
+        // Passar a antiga para ativa
         if (currentPieceType != -1)
-        {
-            // Passar a antiga para ativa
             piece = nextPiece;
-        }
-
+        
         ChooseNextPiece();
 
         _holder->UpdateStatusToNotModified();
@@ -613,7 +620,6 @@ void GameManager::GameLoop()
         _generateNewObject = false;
 
         EraseShadowHint();
-
         DrawShadowHint();
     }
     
@@ -696,7 +702,6 @@ void GameManager::EraseShadowHint()
 
   if (_positionHint._x != _currentPosition._x)
   {
-    //cout << "Esta a fazer limpeza do objecto" << endl;
     shadowHint.Erase(_board, graphicBoard, _positionHint, shadowPiece, boardCenter);
   }
 }

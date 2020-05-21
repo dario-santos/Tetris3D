@@ -129,6 +129,9 @@
     <ClCompile Include="GameEngine\UI\Cursor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Assets\Shaders\TransparencyShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.hpp">
@@ -254,9 +257,6 @@
     <ClInclude Include="Assets\Prefabs\LBlock.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Assets\Prefabs\OBlock.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Assets\Prefabs\Player.hpp">
       <Filter>Prefabs</Filter>
     </ClInclude>
@@ -279,6 +279,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\UI\Cursor.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Prefabs\HintBlock.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Shaders\TransparencyShader.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
