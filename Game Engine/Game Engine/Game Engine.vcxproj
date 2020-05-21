@@ -182,6 +182,7 @@
     <ClCompile Include="GameEngine\Shader\Material.cpp" />
     <ClCompile Include="GameEngine\UI\Button.cpp" />
     <ClCompile Include="GameEngine\UI\Canvas.cpp" />
+    <ClCompile Include="GameEngine\UI\Cursor.cpp" />
     <ClCompile Include="GameEngine\UI\Sprite.cpp" />
     <ClCompile Include="GameEngine\Window.cpp" />
     <ClCompile Include="main.cpp" />
@@ -225,6 +226,7 @@
     <ClInclude Include="GameEngine\Shader\Shader.hpp" />
     <ClInclude Include="GameEngine\UI\Button.hpp" />
     <ClInclude Include="GameEngine\UI\Canvas.hpp" />
+    <ClInclude Include="GameEngine\UI\Cursor.hpp" />
     <ClInclude Include="GameEngine\UI\Sprite.hpp" />
     <ClInclude Include="GameEngine\Window.hpp" />
     <ClInclude Include="main.hpp" />

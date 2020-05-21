@@ -100,6 +100,8 @@ void Scene::DrawScene()
         g->Draw(c->GetView(), c->GetProjection());
 }
 
+#include <iostream>
+
 void Scene::DrawGUI()
 {
   for(ICamera* cam: cameras)
@@ -110,8 +112,8 @@ void Scene::DrawGUI()
         {
           for (Button* b : c->GetButtons())
             b->GetShader()->LoadShader(b->GetTransform()->model, cam->GetView(), cam->GetProjection());
-                
-          //  TODO : Draw sprites
+          if (c->IsCursorEnabled())
+            c->GetCursor()->GetShader()->LoadShader(c->GetCursor()->GetTransform()->model, cam->GetView(), cam->GetProjection());
         }
     }
   }

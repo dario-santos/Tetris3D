@@ -63,7 +63,7 @@ int main(void)
   // Initialization of the GLFW
   glfwInit();
 
-  glfwWindowHint(GLFW_SAMPLES, 4);               //4xMSAA
+  glfwWindowHint(GLFW_SAMPLES, 4); //4xMSAA
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // Opengl 3
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3); // Opengl 3.3
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);           // Removes functionality deprecated opengl functions
@@ -112,7 +112,8 @@ int main(void)
   Config::LoadConfig("./config.cfg");
 
   // Loads the scene and sets it as the active one
-  scene->AddCamera(new Perspective(45.0f, 4/3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
+  //scene->AddCamera(new Perspective(45.0f, 4/3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
+  scene->AddCamera(new Orthographic(vec3(-150, -100, -100), vec3(150, 100, 100)));
   
   loadLevelMainMenu(scene);
   Scene::LoadScene(scene);
@@ -204,7 +205,8 @@ void callLoadLevelOptionMenu()
     scene.reset(new Scene());
 
     // Single Player camera
-    scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
+    //scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
+    scene->AddCamera(new Orthographic(vec3(-150, -100, -100), vec3(150, 100, 100)));
     Scene::LoadScene(scene);
 
     loadLevelOptionMenu(scene);
@@ -215,8 +217,10 @@ void callLoadLevelMainMenu()
     scene.reset(new Scene());
 
     // Single Player camera
-    scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(50, -100, 500), vec3(50, -100, 0), vec3(0, 1, 0)));
+    //scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
+    scene->AddCamera(new Orthographic(vec3(-150, -100, -100), vec3(150, 100, 100)));
     Scene::LoadScene(scene);
+
     loadLevelMainMenu(scene);
 
 }
@@ -244,20 +248,26 @@ void loadLevelOptionMenu(unique_ptr<Scene>& scene)
     Canvas* canvas = new Canvas();
 
     canvas->AddButton(new Button(new OpaqueShader(new Renderer(new Square(vec3(255, 50, 0)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f))),
-        new Transform(vec3(50, -50, 1), vec3(0, 0, 0), vec3(5, 5, 5)),
+        new Transform(vec3(0, 50, 0), vec3(0, 0, 0), vec3(100, 10, 5)),
         &setThemeA));
 
     canvas->AddButton(new Button(new OpaqueShader(new Renderer(new Square(vec3(0, 255, 50)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f))),
-        new Transform(vec3(25, -50, 1), vec3(0, 0, 0), vec3(5, 5, 5)),
+        new Transform(vec3(0, 25, 0), vec3(0, 0, 0), vec3(100, 10, 5)),
         &setThemeB));
 
     canvas->AddButton(new Button(new OpaqueShader(new Renderer(new Square(vec3(50, 0, 255)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f))),
-        new Transform(vec3(0, -50, 1), vec3(0, 0, 0), vec3(5, 5, 5)),
+        new Transform(vec3(0, 0, 0), vec3(0, 0, 0), vec3(100, 10, 5)),
         &setThemeC));
     
     canvas->AddButton(new Button(new OpaqueShader(new Renderer(new Square(vec3(50, 100, 100)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f))),
-        new Transform(vec3(-100, -50, 1), vec3(0, 0, 0), vec3(5, 5, 5)),
+        new Transform(vec3(0, -50, 0), vec3(0, 0, 0), vec3(100, 10, 5)),
         &callLoadLevelMainMenu));
+
+
+    // Nav cursor
+    // Delta é a width do botao
+    canvas->AddCursor(new Cursor(new OpaqueShader(new Renderer(new Square(vec3(255, 255, 255)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f))),
+        new Transform(vec3(0, 0, 0), vec3(0, 0, 0), vec3(5, 5, 5)), -65), true);
 
     
     GameObject* go = new GameObject(
@@ -274,20 +284,26 @@ void loadLevelMainMenu(unique_ptr<Scene>& scene)
     Canvas* canvas = new Canvas();
 
     Button* b = new Button(new OpaqueShader(new Renderer(new Square(vec3(255, 0, 0)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f))),
-        new Transform(vec3(50, -50, 1), vec3(0,0,0), vec3(5, 5, 5)),
+        new Transform(vec3(0, 25, 0), vec3(0, 0, 0), vec3(100, 10, 5)),
         &callLoadLevelSinglePlayer);
 
     Button* b2 = new Button(new OpaqueShader(new Renderer(new Square(vec3(0, 255, 0)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f))),
-        new Transform(vec3(25, -50, 1), vec3(0, 0, 0), vec3(5, 5, 5)),
+        new Transform(vec3(0, 0, 0), vec3(0, 0, 0), vec3(100, 10, 5)),
         &callLoadLevelMultiPlayer);
 
     Button* b3 = new Button(new OpaqueShader(new Renderer(new Square(vec3(0, 0, 255)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f))),
-        new Transform(vec3(0, -50, 1), vec3(0, 0, 0), vec3(5, 5, 5)),
+        new Transform(vec3(0, -25, 0), vec3(0, 0, 0), vec3(100, 10, 5)),
         &callLoadLevelOptionMenu);
+
 
     canvas->AddButton(b);
     canvas->AddButton(b2);
     canvas->AddButton(b3);
+
+    // Nav cursor
+    // Delta é a width do botao
+    canvas->AddCursor(new Cursor(new OpaqueShader(new Renderer(new Square(vec3(255, 255, 255)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f))),
+        new Transform(vec3(0, 0, 0), vec3(0, 0, 0), vec3(5, 5, 5)), -65), true);
 
     GameObject* go = new GameObject(
         new Transform(vec3(-200, -200, -200), vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f)), nullptr, "Menu");

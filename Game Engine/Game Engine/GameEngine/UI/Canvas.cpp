@@ -16,6 +16,27 @@ Canvas::~Canvas()
 
   buttons.clear();
   sprites.clear();
+  
+  if (cursor != nullptr)
+  {
+      delete cursor;
+      cursor = nullptr;
+  }
+  
+
+}
+
+void Canvas::AddCursor(Cursor* cursor, bool enable)
+{
+    this->cursor = cursor;
+    
+    if (enable)
+        this->EnableCursor();
+}
+
+Cursor* Canvas::GetCursor()
+{
+    return this->cursor;
 }
 
 void Canvas::AddButton(Button* b)
@@ -51,4 +72,19 @@ void Canvas::Disable()
 bool Canvas::IsEnabled()
 {
 	return this->isEnabled;
+}
+
+bool Canvas::IsCursorEnabled()
+{
+    return this->isCursorEnabled;
+}
+
+void Canvas::EnableCursor()
+{
+    this->isCursorEnabled = true;
+}
+
+void Canvas::DisableCursor()
+{
+    this->isCursorEnabled = false;
 }
