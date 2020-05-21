@@ -295,16 +295,16 @@ void GameManager::Transformation(bool isClockWise)
     tmpObject->Transformation(isClockWise);
     
     _currenctObject->Erase(_board, graphicBoard, _currentPosition, this->piece, this->boardCenter, pieceScale);
+    //EraseShadowHint();
 
     if(!tmpObject->VerifyColision(_board, _currentPosition))
     {
-      EraseShadowHint();
       beep.get()->Play2D("Assets/Audio/SFX_PieceRotate.wav");
       _currenctObject.reset(tmpObject.get());
-      DrawShadowHint();
     }
     
     _currenctObject->Draw(_board, graphicBoard, _currentPosition, this->piece, this->boardCenter, pieceScale);
+    //DrawShadowHint();
     tmpObject.release();
 }
 
@@ -352,6 +352,9 @@ void GameManager::MoveObjectHardDrop()
 
 bool GameManager::UpdatePosition(const Position& newPosition, const bool createNewObjectIfFailed)
 {
+  if (_generateNewObject)
+    return false;
+
     _currenctObject->Erase(_board, graphicBoard, _currentPosition, this->piece, this->boardCenter, pieceScale);
 
     if (_currenctObject->VerifyColision(_board, newPosition))
@@ -368,10 +371,10 @@ bool GameManager::UpdatePosition(const Position& newPosition, const bool createN
     }
     else
     {
-      EraseShadowHint();
+      //EraseShadowHint();
       _currenctObject->Draw(_board, graphicBoard, newPosition, this->piece, this->boardCenter, pieceScale);
       _currentPosition = newPosition;
-      DrawShadowHint();
+      //DrawShadowHint();
 
 
       return false;
@@ -607,9 +610,9 @@ void GameManager::GameLoop()
         canHoldPiece = true;
         _generateNewObject = false;
 
-        EraseShadowHint();
+        //EraseShadowHint();
 
-        DrawShadowHint();
+        //DrawShadowHint();
     }
     
     //ClearScreen();
@@ -667,16 +670,6 @@ void GameManager::Update()
   cout << "Delay Time: " << this->delayTime << endl;
 }
 
-void GameManager::HoldPieces()
-{
-  EraseShadowHint();
-  _currenctObject->Erase(_board, graphicBoard, _currentPosition, piece, boardCenter, pieceScale);
-  _holder->ChangePiece(_currenctObject);
-
-  if (!_currenctObject) // nullptr => false
-    _generateNewObject = true;
-}
-
 void GameManager::DrawShadowHint()
 {
   shadowHint.NewBlock(_currenctObject);
@@ -698,10 +691,6 @@ void GameManager::EraseShadowHint()
 
   _currenctObject->Erase(_board, graphicBoard, _currentPosition, shadowPiece, boardCenter, pieceScale);
   _positionHint = shadowHint.PositionShadowHint(_board, _currentPosition);
-  //cout << "test" << endl;
-  //cout << "Valor position:" << std::to_string(_positionHint._x) << endl;
-  //cout << "Valor position:" << std::to_string(_currentPosition._x) << endl;
-  //cout << "Valor da condicao: "<<std::to_string(_positionHint._x != _currentPosition._x) << endl;
 
   if (_positionHint._x != _currentPosition._x)
   {

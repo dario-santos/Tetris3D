@@ -13,24 +13,22 @@ Canvas::~Canvas()
     delete s;
     s = nullptr;
   }
-
-  buttons.clear();
-  sprites.clear();
   
   if (cursor != nullptr)
   {
       delete cursor;
       cursor = nullptr;
   }
-  
 
+  buttons.clear();
+  sprites.clear();
 }
 
 void Canvas::AddCursor(Cursor* cursor, bool enable)
 {
     this->cursor = cursor;
     
-    if (enable)
+    if(enable)
         this->EnableCursor();
 }
 
