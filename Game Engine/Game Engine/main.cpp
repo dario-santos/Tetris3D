@@ -63,7 +63,7 @@ int main(void)
   // Initialization of the GLFW
   glfwInit();
 
-  glfwWindowHint(GLFW_SAMPLES, 4); //4xMSAA
+  glfwWindowHint(GLFW_SAMPLES, 4);               //4xMSAA
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // Opengl 3
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3); // Opengl 3.3
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);           // Removes functionality deprecated opengl functions
@@ -180,8 +180,8 @@ void callLoadLevelSinglePlayer()
     scene.reset(new Scene());
 
     // Single Player camera
-     scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
-    //scene->AddCamera(new Orthographic(vec3(-100, -200, 0), vec3(300 - 100, 225 - 200, 5)));
+    //scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
+    scene->AddCamera(new Orthographic(vec3(-100, -200, 0), vec3(300 - 100, 225 - 200, 5)));
     Scene::LoadScene(scene);
 
     loadLevelSingleplayer(scene);

@@ -79,6 +79,8 @@ class GameManager : public Script
         float pieceScale = 10.0f;
         bool isHardDropKeyPressed = false;
         bool isRotationKeyPressed = false;
+        bool isHoldKeyPressed = false;
+
         bool _generateNewObject = true;
         bool canHoldPiece = false;
 

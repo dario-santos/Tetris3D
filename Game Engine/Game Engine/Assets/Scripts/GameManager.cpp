@@ -211,7 +211,7 @@ void GameManager::ManageInput()
   }
 
   // Hold
-  if((Input::GetKey("Hold" + player) || Input::GetButton("Hold", gamepad) || Input::GetButton("HoldAlt", gamepad)) && canHoldPiece)
+  if((Input::GetKey("Hold" + player) || Input::GetButton("Hold", gamepad) || Input::GetButton("HoldAlt", gamepad)) && canHoldPiece && !isHoldKeyPressed)
   {
     canHoldPiece = false;
     
@@ -224,15 +224,20 @@ void GameManager::ManageInput()
   }
 
   isHardDropKeyPressed = Input::GetKey("HardDrop" + player) || Input::GetButton("HardDrop", gamepad);
-  isRotationKeyPressed = Input::GetKey("RotateR" + player) || Input::GetKey("RotateL" + player) || Input::GetButton("RotateR", gamepad) || Input::GetButton("RotateL", gamepad);;
+  isRotationKeyPressed = Input::GetKey("RotateR" + player) || Input::GetKey("RotateL" + player) || Input::GetButton("RotateR", gamepad) || Input::GetButton("RotateL", gamepad);
+  isHoldKeyPressed = Input::GetKey("Hold" + player) || Input::GetButton("Hold", gamepad) || Input::GetButton("HoldAlt", gamepad);
 }
 
 void GameManager::HoldPiece() 
 {
   _currenctObject->UpdateWorldPosition(this->piece, vec3(5, 13, 1), this->boardCenter, pieceScale);
+  _currenctObject->UpdateWorldPosition(this->piece, vec3(5, 13, 1), this->boardCenter, pieceScale);
+
   _currenctObject->Erase(_board, graphicBoard, _currentPosition, this->piece, this->boardCenter, pieceScale);
+
   for (GameObject* g : piece)
     g->Enable();
+
   _currenctObject->Restart();
 
 
@@ -378,7 +383,7 @@ void GameManager::ClearScreen()
     system("cls");
 }
 
-void GameManager::DetectLinesToRemove(std::set< int >& linesToRemove) const
+void GameManager::DetectLinesToRemove(std::set<int>& linesToRemove) const
 {
     bool flagLineFilled;    
 
@@ -543,8 +548,8 @@ void GameManager::GameLoop()
      ManageInput();
     
      if(_generateNewObject)
-    {
-      // Delete hold piece
+      {
+        // Delete hold piece
 
         canHoldPiece = false;
         ClearLine();
@@ -595,11 +600,16 @@ void GameManager::GameLoop()
 
         _holder->UpdateStatusToNotModified();
         GameOver();
-        if (_flagGameover)
+
+        if(_flagGameover)
           return;
+        
         canHoldPiece = true;
         _generateNewObject = false;
 
+        EraseShadowHint();
+
+        DrawShadowHint();
     }
     
     //ClearScreen();
