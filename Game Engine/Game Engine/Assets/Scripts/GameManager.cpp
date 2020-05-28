@@ -623,7 +623,7 @@ void GameManager::GameLoop()
         DrawShadowHint();
     }
     
-    //ClearScreen();
+    // ClearScreen();
     // DrawBoard();
 }
 
@@ -682,11 +682,14 @@ void GameManager::DrawShadowHint()
 {
   shadowHint.NewBlock(_currenctObject);
 
-  _currenctObject->Erase(_board, graphicBoard, _currentPosition, shadowPiece, boardCenter, pieceScale);
-
+  //_currenctObject->Erase(_board, graphicBoard, _currentPosition, shadowPiece, boardCenter, pieceScale);
+  
+  shadowHint.Erase(_board, graphicBoard, _currentPosition, shadowPiece, boardCenter);
+  
   _positionHint = shadowHint.PositionShadowHint(_board, _currentPosition);
 
-  _currenctObject->Draw(_board, graphicBoard, _currentPosition, shadowPiece, boardCenter, pieceScale);
+  //_currenctObject->Draw(_board, graphicBoard, _currentPosition, shadowPiece, boardCenter, pieceScale);
+  shadowHint.Draw(_board, graphicBoard, _currentPosition, shadowPiece, boardCenter);
 
   if (_positionHint._x != _currentPosition._x)
     shadowHint.Draw(_board, graphicBoard, _positionHint, shadowPiece, boardCenter);
@@ -697,11 +700,13 @@ void GameManager::EraseShadowHint()
 {
   shadowHint.NewBlock(_currenctObject);
 
-  _currenctObject->Erase(_board, graphicBoard, _currentPosition, shadowPiece, boardCenter, pieceScale);
+  shadowHint.Erase(_board, graphicBoard, _currentPosition, shadowPiece, boardCenter);
+
+  //_currenctObject->Erase(_board, graphicBoard, _currentPosition, shadowPiece, boardCenter, pieceScale);
   _positionHint = shadowHint.PositionShadowHint(_board, _currentPosition);
 
   if (_positionHint._x != _currentPosition._x)
   {
-    shadowHint.Erase(_board, graphicBoard, _positionHint, shadowPiece, boardCenter);
+    shadowHint.Erase(_board, graphicBoard, _currentPosition, shadowPiece, boardCenter);
   }
 }
