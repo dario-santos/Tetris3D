@@ -23,14 +23,20 @@ using namespace glm;
 class Square : public IPrimitive
 {
 private:
-  /** The Square VAO */
-  static GLuint squareVAO;
+    /** The Square VAO */
+    static GLuint squareVAO;
 	/** The vertex buffer, contains the (x,y,z) points of the square */
 	static std::vector<GLfloat> verticeBuffer;
 	/** The id of the vertex buffer array */
 	static GLuint verticeBufferId;
 	/** The RGB color of the object*/
+
+
+    static GLuint textureVBO;
+
 	vec3 color = vec3(1.0f);
+
+    
 
 public:
   /**

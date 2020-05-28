@@ -35,6 +35,9 @@ public:
    */
   static vector<GameObject*> AddHintBlock(float scale, vec3 color, Material* material)
   {
+      const char* buttonTexture = "Assets/Sprites/na.png";
+
+
     vector<GameObject*> gameObjects;
     // For reference, 0 is the middle line
 

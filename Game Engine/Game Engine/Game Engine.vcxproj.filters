@@ -132,6 +132,9 @@
     <ClCompile Include="Assets\Shaders\TransparencyShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngine\Texture\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.hpp">
@@ -242,29 +245,14 @@
     <ClInclude Include="Assets\Scripts\MenuLogic.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Assets\Prefabs\ZBlock.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Assets\Prefabs\Brick.hpp">
       <Filter>Prefabs</Filter>
     </ClInclude>
     <ClInclude Include="Assets\Prefabs\IBlock.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Assets\Prefabs\JBlock.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Assets\Prefabs\LBlock.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Assets\Prefabs\Player.hpp">
       <Filter>Prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="Assets\Prefabs\SBlock.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Assets\Prefabs\TBlock.hpp">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Assets\Scripts\ObjectHint.hpp">
       <Filter>Header Files</Filter>
@@ -285,6 +273,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Assets\Shaders\TransparencyShader.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Texture\Texture.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

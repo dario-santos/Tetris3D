@@ -231,26 +231,28 @@ void loadLevelOptionMenu(unique_ptr<Scene>& scene)
 {    
     Canvas* canvas = new Canvas();
 
-    canvas->AddButton(new Button(new OpaqueShader(new Renderer(new Square(vec3(255, 50, 0)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f))),
+    const char* buttonTexture = "Assets/Sprites/na.png";
+
+    canvas->AddButton(new Button(new OpaqueShader(new Renderer(new Square(vec3(255, 50, 0)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), buttonTexture),
         new Transform(vec3(0, 50, 0), vec3(0, 0, 0), vec3(100, 10, 5)),
         &setThemeA));
 
-    canvas->AddButton(new Button(new OpaqueShader(new Renderer(new Square(vec3(0, 255, 50)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f))),
+    canvas->AddButton(new Button(new OpaqueShader(new Renderer(new Square(vec3(0, 255, 50)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), buttonTexture),
         new Transform(vec3(0, 25, 0), vec3(0, 0, 0), vec3(100, 10, 5)),
         &setThemeB));
 
-    canvas->AddButton(new Button(new OpaqueShader(new Renderer(new Square(vec3(50, 0, 255)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f))),
+    canvas->AddButton(new Button(new OpaqueShader(new Renderer(new Square(vec3(50, 0, 255)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), buttonTexture),
         new Transform(vec3(0, 0, 0), vec3(0, 0, 0), vec3(100, 10, 5)),
         &setThemeC));
     
-    canvas->AddButton(new Button(new OpaqueShader(new Renderer(new Square(vec3(50, 100, 100)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f))),
+    canvas->AddButton(new Button(new OpaqueShader(new Renderer(new Square(vec3(50, 100, 100)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), buttonTexture),
         new Transform(vec3(0, -50, 0), vec3(0, 0, 0), vec3(100, 10, 5)),
         &callLoadLevelMainMenu));
 
 
     // Nav cursor
     // Delta é a width do botao
-    canvas->AddCursor(new Cursor(new OpaqueShader(new Renderer(new Square(vec3(255, 255, 255)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f))),
+    canvas->AddCursor(new Cursor(new OpaqueShader(new Renderer(new Square(vec3(255, 255, 255)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), buttonTexture),
         new Transform(vec3(0, 0, 0), vec3(0, 0, 0), vec3(5, 5, 5)), -65), true);
 
     
@@ -265,17 +267,19 @@ void loadLevelOptionMenu(unique_ptr<Scene>& scene)
 
 void loadLevelMainMenu(unique_ptr<Scene>& scene)
 {
+    const char* buttonTexture = "Assets/Sprites/na.png";
+
     Canvas* canvas = new Canvas();
 
-    Button* b = new Button(new OpaqueShader(new Renderer(new Square(vec3(255, 0, 0)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f))),
+    Button* b = new Button(new OpaqueShader(new Renderer(new Square(vec3(255, 0, 0)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), buttonTexture),
         new Transform(vec3(0, 25, 0), vec3(0, 0, 0), vec3(100, 10, 5)),
         &callLoadLevelSinglePlayer);
 
-    Button* b2 = new Button(new OpaqueShader(new Renderer(new Square(vec3(0, 255, 0)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f))),
+    Button* b2 = new Button(new OpaqueShader(new Renderer(new Square(vec3(0, 255, 0)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), buttonTexture),
         new Transform(vec3(0, 0, 0), vec3(0, 0, 0), vec3(100, 10, 5)),
         &callLoadLevelMultiPlayer);
 
-    Button* b3 = new Button(new OpaqueShader(new Renderer(new Square(vec3(0, 0, 255)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f))),
+    Button* b3 = new Button(new OpaqueShader(new Renderer(new Square(vec3(0, 0, 255)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), buttonTexture),
         new Transform(vec3(0, -25, 0), vec3(0, 0, 0), vec3(100, 10, 5)),
         &callLoadLevelOptionMenu);
 
@@ -286,7 +290,7 @@ void loadLevelMainMenu(unique_ptr<Scene>& scene)
 
     // Nav cursor
     // Delta é a width do botao
-    canvas->AddCursor(new Cursor(new OpaqueShader(new Renderer(new Square(vec3(255, 255, 255)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f))),
+    canvas->AddCursor(new Cursor(new OpaqueShader(new Renderer(new Square(vec3(255, 255, 255)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), buttonTexture),
         new Transform(vec3(0, 0, 0), vec3(0, 0, 0), vec3(5, 5, 5)), -65), true);
 
     GameObject* go = new GameObject(
@@ -301,6 +305,8 @@ void loadLevelMainMenu(unique_ptr<Scene>& scene)
 
 void loadLevelSingleplayer(unique_ptr<Scene>& scene)
 {
+
+    PhongShader::Init("Assets/Sprites/na.png");
 
   scene->AddLightSource(new LightSource(vec3(1.0f), vec3(0.4), vec3(1.0f), vec4(5.0f, 5.0f, 2.0f, 1.0f)));
   scene->AddLightSource(new LightSource(vec3(1.0f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), vec4(-5.0f, 5.0f, 2.0f, 1.0f)));

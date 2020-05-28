@@ -39,7 +39,8 @@ void TransparencyShader::LoadShader(mat4 model, mat4 view, mat4 projection)
   glUniformMatrix4fv(p, 1, GL_FALSE, &projection[0][0]);
 
   // be sure to activate shader when setting uniforms/drawing objects
-  glUniform3f(glGetUniformLocation(shaderId, "objectColor"), renderer->GetIPrimitive()->GetColor().x, renderer->GetIPrimitive()->GetColor().y, renderer->GetIPrimitive()->GetColor().z);
+  vec3 color = renderer->GetIPrimitive()->GetColor() / vec3(255.f);
+  glUniform3f(glGetUniformLocation(shaderId, "objectColor"), color.x, color.y, color.z);
 
   glEnableVertexAttribArray(0);
 

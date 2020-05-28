@@ -92,7 +92,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)OpenGL\irrKlang\include;$(SolutionDir)OpenGL\glm;$(SolutionDir)OpenGL\glew\include;$(SolutionDir)OpenGL\glfw\include;$(SolutionDir)OpenGL\gli;$(SolutionDir)Game Engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)OpenGL\irrKlang\include;$(SolutionDir)OpenGL\glm;$(SolutionDir)OpenGL\glew\include;$(SolutionDir)OpenGL\glfw\include;$(SolutionDir)Game Engine;$(SolutionDir)OpenGL\stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -125,7 +125,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)OpenGL\irrKlang\include;$(SolutionDir)OpenGL\glm;$(SolutionDir)OpenGL\glew\include;$(SolutionDir)OpenGL\glfw\include;$(SolutionDir)OpenGL\gli;$(SolutionDir)Game Engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)OpenGL\irrKlang\include;$(SolutionDir)OpenGL\glm;$(SolutionDir)OpenGL\glew\include;$(SolutionDir)OpenGL\glfw\include;$(SolutionDir)Game Engine;$(SolutionDir)OpenGL\stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -181,6 +181,7 @@
     <ClCompile Include="GameEngine\Scene.cpp" />
     <ClCompile Include="GameEngine\Shader\GLSLProgram.cpp" />
     <ClCompile Include="GameEngine\Shader\Material.cpp" />
+    <ClCompile Include="GameEngine\Texture\Texture.cpp" />
     <ClCompile Include="GameEngine\UI\Button.cpp" />
     <ClCompile Include="GameEngine\UI\Canvas.cpp" />
     <ClCompile Include="GameEngine\UI\Cursor.cpp" />
@@ -226,6 +227,7 @@
     <ClInclude Include="GameEngine\Shader\GLSLProgram.hpp" />
     <ClInclude Include="GameEngine\Shader\Material.hpp" />
     <ClInclude Include="GameEngine\Shader\Shader.hpp" />
+    <ClInclude Include="GameEngine\Texture\Texture.hpp" />
     <ClInclude Include="GameEngine\UI\Button.hpp" />
     <ClInclude Include="GameEngine\UI\Canvas.hpp" />
     <ClInclude Include="GameEngine\UI\Cursor.hpp" />
@@ -234,13 +236,8 @@
     <ClInclude Include="main.hpp" />
     <ClInclude Include="Assets\Prefabs\Brick.hpp" />
     <ClInclude Include="Assets\Prefabs\IBlock.hpp" />
-    <ClInclude Include="Assets\Prefabs\JBlock.hpp" />
-    <ClInclude Include="Assets\Prefabs\LBlock.hpp" />
     <ClInclude Include="Assets\Prefabs\HintBlock.hpp" />
     <ClInclude Include="Assets\Prefabs\Player.hpp" />
-    <ClInclude Include="Assets\Prefabs\SBlock.hpp" />
-    <ClInclude Include="Assets\Prefabs\TBlock.hpp" />
-    <ClInclude Include="Assets\Prefabs\ZBlock.hpp" />
     <ClInclude Include="Assets\Scripts\GameManager.hpp" />
     <ClInclude Include="Assets\Scripts\MenuLogic.hpp" />
     <ClInclude Include="GameEngine\Time\Time.hpp" />

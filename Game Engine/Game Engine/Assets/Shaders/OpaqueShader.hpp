@@ -4,22 +4,23 @@
 using std::cerr;
 using std::endl;
 
-#include "../../GameEngine/Shader/Shader.hpp"
+#include "GameEngine/Shader/Shader.hpp"
 
-#include "../../GameEngine/Primitives/IPrimitive.hpp"
+#include "GameEngine/Primitives/IPrimitive.hpp"
 
-#include "../../GameEngine/Primitives/Cube.hpp"
+#include "GameEngine/Components/Renderer.hpp"
 
-#include "../../GameEngine/Components/Renderer.hpp"
+#include "GameEngine/Texture/Texture.hpp"
 
 
 class OpaqueShader : public Shader
 {
 private:
   Renderer* renderer;
+  GLuint texture;
 
 public:
-  OpaqueShader(Renderer* object);
+  OpaqueShader(Renderer* object, const char* texturePath);
 
   void LoadShader(mat4 model, mat4 view, mat4 projection) override;
 

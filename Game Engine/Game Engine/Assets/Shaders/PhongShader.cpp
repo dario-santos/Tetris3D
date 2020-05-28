@@ -1,6 +1,6 @@
 #include "./PhongShader.hpp"
 
-PhongShader::PhongShader(Renderer* renderer, vector<LightSource*> lights)
+PhongShader::PhongShader(Renderer* renderer, vector<LightSource*> lights, const char* texturePath)
 {
   this->renderer = renderer;
   this->lights = lights;
@@ -18,6 +18,15 @@ PhongShader::PhongShader(Renderer* renderer, vector<LightSource*> lights)
     cerr << e.what() << endl;
     exit(EXIT_FAILURE);
   }
+}
+
+
+
+GLuint PhongShader::texture = 0;
+
+void PhongShader::Init(const char* texturePath)
+{
+    texture = Texture::LoadTexture(texturePath);
 }
 
 
@@ -48,15 +57,21 @@ void PhongShader::LoadShader(mat4 model, mat4 view, mat4 projection)
   shader->setUniform("Material.Ks", renderer->GetMaterial()->spectral);
   shader->setUniform("Material.Shininess", renderer->GetMaterial()->shininess);
 
-  shader->setUniform("objectColor", renderer->GetIPrimitive()->GetColor());
+  shader->setUniform("objectColor", (renderer->GetIPrimitive()->GetColor() / vec3(255.f)));
+  shader->setUniform("texture1", this->texture);
 
   glEnableVertexAttribArray(0);
   glEnableVertexAttribArray(1);
+  glEnableVertexAttribArray(2);
+
+  glActiveTexture(GL_TEXTURE0);
+  glBindTexture(GL_TEXTURE_2D, this->texture);
 
   renderer->Render();
 
   glDisableVertexAttribArray(0);
   glDisableVertexAttribArray(1);
+  glDisableVertexAttribArray(2);
 }
 
 

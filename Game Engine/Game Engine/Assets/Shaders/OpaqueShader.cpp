@@ -1,8 +1,10 @@
 #include "./OpaqueShader.hpp"
 
-OpaqueShader::OpaqueShader(Renderer* renderer) 
+OpaqueShader::OpaqueShader(Renderer* renderer, const char* texturePath) 
 {
   this->renderer = renderer;
+
+  this->texture = Texture::LoadTexture(texturePath);
 
   try
   {
@@ -21,6 +23,7 @@ OpaqueShader::OpaqueShader(Renderer* renderer)
 
 void OpaqueShader::LoadShader(mat4 model, mat4 view, mat4 projection)
 {
+
   // Uses shaderId as our shader
   GLuint shaderId = shader->getHandle();
   glUseProgram(shader->getHandle());
@@ -39,13 +42,22 @@ void OpaqueShader::LoadShader(mat4 model, mat4 view, mat4 projection)
   glUniformMatrix4fv(p, 1, GL_FALSE, &projection[0][0]);
 
   // be sure to activate shader when setting uniforms/drawing objects
-  glUniform3f(glGetUniformLocation(shaderId, "objectColor"), renderer->GetIPrimitive()->GetColor().x, renderer->GetIPrimitive()->GetColor().y, renderer->GetIPrimitive()->GetColor().z);
+  vec3 color = renderer->GetIPrimitive()->GetColor() / vec3(255.f);
+  glUniform3f(glGetUniformLocation(shaderId, "objectColor"), color.x, color.y, color.z);
+
+  shader->setUniform("texture1", this->texture);
 
   glEnableVertexAttribArray(0);
+  glEnableVertexAttribArray(2);
+
+  glActiveTexture(GL_TEXTURE0);
+  glBindTexture(GL_TEXTURE_2D, this->texture);
 
   renderer->Render();
 
+
   glDisableVertexAttribArray(0);
+  glDisableVertexAttribArray(2);
 }
 
 IPrimitive* OpaqueShader::GetIPrimitive() 

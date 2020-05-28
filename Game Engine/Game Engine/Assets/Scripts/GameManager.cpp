@@ -78,23 +78,23 @@ void GameManager::ChooseNextPiece()
     break;
   case tetrominos::L:
     _currenctObject.reset(new LObject());
-    this->nextPiece = LBlock::AddLBlock(pieceScale, vec3(3, 65, 174), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f));
+    this->nextPiece = IBlock::AddIBlock(pieceScale, vec3(3, 65, 174), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f));
     break;
   case tetrominos::J:
     _currenctObject.reset(new LInverseObject());
-    this->nextPiece = JBlock::AddJBlock(pieceScale, vec3(255, 151, 28), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f));
+    this->nextPiece = IBlock::AddIBlock(pieceScale, vec3(255, 151, 28), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f));
     break;
   case tetrominos::T:
     _currenctObject.reset(new TObject());
-    this->nextPiece = TBlock::AddTBlock(pieceScale, vec3(128, 0, 128), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f));
+    this->nextPiece = IBlock::AddIBlock(pieceScale, vec3(128, 0, 128), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f));
     break;
   case tetrominos::Z:
     _currenctObject.reset(new ZObject());
-    this->nextPiece = ZBlock::AddZBlock(pieceScale, vec3(255, 50, 19), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f));
+    this->nextPiece = IBlock::AddIBlock(pieceScale, vec3(255, 50, 19), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f));
     break;
   case tetrominos::S:
     _currenctObject.reset(new SObject());
-    this->nextPiece = SBlock::AddSBlock(pieceScale, vec3(114, 203, 59), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f));
+    this->nextPiece = IBlock::AddIBlock(pieceScale, vec3(114, 203, 59), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f));
     break;
   }
 
@@ -131,7 +131,7 @@ void GameManager::ChooseNextPiece()
   {
     _currenctObject->UpdateWorldPosition(this->piece, vec3(_currentPosition._x, _currentPosition._y, 1), this->boardCenter, pieceScale);
     // Update Shadow Color
-    vec3 color = piece[0]->shader->GetIPrimitive()->GetColor() * vec3(255);
+    vec3 color = piece[0]->shader->GetIPrimitive()->GetColor();
     for (GameObject* g : this->shadowPiece)
       g->shader->GetIPrimitive()->UpdateColor(color);
 
@@ -292,7 +292,7 @@ void GameManager::HoldPiece()
 
 
   // Update Shadow Color
-  vec3 color = piece[0]->shader->GetIPrimitive()->GetColor() * vec3(255);
+  vec3 color = piece[0]->shader->GetIPrimitive()->GetColor();
   for (GameObject* g : this->shadowPiece)
     g->shader->GetIPrimitive()->UpdateColor(color);
 }

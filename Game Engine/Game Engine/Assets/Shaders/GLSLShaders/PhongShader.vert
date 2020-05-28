@@ -1,8 +1,10 @@
 #version 330 core
 layout (location = 0) in vec3 VertexPosition;
 layout (location = 1) in vec3 VertexNormal;
+layout (location = 2) in vec2 aTexCoords;
 
 out vec3 LightIntensity;
+out vec2 TexCoords;
 
 struct LightInfo {
   vec4 Position; // Light position in eye coords.
@@ -53,5 +55,6 @@ void main()
        spec2 = Light[1].Ls * Material.Ks * pow(max(dot(r2, v2), 0.0), Material.Shininess);
 
     LightIntensity = ambient1 + diffuse1 + spec1 + ambient2 + diffuse2 + spec2;
+    TexCoords = aTexCoords;
     gl_Position = MVP * vec4(VertexPosition,1.0);
 }

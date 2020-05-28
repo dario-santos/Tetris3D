@@ -39,7 +39,7 @@ class Brick
       IPrimitive *p = new Cube(color);
       Renderer* r = new Renderer(p, material);
       GameObject *go = new GameObject(t, r, "Brick");
-      go->shader = new OpaqueShader(r);
+      go->shader = new OpaqueShader(r, "Assets/Sprites/na.png");
       return go;
     }
 };

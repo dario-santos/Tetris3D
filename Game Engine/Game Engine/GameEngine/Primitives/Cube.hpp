@@ -29,6 +29,8 @@ using namespace glm;
 class Cube : public IPrimitive
 {
 private:
+
+  static GLuint verticeBufferId;
   // Cube VAO
   static GLuint cubeVAO;
   // The vertex buffer, contains the (x,y,z) points of the circle
@@ -37,8 +39,10 @@ private:
   // The rgb color of the cube
   vec3 color = vec3(1.0f);
 
+  static GLuint textureVBO;
+
 public:
-  static GLuint verticeBufferId;
+  
    /*
     * Function: Square
     * --------------------------------
