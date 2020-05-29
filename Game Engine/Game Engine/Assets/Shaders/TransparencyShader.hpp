@@ -8,15 +8,13 @@ using std::endl;
 
 #include "../../GameEngine/Primitives/IPrimitive.hpp"
 
-#include "../../GameEngine/Primitives/Cube.hpp"
-
 #include "../../GameEngine/Components/Renderer.hpp"
-
 
 class TransparencyShader : public Shader
 {
 private:
   Renderer* renderer;
+  GLSLProgram* shader = new GLSLProgram();
 
 public:
   TransparencyShader(Renderer* object);

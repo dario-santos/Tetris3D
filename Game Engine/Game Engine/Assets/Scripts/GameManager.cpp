@@ -63,6 +63,7 @@ GameManager::GameManager(Material* material, float boardCenter, int startLevel, 
 }
 
 vector<int> GameManager::pieceList = vector<int>();
+bool GameManager::isPaused = false;
 
 void GameManager::ChooseNextPiece()
 {
@@ -540,7 +541,7 @@ void GameManager::GameOver()
     cout << "X: " << _currentPosition._x << "Y: " << _currentPosition._y << endl;
     cout << "GameOver" << endl;
     //Todo Restart game
-    _flagGameover = true;
+    isGameOver = true;
   }
 }
 
@@ -613,7 +614,7 @@ void GameManager::GameLoop()
         _holder->UpdateStatusToNotModified();
         GameOver();
 
-        if(_flagGameover)
+        if(isGameOver)
           return;
         
         canHoldPiece = true;
@@ -668,6 +669,9 @@ void GameManager::ResetGame()
 
 void GameManager::Update()
 {
+  if(GameManager::isPaused)
+    return;
+
   GameLoop();
 
   //ClearScreen();

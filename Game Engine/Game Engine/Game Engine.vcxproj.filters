@@ -135,6 +135,15 @@
     <ClCompile Include="GameEngine\Texture\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Assets\Scripts\PauseMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\Scripts\VersusManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\Scripts\MarathonManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.hpp">
@@ -276,6 +285,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\Texture\Texture.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Scripts\PauseMenu.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Scripts\VersusManager.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Scripts\MarathonManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

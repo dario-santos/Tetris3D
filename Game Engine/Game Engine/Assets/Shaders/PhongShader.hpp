@@ -16,17 +16,22 @@ using std::vector;
 
 #include "GameEngine/Texture/Texture.hpp"
 
+#include "GameEngine/Scene.hpp"
+
 
 class PhongShader : public Shader
 {
 private:
   Renderer* renderer = nullptr;
-  vector<LightSource*> lights;
+  static vector<LightSource*> lights;
   static GLuint texture;
+  static GLSLProgram* shader;
 
 public:
-  PhongShader(Renderer* renderer, vector<LightSource*> lights, const char* texturePath);
+  PhongShader(Renderer* renderer);
+  
   static void Init(const char* texturePath);
+
   void LoadShader(mat4 model, mat4 view, mat4 projection) override;
 
   IPrimitive* GetIPrimitive() override;

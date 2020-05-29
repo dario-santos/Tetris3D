@@ -1,38 +1,39 @@
 #include "./PhongShader.hpp"
 
-PhongShader::PhongShader(Renderer* renderer, vector<LightSource*> lights, const char* texturePath)
+PhongShader::PhongShader(Renderer* renderer)
 {
   this->renderer = renderer;
-  this->lights = lights;
-
-  try
-  {
-    shader->compileShader("./Assets/Shaders/GLSLShaders/PhongShader.vert");
-    shader->compileShader("./Assets/Shaders/GLSLShaders/PhongShader.frag");
-
-    shader->link();
-    shader->use();
-  }
-  catch (GLSLProgramException& e)
-  {
-    cerr << e.what() << endl;
-    exit(EXIT_FAILURE);
-  }
 }
 
-
-
 GLuint PhongShader::texture = 0;
+vector<LightSource*> PhongShader::lights = vector<LightSource*>();
+GLSLProgram* PhongShader::shader = nullptr;
 
 void PhongShader::Init(const char* texturePath)
 {
     texture = Texture::LoadTexture(texturePath);
-}
+    lights = Scene::CurrentScene()->GetLigthSources();
+    shader = new GLSLProgram();
 
+    try
+    {
+      shader->compileShader("./Assets/Shaders/GLSLShaders/PhongShader.vert");
+      shader->compileShader("./Assets/Shaders/GLSLShaders/PhongShader.frag");
+
+      shader->link();
+      shader->use();
+    }
+    catch (GLSLProgramException& e)
+    {
+      cerr << e.what() << endl;
+      exit(EXIT_FAILURE);
+    }
+}
 
 void PhongShader::LoadShader(mat4 model, mat4 view, mat4 projection)
 {
-  glUseProgram(shader->getHandle());
+  //glUseProgram(shader->getHandle());
+  shader->use();
 
   // Set ligts
   shader->setUniform("Light[0].Position", view * lights[0]->position);

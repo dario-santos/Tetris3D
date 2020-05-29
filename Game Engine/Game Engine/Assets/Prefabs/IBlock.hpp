@@ -20,8 +20,8 @@ class IBlock
 {
 private:
   // This is private because we don't want SBlock objects
-  IBlock();
-  ~IBlock();
+  IBlock() = default;
+  ~IBlock() = default;
 
 public:
   /**
@@ -33,10 +33,6 @@ public:
    */
   static vector<GameObject*> AddIBlock(float scale, vec3 color, Material* material)
   {
-
-      const char* texture = "Assets/Sprites/na.png";
-
-
     vector<GameObject*> gameObjects;
     // D  = [-50,50]
     // D' = [0, 200]
@@ -46,28 +42,28 @@ public:
     Transform* t = new Transform(vec3(-15, 195, 1), vec3(0), vec3(scale));
     Renderer* r = new Renderer(new Cube(color), material);
     GameObject* g = new GameObject(t, r, "IBlock");
-    g->shader = new PhongShader(r, Scene::CurrentScene()->GetLigthSources(), texture);
+    g->shader = new PhongShader(r);
     gameObjects.push_back(g);
 
     t = new Transform(vec3(-5, 195, 1), vec3(0), vec3(scale));
     material = new Material(material->ambiental, material->diffuse, material->spectral, material->shininess);
     r = new Renderer(new Cube(color), material);
     g = new GameObject(t, r, "IBlock");
-    g->shader = new PhongShader(r, Scene::CurrentScene()->GetLigthSources(), texture);
+    g->shader = new PhongShader(r);
     gameObjects.push_back(g);
 
     t = new Transform(vec3(5, 195, 1), vec3(0), vec3(scale));
     material = new Material(material->ambiental, material->diffuse, material->spectral, material->shininess);
     r = new Renderer(new Cube(color), material);
     g = new GameObject(t, r, "IBlock");
-    g->shader = new PhongShader(r, Scene::CurrentScene()->GetLigthSources(), texture);
+    g->shader = new PhongShader(r);
     gameObjects.push_back(g);
 
     t = new Transform(vec3(15, 195, 1), vec3(0), vec3(scale));
     material = new Material(material->ambiental, material->diffuse, material->spectral, material->shininess);
     r = new Renderer(new Cube(color), material);
     g = new GameObject(t, r, "IBlock");
-    g->shader = new PhongShader(r, Scene::CurrentScene()->GetLigthSources(), texture);
+    g->shader = new PhongShader(r);
     gameObjects.push_back(g);
 
     return gameObjects;

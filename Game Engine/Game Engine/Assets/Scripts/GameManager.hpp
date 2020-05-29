@@ -104,14 +104,12 @@ class GameManager : public Script
         
         vector<GameObject*> shadowPiece;
         int _currentPieceType;
-        bool _flagGameover = false;
 
         unique_ptr<PieceHolder> _holder;
         bool _flag_change_piece = true;
         ObjectHint shadowHint;
         Position _positionHint;
 
-        void HoldPieces();
         void DrawShadowHint();
         void EraseShadowHint();
         void GameOver();
@@ -137,6 +135,9 @@ class GameManager : public Script
         void GameLoop();
 
     public:
+        bool isGameOver = false;
+        static bool isPaused;
+
         /*
         * Function: GameManager
         * --------------------------------
