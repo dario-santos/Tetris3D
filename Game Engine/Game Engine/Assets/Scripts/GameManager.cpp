@@ -234,10 +234,10 @@ void GameManager::ManageInput()
 
 void GameManager::HoldPiece() 
 {
+  _currenctObject->Erase(_board, graphicBoard, _currentPosition, this->piece, this->boardCenter, pieceScale);
+
   _currenctObject->Restart();
   _currenctObject->UpdateWorldPosition(this->piece, vec3(4, 13, 1), this->boardCenter, pieceScale);
-
-  _currenctObject->Erase(_board, graphicBoard, _currentPosition, this->piece, this->boardCenter, pieceScale);
 
   for (GameObject* g : piece)
     g->Enable();
