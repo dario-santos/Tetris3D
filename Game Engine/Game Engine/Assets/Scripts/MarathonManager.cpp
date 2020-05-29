@@ -9,11 +9,7 @@ MarathonManager::MarathonManager()
 void MarathonManager::Update()
 {
   if (player1->isGameOver)
-  {
     std::cout << "GameOver" << std::endl;
-  }
   else
-  {
     player1->Update();
-  }
 }

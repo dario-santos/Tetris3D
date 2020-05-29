@@ -123,9 +123,6 @@
     <ClCompile Include="Assets\Scripts\ObjectHint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Assets\Scripts\PieceHolder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameEngine\UI\Cursor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -267,9 +264,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Assets\Scripts\GameBoard.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Assets\Scripts\PieceHolder.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Assets\Scripts\Position.hpp">

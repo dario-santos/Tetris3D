@@ -117,7 +117,6 @@ void BoardObject::_Draw(GameBoard& board, vector<vector<GameObject*>>& graphicBo
 void BoardObject::UpdateWorldPosition(vector<GameObject*> tetromino, vec3 newPosition, float boardCenter, float pieceScale)
 {
   int cnt = 0;
-
   const Shape& shape = _GetShape();
   const std::vector<int>& mappingVector = _GetMapping();
 
