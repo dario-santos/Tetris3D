@@ -3,8 +3,6 @@
 #include <vector>
 using namespace std;
 
-#include "./Sprite.hpp"
-
 #include "../Components/Transform.hpp"
 #include "../Shader/Shader.hpp"
 

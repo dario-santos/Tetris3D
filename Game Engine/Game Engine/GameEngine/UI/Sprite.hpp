@@ -3,21 +3,18 @@
 #include <vector>
 using namespace std;
 
-//#include <gli/gli.hpp>
-//using namespace gli;
-
 #include "../Components/Transform.hpp"
+#include "../Shader/Shader.hpp"
 
 class Sprite
 {
 	private:
-		//texture2d texture;
+		Shader* shader = nullptr;
 		Transform* transform = nullptr;
 	
 	public:
-		//Sprite(texture2d texture, Transform* t);
-		
+		Sprite(Shader* shader, Transform* transform);
 		~Sprite();
-		
-		//void UpdateTexture(texture2d texture);
+		Shader* GetShader();
+		Transform* GetTransform();
 };

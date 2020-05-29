@@ -112,6 +112,8 @@ void Scene::DrawGUI()
         {
           for (Button* b : c->GetButtons())
             b->GetShader()->LoadShader(b->GetTransform()->model, cam->GetView(), cam->GetProjection());
+          for (Sprite* s : c->GetSprites())
+              s->GetShader()->LoadShader(s->GetTransform()->model, cam->GetView(), cam->GetProjection());
           if (c->IsCursorEnabled())
             c->GetCursor()->GetShader()->LoadShader(c->GetCursor()->GetTransform()->model, cam->GetView(), cam->GetProjection());
         }

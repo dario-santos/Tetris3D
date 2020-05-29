@@ -1,17 +1,10 @@
 #include "Sprite.hpp"
-/*
 
-Sprite::Sprite(texture2d texture, Transform* t)
+Sprite::Sprite(Shader* shader, Transform* transform)
 {
-	this->texture = texture;
-	this->t = t;
+	this->shader = shader;
+	this->transform = transform;
 }
-
-void Sprite::UpdateTexture(texture2d texture)
-{
-	this->texture = texture;
-}
-*/
 
 Sprite::~Sprite() 
 {
@@ -20,4 +13,14 @@ Sprite::~Sprite()
 		delete transform;
 		transform = nullptr;
 	}
+}
+
+Shader* Sprite::GetShader()
+{
+	return this->shader;
+}
+
+Transform* Sprite::GetTransform()
+{
+	return this->transform;
 }
