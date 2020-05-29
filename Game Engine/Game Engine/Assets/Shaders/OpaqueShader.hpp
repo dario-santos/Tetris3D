@@ -12,12 +12,12 @@ using std::endl;
 
 #include "GameEngine/Texture/Texture.hpp"
 
-
 class OpaqueShader : public Shader
 {
 private:
   Renderer* renderer;
   GLuint texture;
+  GLSLProgram* shader = new GLSLProgram();
 
 public:
   OpaqueShader(Renderer* object, const char* texturePath);

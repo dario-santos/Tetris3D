@@ -15,22 +15,20 @@ public:
 
 	void Erase(GameBoard& board, vector<vector<GameObject*>>& graphicBoard, const Position& pos, vector<GameObject*> tetromino, float boardCenter, float pieceScale) const;
 
-	virtual void Transformation(bool isClockWise) = 0;
-
 	void UpdateWorldPosition(vector<GameObject*> tetromino, vec3 newPosition, float boardCenter, float pieceScale);
-
+	
+	virtual void Transformation(bool isClockWise) = 0;
 
 	virtual std::unique_ptr<BoardObject> Clone() const = 0;
 
 	virtual void Restart() = 0;
 
 	~BoardObject() = default;
+
 protected:
-	
 	typedef std::vector<std::vector<int>> Shape;
 
 	BoardObject() = default;
-
 
 	virtual const Shape& _GetShape() const = 0;
 	

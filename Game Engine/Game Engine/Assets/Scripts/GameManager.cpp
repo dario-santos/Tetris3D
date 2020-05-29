@@ -54,15 +54,14 @@ GameManager::GameManager(Material* material, float boardCenter, int startLevel, 
   this->boardCenter = boardCenter;
   this->gamepad     = gamepad;
   beep.reset(new AudioDevice(100));
-  
-  _holder.reset(new PieceHolder());
-  
+    
 
   // Set random sequence
   srand((unsigned)time(0));
 }
 
 vector<int> GameManager::pieceList = vector<int>();
+bool GameManager::isPaused = false;
 
 void GameManager::ChooseNextPiece()
 {
@@ -235,16 +234,13 @@ void GameManager::ManageInput()
 
 void GameManager::HoldPiece() 
 {
-  _currenctObject->UpdateWorldPosition(this->piece, vec3(5, 13, 1), this->boardCenter, pieceScale);
-  _currenctObject->UpdateWorldPosition(this->piece, vec3(5, 13, 1), this->boardCenter, pieceScale);
+  _currenctObject->Restart();
+  _currenctObject->UpdateWorldPosition(this->piece, vec3(4, 13, 1), this->boardCenter, pieceScale);
 
   _currenctObject->Erase(_board, graphicBoard, _currentPosition, this->piece, this->boardCenter, pieceScale);
 
   for (GameObject* g : piece)
     g->Enable();
-
-  _currenctObject->Restart();
-
 
   _currentPosition.Reset();
 
@@ -535,12 +531,9 @@ void GameManager::UpdateScore(int linesCleared)
 
 void GameManager::GameOver()
 {
-  if (_currenctObject->VerifyColision(_board, _currentPosition))
+  if(_currenctObject->VerifyColision(_board, _currentPosition))
   {
-    cout << "X: " << _currentPosition._x << "Y: " << _currentPosition._y << endl;
-    cout << "GameOver" << endl;
-    //Todo Restart game
-    _flagGameover = true;
+    isGameOver = true;
   }
 }
 
@@ -610,10 +603,9 @@ void GameManager::GameLoop()
         
         ChooseNextPiece();
 
-        _holder->UpdateStatusToNotModified();
         GameOver();
 
-        if(_flagGameover)
+        if(isGameOver)
           return;
         
         canHoldPiece = true;
@@ -627,47 +619,11 @@ void GameManager::GameLoop()
     // DrawBoard();
 }
 
-void GameManager::ResetGame() 
-{
-  this->score = 0;
-  this->linesCleared = 0;
-
-  this->_generateNewObject = true;
-
-  this->inputDelayTime = 0.28f;
-  this->delayTime = 1.0f;
-  this->startCycleTime = Time::GetTime();
-  this->startInputCycleTime = Time::GetTime();
-
-  for(int i = 0 ; i < piece.size() ; i++)
-  {
-    piece[i]->Destroy();
-    piece[i] = nullptr;
-  }
-
-  for(int i = 0; i < this->graphicBoard.size(); i++)
-  {
-    for(int j = 0; j < this->graphicBoard[i].size(); j++)
-    {
-      if(this->graphicBoard[i][j] != nullptr)
-      {
-        this->graphicBoard[i][j]->Destroy();
-        this->graphicBoard[i][j] = nullptr;
-      }
-    }
-  }
-
-  for (int i = 0; i < this->_board.size(); i++)
-    for (int j = 0; j < this->_board[i].size(); j++)
-      this->_board[i][j] = 0;
-
-  this->_currenctObject.reset();
-
-  this->_currentPosition.Reset();
-}
-
 void GameManager::Update()
 {
+  if(GameManager::isPaused)
+    return;
+
   GameLoop();
 
   //ClearScreen();

@@ -123,9 +123,6 @@
     <ClCompile Include="Assets\Scripts\ObjectHint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Assets\Scripts\PieceHolder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameEngine\UI\Cursor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -133,6 +130,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\Texture\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\Scripts\PauseMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\Scripts\VersusManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\Scripts\MarathonManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -260,9 +266,6 @@
     <ClInclude Include="Assets\Scripts\GameBoard.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Assets\Scripts\PieceHolder.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Assets\Scripts\Position.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -276,6 +279,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\Texture\Texture.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Scripts\PauseMenu.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Scripts\VersusManager.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Scripts\MarathonManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -9,18 +9,6 @@ using glm::mat4;
 class Shader 
 {
 public:
-  ~Shader()
-  {
-    if (shader != nullptr)
-    {
-      delete shader;
-      shader = nullptr;
-    }
-  }
-
   virtual void LoadShader(mat4 model, mat4 view, mat4 projection) = 0;
   virtual IPrimitive* GetIPrimitive() = 0;
-
-protected:
-  GLSLProgram* shader = new GLSLProgram();
 };

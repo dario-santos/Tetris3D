@@ -21,12 +21,10 @@ using namespace glm;
 #include "Assets/Prefabs/IBlock.hpp"
 #include "Assets/Prefabs/HintBlock.hpp"
 
-//
-#include "PieceHolder.hpp"
 #include "ObjectHint.hpp"
 #include "GameBoard.hpp"
 #include "Position.hpp"
-//
+
 
 class BoardObject;
 
@@ -49,76 +47,76 @@ class GameManager : public Script
             Total
         };
         
+        // Ordem das peças que serão dadas ao utilizador
         static vector<int> pieceList;
-
+        // Indice da lista de peças que está
         int pieceListIndex = 0;
 
-
-        Material* material = nullptr;
+        // Material das peças criadas
+        Material* material;
+        // Centro do tabuleiro no eixo X
         float boardCenter = 0.0f;
-     
+        // Tamanho das peças
+        float pieceScale = 10.0f;
+        // Id deste jogador
+        Gamepad gamepad;
         // Audio device
         unique_ptr<AudioDevice> beep;
         // Score of the game
         int score = 0;
         int linesCleared = 0;
-
         int level = 0;
         int startLevel = 0;
         int linesToNextLevel = 10;
-        Gamepad gamepad;
+        // Última peça gerada
         int lastPiece = -1;
         
-        // Movement
+        // Input
         int movementAmmount = 0;
-        float pieceScale = 10.0f;
         bool isHardDropKeyPressed = false;
         bool isRotationKeyPressed = false;
         bool isHoldKeyPressed = false;
-
-        bool _generateNewObject = true;
         bool canHoldPiece = false;
+        // Pode gerar uma nova peça
+        bool _generateNewObject = true;
 
-        // In seconds
+        // Timers - in seconds
         float inputDelayTime = 0.26f;
         float startInputCycleTime = Time::GetTime();
         float delayTime = 1;
         float startCycleTime = Time::GetTime();
-
+        // Pieces
         vector<GameObject*> piece;
         vector<GameObject*> nextPiece;
         vector<GameObject*> holdPiece;
+        vector<GameObject*> shadowPiece;
         vector<vector<GameObject*>> graphicBoard;
         
         int holdPieceType = -1;
         int currentPieceType = -1;
         int nextPieceType = -1;
 
-        unique_ptr<BoardObject> _currenctObject;
-
+        // Board
         GameBoard _board;
-        
+        unique_ptr<BoardObject> _currenctObject;
         Position _currentPosition;
-
-        //
-        
-        vector<GameObject*> shadowPiece;
-        int _currentPieceType;
-        bool _flagGameover = false;
-
-        unique_ptr<PieceHolder> _holder;
-        bool _flag_change_piece = true;
+        // Shadow of the piece
         ObjectHint shadowHint;
         Position _positionHint;
+               
+        int _currentPieceType;
 
-        void HoldPieces();
+
+        void GameOver();
+        
         void DrawShadowHint();
         void EraseShadowHint();
-        void GameOver();
-
-        //
+        
         void ChooseNextPiece();
+
         void DrawBoard();
+        void ClearScreen();
+        
         void ManageInput();
         void HoldPiece();
         void Transformation(bool isClockWise);
@@ -126,28 +124,23 @@ class GameManager : public Script
         void MoveObjectRight();
         void MoveObjectDown();
         void MoveObjectHardDrop();
+
         bool UpdatePosition(const Position& newPosition, const bool createNewObjectIfFailed = false);
+        
         void DetectLinesToRemove(std::set< int >& linesToRemove) const;
         void CopyLineToOtherBoard(int dstIndex, int srcIndex, GameBoard& destBoard, const GameBoard& srcBoard) const;
         void CopyLineToOtherBoard(int dstIndex, int srcIndex, vector<vector<GameObject*>>& dstBoard, vector<vector<GameObject*>>& srcBoard);
         void ClearLine();
+        
         void UpdateScore(int linesCleared);
-        void ClearScreen();
-        void ResetGame();
+        
         void GameLoop();
 
     public:
-        /*
-        * Function: GameManager
-        * --------------------------------
-        *  GameManager constructor
-        *
-        */
+        bool isGameOver = false;
+        static bool isPaused;
+
         GameManager(Material* material, float boardCenter = 0.0f, int startLevel = 0, Gamepad gamepad = Gamepad::Gamepad1);
-        /*
-        * Function: Update
-        * --------------------------------
-        *  The Update event
-        */
+
         void Update() override;
 };
