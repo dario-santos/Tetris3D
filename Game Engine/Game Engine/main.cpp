@@ -101,7 +101,8 @@ int main(void)
   // Initializations and configurations
   Square::Init();
   Cube::Init();
-  Config::LoadConfig("./config.cfg");
+  Config::LoadConfig("config.cfg");
+  Config::LoadScore("score.dat");
 
   // Loads the scene and sets it as the active one
   //scene->AddCamera(new Perspective(45.0f, 4/3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
@@ -112,7 +113,6 @@ int main(void)
 
   theme->Play2D("Assets/Audio/Theme_A.mp3", GL_TRUE);
   glfwSwapInterval(1);
-
   // render scene for each frame
   do
   {

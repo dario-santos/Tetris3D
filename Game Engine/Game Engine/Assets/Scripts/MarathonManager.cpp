@@ -9,7 +9,19 @@ MarathonManager::MarathonManager()
 void MarathonManager::Update()
 {
   if (player1->isGameOver)
+  {
+    if (player1->score > Config::highscore)
+    {
+      Config::highscore = player1->score;
+      Config::SaveScore("score.dat");
+    }
+   
     std::cout << "GameOver" << std::endl;
+    std::cout << "Score: " << player1->score << std::endl;
+    std::cout << "HighScore: " << Config::highscore << std::endl;
+  }
   else
+  {
     player1->Update();
+  }
 }

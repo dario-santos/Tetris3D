@@ -28,11 +28,27 @@ private:
 public:
   /** Map from section to (key, value) */
   static map<string, map<string, int>> keys;
-  
+  /** Saved highscore  */
+  static int highscore;
+
   /**
    * LoadConfig
    *
    * \param path The path of the file that will be parsed
    */
   static void LoadConfig(char const* path);
+
+  /**
+   * LoadScore.
+   * 
+   * \param path The path of the file with scores
+   */
+  static void LoadScore(char const* path);
+
+  /**
+   * SaveScore.
+   * 
+   * \param path The path of the file that will save the score
+   */
+  static void SaveScore(char const* path);
 };

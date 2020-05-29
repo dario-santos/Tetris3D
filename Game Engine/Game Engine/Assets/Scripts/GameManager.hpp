@@ -63,7 +63,6 @@ class GameManager : public Script
         // Audio device
         unique_ptr<AudioDevice> beep;
         // Score of the game
-        int score = 0;
         int linesCleared = 0;
         int level = 0;
         int startLevel = 0;
@@ -137,8 +136,10 @@ class GameManager : public Script
         void GameLoop();
 
     public:
-        bool isGameOver = false;
         static bool isPaused;
+        bool isGameOver = false;
+
+        int score = 0;
 
         GameManager(Material* material, float boardCenter = 0.0f, int startLevel = 0, Gamepad gamepad = Gamepad::Gamepad1);
 
