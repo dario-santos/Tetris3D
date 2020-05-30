@@ -482,8 +482,6 @@ void loadLevelOptionMenu(unique_ptr<Scene>& scene)
 
 void loadLevelSingleplayer(unique_ptr<Scene>& scene)
 {
-  
-
   scene->AddLightSource(new LightSource(vec3(1.0f), vec3(0.4), vec3(1.0f), vec4(5.0f, 5.0f, 2.0f, 1.0f)));
   scene->AddLightSource(new LightSource(vec3(1.0f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), vec4(-5.0f, 5.0f, 2.0f, 1.0f)));
 
@@ -557,10 +555,6 @@ void loadLevelSingleplayer(unique_ptr<Scene>& scene)
   
 
   scene->AddCanvas(canvas);
-
-
-
-
 
   // Pause Menu
   const char* backTexture = "Assets/Sprites/buttons/back.png";

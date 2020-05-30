@@ -4,15 +4,15 @@ PauseMenu::PauseMenu(Canvas* canvas)
 {
   this->canvas = canvas;
 
-  if (GameManager::isPaused)
-    canvas->Enable();
-  else
-    canvas->Disable();
+  GameManager::isPaused = false;
+  canvas->Disable();
 
   audioDevice.reset(new AudioDevice(75));
+
+  isKeyPressed = true;
 }
 
-bool PauseMenu::isKeyPressed = false;
+bool PauseMenu::isKeyPressed = true;
 
 void PauseMenu::Update() 
 {

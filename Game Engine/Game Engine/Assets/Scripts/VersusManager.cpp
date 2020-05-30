@@ -15,19 +15,25 @@ VersusManager::VersusManager(Canvas* p1canvas, Canvas* p2canvas)
 
 void VersusManager::Update()
 {
+  if (GameManager::isPaused)
+    return;
+
   if(player1->isGameOver)
   {
     std::cout << "Player 2 wins"<< std::endl;
+    return;
   }
   else if(player2->isGameOver)
   {
     std::cout << "Player 1 wins" << std::endl;
+    return;
   }
   else
   {
     player1->Update();
     player2->Update();
   }
+
 
   char p1scoreDigits[7];
   char p2scoreDigits[7];
