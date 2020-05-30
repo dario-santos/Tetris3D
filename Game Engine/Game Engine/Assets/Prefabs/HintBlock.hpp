@@ -35,8 +35,8 @@ public:
    */
   static vector<GameObject*> AddHintBlock(float scale, vec3 color, Material* material)
   {
-      const char* buttonTexture = "Assets/Sprites/na.png";
 
+    const char* buttonTexture = "Assets/Sprites/blocks/sample.png";
 
     vector<GameObject*> gameObjects;
     // For reference, 0 is the middle line
@@ -44,28 +44,28 @@ public:
     Transform* t = new Transform(vec3(-5, 195, 1), vec3(0), vec3(scale));
     Renderer* r = new Renderer(new Cube(color), material);
     GameObject* g = new GameObject(t, r, "OBlock");
-    g->shader = new TransparencyShader(r);
+    g->shader = new TransparencyShader(r, buttonTexture);
     gameObjects.push_back(g);
 
     t = new Transform(vec3(5, 195, 1), vec3(0), vec3(scale));
     material = new Material(material->ambiental, material->diffuse, material->spectral, material->shininess);
     r = new Renderer(new Cube(color), material);
     g = new GameObject(t, r, "OBlock");
-    g->shader = new TransparencyShader(r);
+    g->shader = new TransparencyShader(r, buttonTexture);
     gameObjects.push_back(g);
 
     t = new Transform(vec3(-5, 185, 1), vec3(0), vec3(scale));
     material = new Material(material->ambiental, material->diffuse, material->spectral, material->shininess);
     r = new Renderer(new Cube(color), material);
     g = new GameObject(t, r, "OBlock");
-    g->shader = new TransparencyShader(r);
+    g->shader = new TransparencyShader(r, buttonTexture);
     gameObjects.push_back(g);
 
     t = new Transform(vec3(5, 185, 1), vec3(0), vec3(scale));
     material = new Material(material->ambiental, material->diffuse, material->spectral, material->shininess);
     r = new Renderer(new Cube(color), material);
     g = new GameObject(t, r, "OBlock");
-    g->shader = new TransparencyShader(r);
+    g->shader = new TransparencyShader(r, buttonTexture);
     gameObjects.push_back(g);
 
     return gameObjects;

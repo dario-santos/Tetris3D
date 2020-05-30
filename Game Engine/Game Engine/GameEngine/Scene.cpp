@@ -7,9 +7,16 @@ Scene::~Scene()
     //delete go;
   }
 
+  for (Canvas* c : canvas)
+  {
+      delete c;
+      c = nullptr;
+  }
+
   cameras.clear();
   gameObjects.clear();
   canvas.clear();
+
 }
 
 Scene* Scene::currentScene = nullptr;
@@ -99,8 +106,6 @@ void Scene::DrawScene()
       if(g->IsEnabled())
         g->Draw(c->GetView(), c->GetProjection());
 }
-
-#include <iostream>
 
 void Scene::DrawGUI()
 {

@@ -21,6 +21,12 @@ OpaqueShader::OpaqueShader(Renderer* renderer, const char* texturePath)
   }
 }
 
+OpaqueShader::~OpaqueShader()
+{
+    glDeleteTextures(1, &this->texture);
+    delete this->shader;
+}
+
 void OpaqueShader::LoadShader(mat4 model, mat4 view, mat4 projection)
 {
 
@@ -63,4 +69,10 @@ void OpaqueShader::LoadShader(mat4 model, mat4 view, mat4 projection)
 IPrimitive* OpaqueShader::GetIPrimitive() 
 {
   return this->renderer->GetIPrimitive();
+}
+
+void OpaqueShader::UpdateShader(const char* texturePath)
+{
+    glDeleteTextures(1, &this->texture);
+    this->texture = Texture::LoadTexture(texturePath);
 }

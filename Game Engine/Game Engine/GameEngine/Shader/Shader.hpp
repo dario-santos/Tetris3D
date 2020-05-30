@@ -11,4 +11,5 @@ class Shader
 public:
   virtual void LoadShader(mat4 model, mat4 view, mat4 projection) = 0;
   virtual IPrimitive* GetIPrimitive() = 0;
+  virtual void UpdateShader(const char* texturePath) = 0;
 };

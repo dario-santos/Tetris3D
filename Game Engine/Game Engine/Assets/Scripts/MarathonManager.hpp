@@ -8,13 +8,17 @@
 
 #include "Assets/Scripts/GameManager.hpp"
 
+#include "GameEngine/UI/Canvas.hpp"
+#include "GameEngine/UI/Sprite.hpp"
+
 class MarathonManager : public Script
 {
 private:
   GameManager* player1;
+  Canvas* canvas;
+  vector<Sprite*> digitSprites;
 
 public:
-  MarathonManager();
-
+  MarathonManager(Canvas* canvas);
   void Update() override;
 };

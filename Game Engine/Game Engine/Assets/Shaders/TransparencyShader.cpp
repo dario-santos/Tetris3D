@@ -1,8 +1,9 @@
 #include "./TransparencyShader.hpp"
 
-TransparencyShader::TransparencyShader(Renderer* renderer)
+TransparencyShader::TransparencyShader(Renderer* renderer, const char* texturePath)
 {
   this->renderer = renderer;
+  this->texture = Texture::LoadTexture(texturePath);
 
   try
   {
@@ -43,13 +44,24 @@ void TransparencyShader::LoadShader(mat4 model, mat4 view, mat4 projection)
   glUniform3f(glGetUniformLocation(shaderId, "objectColor"), color.x, color.y, color.z);
 
   glEnableVertexAttribArray(0);
+  glEnableVertexAttribArray(2);
+
+  glActiveTexture(GL_TEXTURE0);
+  glBindTexture(GL_TEXTURE_2D, this->texture);
 
   renderer->Render();
 
+
   glDisableVertexAttribArray(0);
+  glDisableVertexAttribArray(2);
 }
 
 IPrimitive* TransparencyShader::GetIPrimitive()
 {
   return this->renderer->GetIPrimitive();
+}
+
+void TransparencyShader::UpdateShader(const char* texturePath)
+{
+    this->texture = Texture::LoadTexture(texturePath);
 }

@@ -35,4 +35,6 @@ public:
   void LoadShader(mat4 model, mat4 view, mat4 projection) override;
 
   IPrimitive* GetIPrimitive() override;
+
+  void UpdateShader(const char* texturePath) override;
 };

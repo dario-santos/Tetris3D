@@ -80,3 +80,8 @@ IPrimitive* PhongShader::GetIPrimitive()
 {
   return this->renderer->GetIPrimitive();
 }
+
+void PhongShader::UpdateShader(const char* texturePath)
+{
+    this->texture = Texture::LoadTexture(texturePath);
+}

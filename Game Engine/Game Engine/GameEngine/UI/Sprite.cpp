@@ -13,6 +13,12 @@ Sprite::~Sprite()
 		delete transform;
 		transform = nullptr;
 	}
+
+	if (shader != nullptr)
+	{
+		delete shader;
+		shader = nullptr;
+	}
 }
 
 Shader* Sprite::GetShader()

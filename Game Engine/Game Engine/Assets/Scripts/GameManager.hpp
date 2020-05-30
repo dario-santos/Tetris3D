@@ -64,7 +64,6 @@ class GameManager : public Script
         unique_ptr<AudioDevice> beep;
         // Score of the game
         int linesCleared = 0;
-        int level = 0;
         int startLevel = 0;
         int linesToNextLevel = 10;
         // Última peça gerada
@@ -138,7 +137,8 @@ class GameManager : public Script
     public:
         static bool isPaused;
         bool isGameOver = false;
-
+        
+        int level = 0;
         int score = 0;
 
         GameManager(Material* material, float boardCenter = 0.0f, int startLevel = 0, Gamepad gamepad = Gamepad::Gamepad1);
