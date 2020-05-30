@@ -16,8 +16,14 @@ private:
   GameManager* player1;
   GameManager* player2;
 
+  Canvas* p1canvas;
+  Canvas* p2canvas;
+
+  vector<Sprite*> p1digitSprites;
+  vector<Sprite*> p2digitSprites;
+
 public:
-  VersusManager();
+  VersusManager(Canvas* p1canvas, Canvas* p2canvas);
 
   void Update() override;
 };
