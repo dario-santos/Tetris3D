@@ -11,9 +11,14 @@
 #include <memory>
 using namespace std;
 
-void loadLevelOptionMenu(unique_ptr<Scene>& scene);
 
 void loadLevelMainMenu(unique_ptr<Scene>& scene);
+
+void loadLevelOptionMenu(unique_ptr<Scene>& scene);
+
+void loadLevelMarathonMenu(unique_ptr<Scene>& scene);
+
+void loadLevelVersusMenu(unique_ptr<Scene>& scene);
 
 /*
  * Function: loadGameObjects

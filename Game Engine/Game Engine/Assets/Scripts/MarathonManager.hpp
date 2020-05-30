@@ -11,6 +11,8 @@
 #include "GameEngine/UI/Canvas.hpp"
 #include "GameEngine/UI/Sprite.hpp"
 
+#include "MarathonMenuLogic.hpp"
+
 class MarathonManager : public Script
 {
 private:

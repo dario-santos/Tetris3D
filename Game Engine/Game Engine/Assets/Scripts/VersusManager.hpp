@@ -8,6 +8,8 @@
 
 #include "Assets/Scripts/GameManager.hpp"
 
+#include "MarathonMenuLogic.hpp"
+
 class VersusManager : public Script
 {
 private:

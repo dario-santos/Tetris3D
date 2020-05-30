@@ -156,6 +156,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Assets\Scripts\MarathonManager.cpp" />
+    <ClCompile Include="Assets\Scripts\MarathonMenuLogic.cpp" />
     <ClCompile Include="Assets\Scripts\ObjectHint.cpp" />
     <ClCompile Include="Assets\Scripts\PauseMenu.cpp" />
     <ClCompile Include="Assets\Scripts\VersusManager.cpp" />
@@ -198,6 +199,7 @@
   <ItemGroup>
     <ClInclude Include="Assets\Scripts\GameBoard.hpp" />
     <ClInclude Include="Assets\Scripts\MarathonManager.hpp" />
+    <ClInclude Include="Assets\Scripts\MarathonMenuLogic.hpp" />
     <ClInclude Include="Assets\Scripts\ObjectHint.hpp" />
     <ClInclude Include="Assets\Scripts\PauseMenu.hpp" />
     <ClInclude Include="Assets\Scripts\Position.hpp" />

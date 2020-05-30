@@ -37,6 +37,7 @@ using namespace glm;
 #include "Assets/Scripts/MarathonManager.hpp"
 #include "Assets/Scripts/VersusManager.hpp"
 #include "Assets/Scripts/MenuLogic.hpp"
+#include "Assets/Scripts/MarathonMenuLogic.hpp"
 #include "Assets/Scripts/PauseMenu.hpp"
 
 #include "Assets/Shaders/OpaqueShader.hpp"
@@ -81,8 +82,9 @@ int main(void)
   glfwSetWindowSizeCallback(window, Window::WindowReshapeCallback);
 
   // Background Color
+
   //glClearColor(45.f/255, 52.f/255, 54.f/255, 0.0f);
-  glClearColor(236.f/255, 240.f/255, 241.f/255, 0.0f);
+  glClearColor(229.f/255, 229.f/255, 229.f/255, 0.0f);
 
   // Enable depth test and blend
   glEnable(GL_DEPTH_TEST);
@@ -188,18 +190,6 @@ void callLoadLevelMultiPlayer()
     loadLevelMultiplayer(scene);
 }
 
-void callLoadLevelOptionMenu()
-{
-    scene.reset(new Scene());
-
-    // Single Player camera
-    //scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
-    scene->AddCamera(new Orthographic(vec3(-200, -150, -100), vec3(200, 150, 100)));
-    Scene::LoadScene(scene);
-
-    loadLevelOptionMenu(scene);
-}
-
 void callLoadLevelMainMenu()
 {
     scene.reset(new Scene());
@@ -212,6 +202,43 @@ void callLoadLevelMainMenu()
     loadLevelMainMenu(scene);
 
 }
+
+void callLoadLevelOptionMenu()
+{
+    scene.reset(new Scene());
+
+    // Single Player camera
+    //scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
+    scene->AddCamera(new Orthographic(vec3(-200, -150, -100), vec3(200, 150, 100)));
+    Scene::LoadScene(scene);
+
+    loadLevelOptionMenu(scene);
+}
+
+void callLoadLevelMarathonMenu()
+{
+    scene.reset(new Scene());
+
+    // Single Player camera
+    //scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
+    scene->AddCamera(new Orthographic(vec3(-200, -150, -100), vec3(200, 150, 100)));
+    Scene::LoadScene(scene);
+
+    loadLevelMarathonMenu(scene);
+}
+
+void callLoadLevelVersusMenu()
+{
+    scene.reset(new Scene());
+
+    // Single Player camera
+    //scene->AddCamera(new Perspective(45.0f, 4 / 3.0f, 0.1f, 500.0f, vec3(50, -100, 250), vec3(50, -100, 0), vec3(0, 1, 0)));
+    scene->AddCamera(new Orthographic(vec3(-200, -150, -100), vec3(200, 150, 100)));
+    Scene::LoadScene(scene);
+
+    loadLevelVersusMenu(scene);
+}
+
 
 void setThemeA()
 {
@@ -229,6 +256,150 @@ void setThemeC()
 {
     theme->Stop();
     theme->Play2D("Assets/Audio/Theme_C.mp3", GL_TRUE);
+}
+
+void loadLevelMainMenu(unique_ptr<Scene>& scene)
+{
+    const char* buttonTexture   = "Assets/Sprites/na.png";
+    const char* logoTexture     = "Assets/Sprites/logos/logo.png";
+    const char* arrowTexture    = "Assets/Sprites/buttons/cursor.png";
+    const char* marathonTexture = "Assets/Sprites/buttons/marathon.png";
+    const char* versusTexture   = "Assets/Sprites/buttons/versus.png";
+    const char* optionsTexture  = "Assets/Sprites/buttons/options.png";
+
+
+    Canvas* canvas = new Canvas();
+
+    Button* b = new Button(new OpaqueShader(new Renderer(new Square(vec3(255.f)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), marathonTexture),
+        new Transform(vec3(0, -25, 0), vec3(0, 0, 0), vec3(120, 20, 5)),
+        &callLoadLevelMarathonMenu);
+
+    Button* b2 = new Button(new OpaqueShader(new Renderer(new Square(vec3(255.f)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), versusTexture),
+        new Transform(vec3(0, -50, 0), vec3(0, 0, 0), vec3(120, 20, 5)),
+        &callLoadLevelVersusMenu);
+
+    Button* b3 = new Button(new OpaqueShader(new Renderer(new Square(vec3(255.f)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), optionsTexture),
+        new Transform(vec3(0, -75, 0), vec3(0, 0, 0), vec3(120, 20, 5)),
+        &callLoadLevelOptionMenu);
+
+
+    Sprite* logo = new Sprite(new OpaqueShader(new Renderer(new Square(vec3(255.f)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), logoTexture),
+        new Transform(vec3(0, 75, 0), vec3(0, 0, 0), vec3(360/2, 220/2, 5)));
+
+
+    canvas->AddButton(b);
+    canvas->AddButton(b2);
+    canvas->AddButton(b3);
+
+    canvas->AddSprite(logo);
+
+    // Nav cursor
+    // Delta é a width do botao
+    canvas->AddCursor(new Cursor(new OpaqueShader(new Renderer(new Square(vec3(255.f)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), arrowTexture),
+        new Transform(vec3(0, 0, 0), vec3(0, 0, 0), vec3(180/10, 80/10, 5)), -70), true);
+
+    GameObject* go = new GameObject(
+        new Transform(vec3(-200, -200, -200), vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f)), nullptr, "Menu");
+    go->AddScript(new MenuLogic(canvas));
+
+    scene->AddGameObject(go);
+
+    scene->AddCanvas(canvas);
+
+}
+
+void loadLevelMarathonMenu(unique_ptr<Scene>& scene)
+{
+    Canvas* canvas = new Canvas();
+
+    const char* plusTexture = "Assets/Sprites/buttons/plus.png";
+    const char* minusTexture = "Assets/Sprites/buttons/minus.png";
+    const char* zero = "Assets/Sprites/digits/zero.png";
+    const char* levelTexture = "Assets/Sprites/gp_buttons/w_level.png";
+    const char* pressTexture = "Assets/Sprites/gp_buttons/w_press.png";
+    const char* buttonStart= "Assets/Sprites/gp_buttons/gp_start.png";
+
+
+    //  Plus and Minus
+    canvas->AddButton(new Button(new OpaqueShader(new Renderer(new Square(vec3(255.f)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), plusTexture),
+        new Transform(vec3(40, 0, 0), vec3(0, 0, 0), vec3(512 / 32, 512 / 32, 5)),
+        &callLoadLevelSinglePlayer));
+    canvas->AddButton(new Button(new OpaqueShader(new Renderer(new Square(vec3(255.f)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), minusTexture),
+        new Transform(vec3(-40, 0, 0), vec3(0, 0, 0), vec3(512 / 32, 512 / 32, 5)),
+        &callLoadLevelSinglePlayer));
+
+    //  Digits
+    canvas->AddSprite(new Sprite(new OpaqueShader(new Renderer(new Square(vec3(255.f)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), zero),
+        new Transform(vec3(-10, 0, 0), vec3(0, 0, 0), vec3(20, 40, 5))));
+    canvas->AddSprite(new Sprite(new OpaqueShader(new Renderer(new Square(vec3(255.f)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), zero),
+        new Transform(vec3(10, 0, 0), vec3(0, 0, 0), vec3(20, 40, 5))));
+
+    //  Level word
+    canvas->AddSprite(new Sprite(new OpaqueShader(new Renderer(new Square(vec3(255.f)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), levelTexture),
+        new Transform(vec3(0, -30, 0), vec3(0, 0, 0), vec3(47, 17, 5))));
+
+    //  Press START
+    canvas->AddSprite(new Sprite(new OpaqueShader(new Renderer(new Square(vec3(255.f)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), pressTexture),
+        new Transform(vec3(-25, 80, 0), vec3(0, 0, 0), vec3(47, 13, 5))));
+    canvas->AddSprite(new Sprite(new OpaqueShader(new Renderer(new Square(vec3(255.f)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), buttonStart),
+        new Transform(vec3(25, 80, 0), vec3(0, 0, 0), vec3(81/2, 41/2, 5))));
+
+
+
+    GameObject* go = new GameObject(
+        new Transform(vec3(-200, -200, -200), vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f)), nullptr, "Menu");
+    go->AddScript(new MarathonMenuLogic(canvas));
+
+    scene->AddGameObject(go);
+
+    scene->AddCanvas(canvas);
+}
+
+void loadLevelVersusMenu(unique_ptr<Scene>& scene)
+{
+    Canvas* canvas = new Canvas();
+
+    const char* plusTexture = "Assets/Sprites/buttons/plus.png";
+    const char* minusTexture = "Assets/Sprites/buttons/minus.png";
+    const char* zero = "Assets/Sprites/digits/zero.png";
+    const char* levelTexture = "Assets/Sprites/gp_buttons/w_level.png";
+    const char* pressTexture = "Assets/Sprites/gp_buttons/w_press.png";
+    const char* buttonStart = "Assets/Sprites/gp_buttons/gp_start.png";
+
+
+    //  Plus and Minus
+    canvas->AddButton(new Button(new OpaqueShader(new Renderer(new Square(vec3(255.f)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), plusTexture),
+        new Transform(vec3(40, 0, 0), vec3(0, 0, 0), vec3(512 / 32, 512 / 32, 5)),
+        &callLoadLevelMultiPlayer));
+    canvas->AddButton(new Button(new OpaqueShader(new Renderer(new Square(vec3(255.f)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), minusTexture),
+        new Transform(vec3(-40, 0, 0), vec3(0, 0, 0), vec3(512 / 32, 512 / 32, 5)),
+        &callLoadLevelMultiPlayer));
+
+    //  Digits
+    canvas->AddSprite(new Sprite(new OpaqueShader(new Renderer(new Square(vec3(255.f)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), zero),
+        new Transform(vec3(-10, 0, 0), vec3(0, 0, 0), vec3(20, 40, 5))));
+    canvas->AddSprite(new Sprite(new OpaqueShader(new Renderer(new Square(vec3(255.f)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), zero),
+        new Transform(vec3(10, 0, 0), vec3(0, 0, 0), vec3(20, 40, 5))));
+
+    //  Level word
+    canvas->AddSprite(new Sprite(new OpaqueShader(new Renderer(new Square(vec3(255.f)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), levelTexture),
+        new Transform(vec3(0, -30, 0), vec3(0, 0, 0), vec3(47, 17, 5))));
+
+    //  Press START
+    canvas->AddSprite(new Sprite(new OpaqueShader(new Renderer(new Square(vec3(255.f)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), pressTexture),
+        new Transform(vec3(-25, 80, 0), vec3(0, 0, 0), vec3(47, 13, 5))));
+    canvas->AddSprite(new Sprite(new OpaqueShader(new Renderer(new Square(vec3(255.f)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), buttonStart),
+        new Transform(vec3(25, 80, 0), vec3(0, 0, 0), vec3(81 / 2, 41 / 2, 5))));
+
+
+
+    GameObject* go = new GameObject(
+        new Transform(vec3(-200, -200, -200), vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f)), nullptr, "Menu");
+    go->AddScript(new MarathonMenuLogic(canvas));
+
+    scene->AddGameObject(go);
+
+    scene->AddCanvas(canvas);
 }
 
 void loadLevelOptionMenu(unique_ptr<Scene>& scene)
@@ -279,55 +450,6 @@ void loadLevelOptionMenu(unique_ptr<Scene>& scene)
     scene->AddCanvas(canvas);
 }
 
-void loadLevelMainMenu(unique_ptr<Scene>& scene)
-{
-    const char* buttonTexture = "Assets/Sprites/na.png";
-    const char* logoTexture = "Assets/Sprites/logos/logo.png";
-    const char* arrowTexture = "Assets/Sprites/buttons/cursor.png";
-    const char* marathonTexture = "Assets/Sprites/buttons/marathon.png";
-    const char* versusTexture = "Assets/Sprites/buttons/versus.png";
-    const char* optionsTexture = "Assets/Sprites/buttons/options.png";
-
-
-    Canvas* canvas = new Canvas();
-
-    Button* b = new Button(new OpaqueShader(new Renderer(new Square(vec3(255.f)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), marathonTexture),
-        new Transform(vec3(0, -25, 0), vec3(0, 0, 0), vec3(120, 20, 5)),
-        &callLoadLevelSinglePlayer);
-
-    Button* b2 = new Button(new OpaqueShader(new Renderer(new Square(vec3(255.f)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), versusTexture),
-        new Transform(vec3(0, -50, 0), vec3(0, 0, 0), vec3(120, 20, 5)),
-        &callLoadLevelMultiPlayer);
-
-    Button* b3 = new Button(new OpaqueShader(new Renderer(new Square(vec3(255.f)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), optionsTexture),
-        new Transform(vec3(0, -75, 0), vec3(0, 0, 0), vec3(120, 20, 5)),
-        &callLoadLevelOptionMenu);
-
-
-    Sprite* logo = new Sprite(new OpaqueShader(new Renderer(new Square(vec3(255.f)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), logoTexture),
-        new Transform(vec3(0, 75, 0), vec3(0, 0, 0), vec3(360/2, 220/2, 5)));
-
-
-    canvas->AddButton(b);
-    canvas->AddButton(b2);
-    canvas->AddButton(b3);
-
-    canvas->AddSprite(logo);
-
-    // Nav cursor
-    // Delta é a width do botao
-    canvas->AddCursor(new Cursor(new OpaqueShader(new Renderer(new Square(vec3(255.f)), new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f)), arrowTexture),
-        new Transform(vec3(0, 0, 0), vec3(0, 0, 0), vec3(180/10, 80/10, 5)), -70), true);
-
-    GameObject* go = new GameObject(
-        new Transform(vec3(-200, -200, -200), vec3(0.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f)), nullptr, "Menu");
-    go->AddScript(new MenuLogic(canvas));
-
-    scene->AddGameObject(go);
-
-    scene->AddCanvas(canvas);
-
-}
 
 void loadLevelSingleplayer(unique_ptr<Scene>& scene)
 {

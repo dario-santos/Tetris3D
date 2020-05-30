@@ -3,7 +3,7 @@
 
 MarathonManager::MarathonManager(Canvas* canvas)
 {
-  this->player1 = new GameManager(new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f), 0);
+  this->player1 = new GameManager(new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f), 0, MarathonMenuLogic::levelCont);
   this->canvas = canvas;
   this->digitSprites = canvas->GetSprites();
 }
@@ -84,7 +84,7 @@ void MarathonManager::Update()
   }
 
   char levelDigits[3];
-  snprintf(levelDigits, 7, "%02d", player1->level);
+  snprintf(levelDigits, 3, "%02d", player1->level);
 
   for (int i = 0; i < 2; i++)
   {
