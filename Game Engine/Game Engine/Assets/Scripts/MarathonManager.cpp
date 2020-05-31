@@ -1,26 +1,31 @@
 #include "./MarathonManager.hpp"
 #include <iostream>
 
-MarathonManager::MarathonManager(Canvas* canvas)
+MarathonManager::MarathonManager(Canvas* canvas, Canvas* gameoverCanvas)
 {
   this->player1 = new GameManager(new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f), 0, MarathonMenuLogic::levelCont);
   this->canvas = canvas;
   this->digitSprites = canvas->GetSprites();
+  this->gameoverCanvas = gameoverCanvas;
+
+  this->gameoverCanvas->Disable();
 }
 
 void MarathonManager::Update()
 {
+  if (GameManager::isPaused || gameoverHappened)
+      return;
+
   if (player1->isGameOver)
   {
+    gameoverHappened = true;
+
     if (player1->score > Config::highscore)
     {
       Config::highscore = player1->score;
       Config::SaveScore("score.dat");
     }
-   
-    std::cout << "GameOver" << std::endl;
-    std::cout << "Score: " << player1->score << std::endl;
-    std::cout << "HighScore: " << Config::highscore << std::endl;
+    this->gameoverCanvas->Enable();
   }
   else
   {

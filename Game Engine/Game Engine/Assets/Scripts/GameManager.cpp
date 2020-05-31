@@ -533,6 +533,7 @@ void GameManager::GameOver()
 {
   if(_currenctObject->VerifyColision(_board, _currentPosition))
   {
+    beep->Play2D("Assets/Audio/SFX_GameOver.mp3");
     isGameOver = true;
   }
 }

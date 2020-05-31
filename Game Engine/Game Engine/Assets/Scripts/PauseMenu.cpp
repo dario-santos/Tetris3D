@@ -20,6 +20,8 @@ void PauseMenu::Update()
   {
     PauseMenu::isKeyPressed = true;
 
+    audioDevice->Play2D("Assets/Audio/SFX_MenuPause.wav");
+
     GameManager::isPaused = !GameManager::isPaused;
     
     if(GameManager::isPaused)

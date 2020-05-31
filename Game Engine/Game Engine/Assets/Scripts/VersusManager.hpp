@@ -18,12 +18,16 @@ private:
 
   Canvas* p1canvas;
   Canvas* p2canvas;
+  Canvas* gameoverCanvas;
 
   vector<Sprite*> p1digitSprites;
   vector<Sprite*> p2digitSprites;
+  vector<Sprite*> gameoverSprites;
+
+  bool gameoverHappened = false;
 
 public:
-  VersusManager(Canvas* p1canvas, Canvas* p2canvas);
+  VersusManager(Canvas* p1canvas, Canvas* p2canvas, Canvas* gameoverCanvas);
 
   void Update() override;
 };

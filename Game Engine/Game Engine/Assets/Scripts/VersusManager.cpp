@@ -1,31 +1,41 @@
 #include "./VersusManager.hpp"
 #include <iostream>
 
-VersusManager::VersusManager(Canvas* p1canvas, Canvas* p2canvas)
+VersusManager::VersusManager(Canvas* p1canvas, Canvas* p2canvas, Canvas* gameoverCanvas)
 {  
   this->player1 = new GameManager(new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f), 0, MarathonMenuLogic::levelCont);
   this->player2 = new GameManager(new Material(vec3(1.0f), vec3(1.0f), vec3(1.0f), 128.0f), 190, MarathonMenuLogic::levelCont, Gamepad::Gamepad2);
 
   this->p1canvas = p1canvas;
   this->p2canvas = p2canvas;
+  this->gameoverCanvas = gameoverCanvas;
 
   this->p1digitSprites = p1canvas->GetSprites();
   this->p2digitSprites = p2canvas->GetSprites();
+  this->gameoverSprites = gameoverCanvas->GetSprites();
+
+  this->gameoverCanvas->Disable();
 }
 
 void VersusManager::Update()
 {
-  if (GameManager::isPaused)
+  if (GameManager::isPaused || gameoverHappened)
     return;
 
   if(player1->isGameOver)
   {
+    gameoverHappened = true;
     std::cout << "Player 2 wins"<< std::endl;
+    gameoverCanvas->Enable();
+    gameoverSprites[0]->GetShader()->UpdateShader("Assets/Sprites/gameover/p2.png");
     return;
   }
   else if(player2->isGameOver)
   {
+    gameoverHappened = true;
     std::cout << "Player 1 wins" << std::endl;
+    gameoverCanvas->Enable();
+    gameoverSprites[0]->GetShader()->UpdateShader("Assets/Sprites/gameover/p1.png");
     return;
   }
   else
