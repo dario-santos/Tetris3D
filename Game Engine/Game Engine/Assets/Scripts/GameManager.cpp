@@ -615,9 +615,6 @@ void GameManager::GameLoop()
         EraseShadowHint();
         DrawShadowHint();
     }
-    
-    // ClearScreen();
-    // DrawBoard();
 }
 
 void GameManager::Update()
@@ -626,26 +623,16 @@ void GameManager::Update()
     return;
 
   GameLoop();
-
-  //ClearScreen();
-  cout << "Score: " << this->score << endl;
-  cout << "Level: " << this->level << endl;
-  cout << "Lines to Next Level: " << this->linesToNextLevel << endl;
-  cout << "Cleared Lines: " << this->linesCleared << endl;
-  cout << "Delay Time: " << this->delayTime << endl;
 }
 
 void GameManager::DrawShadowHint()
 {
   shadowHint.NewBlock(_currenctObject);
-
-  //_currenctObject->Erase(_board, graphicBoard, _currentPosition, shadowPiece, boardCenter, pieceScale);
   
   shadowHint.Erase(_board, graphicBoard, _currentPosition, shadowPiece, boardCenter);
   
   _positionHint = shadowHint.PositionShadowHint(_board, _currentPosition);
 
-  //_currenctObject->Draw(_board, graphicBoard, _currentPosition, shadowPiece, boardCenter, pieceScale);
   shadowHint.Draw(_board, graphicBoard, _currentPosition, shadowPiece, boardCenter);
 
   if (_positionHint._x != _currentPosition._x)
@@ -659,7 +646,6 @@ void GameManager::EraseShadowHint()
 
   shadowHint.Erase(_board, graphicBoard, _currentPosition, shadowPiece, boardCenter);
 
-  //_currenctObject->Erase(_board, graphicBoard, _currentPosition, shadowPiece, boardCenter, pieceScale);
   _positionHint = shadowHint.PositionShadowHint(_board, _currentPosition);
 
   if (_positionHint._x != _currentPosition._x)

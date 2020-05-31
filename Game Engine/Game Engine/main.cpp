@@ -277,6 +277,14 @@ void callLoadLevelMultiPlayer()
 
 void callLoadLevelMainMenu()
 {
+    std::cout << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "Pontuação Maxima Atual: " << Config::highscore << std::endl;
+
+    std::cout << std::endl;
+    std::cout << std::endl;
+
     scene.reset(new Scene());
 
     // Single Player camera
