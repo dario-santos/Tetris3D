@@ -16,7 +16,7 @@ bool PauseMenu::isKeyPressed = true;
 
 void PauseMenu::Update() 
 {
-  if((Input::GetButton("Pause") || Input::GetButton("Pause", Gamepad::Gamepad2)) && !PauseMenu::isKeyPressed)
+  if((Input::GetKey("Pause") || Input::GetButton("Pause") || Input::GetButton("Pause", Gamepad::Gamepad2)) && !PauseMenu::isKeyPressed)
   {
     PauseMenu::isKeyPressed = true;
 
@@ -30,5 +30,5 @@ void PauseMenu::Update()
       canvas->Disable();
   }
 
-  PauseMenu::isKeyPressed = Input::GetButton("Pause") || Input::GetButton("Pause", Gamepad::Gamepad2);
+  PauseMenu::isKeyPressed = Input::GetKey("Pause") || Input::GetButton("Pause") || Input::GetButton("Pause", Gamepad::Gamepad2);
 }
