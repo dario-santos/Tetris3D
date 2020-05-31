@@ -17,10 +17,14 @@ class MarathonManager : public Script
 {
 private:
   GameManager* player1;
-  Canvas* canvas;
   vector<Sprite*> digitSprites;
 
+  Canvas* canvas;
+  Canvas* gameoverCanvas;
+
+  bool gameoverHappened = false;
+
 public:
-  MarathonManager(Canvas* canvas);
+  MarathonManager(Canvas* canvas, Canvas* gameoverCanvas);
   void Update() override;
 };
